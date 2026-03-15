@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitcoin Halving Cycles Dashboard</title>
+<meta name="description" content="Live Bitcoin halving cycle comparison dashboard with auto-updating price data">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
+:root {
+  --bg: #0c0e12; --bg2: #13161c; --bg3: #1a1e26; --border: #252a35;
+  --txt: #e8e6e1; --txt2: #9a9890; --txt3: #5f5e58;
+  --blue: #378ADD; --green: #1D9E75; --purple: #7F77DD; --orange: #D85A30;
+  --red: #E24B4A; --teal: #5DCAA5;
+  --blue-dim: #378ADD44; --green-dim: #1D9E7544; --purple-dim: #7F77DD44; --orange-dim: #D85A3044;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--txt); line-height: 1.6; }
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: .25rem; letter-spacing: -.02em; }
+.subtitle { color: var(--txt2); font-size: .9rem; margin-bottom: 2rem; }
+.status-bar { display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem; padding: 10px 16px;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; font-size: .8rem; flex-wrap: wrap; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.status-dot.ok { background: var(--green); }
+.status-dot.err { background: var(--red); }
+.status-dot.loading { background: var(--orange); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+.status-text { color: var(--txt2); }
+.status-text b { color: var(--txt); font-weight: 500; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 2rem; }
+.metric { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+.metric .label { font-size: .7rem; color: var(--txt3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.metric .value { font-size: 1.4rem; font-weight: 500; font-family: 'JetBrains Mono', monospace; }
+.metric .value.green { color: var(--green); }
+.metric .value.red { color: var(--red); }
+.section { margin-bottom: 2.5rem; }
+.section-title { font-size: 1rem; font-weight: 500; color: var(--txt2); margin-bottom: 1rem;
+  padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
+.chart-wrap { position: relative; width: 100%; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px; margin-bottom: 1rem; }
+.chart-inner { position: relative; width: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: .8rem; color: var(--txt2);
+  cursor: pointer; padding: 4px 10px; border-radius: 6px; border: 1px solid transparent; transition: all .2s; user-select: none; }
+.legend-item:hover { border-color: var(--border); background: var(--bg3); }
+.legend-item.off { opacity: .3; }
+.legend-sq { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+th { text-align: left; padding: 10px 12px; border-bottom: 1.5px solid var(--border);
+  color: var(--txt3); font-weight: 500; font-size: .72rem; text-transform: uppercase; letter-spacing: .5px; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+.cycle-tag { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: .72rem; font-weight: 500; }
+.c1 { background: var(--blue-dim); color: var(--blue); }
+.c2 { background: var(--green-dim); color: var(--green); }
+.c3 { background: var(--purple-dim); color: var(--purple); }
+.c4 { background: var(--orange-dim); color: var(--orange); }
+.green { color: var(--teal); } .red { color: var(--red); }
+.mono { font-family: 'JetBrains Mono', monospace; font-size: .8rem; }
+.note { font-size: .75rem; color: var(--txt3); font-style: italic; margin-top: .5rem; }
+.footer { text-align: center; padding: 2rem 0; color: var(--txt3); font-size: .75rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+.footer a { color: var(--txt2); }
+@media (max-width: 600px) {
+  .container { padding: 1rem; }
+  h1 { font-size: 1.4rem; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .metric .value { font-size: 1.1rem; }
+  th, td { padding: 8px 6px; font-size: .75rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Bitcoin halving cycles</h1>
+  <p class="subtitle">Auto-updating dashboard — price data via CoinGecko API</p>
+
+  <div class="status-bar">
+    <span class="status-dot loading" id="statusDot"></span>
+    <span class="status-text" id="statusText">Fetching data...</span>
+    <span style="margin-left:auto;color:var(--txt3)" id="lastUpdate"></span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="label">Current price</div><div class="value" id="mPrice">--</div></div>
+    <div class="metric"><div class="label">Cycle 4 ATH</div><div class="value">$126,296</div></div>
+    <div class="metric"><div class="label">Drawdown from ATH</div><div class="value red" id="mDraw">--</div></div>
+    <div class="metric"><div class="label">Weeks since ATH</div><div class="value" id="mWeeks">--</div></div>
+    <div class="metric"><div class="label">Next halving</div><div class="value" id="mNextHalv">~Apr 2028</div></div>
+    <div class="metric"><div class="label">Weeks to halving</div><div class="value" id="mWeeksToHalv">--</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Overlaid cycles — halving to halving (aligned by ATH)</div>
+    <div class="chart-wrap">
+      <div class="legend" id="legendMain"></div>
+      <div class="chart-inner" style="height:460px;"><canvas id="chartMain"></canvas></div>
+    </div>
+    <p class="note">X-axis: weeks relative to ATH (0 = top). Left = halving→ATH. Right = ATH→next halving. Cycle 4 data auto-updates.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Post-ATH drawdown — same-week comparison</div>
+    <div class="chart-wrap">
+      <div class="legend" id="legendDD"></div>
+      <div class="chart-inner" style="height:380px;"><canvas id="chartDD"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Halving data</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>Cycle</th><th>Halving date</th><th>Price at halving</th><th>Post-halving high</th><th>High date</th><th>Weeks halving→high</th><th>Gain</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cycle-tag c1">1st</span></td><td>Nov 28, 2012</td><td class="mono">$12</td><td class="mono">$1,150</td><td>Nov 30, 2013</td><td class="mono">52</td><td class="green mono">+9,483%</td></tr>
+        <tr><td><span class="cycle-tag c2">2nd</span></td><td>Jul 9, 2016</td><td class="mono">$650</td><td class="mono">$19,783</td><td>Dec 17, 2017</td><td class="mono">75</td><td class="green mono">+2,943%</td></tr>
+        <tr><td><span class="cycle-tag c3">3rd</span></td><td>May 11, 2020</td><td class="mono">$8,570</td><td class="mono">$69,000</td><td>Nov 10, 2021</td><td class="mono">78</td><td class="green mono">+705%</td></tr>
+        <tr><td><span class="cycle-tag c4">4th</span></td><td>Apr 20, 2024</td><td class="mono">$63,850</td><td class="mono">$126,296</td><td>Oct 6, 2025</td><td class="mono">76</td><td class="green mono">+98%</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Post-ATH bear market</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>Cycle</th><th>ATH</th><th>Bear low</th><th>Low date</th><th>Weeks ATH→low</th><th>Drawdown</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cycle-tag c1">1st</span></td><td class="mono">$1,150</td><td class="mono">$170</td><td>Jan 14, 2015</td><td class="mono">59</td><td class="red mono">-85%</td></tr>
+        <tr><td><span class="cycle-tag c2">2nd</span></td><td class="mono">$19,783</td><td class="mono">$3,200</td><td>Dec 15, 2018</td><td class="mono">52</td><td class="red mono">-84%</td></tr>
+        <tr><td><span class="cycle-tag c3">3rd</span></td><td class="mono">$69,000</td><td class="mono">$15,479</td><td>Nov 21, 2022</td><td class="mono">54</td><td class="red mono">-78%</td></tr>
+        <tr><td><span class="cycle-tag c4">4th</span></td><td class="mono">$126,296</td><td class="mono" id="tdMinPrice">--</td><td id="tdMinDate">ongoing</td><td class="mono" id="tdMinWeeks">--</td><td class="red mono" id="tdMinDD">--</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Same-week drawdown comparison</div>
+    <div style="overflow-x:auto;">
+    <table id="weekCompare">
+      <thead><tr><th>Cycle</th><th>Drawdown at current week</th><th>Final drawdown</th><th>Remaining drop</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    Historical data (cycles 1-3) fixed. Cycle 4 auto-updates via <a href="https://www.coingecko.com/en/api" target="_blank">CoinGecko API</a> (free, no key).<br>
+    Data persisted in localStorage between sessions. Last update: <span id="footerDate">--</span>
+  </div>
+</div>
+
+<script>
+const ATH4 = 126296;
+const ATH4_DATE = new Date('2025-10-06');
+const HALVING4_DATE = new Date('2024-04-20');
+const HALVING5_EST = new Date('2028-04-15');
+const STORAGE_KEY = 'btc_cycle4_weekly_v2';
+const COLORS = ['#378ADD','#1D9E75','#7F77DD','#D85A30'];
+const NAMES = ['Cycle 1 · 2012→2016','Cycle 2 · 2016→2020','Cycle 3 · 2020→2024','Cycle 4 · 2024→2028'];
+
+const CYC1 = [
+{x:-52,y:-99},{x:-50,y:-98},{x:-48,y:-97},{x:-46,y:-96},{x:-44,y:-95},
+{x:-42,y:-94},{x:-40,y:-93},{x:-38,y:-92},{x:-36,y:-90},{x:-34,y:-88},
+{x:-32,y:-86},{x:-30,y:-84},{x:-28,y:-80},{x:-26,y:-76},{x:-24,y:-72},
+{x:-22,y:-82},{x:-20,y:-85},{x:-18,y:-80},{x:-16,y:-75},{x:-14,y:-70},
+{x:-12,y:-65},{x:-10,y:-60},{x:-8,y:-50},{x:-6,y:-40},{x:-4,y:-25},
+{x:-3,y:-15},{x:-2,y:-8},{x:-1,y:-3},{x:0,y:0},
+{x:1,y:-10},{x:2,y:-22},{x:3,y:-25},{x:4,y:-28},{x:5,y:-30},{x:6,y:-26},
+{x:8,y:-50},{x:10,y:-43},{x:12,y:-42},{x:14,y:-46},{x:16,y:-52},
+{x:18,y:-53},{x:20,y:-58},{x:23,y:-62},{x:26,y:-50},{x:28,y:-49},
+{x:32,y:-56},{x:36,y:-55},{x:40,y:-63},{x:44,y:-67},{x:48,y:-70},
+{x:52,y:-74},{x:56,y:-80},{x:59,y:-85},{x:63,y:-81},{x:67,y:-79},
+{x:73,y:-78},{x:79,y:-79},{x:85,y:-76},{x:91,y:-72},{x:97,y:-74},
+{x:103,y:-68},{x:109,y:-64},{x:115,y:-63},{x:121,y:-57},{x:127,y:-50},
+{x:133,y:-45},{x:136,y:-43}
+];
+
+const CYC2 = [
+{x:-75,y:-97},{x:-73,y:-96},{x:-71,y:-96},{x:-69,y:-96},{x:-67,y:-96},
+{x:-65,y:-95},{x:-63,y:-95},{x:-61,y:-95},{x:-59,y:-95},{x:-57,y:-95},
+{x:-55,y:-94},{x:-53,y:-94},{x:-51,y:-93},{x:-49,y:-92},{x:-47,y:-90},
+{x:-45,y:-88},{x:-43,y:-86},{x:-41,y:-83},{x:-39,y:-80},{x:-37,y:-78},
+{x:-35,y:-75},{x:-33,y:-72},{x:-31,y:-70},{x:-29,y:-65},{x:-27,y:-60},
+{x:-25,y:-55},{x:-23,y:-52},{x:-21,y:-50},{x:-19,y:-46},{x:-17,y:-42},
+{x:-15,y:-38},{x:-13,y:-35},{x:-11,y:-30},{x:-9,y:-25},{x:-7,y:-18},
+{x:-5,y:-12},{x:-3,y:-5},{x:-1,y:-1},{x:0,y:0},
+{x:1,y:-18},{x:2,y:-30},{x:3,y:-38},{x:4,y:-42},{x:5,y:-35},
+{x:7,y:-45},{x:9,y:-47},{x:11,y:-50},{x:13,y:-52},{x:15,y:-48},
+{x:17,y:-55},{x:19,y:-50},{x:21,y:-58},{x:23,y:-63},{x:25,y:-58},
+{x:27,y:-65},{x:30,y:-55},{x:34,y:-62},{x:38,y:-67},{x:42,y:-65},
+{x:46,y:-68},{x:50,y:-72},{x:52,y:-84},{x:56,y:-78},{x:60,y:-80},
+{x:64,y:-75},{x:68,y:-70},{x:72,y:-65},{x:76,y:-48},{x:78,y:-35},
+{x:82,y:-48},{x:86,y:-55},{x:90,y:-62},{x:94,y:-55},{x:98,y:-53},
+{x:102,y:-55},{x:106,y:-52},{x:110,y:-58},{x:114,y:-80},{x:118,y:-65},
+{x:122,y:-52},{x:125,y:-57}
+];
+
+const CYC3 = [
+{x:-78,y:-88},{x:-76,y:-86},{x:-74,y:-85},{x:-72,y:-84},{x:-70,y:-86},
+{x:-68,y:-88},{x:-66,y:-94},{x:-64,y:-88},{x:-62,y:-85},{x:-60,y:-82},
+{x:-58,y:-80},{x:-56,y:-78},{x:-54,y:-76},{x:-52,y:-72},{x:-50,y:-68},
+{x:-48,y:-65},{x:-46,y:-60},{x:-44,y:-55},{x:-42,y:-50},{x:-40,y:-48},
+{x:-38,y:-52},{x:-36,y:-50},{x:-34,y:-48},{x:-32,y:-45},{x:-30,y:-42},
+{x:-28,y:-38},{x:-26,y:-32},{x:-24,y:-28},{x:-22,y:-25},{x:-20,y:-22},
+{x:-18,y:-18},{x:-16,y:-15},{x:-14,y:-12},{x:-12,y:-8},{x:-10,y:-10},
+{x:-8,y:-12},{x:-6,y:-7},{x:-4,y:-4},{x:-2,y:-2},{x:0,y:0},
+{x:1,y:-5},{x:2,y:-14},{x:3,y:-18},{x:4,y:-22},{x:5,y:-24},{x:6,y:-28},
+{x:8,y:-35},{x:10,y:-36},{x:12,y:-40},{x:14,y:-35},{x:16,y:-40},
+{x:18,y:-38},{x:20,y:-38},{x:23,y:-40},{x:25,y:-45},{x:27,y:-57},
+{x:30,y:-68},{x:32,y:-71},{x:36,y:-66},{x:40,y:-67},{x:44,y:-71},
+{x:48,y:-72},{x:52,y:-74},{x:54,y:-78},{x:58,y:-74},{x:62,y:-76},
+{x:66,y:-73},{x:70,y:-70},{x:74,y:-66},{x:78,y:-60},{x:82,y:-55},
+{x:86,y:-48},{x:90,y:-48},{x:94,y:-40},{x:98,y:-35},{x:102,y:-36},
+{x:106,y:-28},{x:110,y:-18},{x:114,y:-15},{x:118,y:-12},{x:122,y:-6},
+{x:127,y:-7}
+];
+
+const CYC4_PRE = [
+{x:-76,y:-49},{x:-74,y:-48},{x:-72,y:-47},{x:-70,y:-46},{x:-68,y:-45},
+{x:-66,y:-45},{x:-64,y:-50},{x:-62,y:-47},{x:-60,y:-44},{x:-58,y:-43},
+{x:-56,y:-42},{x:-54,y:-43},{x:-52,y:-44},{x:-50,y:-40},{x:-48,y:-38},
+{x:-46,y:-36},{x:-44,y:-35},{x:-42,y:-33},{x:-40,y:-30},{x:-38,y:-27},
+{x:-36,y:-25},{x:-34,y:-23},{x:-32,y:-22},{x:-30,y:-25},{x:-28,y:-28},
+{x:-26,y:-30},{x:-24,y:-27},{x:-22,y:-24},{x:-20,y:-20},{x:-18,y:-16},
+{x:-16,y:-12},{x:-14,y:-8},{x:-12,y:-5},{x:-10,y:-7},{x:-8,y:-12},
+{x:-6,y:-10},{x:-4,y:-6},{x:-2,y:-3},{x:0,y:0}
+];
+
+const CYC4_SEED = [
+{x:1,y:-5},{x:2,y:-8},{x:3,y:-11},{x:4,y:-14},{x:5,y:-17},
+{x:6,y:-20},{x:7,y:-22},{x:8,y:-24},{x:9,y:-26},{x:10,y:-29},
+{x:11,y:-26},{x:12,y:-25},{x:13,y:-28},{x:14,y:-30},{x:15,y:-23},
+{x:16,y:-22},{x:17,y:-27},{x:18,y:-33},{x:19,y:-43},{x:20,y:-52},
+{x:21,y:-50},{x:22,y:-46},{x:23,y:-44}
+];
+
+function weeksFromATH(d) { return Math.floor((d - ATH4_DATE) / (7*864e5)); }
+function fmt(n) { return '$' + n.toLocaleString('en-US', {maximumFractionDigits:0}); }
+function loadStored() { try { const r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
+function saveStored(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+function setStatus(type, html) {
+  document.getElementById('statusDot').className = 'status-dot ' + type;
+  document.getElementById('statusText').innerHTML = html;
+}
+
+async function fetchPrice() {
+  try {
+    const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+    return (await r.json()).bitcoin.usd;
+  } catch(e) { return null; }
+}
+
+async function fetchHistory(fromTs, toTs) {
+  try {
+    const r = await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=usd&from=${fromTs}&to=${toTs}`);
+    const d = await r.json();
+    if (!d.prices) return [];
+    const out = []; let lw = -999;
+    for (const [ts, p] of d.prices) {
+      const w = weeksFromATH(new Date(ts));
+      if (w !== lw && w > 0) { out.push({x:w, y:Math.round(((p/ATH4)-1)*100)}); lw = w; }
+    }
+    return out;
+  } catch(e) { return []; }
+}
+
+function merge(seed, fetched) {
+  const m = new Map();
+  for (const p of seed) m.set(p.x, p.y);
+  for (const p of fetched) m.set(p.x, p.y);
+  return [...m.entries()].map(([x,y])=>({x,y})).sort((a,b)=>a.x-b.x);
+}
+
+function ddAtWeek(cyc, w) {
+  let cl = cyc; let best = cl[0];
+  for (const p of cl) { if (p.x <= w) best = p; else break; }
+  return best ? best.y : null;
+}
+
+function updateUI(price, post) {
+  const dd = Math.round(((price/ATH4)-1)*100);
+  const w = weeksFromATH(new Date());
+  const wToH = Math.round((HALVING5_EST - new Date()) / (7*864e5));
+  document.getElementById('mPrice').textContent = fmt(price);
+  document.getElementById('mDraw').textContent = dd + '%';
+  document.getElementById('mWeeks').textContent = w;
+  document.getElementById('mWeeksToHalv').textContent = '~' + wToH;
+
+  let minDD = dd;
+  for (const p of post) { if (p.y < minDD) minDD = p.y; }
+  document.getElementById('tdMinPrice').textContent = fmt(Math.round(ATH4*(1+minDD/100))) + ' (partial)';
+  document.getElementById('tdMinDate').textContent = 'ongoing';
+  document.getElementById('tdMinWeeks').textContent = w + '+';
+  document.getElementById('tdMinDD').textContent = minDD + '%';
+
+  const cycs = [
+    {n:'1st',cls:'c1',data:CYC1.filter(p=>p.x>=0),final:-85},
+    {n:'2nd',cls:'c2',data:CYC2.filter(p=>p.x>=0),final:-84},
+    {n:'3rd',cls:'c3',data:CYC3.filter(p=>p.x>=0),final:-78},
+    {n:'4th',cls:'c4',data:null,final:null}
+  ];
+  const tbody = document.querySelector('#weekCompare tbody');
+  tbody.innerHTML = '';
+  for (const c of cycs) {
+    const atW = c.data ? ddAtWeek(c.data, w) : dd;
+    const rem = c.final !== null ? (c.final - atW) + ' p.p.' : '?';
+    tbody.innerHTML += `<tr>
+      <td><span class="cycle-tag ${c.cls}">${c.n}</span></td>
+      <td class="mono red">${atW}%</td>
+      <td class="mono red">${c.final !== null ? c.final+'%' : 'ongoing'}</td>
+      <td class="mono">${rem}</td></tr>`;
+  }
+
+  const now = new Date();
+  const ds = now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + ' ' +
+    now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('lastUpdate').textContent = 'Updated: ' + ds;
+  document.getElementById('footerDate').textContent = ds;
+}
+
+function buildLegend(id, chart) {
+  const el = document.getElementById(id); el.innerHTML = '';
+  NAMES.forEach((n,i) => {
+    const s = document.createElement('span');
+    s.className = 'legend-item';
+    s.innerHTML = `<span class="legend-sq" style="background:${COLORS[i]}"></span>${n}`;
+    s.onclick = () => { const v = chart.isDatasetVisible(i); chart.setDatasetVisibility(i,!v); chart.update(); s.classList.toggle('off',v); };
+    el.appendChild(s);
+  });
+}
+
+function chartOpts(xMin, xMax, xLabel, yLabel) {
+  return {
+    responsive:true, maintainAspectRatio:false,
+    interaction:{mode:'nearest',intersect:false,axis:'x'},
+    scales:{
+      x:{type:'linear',min:xMin,max:xMax,
+        title:{display:true,text:xLabel,color:'#5f5e58',font:{size:12,family:'Outfit'}},
+        grid:{color:'#252a3544'},
+        ticks:{color:'#5f5e58',font:{size:11},stepSize:10,
+          callback:v => xMin<0 ? (v===0?'ATH':v>0?'+'+v:''+v) : v}
+      },
+      y:{min:-100,max:5,
+        title:{display:true,text:yLabel,color:'#5f5e58',font:{size:12,family:'Outfit'}},
+        grid:{color:'#252a3544'},
+        ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v+'%'}
+      }
+    },
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#1a1e26',titleColor:'#e8e6e1',bodyColor:'#9a9890',
+        borderColor:'#252a35',borderWidth:1,padding:10,
+        displayColors:true,boxWidth:10,boxHeight:10,boxPadding:3,
+        callbacks:{
+          title:items=>{const w=Math.round(items[0].parsed.x);
+            return xMin<0?(w===0?'ATH (week 0)':w>0?'Week +'+w+' after ATH':'Week '+w+' before ATH'):'Week '+w;},
+          label:ctx=>' '+ctx.dataset.label+': '+Math.round(ctx.parsed.y)+'%'
+        }
+      }
+    }
+  };
+}
+
+function ds(data,i){return{label:NAMES[i],data,borderColor:COLORS[i],backgroundColor:'transparent',borderWidth:i===3?3:1.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:COLORS[i],tension:.3,fill:false};}
+
+function makeMainChart(cyc4Full) {
+  const chart = new Chart(document.getElementById('chartMain'), {
+    type:'line',
+    data:{datasets:[ds(CYC1,0),ds(CYC2,1),ds(CYC3,2),ds(cyc4Full,3)]},
+    options:chartOpts(-82,140,'Weeks (0 = ATH)','% relative to ATH'),
+    plugins:[{
+      id:'bg',beforeDraw(ch){
+        const ctx=ch.ctx,xs=ch.scales.x,ys=ch.scales.y,x0=xs.getPixelForValue(0);
+        ctx.save();
+        ctx.fillStyle='rgba(100,200,130,0.03)';ctx.fillRect(xs.left,ys.top,x0-xs.left,ys.bottom-ys.top);
+        ctx.fillStyle='rgba(200,80,80,0.03)';ctx.fillRect(x0,ys.top,xs.right-x0,ys.bottom-ys.top);
+        ctx.beginPath();ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1;
+        ctx.moveTo(x0,ys.top);ctx.lineTo(x0,ys.bottom);ctx.stroke();ctx.setLineDash([]);
+        ctx.fillStyle='#e8e6e1';ctx.font='500 12px Outfit,sans-serif';ctx.textAlign='center';
+        ctx.fillText('ATH',x0,ys.top-8);
+        ctx.fillStyle='#5f5e58';ctx.font='11px Outfit,sans-serif';
+        ctx.fillText('HALVING \u2192 ATH',xs.left+(x0-xs.left)/2,ys.bottom-8);
+        ctx.fillText('ATH \u2192 NEXT HALVING',(x0+xs.right)/2,ys.bottom-8);
+        ctx.restore();
+      }
+    },{
+      id:'dot',afterDatasetsDraw(ch){
+        const m=ch.getDatasetMeta(3);if(m.hidden)return;
+        const pt=m.data[m.data.length-1];if(!pt)return;
+        const ctx=ch.ctx;ctx.save();
+        ctx.beginPath();ctx.arc(pt.x,pt.y,7,0,Math.PI*2);ctx.fillStyle='#D85A30';ctx.fill();
+        ctx.beginPath();ctx.arc(pt.x,pt.y,3,0,Math.PI*2);ctx.fillStyle='#0c0e12';ctx.fill();
+        ctx.fillStyle='#F5C4B3';ctx.font='500 11px Outfit,sans-serif';ctx.textAlign='left';
+        ctx.fillText('now',pt.x+12,pt.y+4);ctx.restore();
+      }
+    }]
+  });
+  buildLegend('legendMain',chart);
+}
+
+function makeDDChart(post) {
+  const allPost=[CYC1.filter(p=>p.x>=0),CYC2.filter(p=>p.x>=0),CYC3.filter(p=>p.x>=0),[{x:0,y:0},...post]];
+  const chart = new Chart(document.getElementById('chartDD'),{
+    type:'line',
+    data:{datasets:allPost.map((d,i)=>ds(d,i))},
+    options:chartOpts(0,140,'Weeks after ATH','% drawdown from ATH'),
+    plugins:[{
+      id:'wk',afterDraw(ch){
+        const w=weeksFromATH(new Date()),ctx=ch.ctx,xs=ch.scales.x,ys=ch.scales.y,x=xs.getPixelForValue(w);
+        ctx.save();ctx.beginPath();ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1;
+        ctx.moveTo(x,ys.top);ctx.lineTo(x,ys.bottom);ctx.stroke();ctx.setLineDash([]);
+        ctx.fillStyle='#9a9890';ctx.font='11px Outfit,sans-serif';ctx.textAlign='center';
+        ctx.fillText('week '+w+' (now)',x,ys.top-6);ctx.restore();
+      }
+    },{
+      id:'d2',afterDatasetsDraw(ch){
+        const m=ch.getDatasetMeta(3);if(m.hidden)return;
+        const pt=m.data[m.data.length-1];if(!pt)return;
+        const ctx=ch.ctx;ctx.save();
+        ctx.beginPath();ctx.arc(pt.x,pt.y,7,0,Math.PI*2);ctx.fillStyle='#D85A30';ctx.fill();
+        ctx.beginPath();ctx.arc(pt.x,pt.y,3,0,Math.PI*2);ctx.fillStyle='#0c0e12';ctx.fill();
+        ctx.restore();
+      }
+    }]
+  });
+  buildLegend('legendDD',chart);
+}
+
+(async function(){
+  let post = [...CYC4_SEED];
+  const stored = loadStored();
+  if (stored?.data?.length > 0) post = stored.data;
+
+  setStatus('loading','Fetching current BTC price...');
+  const price = await fetchPrice();
+
+  if (price) {
+    const cw = weeksFromATH(new Date());
+    const cd = Math.round(((price/ATH4)-1)*100);
+    const lastW = post.length > 0 ? Math.max(...post.map(p=>p.x)) : 0;
+    if (cw > lastW + 1) {
+      setStatus('loading',`Fetching weeks ${lastW+1} to ${cw}...`);
+      const from = new Date(ATH4_DATE.getTime() + lastW*7*864e5);
+      const fetched = await fetchHistory(Math.floor(from.getTime()/1000), Math.floor(Date.now()/1000));
+      if (fetched.length > 0) post = merge(post, fetched);
+    }
+    const ei = post.findIndex(p=>p.x===cw);
+    if (ei>=0) post[ei].y=cd; else { post.push({x:cw,y:cd}); post.sort((a,b)=>a.x-b.x); }
+    saveStored({data:post,lastUpdate:Date.now(),lastPrice:price});
+    setStatus('ok',`Connected — BTC <b>${fmt(price)}</b> (${cd}% from ATH)`);
+    updateUI(price, post);
+  } else {
+    if (stored?.lastPrice) {
+      setStatus('err',`Offline — using last saved price: <b>${fmt(stored.lastPrice)}</b>`);
+      updateUI(stored.lastPrice, post);
+    } else {
+      setStatus('err','No connection and no saved data. Using seed data.');
+      updateUI(71000, post);
+    }
+  }
+
+  makeMainChart([...CYC4_PRE,...post]);
+  makeDDChart(post);
+})();
+</script>
+</body>
+</html>

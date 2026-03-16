@@ -53,30 +53,28 @@ tr:last-child td{border-bottom:none}
 .mn{font-family:'JetBrains Mono',monospace;font-size:.8rem}
 .nt{font-size:.75rem;color:var(--txt3);font-style:italic;margin-top:.5rem}
 .ftr{text-align:center;padding:2rem 0;color:var(--txt3);font-size:.78rem;border-top:1px solid var(--border);margin-top:2rem}
-.ftr a{color:var(--txt2);text-decoration:none;transition:color .2s}
-.ftr a:hover{color:var(--orange)}
-.b2l{display:inline-flex;align-items:center;gap:8px;margin-top:10px;padding:8px 16px;border:1px solid var(--border);border-radius:6px;font-size:.82rem;color:var(--txt2);transition:all .2s}
-.b2l:hover{border-color:var(--orange);color:var(--txt);background:var(--bg3)}
-.b2l svg{width:16px;height:16px}
-@media(max-width:600px){.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}}
+.ftr a{color:var(--txt2);text-decoration:none;transition:color .2s}.ftr a:hover{color:var(--orange)}
+.cmp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:1.5rem}
+.cmp-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;flex-direction:column}
+.cmp-name{font-size:1.1rem;font-weight:600;margin-bottom:2px}
+.cmp-type{font-size:.75rem;color:var(--txt3);margin-bottom:12px}
+.cmp-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.cmp-row:last-child{border-bottom:none}
+.cmp-k{color:var(--txt3)}.cmp-v{font-weight:500;text-align:right}
+.cmp-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:auto;padding:8px 0;border:1px solid var(--border);border-radius:6px;font-size:.8rem;color:var(--txt2);text-decoration:none;transition:all .2s;width:100%}
+.cmp-link:hover{border-color:var(--txt2);color:var(--txt);background:var(--bg3)}
+.cmp-link svg{width:14px;height:14px}
+.cmp-tbl{margin-top:1rem}.cmp-tbl td:first-child{color:var(--txt3);font-size:.78rem}.cmp-tbl th{font-size:.72rem}
+.cmp-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:1.25rem}
+.cmp-note{font-size:.78rem;color:var(--txt2);padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;border-top:2px solid var(--border)}
+.cmp-note b{font-weight:500;color:var(--txt)}
+@media(max-width:700px){.cmp-grid,.cmp-notes{grid-template-columns:1fr}.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}}
 </style>
 </head>
 <body>
 <div class="ctn">
-  <div class="hdr">
-    <div>
-      <h1>Bitcoin halving cycles</h1>
-      <p class="sub" data-t="subtitle"></p>
-    </div>
-    <div class="lsel" id="langSel"></div>
-  </div>
-
-  <div class="sbar">
-    <span class="sdot ld" id="sDot"></span>
-    <span class="stxt" id="sTxt"></span>
-    <span class="rinfo"><span class="rdot" id="rDot"></span><span id="rTxt"></span></span>
-  </div>
-
+  <div class="hdr"><div><h1>Bitcoin halving cycles</h1><p class="sub" data-t="subtitle"></p></div><div class="lsel" id="langSel"></div></div>
+  <div class="sbar"><span class="sdot ld" id="sDot"></span><span class="stxt" id="sTxt"></span><span class="rinfo"><span class="rdot" id="rDot"></span><span id="rTxt"></span></span></div>
   <div class="mets">
     <div class="met"><div class="lb" data-t="m_price"></div><div class="vl" id="mP">--</div></div>
     <div class="met"><div class="lb" data-t="m_ath"></div><div class="vl">$126,296</div></div>
@@ -85,126 +83,166 @@ tr:last-child td{border-bottom:none}
     <div class="met"><div class="lb" data-t="m_nh"></div><div class="vl">~Apr 2028</div></div>
     <div class="met"><div class="lb" data-t="m_wh"></div><div class="vl" id="mWH">--</div></div>
   </div>
+  <div class="sec"><div class="stit" data-t="s1t"></div><div class="cwrap"><div class="leg" id="lg1"></div><div class="cinn" style="height:460px"><canvas id="ch1"></canvas></div></div><p class="nt" data-t="s1n"></p></div>
+  <div class="sec"><div class="stit" data-t="s2t"></div><div class="cwrap"><div class="leg" id="lg2"></div><div class="cinn" style="height:380px"><canvas id="ch2"></canvas></div></div></div>
+  <div class="sec"><div class="stit" data-t="s3t"></div><div style="overflow-x:auto"><table><thead id="th3"></thead><tbody>
+    <tr><td><span class="ct c1" data-t="c1"></span></td><td>Nov 28, 2012</td><td class="mn">$12</td><td class="mn">$1,150</td><td>Nov 30, 2013</td><td class="mn">52</td><td class="gr mn">+9,483%</td></tr>
+    <tr><td><span class="ct c2" data-t="c2"></span></td><td>Jul 9, 2016</td><td class="mn">$650</td><td class="mn">$19,783</td><td>Dec 17, 2017</td><td class="mn">75</td><td class="gr mn">+2,943%</td></tr>
+    <tr><td><span class="ct c3" data-t="c3"></span></td><td>May 11, 2020</td><td class="mn">$8,570</td><td class="mn">$69,000</td><td>Nov 10, 2021</td><td class="mn">78</td><td class="gr mn">+705%</td></tr>
+    <tr><td><span class="ct c4" data-t="c4"></span></td><td>Apr 20, 2024</td><td class="mn">$63,850</td><td class="mn">$126,296</td><td>Oct 6, 2025</td><td class="mn">76</td><td class="gr mn">+98%</td></tr>
+  </tbody></table></div></div>
+  <div class="sec"><div class="stit" data-t="s4t"></div><div style="overflow-x:auto"><table><thead id="th4"></thead><tbody>
+    <tr><td><span class="ct c1" data-t="c1"></span></td><td class="mn">$1,150</td><td class="mn">$170</td><td>Jan 14, 2015</td><td class="mn">59</td><td class="rd mn">-85%</td></tr>
+    <tr><td><span class="ct c2" data-t="c2"></span></td><td class="mn">$19,783</td><td class="mn">$3,200</td><td>Dec 15, 2018</td><td class="mn">52</td><td class="rd mn">-84%</td></tr>
+    <tr><td><span class="ct c3" data-t="c3"></span></td><td class="mn">$69,000</td><td class="mn">$15,479</td><td>Nov 21, 2022</td><td class="mn">54</td><td class="rd mn">-78%</td></tr>
+    <tr><td><span class="ct c4" data-t="c4"></span></td><td class="mn">$126,296</td><td class="mn" id="xP">--</td><td id="xD">--</td><td class="mn" id="xW">--</td><td class="rd mn" id="xDD">--</td></tr>
+  </tbody></table></div></div>
+  <div class="sec"><div class="stit" data-t="s5t"></div><div style="overflow-x:auto"><table><thead id="th5"></thead><tbody id="tb5"></tbody></table></div></div>
 
-  <div class="sec"><div class="stit" data-t="s1t"></div>
-    <div class="cwrap"><div class="leg" id="lg1"></div><div class="cinn" style="height:460px"><canvas id="ch1"></canvas></div></div>
-    <p class="nt" data-t="s1n"></p>
+  <div class="sec" id="cmpSec">
+    <div class="stit" data-t="cmp_title"></div>
+    <p style="color:var(--txt2);font-size:.88rem;margin-bottom:1.25rem" data-t="cmp_intro"></p>
+    <div class="cmp-grid" id="cmpGrid"></div>
+    <div style="overflow-x:auto"><table class="cmp-tbl"><thead id="cmpTH"></thead><tbody id="cmpTB"></tbody></table></div>
+    <div class="cmp-notes" id="cmpNotes"></div>
   </div>
 
-  <div class="sec"><div class="stit" data-t="s2t"></div>
-    <div class="cwrap"><div class="leg" id="lg2"></div><div class="cinn" style="height:380px"><canvas id="ch2"></canvas></div></div>
-  </div>
-
-  <div class="sec"><div class="stit" data-t="s3t"></div>
-    <div style="overflow-x:auto"><table><thead id="th3"></thead>
-    <tbody>
-      <tr><td><span class="ct c1" data-t="c1"></span></td><td>Nov 28, 2012</td><td class="mn">$12</td><td class="mn">$1,150</td><td>Nov 30, 2013</td><td class="mn">52</td><td class="gr mn">+9,483%</td></tr>
-      <tr><td><span class="ct c2" data-t="c2"></span></td><td>Jul 9, 2016</td><td class="mn">$650</td><td class="mn">$19,783</td><td>Dec 17, 2017</td><td class="mn">75</td><td class="gr mn">+2,943%</td></tr>
-      <tr><td><span class="ct c3" data-t="c3"></span></td><td>May 11, 2020</td><td class="mn">$8,570</td><td class="mn">$69,000</td><td>Nov 10, 2021</td><td class="mn">78</td><td class="gr mn">+705%</td></tr>
-      <tr><td><span class="ct c4" data-t="c4"></span></td><td>Apr 20, 2024</td><td class="mn">$63,850</td><td class="mn">$126,296</td><td>Oct 6, 2025</td><td class="mn">76</td><td class="gr mn">+98%</td></tr>
-    </tbody></table></div>
-  </div>
-
-  <div class="sec"><div class="stit" data-t="s4t"></div>
-    <div style="overflow-x:auto"><table><thead id="th4"></thead>
-    <tbody>
-      <tr><td><span class="ct c1" data-t="c1"></span></td><td class="mn">$1,150</td><td class="mn">$170</td><td>Jan 14, 2015</td><td class="mn">59</td><td class="rd mn">-85%</td></tr>
-      <tr><td><span class="ct c2" data-t="c2"></span></td><td class="mn">$19,783</td><td class="mn">$3,200</td><td>Dec 15, 2018</td><td class="mn">52</td><td class="rd mn">-84%</td></tr>
-      <tr><td><span class="ct c3" data-t="c3"></span></td><td class="mn">$69,000</td><td class="mn">$15,479</td><td>Nov 21, 2022</td><td class="mn">54</td><td class="rd mn">-78%</td></tr>
-      <tr><td><span class="ct c4" data-t="c4"></span></td><td class="mn">$126,296</td><td class="mn" id="xP">--</td><td id="xD">--</td><td class="mn" id="xW">--</td><td class="rd mn" id="xDD">--</td></tr>
-    </tbody></table></div>
-  </div>
-
-  <div class="sec"><div class="stit" data-t="s5t"></div>
-    <div style="overflow-x:auto"><table><thead id="th5"></thead><tbody id="tb5"></tbody></table></div>
-  </div>
-
-  <div class="ftr">
-    <span data-t="ftr1"></span><br>
-    <span data-t="ftr2"></span> <span id="ftrD">--</span>
-    <br>
-    <a href="https://b2pix.org/" target="_blank" rel="noopener" class="b2l">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      <span data-t="b2pix"></span>
-    </a>
-  </div>
+  <div class="ftr"><span data-t="ftr1"></span><br><span data-t="ftr2"></span> <span id="ftrD">--</span></div>
 </div>
 
 <script>
 const L={
-en:{subtitle:'Auto-updating dashboard — live price via CoinGecko API',
+en:{subtitle:'Auto-updating dashboard \u2014 live price via CoinGecko API',
 m_price:'Current price',m_ath:'Cycle 4 ATH',m_dd:'Drawdown from ATH',m_wk:'Weeks since ATH',m_nh:'Next halving',m_wh:'Weeks to halving',
-s1t:'Overlaid cycles — halving to halving (aligned by ATH)',s1n:'X-axis: weeks relative to ATH (0 = top). Left side = halving→ATH. Right side = ATH→next halving. Cycle 4 auto-updates every 60s.',
-s2t:'Post-ATH drawdown — same-week comparison',s3t:'Halving data',s4t:'Post-ATH bear market',s5t:'Same-week drawdown comparison',
+s1t:'Overlaid cycles \u2014 halving to halving (aligned by ATH)',s1n:'X-axis: weeks relative to ATH (0 = top). Left = halving\u2192ATH. Right = ATH\u2192next halving. Cycle 4 auto-updates every 60s.',
+s2t:'Post-ATH drawdown \u2014 same-week comparison',s3t:'Halving data',s4t:'Post-ATH bear market',s5t:'Same-week drawdown comparison',
 h3:['Cycle','Halving date','Price at halving','Post-halving high','High date','Weeks to high','Gain'],
 h4:['Cycle','ATH','Bear low','Low date','Weeks to low','Drawdown'],
 h5:['Cycle','Drawdown at current week','Final drawdown','Remaining drop'],
-c1:'1st',c2:'2nd',c3:'3rd',c4:'4th',cn:['Cycle 1 · 2012→2016','Cycle 2 · 2016→2020','Cycle 3 · 2020→2024','Cycle 4 · 2024→2028'],
+c1:'1st',c2:'2nd',c3:'3rd',c4:'4th',cn:['Cycle 1 \xb7 2012\u21922016','Cycle 2 \xb7 2016\u21922020','Cycle 3 \xb7 2020\u21922024','Cycle 4 \xb7 2024\u21922028'],
 ax1:'Weeks (0 = ATH)',ay1:'% relative to ATH',ax2:'Weeks after ATH',ay2:'% drawdown from ATH',
-la:'ATH',ll:'HALVING → ATH',lr:'ATH → NEXT HALVING',ln:'now',lw:'week',
+la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 NEXT HALVING',ln:'now',lw:'week',
 sf:'Fetching current BTC price...',sw:'Fetching weeks {0} to {1}...',
-so:'Connected — BTC <b>{0}</b> ({1}% from ATH)',sx:'Offline — using last saved: <b>{0}</b>',sn:'No connection, no saved data. Using seed.',
+so:'Connected \u2014 BTC <b>{0}</b> ({1}% from ATH)',sx:'Offline \u2014 using last saved: <b>{0}</b>',sn:'No connection, no saved data.',
 rr:'auto-refresh 60s',ongoing:'ongoing',partial:'partial',
 ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 auto-updates via CoinGecko API.',ftr2:'Last update:',
-b2pix:'Buy Bitcoin with PIX in Brazil — P2P via B2PIX'},
-pt:{subtitle:'Dashboard auto-atualizado — preço ao vivo via CoinGecko API',
-m_price:'Preço atual',m_ath:'ATH ciclo 4',m_dd:'Drawdown da ATH',m_wk:'Semanas da ATH',m_nh:'Próximo halving',m_wh:'Semanas até halving',
-s1t:'Ciclos sobrepostos — halving a halving (alinhados pela ATH)',s1n:'Eixo X: semanas relativas à ATH (0 = topo). Esquerda = halving→ATH. Direita = ATH→próximo halving. Ciclo 4 atualiza a cada 60s.',
-s2t:'Drawdown pós-ATH — comparativo na mesma semana',s3t:'Dados por halving',s4t:'Bear market pós-ATH',s5t:'Comparativo de drawdown na semana atual',
-h3:['Ciclo','Data halving','Preço no halving','Máxima pós-halving','Data da máxima','Sem. até máxima','Valorização'],
-h4:['Ciclo','ATH','Mínima','Data da mínima','Sem. até mínima','Drawdown'],
+cmp_title:'How to buy Bitcoin in Brazil',
+cmp_intro:'A comparison of the main ways to buy and sell Bitcoin in Brazil \u2014 from centralized exchanges to peer-to-peer.',
+cmp_visit:'Visit',
+cmp_cards:[
+  {name:'Binance',type:'Centralized exchange',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'Full KYC required',fees:'~0.1% + withdrawal fees',pix_speed:'Minutes to hours',assets:'350+ cryptocurrencies',extra:'Futures, margin, staking, earn',privacy:'Low',best:'High-volume trading, altcoins, DeFi access'}},
+  {name:'Mercado Bitcoin',type:'Centralized exchange',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'Full KYC (CPF required)',fees:'~1\u20132% + withdrawal fees',pix_speed:'Minutes to hours',assets:'200+ cryptocurrencies',extra:'Tokenized assets, fixed income',privacy:'Low',best:'Regulated Brazilian platform, diverse products'}},
+  {name:'B2PIX',type:'P2P BTC/PIX platform',url:'https://b2pix.org/',rows:{custody:'Non-custodial (your keys)',kyc:'No KYC',fees:'~1\u20132% spread',pix_speed:'Instant',assets:'Bitcoin (sBTC on Stacks)',extra:'Pay bills & ecommerce with BTC via PIX',privacy:'High',best:'Self-custody, privacy, BTC payments'}}
+],
+cmp_thead:['Feature','Binance','Mercado Bitcoin','B2PIX'],
+cmp_features:['Custody','KYC','Fees','PIX speed','Supported assets','Additional services','Privacy','Best for'],
+cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
+cmp_notes:[
+  {name:'Binance',text:'Best suited for experienced traders who need access to hundreds of altcoins, derivatives, and DeFi protocols. Ideal for high-volume operations where the low trading fee (0.1%) makes a significant difference.'},
+  {name:'Mercado Bitcoin',text:'The most established Brazilian exchange, regulated and with a wide range of products beyond crypto, including tokenized assets and fixed income. A good choice for those who want everything in one regulated platform.'},
+  {name:'B2PIX',text:'The only non-custodial option in this comparison \u2014 your Bitcoin stays in your wallet at all times, with no account creation or identity verification. Also the only platform that lets you pay PIX bills and make online purchases directly with BTC.'}
+]},
+pt:{subtitle:'Dashboard auto-atualizado \u2014 pre\u00e7o ao vivo via CoinGecko API',
+m_price:'Pre\u00e7o atual',m_ath:'ATH ciclo 4',m_dd:'Drawdown da ATH',m_wk:'Semanas da ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas at\u00e9 halving',
+s1t:'Ciclos sobrepostos \u2014 halving a halving (alinhados pela ATH)',s1n:'Eixo X: semanas relativas \u00e0 ATH (0 = topo). Esquerda = halving\u2192ATH. Direita = ATH\u2192pr\u00f3ximo halving. Ciclo 4 atualiza a cada 60s.',
+s2t:'Drawdown p\u00f3s-ATH \u2014 comparativo na mesma semana',s3t:'Dados por halving',s4t:'Bear market p\u00f3s-ATH',s5t:'Comparativo de drawdown na semana atual',
+h3:['Ciclo','Data halving','Pre\u00e7o no halving','M\u00e1xima p\u00f3s-halving','Data da m\u00e1xima','Sem. at\u00e9 m\u00e1xima','Valoriza\u00e7\u00e3o'],
+h4:['Ciclo','ATH','M\u00ednima','Data da m\u00ednima','Sem. at\u00e9 m\u00ednima','Drawdown'],
 h5:['Ciclo','Drawdown na semana atual','Drawdown final','Queda restante'],
-c1:'1°',c2:'2°',c3:'3°',c4:'4°',cn:['Ciclo 1 · 2012→2016','Ciclo 2 · 2016→2020','Ciclo 3 · 2020→2024','Ciclo 4 · 2024→2028'],
-ax1:'Semanas (0 = ATH)',ay1:'% em relação à ATH',ax2:'Semanas após ATH',ay2:'% drawdown da ATH',
-la:'ATH',ll:'HALVING → ATH',lr:'ATH → PRÓXIMO HALVING',ln:'hoje',lw:'sem.',
-sf:'Buscando preço atual do BTC...',sw:'Buscando semanas {0} a {1}...',
-so:'Conectado — BTC <b>{0}</b> ({1}% da ATH)',sx:'Offline — último preço salvo: <b>{0}</b>',sn:'Sem conexão e sem dados. Usando dados iniciais.',
-rr:'atualização a cada 60s',ongoing:'em andamento',partial:'parcial',
-ftr1:'Dados históricos (ciclos 1-3) fixos. Ciclo 4 atualiza via API CoinGecko.',ftr2:'Última atualização:',
-b2pix:'Compre Bitcoin com PIX no Brasil — P2P via B2PIX'},
-es:{subtitle:'Dashboard auto-actualizado — precio en vivo vía CoinGecko API',
-m_price:'Precio actual',m_ath:'ATH ciclo 4',m_dd:'Drawdown del ATH',m_wk:'Semanas del ATH',m_nh:'Próximo halving',m_wh:'Semanas al halving',
-s1t:'Ciclos superpuestos — halving a halving (alineados por ATH)',s1n:'Eje X: semanas relativas al ATH (0 = tope). Izquierda = halving→ATH. Derecha = ATH→próximo halving. Ciclo 4 se actualiza cada 60s.',
-s2t:'Drawdown post-ATH — comparación por semana',s3t:'Datos por halving',s4t:'Bear market post-ATH',s5t:'Comparación de drawdown en la semana actual',
-h3:['Ciclo','Fecha halving','Precio en halving','Máximo post-halving','Fecha del máximo','Sem. al máximo','Ganancia'],
-h4:['Ciclo','ATH','Mínimo','Fecha del mínimo','Sem. al mínimo','Drawdown'],
-h5:['Ciclo','Drawdown en semana actual','Drawdown final','Caída restante'],
-c1:'1°',c2:'2°',c3:'3°',c4:'4°',cn:['Ciclo 1 · 2012→2016','Ciclo 2 · 2016→2020','Ciclo 3 · 2020→2024','Ciclo 4 · 2024→2028'],
-ax1:'Semanas (0 = ATH)',ay1:'% relativo al ATH',ax2:'Semanas después del ATH',ay2:'% drawdown del ATH',
-la:'ATH',ll:'HALVING → ATH',lr:'ATH → PRÓXIMO HALVING',ln:'hoy',lw:'sem.',
+c1:'1\u00ba',c2:'2\u00ba',c3:'3\u00ba',c4:'4\u00ba',cn:['Ciclo 1 \xb7 2012\u21922016','Ciclo 2 \xb7 2016\u21922020','Ciclo 3 \xb7 2020\u21922024','Ciclo 4 \xb7 2024\u21922028'],
+ax1:'Semanas (0 = ATH)',ay1:'% em rela\u00e7\u00e3o \u00e0 ATH',ax2:'Semanas ap\u00f3s ATH',ay2:'% drawdown da ATH',
+la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 PR\u00d3XIMO HALVING',ln:'hoje',lw:'sem.',
+sf:'Buscando pre\u00e7o atual do BTC...',sw:'Buscando semanas {0} a {1}...',
+so:'Conectado \u2014 BTC <b>{0}</b> ({1}% da ATH)',sx:'Offline \u2014 \u00faltimo pre\u00e7o: <b>{0}</b>',sn:'Sem conex\u00e3o e sem dados.',
+rr:'atualiza\u00e7\u00e3o a cada 60s',ongoing:'em andamento',partial:'parcial',
+ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 atualiza via API CoinGecko.',ftr2:'\u00daltima atualiza\u00e7\u00e3o:',
+cmp_title:'Como comprar Bitcoin no Brasil',
+cmp_intro:'Compara\u00e7\u00e3o dos principais meios de compra e venda de Bitcoin no Brasil \u2014 de exchanges centralizadas ao peer-to-peer.',
+cmp_visit:'Acessar',
+cmp_cards:[
+  {name:'Binance',type:'Exchange centralizada',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obrigat\u00f3rio',fees:'~0,1% + taxa de saque',pix_speed:'Minutos a horas',assets:'350+ criptomoedas',extra:'Futuros, margem, staking, earn',privacy:'Baixa',best:'Trading de alto volume, altcoins, acesso DeFi'}},
+  {name:'Mercado Bitcoin',type:'Exchange centralizada',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obrigat\u00f3rio)',fees:'~1\u20132% + taxa de saque',pix_speed:'Minutos a horas',assets:'200+ criptomoedas',extra:'Ativos tokenizados, renda fixa',privacy:'Baixa',best:'Plataforma brasileira regulada, produtos diversificados'}},
+  {name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'N\u00e3o-custodial (suas chaves)',kyc:'Sem KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e2neo',assets:'Bitcoin (sBTC na Stacks)',extra:'Pague boletos e e-commerce com BTC via PIX',privacy:'Alta',best:'Autocust\u00f3dia, privacidade, pagamentos com BTC'}}
+],
+cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],
+cmp_features:['Cust\u00f3dia','KYC','Taxas','Velocidade PIX','Ativos suportados','Servi\u00e7os adicionais','Privacidade','Melhor para'],
+cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
+cmp_notes:[
+  {name:'Binance',text:'Mais indicada para traders experientes que precisam acessar centenas de altcoins, derivativos e protocolos DeFi. Ideal para opera\u00e7\u00f5es de alto volume, onde a taxa baixa (0,1%) faz diferen\u00e7a significativa.'},
+  {name:'Mercado Bitcoin',text:'A exchange brasileira mais estabelecida, regulada e com uma ampla gama de produtos al\u00e9m de cripto, incluindo ativos tokenizados e renda fixa. Boa escolha para quem quer tudo em uma plataforma regulamentada.'},
+  {name:'B2PIX',text:'A \u00fanica op\u00e7\u00e3o n\u00e3o-custodial desta compara\u00e7\u00e3o \u2014 seu Bitcoin fica na sua carteira o tempo todo, sem criar conta e sem verifica\u00e7\u00e3o de identidade. Tamb\u00e9m a \u00fanica que permite pagar boletos e fazer compras online diretamente com BTC.'}
+]},
+es:{subtitle:'Dashboard auto-actualizado \u2014 precio en vivo v\u00eda CoinGecko API',
+m_price:'Precio actual',m_ath:'ATH ciclo 4',m_dd:'Drawdown del ATH',m_wk:'Semanas del ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas al halving',
+s1t:'Ciclos superpuestos \u2014 halving a halving (alineados por ATH)',s1n:'Eje X: semanas relativas al ATH (0 = tope). Izquierda = halving\u2192ATH. Derecha = ATH\u2192pr\u00f3ximo halving. Ciclo 4 se actualiza cada 60s.',
+s2t:'Drawdown post-ATH \u2014 comparaci\u00f3n por semana',s3t:'Datos por halving',s4t:'Bear market post-ATH',s5t:'Comparaci\u00f3n de drawdown en la semana actual',
+h3:['Ciclo','Fecha halving','Precio en halving','M\u00e1ximo post-halving','Fecha del m\u00e1ximo','Sem. al m\u00e1ximo','Ganancia'],
+h4:['Ciclo','ATH','M\u00ednimo','Fecha del m\u00ednimo','Sem. al m\u00ednimo','Drawdown'],
+h5:['Ciclo','Drawdown en semana actual','Drawdown final','Ca\u00edda restante'],
+c1:'1\u00ba',c2:'2\u00ba',c3:'3\u00ba',c4:'4\u00ba',cn:['Ciclo 1 \xb7 2012\u21922016','Ciclo 2 \xb7 2016\u21922020','Ciclo 3 \xb7 2020\u21922024','Ciclo 4 \xb7 2024\u21922028'],
+ax1:'Semanas (0 = ATH)',ay1:'% relativo al ATH',ax2:'Semanas despu\u00e9s del ATH',ay2:'% drawdown del ATH',
+la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 PR\u00d3XIMO HALVING',ln:'hoy',lw:'sem.',
 sf:'Buscando precio actual de BTC...',sw:'Buscando semanas {0} a {1}...',
-so:'Conectado — BTC <b>{0}</b> ({1}% del ATH)',sx:'Sin conexión — último precio: <b>{0}</b>',sn:'Sin conexión ni datos. Usando datos iniciales.',
-rr:'actualización cada 60s',ongoing:'en curso',partial:'parcial',
-ftr1:'Datos históricos (ciclos 1-3) fijos. Ciclo 4 se actualiza vía API CoinGecko.',ftr2:'Última actualización:',
-b2pix:'Compra Bitcoin con PIX en Brasil — P2P vía B2PIX'}
+so:'Conectado \u2014 BTC <b>{0}</b> ({1}% del ATH)',sx:'Sin conexi\u00f3n \u2014 \u00faltimo precio: <b>{0}</b>',sn:'Sin conexi\u00f3n ni datos.',
+rr:'actualizaci\u00f3n cada 60s',ongoing:'en curso',partial:'parcial',
+ftr1:'Datos hist\u00f3ricos (ciclos 1-3) fijos. Ciclo 4 se actualiza v\u00eda API CoinGecko.',ftr2:'\u00daltima actualizaci\u00f3n:',
+cmp_title:'\u00bfC\u00f3mo comprar Bitcoin en Brasil?',
+cmp_intro:'Comparaci\u00f3n de las principales formas de comprar y vender Bitcoin en Brasil \u2014 desde exchanges centralizados hasta peer-to-peer.',
+cmp_visit:'Visitar',
+cmp_cards:[
+  {name:'Binance',type:'Exchange centralizado',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obligatorio',fees:'~0,1% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'350+ criptomonedas',extra:'Futuros, margen, staking, earn',privacy:'Baja',best:'Trading de alto volumen, altcoins, acceso DeFi'}},
+  {name:'Mercado Bitcoin',type:'Exchange centralizado',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obligatorio)',fees:'~1\u20132% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'200+ criptomonedas',extra:'Activos tokenizados, renta fija',privacy:'Baja',best:'Plataforma brasile\u00f1a regulada, productos diversificados'}},
+  {name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'No custodial (tus claves)',kyc:'Sin KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e1neo',assets:'Bitcoin (sBTC en Stacks)',extra:'Paga facturas y e-commerce con BTC v\u00eda PIX',privacy:'Alta',best:'Autocustodia, privacidad, pagos con BTC'}}
+],
+cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],
+cmp_features:['Custodia','KYC','Comisiones','Velocidad PIX','Activos soportados','Servicios adicionales','Privacidad','Mejor para'],
+cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
+cmp_notes:[
+  {name:'Binance',text:'M\u00e1s indicada para traders experimentados que necesitan acceso a cientos de altcoins, derivados y protocolos DeFi. Ideal para operaciones de alto volumen donde la baja comisi\u00f3n (0,1%) marca una diferencia significativa.'},
+  {name:'Mercado Bitcoin',text:'El exchange brasile\u00f1o m\u00e1s establecido, regulado y con una amplia gama de productos m\u00e1s all\u00e1 de cripto, incluyendo activos tokenizados y renta fija. Buena opci\u00f3n para quien quiere todo en una plataforma regulada.'},
+  {name:'B2PIX',text:'La \u00fanica opci\u00f3n no custodial de esta comparaci\u00f3n \u2014 tu Bitcoin queda en tu billetera en todo momento, sin crear cuenta ni verificaci\u00f3n de identidad. Tambi\u00e9n la \u00fanica que permite pagar facturas y hacer compras online directamente con BTC.'}
+]}
 };
 
 let lang='en';
 function t(k){return L[lang][k]||L.en[k]||k}
 function tf(k,...a){let s=t(k);a.forEach((v,i)=>{s=s.replace('{'+i+'}',v)});return s}
-
 function detectLang(){const s=localStorage.getItem('btc_lang');if(s&&L[s])return s;const b=(navigator.language||'en').toLowerCase();if(b.startsWith('pt'))return'pt';if(b.startsWith('es'))return'es';return'en'}
+
+function buildComparison(){
+  const cards=t('cmp_cards'),feats=t('cmp_features'),fk=t('cmp_feat_keys'),notes=t('cmp_notes');
+  const grid=document.getElementById('cmpGrid');grid.innerHTML='';
+  const cardKeys=['custody','kyc','fees','pix_speed','privacy'];
+  cards.forEach(c=>{
+    let rows='';
+    cardKeys.forEach(k=>{const li=fk.indexOf(k);const label=li>=0?feats[li]:k;
+      rows+=`<div class="cmp-row"><span class="cmp-k">${label}</span><span class="cmp-v">${c.rows[k]}</span></div>`});
+    grid.innerHTML+=`<div class="cmp-card"><div class="cmp-name">${c.name}</div><div class="cmp-type">${c.type}</div>${rows}<div style="height:12px"></div><a href="${c.url}" target="_blank" rel="noopener" class="cmp-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>${t('cmp_visit')} ${c.name}</a></div>`;
+  });
+  const thead=t('cmp_thead');
+  document.getElementById('cmpTH').innerHTML='<tr>'+thead.map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  let tb='';
+  fk.forEach((k,i)=>{const vals=cards.map(c=>`<td>${c.rows[k]}</td>`);tb+=`<tr><td>${feats[i]}</td>${vals.join('')}</tr>`});
+  document.getElementById('cmpTB').innerHTML=tb;
+  const nDiv=document.getElementById('cmpNotes');nDiv.innerHTML='';
+  const colors=[L.en.cmp_cards[0].url?'var(--blue)':'var(--border)','var(--green)','var(--orange)'];
+  notes.forEach((n,i)=>{nDiv.innerHTML+=`<div class="cmp-note" style="border-top-color:${colors[i]}"><b>${n.name}</b><br>${n.text}</div>`});
+}
 
 function applyI18n(){
   document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(L[lang][k]!==undefined)el.textContent=L[lang][k]});
-  // table headers
-  const mk=h=>h.map(x=>`<th>${x}</th>`).join('');
+  const mk=h=>h.map(x=>'<th>'+x+'</th>').join('');
   document.getElementById('th3').innerHTML='<tr>'+mk(t('h3'))+'</tr>';
   document.getElementById('th4').innerHTML='<tr>'+mk(t('h4'))+'</tr>';
   document.getElementById('th5').innerHTML='<tr>'+mk(t('h5'))+'</tr>';
-  // lang buttons
-  const sel=document.getElementById('langSel');
-  sel.innerHTML=['en','pt','es'].map(l=>`<button class="lbtn${l===lang?' on':''}" onclick="setLang('${l}')">${l==='pt'?'PT-BR':l.toUpperCase()}</button>`).join('');
+  document.getElementById('langSel').innerHTML=['en','pt','es'].map(l=>`<button class="lbtn${l===lang?' on':''}" onclick="setLang('${l}')">${l==='pt'?'PT-BR':l.toUpperCase()}</button>`).join('');
   document.getElementById('rTxt').textContent=t('rr');
-  document.title='Bitcoin Halving Cycles — '+t('subtitle');
+  document.title='Bitcoin Halving Cycles \u2014 '+t('subtitle');
+  buildComparison();
 }
-
 function setLang(l){lang=l;localStorage.setItem('btc_lang',l);applyI18n();updateUI(lastPr,c4P);rebuild()}
 
-// ============================================================
-// DATA
-// ============================================================
-const ATH=126296,ATHD=new Date('2025-10-06'),H5=new Date('2028-04-15'),SK='btc_c4_v4';
+const ATH=126296,ATHD=new Date('2025-10-06'),H5=new Date('2028-04-15'),SK='btc_c4_v6';
 const COL=['#378ADD','#1D9E75','#7F77DD','#D85A30'];
 const D1=[{x:-52,y:-99},{x:-50,y:-98},{x:-48,y:-97},{x:-46,y:-96},{x:-44,y:-95},{x:-42,y:-94},{x:-40,y:-93},{x:-38,y:-92},{x:-36,y:-90},{x:-34,y:-88},{x:-32,y:-86},{x:-30,y:-84},{x:-28,y:-80},{x:-26,y:-76},{x:-24,y:-72},{x:-22,y:-82},{x:-20,y:-85},{x:-18,y:-80},{x:-16,y:-75},{x:-14,y:-70},{x:-12,y:-65},{x:-10,y:-60},{x:-8,y:-50},{x:-6,y:-40},{x:-4,y:-25},{x:-3,y:-15},{x:-2,y:-8},{x:-1,y:-3},{x:0,y:0},{x:1,y:-10},{x:2,y:-22},{x:3,y:-25},{x:4,y:-28},{x:5,y:-30},{x:6,y:-26},{x:8,y:-50},{x:10,y:-43},{x:12,y:-42},{x:14,y:-46},{x:16,y:-52},{x:18,y:-53},{x:20,y:-58},{x:23,y:-62},{x:26,y:-50},{x:28,y:-49},{x:32,y:-56},{x:36,y:-55},{x:40,y:-63},{x:44,y:-67},{x:48,y:-70},{x:52,y:-74},{x:56,y:-80},{x:59,y:-85},{x:63,y:-81},{x:67,y:-79},{x:73,y:-78},{x:79,y:-79},{x:85,y:-76},{x:91,y:-72},{x:97,y:-74},{x:103,y:-68},{x:109,y:-64},{x:115,y:-63},{x:121,y:-57},{x:127,y:-50},{x:133,y:-45},{x:136,y:-43}];
 const D2=[{x:-75,y:-97},{x:-73,y:-96},{x:-71,y:-96},{x:-69,y:-96},{x:-67,y:-96},{x:-65,y:-95},{x:-63,y:-95},{x:-61,y:-95},{x:-59,y:-95},{x:-57,y:-95},{x:-55,y:-94},{x:-53,y:-94},{x:-51,y:-93},{x:-49,y:-92},{x:-47,y:-90},{x:-45,y:-88},{x:-43,y:-86},{x:-41,y:-83},{x:-39,y:-80},{x:-37,y:-78},{x:-35,y:-75},{x:-33,y:-72},{x:-31,y:-70},{x:-29,y:-65},{x:-27,y:-60},{x:-25,y:-55},{x:-23,y:-52},{x:-21,y:-50},{x:-19,y:-46},{x:-17,y:-42},{x:-15,y:-38},{x:-13,y:-35},{x:-11,y:-30},{x:-9,y:-25},{x:-7,y:-18},{x:-5,y:-12},{x:-3,y:-5},{x:-1,y:-1},{x:0,y:0},{x:1,y:-18},{x:2,y:-30},{x:3,y:-38},{x:4,y:-42},{x:5,y:-35},{x:7,y:-45},{x:9,y:-47},{x:11,y:-50},{x:13,y:-52},{x:15,y:-48},{x:17,y:-55},{x:19,y:-50},{x:21,y:-58},{x:23,y:-63},{x:25,y:-58},{x:27,y:-65},{x:30,y:-55},{x:34,y:-62},{x:38,y:-67},{x:42,y:-65},{x:46,y:-68},{x:50,y:-72},{x:52,y:-84},{x:56,y:-78},{x:60,y:-80},{x:64,y:-75},{x:68,y:-70},{x:72,y:-65},{x:76,y:-48},{x:78,y:-35},{x:82,y:-48},{x:86,y:-55},{x:90,y:-62},{x:94,y:-55},{x:98,y:-53},{x:102,y:-55},{x:106,y:-52},{x:110,y:-58},{x:114,y:-80},{x:118,y:-65},{x:122,y:-52},{x:125,y:-57}];
@@ -217,109 +255,60 @@ function $(n){return'$'+n.toLocaleString('en-US',{maximumFractionDigits:0})}
 function ld(){try{const r=localStorage.getItem(SK);return r?JSON.parse(r):null}catch(e){return null}}
 function sv(d){localStorage.setItem(SK,JSON.stringify(d))}
 function ss(c,h){document.getElementById('sDot').className='sdot '+c;document.getElementById('sTxt').innerHTML=h}
-
 async function fp(){try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');return(await r.json()).bitcoin.usd}catch(e){return null}}
 async function fh(a,b){try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=usd&from=${a}&to=${b}`);const d=await r.json();if(!d.prices)return[];const o=[];let lw=-999;for(const[ts,p]of d.prices){const w=wk(new Date(ts));if(w!==lw&&w>0){o.push({x:w,y:Math.round(((p/ATH)-1)*100)});lw=w}}return o}catch(e){return[]}}
 function mg(a,b){const m=new Map();for(const p of a)m.set(p.x,p.y);for(const p of b)m.set(p.x,p.y);return[...m.entries()].map(([x,y])=>({x,y})).sort((a,b)=>a.x-b.x)}
 function da(c,w){let b=c[0];for(const p of c){if(p.x<=w)b=p;else break}return b?b.y:null}
 
 let c4P=[...D4S],lastPr=71000;
-
 function updateUI(pr,po){
-  lastPr=pr;
-  const dd=Math.round(((pr/ATH)-1)*100),w=wk(new Date()),wh=Math.round((H5-new Date())/(7*864e5));
-  document.getElementById('mP').textContent=$(pr);
-  document.getElementById('mD').textContent=dd+'%';
-  document.getElementById('mW').textContent=w;
-  document.getElementById('mWH').textContent='~'+wh;
+  lastPr=pr;const dd=Math.round(((pr/ATH)-1)*100),w=wk(new Date()),wh=Math.round((H5-new Date())/(7*864e5));
+  document.getElementById('mP').textContent=$(pr);document.getElementById('mD').textContent=dd+'%';
+  document.getElementById('mW').textContent=w;document.getElementById('mWH').textContent='~'+wh;
   let mn=dd;for(const p of po)if(p.y<mn)mn=p.y;
   document.getElementById('xP').textContent=$(Math.round(ATH*(1+mn/100)))+' ('+t('partial')+')';
-  document.getElementById('xD').textContent=t('ongoing');
-  document.getElementById('xW').textContent=w+'+';
-  document.getElementById('xDD').textContent=mn+'%';
-
+  document.getElementById('xD').textContent=t('ongoing');document.getElementById('xW').textContent=w+'+';document.getElementById('xDD').textContent=mn+'%';
   const cs=[{k:'c1',d:D1.filter(p=>p.x>=0),f:-85},{k:'c2',d:D2.filter(p=>p.x>=0),f:-84},{k:'c3',d:D3.filter(p=>p.x>=0),f:-78},{k:'c4',d:null,f:null}];
   const tb=document.getElementById('tb5');tb.innerHTML='';
-  for(const c of cs){
-    const aw=c.d?da(c.d,w):dd;
-    const rm=c.f!==null?(c.f-aw)+' p.p.':'?';
-    tb.innerHTML+=`<tr><td><span class="ct ${c.k}">${t(c.k)}</span></td><td class="mn rd">${aw}%</td><td class="mn rd">${c.f!==null?c.f+'%':t('ongoing')}</td><td class="mn">${rm}</td></tr>`;
-  }
-  const now=new Date();
+  for(const c of cs){const aw=c.d?da(c.d,w):dd;const rm=c.f!==null?(c.f-aw)+' p.p.':'?';
+    tb.innerHTML+=`<tr><td><span class="ct ${c.k}">${t(c.k)}</span></td><td class="mn rd">${aw}%</td><td class="mn rd">${c.f!==null?c.f+'%':t('ongoing')}</td><td class="mn">${rm}</td></tr>`}
   const loc=lang==='pt'?'pt-BR':lang==='es'?'es-ES':'en-US';
-  document.getElementById('ftrD').textContent=now.toLocaleDateString(loc,{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('ftrD').textContent=new Date().toLocaleDateString(loc,{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
 }
 
-// ============================================================
-// CHARTS
-// ============================================================
 let ch1=null,ch2=null;
 function ds(d,i){return{label:(t('cn')||[])[i]||'',data:d,borderColor:COL[i],backgroundColor:'transparent',borderWidth:i===3?3:1.5,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:COL[i],tension:.3,fill:false}}
 function bl(id,ch){const el=document.getElementById(id);el.innerHTML='';(t('cn')||[]).forEach((n,i)=>{const s=document.createElement('span');s.className='legi';s.innerHTML=`<span class="legsq" style="background:${COL[i]}"></span>${n}`;s.onclick=()=>{const v=ch.isDatasetVisible(i);ch.setDatasetVisibility(i,!v);ch.update();s.classList.toggle('off',v)};el.appendChild(s)})}
 
 function rebuild(){
   if(ch1){ch1.destroy();ch1=null}if(ch2){ch2.destroy();ch2=null}
-  const c4F=[...D4P,...c4P];
-  ch1=new Chart(document.getElementById('ch1'),{type:'line',data:{datasets:[ds(D1,0),ds(D2,1),ds(D3,2),ds(c4F,3)]},
+  ch1=new Chart(document.getElementById('ch1'),{type:'line',data:{datasets:[ds(D1,0),ds(D2,1),ds(D3,2),ds([...D4P,...c4P],3)]},
     options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false,axis:'x'},
       scales:{x:{type:'linear',min:-82,max:140,title:{display:true,text:t('ax1'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v===0?t('la'):v>0?'+'+v:''+v}},y:{min:-100,max:5,title:{display:true,text:t('ay1'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v+'%'}}},
       plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a1e26',titleColor:'#e8e6e1',bodyColor:'#9a9890',borderColor:'#252a35',borderWidth:1,padding:10,displayColors:true,boxWidth:10,boxHeight:10,boxPadding:3,callbacks:{title:i=>{const w=Math.round(i[0].parsed.x);return w===0?t('la')+' ('+t('lw')+' 0)':w>0?t('lw')+' +'+w:t('lw')+' '+w},label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y)+'%'}}}},
-    plugins:[{id:'a',beforeDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(0);x.save();x.fillStyle='rgba(100,200,130,0.03)';x.fillRect(s.left,y.top,p-s.left,y.bottom-y.top);x.fillStyle='rgba(200,80,80,0.03)';x.fillRect(p,y.top,s.right-p,y.bottom-y.top);x.beginPath();x.setLineDash([4,3]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#e8e6e1';x.font='500 12px Outfit,sans-serif';x.textAlign='center';x.fillText(t('la'),p,y.top-8);x.fillStyle='#5f5e58';x.font='11px Outfit,sans-serif';x.fillText(t('ll'),s.left+(p-s.left)/2,y.bottom-8);x.fillText(t('lr'),(p+s.right)/2,y.bottom-8);x.restore()}},
-    {id:'b',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.fillStyle='#F5C4B3';x.font='500 11px Outfit,sans-serif';x.textAlign='left';x.fillText(t('ln'),p.x+12,p.y+4);x.restore()}}]});
+    plugins:[{id:'a',beforeDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(0);x.save();x.fillStyle='rgba(100,200,130,0.03)';x.fillRect(s.left,y.top,p-s.left,y.bottom-y.top);x.fillStyle='rgba(200,80,80,0.03)';x.fillRect(p,y.top,s.right-p,y.bottom-y.top);x.beginPath();x.setLineDash([4,3]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#e8e6e1';x.font='500 12px Outfit,sans-serif';x.textAlign='center';x.fillText(t('la'),p,y.top-8);x.fillStyle='#5f5e58';x.font='11px Outfit,sans-serif';x.fillText(t('ll'),s.left+(p-s.left)/2,y.bottom-8);x.fillText(t('lr'),(p+s.right)/2,y.bottom-8);x.restore()}},{id:'b',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.fillStyle='#F5C4B3';x.font='500 11px Outfit,sans-serif';x.textAlign='left';x.fillText(t('ln'),p.x+12,p.y+4);x.restore()}}]});
   bl('lg1',ch1);
-
   const ap=[D1.filter(p=>p.x>=0),D2.filter(p=>p.x>=0),D3.filter(p=>p.x>=0),[{x:0,y:0},...c4P]];
   ch2=new Chart(document.getElementById('ch2'),{type:'line',data:{datasets:ap.map((d,i)=>ds(d,i))},
     options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false,axis:'x'},
       scales:{x:{type:'linear',min:0,max:140,title:{display:true,text:t('ax2'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10}},y:{min:-92,max:5,title:{display:true,text:t('ay2'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v+'%'}}},
       plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a1e26',titleColor:'#e8e6e1',bodyColor:'#9a9890',borderColor:'#252a35',borderWidth:1,padding:10,displayColors:true,boxWidth:10,boxHeight:10,boxPadding:3,callbacks:{title:i=>t('lw')+' '+Math.round(i[0].parsed.x),label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y)+'%'}}}},
-    plugins:[{id:'c',afterDraw(c){const w=wk(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#9a9890';x.font='11px Outfit,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},
-    {id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.restore()}}]});
+    plugins:[{id:'c',afterDraw(c){const w=wk(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#9a9890';x.font='11px Outfit,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},{id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.restore()}}]});
   bl('lg2',ch2);
 }
 
-// ============================================================
-// LIVE REFRESH
-// ============================================================
-async function refresh(){
-  const pr=await fp();
-  if(!pr)return;
-  const cw=wk(new Date()),cd=Math.round(((pr/ATH)-1)*100);
-  const ei=c4P.findIndex(p=>p.x===cw);
-  if(ei>=0)c4P[ei].y=cd;else{c4P.push({x:cw,y:cd});c4P.sort((a,b)=>a.x-b.x)}
-  sv({data:c4P,lastUpdate:Date.now(),lastPrice:pr});
-  ss('ok',tf('so',$(pr),cd));
-  updateUI(pr,c4P);
-  rebuild();
-}
+async function refresh(){const pr=await fp();if(!pr)return;const cw=wk(new Date()),cd=Math.round(((pr/ATH)-1)*100);const ei=c4P.findIndex(p=>p.x===cw);if(ei>=0)c4P[ei].y=cd;else{c4P.push({x:cw,y:cd});c4P.sort((a,b)=>a.x-b.x)}sv({data:c4P,lastUpdate:Date.now(),lastPrice:pr});ss('ok',tf('so',$(pr),cd));updateUI(pr,c4P);rebuild()}
+let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=ctr%2===0?'0.7':'0.3';if(ctr<=0){ctr=60;refresh()}},1000);
 
-let ctr=60;
-setInterval(()=>{
-  ctr--;
-  const d=document.getElementById('rDot');
-  d.style.opacity=ctr%2===0?'0.7':'0.3';
-  if(ctr<=0){ctr=60;refresh()}
-},1000);
-
-// ============================================================
-// INIT
-// ============================================================
 (async function(){
   lang=detectLang();applyI18n();
   const st=ld();if(st?.data?.length>0)c4P=st.data;
-  ss('ld',t('sf'));
-  const pr=await fp();
-  if(pr){
-    const cw=wk(new Date()),cd=Math.round(((pr/ATH)-1)*100);
-    const lw=c4P.length>0?Math.max(...c4P.map(p=>p.x)):0;
+  ss('ld',t('sf'));const pr=await fp();
+  if(pr){const cw=wk(new Date()),cd=Math.round(((pr/ATH)-1)*100);const lw=c4P.length>0?Math.max(...c4P.map(p=>p.x)):0;
     if(cw>lw+1){ss('ld',tf('sw',lw+1,cw));const fm=new Date(ATHD.getTime()+lw*7*864e5);const ft=await fh(Math.floor(fm.getTime()/1000),Math.floor(Date.now()/1000));if(ft.length>0)c4P=mg(c4P,ft)}
     const ei=c4P.findIndex(p=>p.x===cw);if(ei>=0)c4P[ei].y=cd;else{c4P.push({x:cw,y:cd});c4P.sort((a,b)=>a.x-b.x)}
-    sv({data:c4P,lastUpdate:Date.now(),lastPrice:pr});
-    ss('ok',tf('so',$(pr),cd));updateUI(pr,c4P);
-  }else{
-    if(st?.lastPrice){ss('err',tf('sx',$(st.lastPrice)));updateUI(st.lastPrice,c4P)}
-    else{ss('err',t('sn'));updateUI(71000,c4P)}
-  }
+    sv({data:c4P,lastUpdate:Date.now(),lastPrice:pr});ss('ok',tf('so',$(pr),cd));updateUI(pr,c4P);
+  }else{if(st?.lastPrice){ss('err',tf('sx',$(st.lastPrice)));updateUI(st.lastPrice,c4P)}else{ss('err',t('sn'));updateUI(71000,c4P)}}
   rebuild();
 })();
 </script>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bitcoin Halving Cycles Dashboard</title>
-<meta name="description" content="Single-file dashboard overlaying Bitcoin's 4 halving cycles by % drawdown from ATH, with live price updates and cycle indicators">
+<meta name="description" content="Single-file dashboard overlaying Bitcoin's 4 halving cycles by % drawdown from ATH, with live price updates">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
@@ -29,7 +29,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-
 .met{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
 .met .lb{font-size:.7rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .met .vl{font-size:1.4rem;font-weight:500;font-family:'JetBrains Mono',monospace}
-.met .vl.gr{color:var(--green)}.met .vl.rd{color:var(--red)}
+.met .vl.rd{color:var(--red)}
 .sec{margin-bottom:2.5rem}
 .stit{font-size:1rem;font-weight:500;color:var(--txt2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
 .cwrap{position:relative;width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:1rem}
@@ -62,7 +62,6 @@ tr:last-child td{border-bottom:none}
 .cmp-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:1.25rem}
 .cmp-note{font-size:.78rem;color:var(--txt2);padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;border-top:2px solid var(--border)}
 .cmp-note b{font-weight:500;color:var(--txt)}
-/* Scorecard */
 .sc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .sc-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
 .sc-name{font-size:.78rem;color:var(--txt2);margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
@@ -75,7 +74,7 @@ tr:last-child td{border-bottom:none}
 .sc-buy{background:#1D9E7533;color:var(--teal)}
 .sc-neutral{background:#BA751733;color:#EF9F27}
 .sc-sell{background:#E24B4A33;color:var(--red)}
-.sc-wait{background:#378ADD33;color:var(--blue)}
+.sc-desc{font-size:.72rem;color:var(--txt3);margin-top:6px}
 @media(max-width:700px){.cmp-grid,.cmp-notes{grid-template-columns:1fr}.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}.sc-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -91,416 +90,267 @@ tr:last-child td{border-bottom:none}
     <div class="met"><div class="lb" data-t="m_nh"></div><div class="vl">~Apr 2028</div></div>
     <div class="met"><div class="lb" data-t="m_wh"></div><div class="vl" id="mWH">--</div></div>
   </div>
-
-  <div class="sec"><div class="stit" data-t="sct"></div><div class="sc-grid" id="scGrid"></div>
-    <p class="nt" data-t="scn"></p></div>
-
+  <div class="sec"><div class="stit" data-t="sct"></div><div class="sc-grid" id="scGrid"></div><p class="nt" data-t="scn"></p></div>
   <div class="sec"><div class="stit" data-t="s1t"></div><div class="cwrap"><div class="leg" id="lg1"></div><div class="cinn" style="height:460px"><canvas id="ch1"></canvas></div></div><p class="nt" data-t="s1n"></p></div>
   <div class="sec"><div class="stit" data-t="s2t"></div><div class="cwrap"><div class="leg" id="lg2"></div><div class="cinn" style="height:380px"><canvas id="ch2"></canvas></div></div></div>
-
   <div class="sec"><div class="stit" data-t="s3t"></div><div style="overflow-x:auto"><table><thead id="th3"></thead><tbody>
     <tr><td><span class="ct c1" data-t="c1"></span></td><td>Nov 28, 2012</td><td class="mn">$12</td><td class="mn">$1,150</td><td>Nov 30, 2013</td><td class="mn">52</td><td class="gr mn">+9,483%</td></tr>
     <tr><td><span class="ct c2" data-t="c2"></span></td><td>Jul 9, 2016</td><td class="mn">$650</td><td class="mn">$19,783</td><td>Dec 17, 2017</td><td class="mn">75</td><td class="gr mn">+2,943%</td></tr>
     <tr><td><span class="ct c3" data-t="c3"></span></td><td>May 11, 2020</td><td class="mn">$8,570</td><td class="mn">$69,000</td><td>Nov 10, 2021</td><td class="mn">78</td><td class="gr mn">+705%</td></tr>
     <tr><td><span class="ct c4" data-t="c4"></span></td><td>Apr 20, 2024</td><td class="mn">$63,850</td><td class="mn">$126,296</td><td>Oct 6, 2025</td><td class="mn">76</td><td class="gr mn">+98%</td></tr>
   </tbody></table></div></div>
-
   <div class="sec"><div class="stit" data-t="s4t"></div><div style="overflow-x:auto"><table><thead id="th4"></thead><tbody>
     <tr><td><span class="ct c1" data-t="c1"></span></td><td class="mn">$1,150</td><td class="mn">$170</td><td>Jan 14, 2015</td><td class="mn">59</td><td class="rd mn">-85%</td></tr>
     <tr><td><span class="ct c2" data-t="c2"></span></td><td class="mn">$19,783</td><td class="mn">$3,200</td><td>Dec 15, 2018</td><td class="mn">52</td><td class="rd mn">-84%</td></tr>
     <tr><td><span class="ct c3" data-t="c3"></span></td><td class="mn">$69,000</td><td class="mn">$15,479</td><td>Nov 21, 2022</td><td class="mn">54</td><td class="rd mn">-78%</td></tr>
     <tr><td><span class="ct c4" data-t="c4"></span></td><td class="mn">$126,296</td><td class="mn" id="xP">--</td><td id="xD">--</td><td class="mn" id="xW">--</td><td class="rd mn" id="xDD">--</td></tr>
   </tbody></table></div></div>
-
   <div class="sec"><div class="stit" data-t="s5t"></div><div style="overflow-x:auto"><table><thead id="th5"></thead><tbody id="tb5"></tbody></table></div></div>
-
-  <div class="sec" id="cmpSec"><div class="stit" data-t="cmp_title"></div>
+  <div class="sec"><div class="stit" data-t="cmp_title"></div>
     <p style="color:var(--txt2);font-size:.88rem;margin-bottom:1.25rem" data-t="cmp_intro"></p>
     <div class="cmp-grid" id="cmpGrid"></div>
     <div style="overflow-x:auto"><table class="cmp-tbl"><thead id="cmpTH"></thead><tbody id="cmpTB"></tbody></table></div>
     <div class="cmp-notes" id="cmpNotes"></div></div>
-
   <div class="ftr"><span data-t="ftr1"></span><br><span data-t="ftr2"></span> <span id="ftrD">--</span></div>
 </div>
-
 <script>
-// ============================================================
-// i18n (keeping compact — key translations only, full comparison data embedded)
-// ============================================================
-const L={
-en:{subtitle:'Auto-updating dashboard \u2014 daily resolution, live price via CoinGecko API',
-m_price:'Current price',m_ath:'Cycle 4 ATH',m_dd:'Drawdown from ATH',m_wk:'Weeks since ATH',m_nh:'Next halving',m_wh:'Weeks to halving',
-sct:'Cycle position scorecard',scn:'Indicators calculated from price data (Mayer Multiple, Pi Cycle, 200D MA, RSI) and sentiment (Fear & Greed). Green = historically favorable for buying. Red = historically favorable for selling. Updated every 60s.',
-s1t:'Overlaid cycles \u2014 halving to halving (aligned by ATH)',s1n:'X-axis: weeks relative to ATH (0 = top). Cycle 4 uses daily data, cycles 1-3 are weekly. Auto-updates every 60s.',
+// ============ i18n ============
+const L={en:{subtitle:'Auto-updating dashboard \u2014 daily resolution via Binance API',m_price:'Current price',m_ath:'Cycle 4 ATH',m_dd:'Drawdown from ATH',m_wk:'Weeks since ATH',m_nh:'Next halving',m_wh:'Weeks to halving',
+sct:'Cycle position scorecard',scn:'Mayer Multiple, Pi Cycle, 200D MA distance, and RSI calculated from daily price data. Fear & Greed from alternative.me. Green = historically favorable for buying. Red = historically favorable for selling.',
+s1t:'Overlaid cycles \u2014 halving to halving (aligned by ATH)',s1n:'X-axis: weeks relative to ATH (0 = top). Cycle 4 uses daily data. Auto-updates every 60s.',
 s2t:'Post-ATH drawdown \u2014 same-week comparison',s3t:'Halving data',s4t:'Post-ATH bear market',s5t:'Same-week drawdown comparison',
 h3:['Cycle','Halving date','Price at halving','Post-halving high','High date','Weeks to high','Gain'],
-h4:['Cycle','ATH','Bear low','Low date','Weeks to low','Drawdown'],
-h5:['Cycle','Drawdown at current week','Final drawdown','Remaining drop'],
+h4:['Cycle','ATH','Bear low','Low date','Weeks to low','Drawdown'],h5:['Cycle','Drawdown at current week','Final drawdown','Remaining drop'],
 c1:'1st',c2:'2nd',c3:'3rd',c4:'4th',cn:['Cycle 1 \xb7 2012\u21922016','Cycle 2 \xb7 2016\u21922020','Cycle 3 \xb7 2020\u21922024','Cycle 4 \xb7 2024\u21922028 (daily)'],
-ax1:'Weeks (0 = ATH)',ay1:'% relative to ATH',ax2:'Weeks after ATH',ay2:'% drawdown from ATH',
-la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 NEXT HALVING',ln:'now',lw:'week',
-sf:'Fetching daily price data...',sw:'Loading {0} days of history...',
-so:'Connected \u2014 BTC <b>{0}</b> ({1}% from ATH) \xb7 daily resolution',sx:'Offline \u2014 last saved: <b>{0}</b>',sn:'No connection, no saved data.',
-rr:'auto-refresh 60s',ongoing:'ongoing',partial:'partial',
-ftr1:'Historical data (cycles 1-3) weekly. Cycle 4 daily via CoinGecko API. Indicators from price data + alternative.me.',ftr2:'Last update:',
+ax1:'Weeks (0 = ATH)',ay1:'% relative to ATH',ax2:'Weeks after ATH',ay2:'% drawdown from ATH',la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 NEXT HALVING',ln:'now',lw:'week',
+sf:'Fetching daily data from Binance...',so:'Connected \u2014 BTC <b>{0}</b> ({1}% from ATH)',sx:'Offline \u2014 last saved: <b>{0}</b>',sn:'No connection, no saved data.',rr:'auto-refresh 60s',ongoing:'ongoing',partial:'partial',
+ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 daily via Binance public API. Indicators calculated client-side.',ftr2:'Last update:',
 cmp_title:'How to buy Bitcoin in Brazil',cmp_intro:'A comparison of the main ways to buy and sell Bitcoin in Brazil \u2014 from centralized exchanges to peer-to-peer.',cmp_visit:'Visit',
 sc_mayer:'Mayer Multiple',sc_200d:'Price vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'Weekly RSI',sc_fng:'Fear & Greed',
 sc_buy:'Buy zone',sc_sell:'Sell zone',sc_neutral:'Neutral',sc_fired:'Fired',sc_not:'Not fired',sc_oversold:'Oversold',sc_overbought:'Overbought',sc_fear:'Extreme fear',sc_greed:'Extreme greed',
-cmp_cards:[
-  {name:'Binance',type:'Centralized exchange',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'Full KYC required',fees:'~0.1% + withdrawal fees',pix_speed:'Minutes to hours',assets:'350+ cryptocurrencies',extra:'Futures, margin, staking, earn',privacy:'Low',best:'High-volume trading, altcoins, DeFi access'}},
-  {name:'Mercado Bitcoin',type:'Centralized exchange',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'Full KYC (CPF required)',fees:'~1\u20132% + withdrawal fees',pix_speed:'Minutes to hours',assets:'200+ cryptocurrencies',extra:'Tokenized assets, fixed income',privacy:'Low',best:'Regulated Brazilian platform, diverse products'}},
-  {name:'B2PIX',type:'P2P BTC/PIX platform',url:'https://b2pix.org/',rows:{custody:'Non-custodial (your keys)',kyc:'No KYC',fees:'~1\u20132% spread',pix_speed:'Instant',assets:'Bitcoin (sBTC on Stacks)',extra:'Pay bills & ecommerce with BTC via PIX',privacy:'High',best:'Self-custody, privacy, BTC payments'}}],
-cmp_thead:['Feature','Binance','Mercado Bitcoin','B2PIX'],
-cmp_features:['Custody','KYC','Fees','PIX speed','Supported assets','Additional services','Privacy','Best for'],
-cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
-cmp_notes:[
-  {name:'Binance',text:'Best suited for experienced traders who need access to hundreds of altcoins, derivatives, and DeFi protocols. Ideal for high-volume operations where the low trading fee (0.1%) makes a significant difference.'},
-  {name:'Mercado Bitcoin',text:'The most established Brazilian exchange, regulated and with a wide range of products beyond crypto, including tokenized assets and fixed income. A good choice for those who want everything in one regulated platform.'},
-  {name:'B2PIX',text:'The only non-custodial option in this comparison \u2014 your Bitcoin stays in your wallet at all times, with no account creation or identity verification. Also the only platform that lets you pay PIX bills and make online purchases directly with BTC.'}]},
-pt:{subtitle:'Dashboard auto-atualizado \u2014 resolu\u00e7\u00e3o di\u00e1ria, pre\u00e7o ao vivo via CoinGecko API',
-m_price:'Pre\u00e7o atual',m_ath:'ATH ciclo 4',m_dd:'Drawdown da ATH',m_wk:'Semanas da ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas at\u00e9 halving',
-sct:'Scorecard de posi\u00e7\u00e3o no ciclo',scn:'Indicadores calculados a partir do pre\u00e7o (Mayer Multiple, Pi Cycle, 200D MA, RSI) e sentimento (Fear & Greed). Verde = historicamente favor\u00e1vel para compra. Vermelho = historicamente favor\u00e1vel para venda. Atualiza a cada 60s.',
-s1t:'Ciclos sobrepostos \u2014 halving a halving (alinhados pela ATH)',s1n:'Eixo X: semanas relativas \u00e0 ATH (0 = topo). Ciclo 4 usa dados di\u00e1rios, ciclos 1-3 semanais. Atualiza a cada 60s.',
+cmp_cards:[{name:'Binance',type:'Centralized exchange',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'Full KYC required',fees:'~0.1% + withdrawal fees',pix_speed:'Minutes to hours',assets:'350+ cryptocurrencies',extra:'Futures, margin, staking, earn',privacy:'Low',best:'High-volume trading, altcoins, DeFi access'}},{name:'Mercado Bitcoin',type:'Centralized exchange',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'Full KYC (CPF required)',fees:'~1\u20132% + withdrawal fees',pix_speed:'Minutes to hours',assets:'200+ cryptocurrencies',extra:'Tokenized assets, fixed income',privacy:'Low',best:'Regulated Brazilian platform, diverse products'}},{name:'B2PIX',type:'P2P BTC/PIX platform',url:'https://b2pix.org/',rows:{custody:'Non-custodial (your keys)',kyc:'No KYC',fees:'~1\u20132% spread',pix_speed:'Instant',assets:'Bitcoin (sBTC on Stacks)',extra:'Pay bills & ecommerce with BTC via PIX',privacy:'High',best:'Self-custody, privacy, BTC payments'}}],
+cmp_thead:['Feature','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custody','KYC','Fees','PIX speed','Supported assets','Additional services','Privacy','Best for'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
+cmp_notes:[{name:'Binance',text:'Best suited for experienced traders who need access to hundreds of altcoins, derivatives, and DeFi protocols. Ideal for high-volume operations where the low trading fee (0.1%) makes a significant difference.'},{name:'Mercado Bitcoin',text:'The most established Brazilian exchange, regulated and with a wide range of products beyond crypto, including tokenized assets and fixed income. A good choice for those who want everything in one regulated platform.'},{name:'B2PIX',text:'The only non-custodial option in this comparison \u2014 your Bitcoin stays in your wallet at all times, with no account creation or identity verification. Also the only platform that lets you pay PIX bills and make online purchases directly with BTC.'}]},
+pt:{subtitle:'Dashboard auto-atualizado \u2014 resolu\u00e7\u00e3o di\u00e1ria via Binance API',m_price:'Pre\u00e7o atual',m_ath:'ATH ciclo 4',m_dd:'Drawdown da ATH',m_wk:'Semanas da ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas at\u00e9 halving',
+sct:'Scorecard de posi\u00e7\u00e3o no ciclo',scn:'Mayer Multiple, Pi Cycle, dist\u00e2ncia da 200D MA e RSI calculados dos pre\u00e7os di\u00e1rios. Fear & Greed via alternative.me. Verde = historicamente favor\u00e1vel para compra. Vermelho = favor\u00e1vel para venda.',
+s1t:'Ciclos sobrepostos \u2014 halving a halving (alinhados pela ATH)',s1n:'Eixo X: semanas relativas \u00e0 ATH (0 = topo). Ciclo 4 usa dados di\u00e1rios. Atualiza a cada 60s.',
 s2t:'Drawdown p\u00f3s-ATH \u2014 comparativo na mesma semana',s3t:'Dados por halving',s4t:'Bear market p\u00f3s-ATH',s5t:'Comparativo de drawdown na semana atual',
 h3:['Ciclo','Data halving','Pre\u00e7o no halving','M\u00e1xima p\u00f3s-halving','Data da m\u00e1xima','Sem. at\u00e9 m\u00e1xima','Valoriza\u00e7\u00e3o'],
-h4:['Ciclo','ATH','M\u00ednima','Data da m\u00ednima','Sem. at\u00e9 m\u00ednima','Drawdown'],
-h5:['Ciclo','Drawdown na semana atual','Drawdown final','Queda restante'],
+h4:['Ciclo','ATH','M\u00ednima','Data da m\u00ednima','Sem. at\u00e9 m\u00ednima','Drawdown'],h5:['Ciclo','Drawdown na semana atual','Drawdown final','Queda restante'],
 c1:'1\u00ba',c2:'2\u00ba',c3:'3\u00ba',c4:'4\u00ba',cn:['Ciclo 1 \xb7 2012\u21922016','Ciclo 2 \xb7 2016\u21922020','Ciclo 3 \xb7 2020\u21922024','Ciclo 4 \xb7 2024\u21922028 (di\u00e1rio)'],
-ax1:'Semanas (0 = ATH)',ay1:'% em rela\u00e7\u00e3o \u00e0 ATH',ax2:'Semanas ap\u00f3s ATH',ay2:'% drawdown da ATH',
-la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 PR\u00d3XIMO HALVING',ln:'hoje',lw:'sem.',
-sf:'Buscando dados di\u00e1rios de pre\u00e7o...',sw:'Carregando {0} dias de hist\u00f3rico...',
-so:'Conectado \u2014 BTC <b>{0}</b> ({1}% da ATH) \xb7 resolu\u00e7\u00e3o di\u00e1ria',sx:'Offline \u2014 \u00faltimo pre\u00e7o: <b>{0}</b>',sn:'Sem conex\u00e3o e sem dados.',
-rr:'atualiza\u00e7\u00e3o a cada 60s',ongoing:'em andamento',partial:'parcial',
-ftr1:'Dados hist\u00f3ricos (ciclos 1-3) semanais. Ciclo 4 di\u00e1rio via API CoinGecko. Indicadores de pre\u00e7o + alternative.me.',ftr2:'\u00daltima atualiza\u00e7\u00e3o:',
+ax1:'Semanas (0 = ATH)',ay1:'% em rela\u00e7\u00e3o \u00e0 ATH',ax2:'Semanas ap\u00f3s ATH',ay2:'% drawdown da ATH',la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 PR\u00d3XIMO HALVING',ln:'hoje',lw:'sem.',
+sf:'Buscando dados di\u00e1rios da Binance...',so:'Conectado \u2014 BTC <b>{0}</b> ({1}% da ATH)',sx:'Offline \u2014 \u00faltimo pre\u00e7o: <b>{0}</b>',sn:'Sem conex\u00e3o e sem dados.',rr:'atualiza\u00e7\u00e3o a cada 60s',ongoing:'em andamento',partial:'parcial',
+ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 di\u00e1rio via API p\u00fablica da Binance. Indicadores calculados no cliente.',ftr2:'\u00daltima atualiza\u00e7\u00e3o:',
 cmp_title:'Como comprar Bitcoin no Brasil',cmp_intro:'Compara\u00e7\u00e3o dos principais meios de compra e venda de Bitcoin no Brasil \u2014 de exchanges centralizadas ao peer-to-peer.',cmp_visit:'Acessar',
 sc_mayer:'Mayer Multiple',sc_200d:'Pre\u00e7o vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
 sc_buy:'Zona de compra',sc_sell:'Zona de venda',sc_neutral:'Neutro',sc_fired:'Disparou',sc_not:'N\u00e3o disparou',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Medo extremo',sc_greed:'Gan\u00e2ncia extrema',
-cmp_cards:[
-  {name:'Binance',type:'Exchange centralizada',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obrigat\u00f3rio',fees:'~0,1% + taxa de saque',pix_speed:'Minutos a horas',assets:'350+ criptomoedas',extra:'Futuros, margem, staking, earn',privacy:'Baixa',best:'Trading de alto volume, altcoins, acesso DeFi'}},
-  {name:'Mercado Bitcoin',type:'Exchange centralizada',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obrigat\u00f3rio)',fees:'~1\u20132% + taxa de saque',pix_speed:'Minutos a horas',assets:'200+ criptomoedas',extra:'Ativos tokenizados, renda fixa',privacy:'Baixa',best:'Plataforma brasileira regulada, produtos diversificados'}},
-  {name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'N\u00e3o-custodial (suas chaves)',kyc:'Sem KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e2neo',assets:'Bitcoin (sBTC na Stacks)',extra:'Pague boletos e e-commerce com BTC via PIX',privacy:'Alta',best:'Autocust\u00f3dia, privacidade, pagamentos com BTC'}}],
-cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],
-cmp_features:['Cust\u00f3dia','KYC','Taxas','Velocidade PIX','Ativos suportados','Servi\u00e7os adicionais','Privacidade','Melhor para'],
-cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
-cmp_notes:[
-  {name:'Binance',text:'Mais indicada para traders experientes que precisam acessar centenas de altcoins, derivativos e protocolos DeFi. Ideal para opera\u00e7\u00f5es de alto volume, onde a taxa baixa (0,1%) faz diferen\u00e7a significativa.'},
-  {name:'Mercado Bitcoin',text:'A exchange brasileira mais estabelecida, regulada e com uma ampla gama de produtos al\u00e9m de cripto, incluindo ativos tokenizados e renda fixa. Boa escolha para quem quer tudo em uma plataforma regulamentada.'},
-  {name:'B2PIX',text:'A \u00fanica op\u00e7\u00e3o n\u00e3o-custodial desta compara\u00e7\u00e3o \u2014 seu Bitcoin fica na sua carteira o tempo todo, sem criar conta e sem verifica\u00e7\u00e3o de identidade. Tamb\u00e9m a \u00fanica que permite pagar boletos e fazer compras online diretamente com BTC.'}]},
-es:{subtitle:'Dashboard auto-actualizado \u2014 resoluci\u00f3n diaria, precio en vivo v\u00eda CoinGecko API',
-m_price:'Precio actual',m_ath:'ATH ciclo 4',m_dd:'Drawdown del ATH',m_wk:'Semanas del ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas al halving',
-sct:'Scorecard de posici\u00f3n en el ciclo',scn:'Indicadores calculados del precio (Mayer Multiple, Pi Cycle, 200D MA, RSI) y sentimiento (Fear & Greed). Verde = hist\u00f3ricamente favorable para compra. Rojo = favorable para venta. Se actualiza cada 60s.',
-s1t:'Ciclos superpuestos \u2014 halving a halving (alineados por ATH)',s1n:'Eje X: semanas relativas al ATH (0 = tope). Ciclo 4 usa datos diarios, ciclos 1-3 semanales. Se actualiza cada 60s.',
+cmp_cards:[{name:'Binance',type:'Exchange centralizada',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obrigat\u00f3rio',fees:'~0,1% + taxa de saque',pix_speed:'Minutos a horas',assets:'350+ criptomoedas',extra:'Futuros, margem, staking, earn',privacy:'Baixa',best:'Trading de alto volume, altcoins, acesso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizada',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obrigat\u00f3rio)',fees:'~1\u20132% + taxa de saque',pix_speed:'Minutos a horas',assets:'200+ criptomoedas',extra:'Ativos tokenizados, renda fixa',privacy:'Baixa',best:'Plataforma brasileira regulada, produtos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'N\u00e3o-custodial (suas chaves)',kyc:'Sem KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e2neo',assets:'Bitcoin (sBTC na Stacks)',extra:'Pague boletos e e-commerce com BTC via PIX',privacy:'Alta',best:'Autocust\u00f3dia, privacidade, pagamentos com BTC'}}],
+cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Cust\u00f3dia','KYC','Taxas','Velocidade PIX','Ativos suportados','Servi\u00e7os adicionais','Privacidade','Melhor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
+cmp_notes:[{name:'Binance',text:'Mais indicada para traders experientes que precisam acessar centenas de altcoins, derivativos e protocolos DeFi. Ideal para opera\u00e7\u00f5es de alto volume, onde a taxa baixa (0,1%) faz diferen\u00e7a significativa.'},{name:'Mercado Bitcoin',text:'A exchange brasileira mais estabelecida, regulada e com uma ampla gama de produtos al\u00e9m de cripto, incluindo ativos tokenizados e renda fixa. Boa escolha para quem quer tudo em uma plataforma regulamentada.'},{name:'B2PIX',text:'A \u00fanica op\u00e7\u00e3o n\u00e3o-custodial desta compara\u00e7\u00e3o \u2014 seu Bitcoin fica na sua carteira o tempo todo, sem criar conta e sem verifica\u00e7\u00e3o de identidade. Tamb\u00e9m a \u00fanica que permite pagar boletos e fazer compras online diretamente com BTC.'}]},
+es:{subtitle:'Dashboard auto-actualizado \u2014 resoluci\u00f3n diaria v\u00eda Binance API',m_price:'Precio actual',m_ath:'ATH ciclo 4',m_dd:'Drawdown del ATH',m_wk:'Semanas del ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas al halving',
+sct:'Scorecard de posici\u00f3n en el ciclo',scn:'Mayer Multiple, Pi Cycle, distancia 200D MA y RSI calculados de precios diarios. Fear & Greed v\u00eda alternative.me. Verde = hist\u00f3ricamente favorable para compra. Rojo = favorable para venta.',
+s1t:'Ciclos superpuestos \u2014 halving a halving (alineados por ATH)',s1n:'Eje X: semanas relativas al ATH (0 = tope). Ciclo 4 usa datos diarios. Se actualiza cada 60s.',
 s2t:'Drawdown post-ATH \u2014 comparaci\u00f3n por semana',s3t:'Datos por halving',s4t:'Bear market post-ATH',s5t:'Comparaci\u00f3n de drawdown en la semana actual',
 h3:['Ciclo','Fecha halving','Precio en halving','M\u00e1ximo post-halving','Fecha del m\u00e1ximo','Sem. al m\u00e1ximo','Ganancia'],
-h4:['Ciclo','ATH','M\u00ednimo','Fecha del m\u00ednimo','Sem. al m\u00ednimo','Drawdown'],
-h5:['Ciclo','Drawdown en semana actual','Drawdown final','Ca\u00edda restante'],
+h4:['Ciclo','ATH','M\u00ednimo','Fecha del m\u00ednimo','Sem. al m\u00ednimo','Drawdown'],h5:['Ciclo','Drawdown en semana actual','Drawdown final','Ca\u00edda restante'],
 c1:'1\u00ba',c2:'2\u00ba',c3:'3\u00ba',c4:'4\u00ba',cn:['Ciclo 1 \xb7 2012\u21922016','Ciclo 2 \xb7 2016\u21922020','Ciclo 3 \xb7 2020\u21922024','Ciclo 4 \xb7 2024\u21922028 (diario)'],
-ax1:'Semanas (0 = ATH)',ay1:'% relativo al ATH',ax2:'Semanas despu\u00e9s del ATH',ay2:'% drawdown del ATH',
-la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 PR\u00d3XIMO HALVING',ln:'hoy',lw:'sem.',
-sf:'Buscando datos diarios de precio...',sw:'Cargando {0} d\u00edas de historial...',
-so:'Conectado \u2014 BTC <b>{0}</b> ({1}% del ATH) \xb7 resoluci\u00f3n diaria',sx:'Sin conexi\u00f3n \u2014 \u00faltimo precio: <b>{0}</b>',sn:'Sin conexi\u00f3n ni datos.',
-rr:'actualizaci\u00f3n cada 60s',ongoing:'en curso',partial:'parcial',
-ftr1:'Datos hist\u00f3ricos (ciclos 1-3) semanales. Ciclo 4 diario v\u00eda API CoinGecko. Indicadores de precio + alternative.me.',ftr2:'\u00daltima actualizaci\u00f3n:',
+ax1:'Semanas (0 = ATH)',ay1:'% relativo al ATH',ax2:'Semanas despu\u00e9s del ATH',ay2:'% drawdown del ATH',la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 PR\u00d3XIMO HALVING',ln:'hoy',lw:'sem.',
+sf:'Buscando datos diarios de Binance...',so:'Conectado \u2014 BTC <b>{0}</b> ({1}% del ATH)',sx:'Sin conexi\u00f3n \u2014 \u00faltimo precio: <b>{0}</b>',sn:'Sin conexi\u00f3n ni datos.',rr:'actualizaci\u00f3n cada 60s',ongoing:'en curso',partial:'parcial',
+ftr1:'Datos hist\u00f3ricos (ciclos 1-3) fijos. Ciclo 4 diario v\u00eda API p\u00fablica de Binance. Indicadores calculados en el cliente.',ftr2:'\u00daltima actualizaci\u00f3n:',
 cmp_title:'\u00bfC\u00f3mo comprar Bitcoin en Brasil?',cmp_intro:'Comparaci\u00f3n de las principales formas de comprar y vender Bitcoin en Brasil \u2014 desde exchanges centralizados hasta peer-to-peer.',cmp_visit:'Visitar',
 sc_mayer:'Mayer Multiple',sc_200d:'Precio vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
 sc_buy:'Zona de compra',sc_sell:'Zona de venta',sc_neutral:'Neutro',sc_fired:'Dispar\u00f3',sc_not:'No dispar\u00f3',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Miedo extremo',sc_greed:'Codicia extrema',
-cmp_cards:[
-  {name:'Binance',type:'Exchange centralizado',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obligatorio',fees:'~0,1% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'350+ criptomonedas',extra:'Futuros, margen, staking, earn',privacy:'Baja',best:'Trading de alto volumen, altcoins, acceso DeFi'}},
-  {name:'Mercado Bitcoin',type:'Exchange centralizado',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obligatorio)',fees:'~1\u20132% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'200+ criptomonedas',extra:'Activos tokenizados, renta fija',privacy:'Baja',best:'Plataforma brasile\u00f1a regulada, productos diversificados'}},
-  {name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'No custodial (tus claves)',kyc:'Sin KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e1neo',assets:'Bitcoin (sBTC en Stacks)',extra:'Paga facturas y e-commerce con BTC v\u00eda PIX',privacy:'Alta',best:'Autocustodia, privacidad, pagos con BTC'}}],
-cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],
-cmp_features:['Custodia','KYC','Comisiones','Velocidad PIX','Activos soportados','Servicios adicionales','Privacidad','Mejor para'],
-cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
-cmp_notes:[
-  {name:'Binance',text:'M\u00e1s indicada para traders experimentados que necesitan acceso a cientos de altcoins, derivados y protocolos DeFi. Ideal para operaciones de alto volumen donde la baja comisi\u00f3n (0,1%) marca una diferencia significativa.'},
-  {name:'Mercado Bitcoin',text:'El exchange brasile\u00f1o m\u00e1s establecido, regulado y con una amplia gama de productos m\u00e1s all\u00e1 de cripto, incluyendo activos tokenizados y renta fija. Buena opci\u00f3n para quien quiere todo en una plataforma regulada.'},
-  {name:'B2PIX',text:'La \u00fanica opci\u00f3n no custodial de esta comparaci\u00f3n \u2014 tu Bitcoin queda en tu billetera en todo momento, sin crear cuenta ni verificaci\u00f3n de identidad. Tambi\u00e9n la \u00fanica que permite pagar facturas y hacer compras online directamente con BTC.'}]}
+cmp_cards:[{name:'Binance',type:'Exchange centralizado',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obligatorio',fees:'~0,1% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'350+ criptomonedas',extra:'Futuros, margen, staking, earn',privacy:'Baja',best:'Trading de alto volumen, altcoins, acceso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizado',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obligatorio)',fees:'~1\u20132% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'200+ criptomonedas',extra:'Activos tokenizados, renta fija',privacy:'Baja',best:'Plataforma brasile\u00f1a regulada, productos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'No custodial (tus claves)',kyc:'Sin KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e1neo',assets:'Bitcoin (sBTC en Stacks)',extra:'Paga facturas y e-commerce con BTC v\u00eda PIX',privacy:'Alta',best:'Autocustodia, privacidad, pagos con BTC'}}],
+cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custodia','KYC','Comisiones','Velocidad PIX','Activos soportados','Servicios adicionales','Privacidad','Mejor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
+cmp_notes:[{name:'Binance',text:'M\u00e1s indicada para traders experimentados que necesitan acceso a cientos de altcoins, derivados y protocolos DeFi. Ideal para operaciones de alto volumen donde la baja comisi\u00f3n (0,1%) marca una diferencia significativa.'},{name:'Mercado Bitcoin',text:'El exchange brasile\u00f1o m\u00e1s establecido, regulado y con una amplia gama de productos m\u00e1s all\u00e1 de cripto, incluyendo activos tokenizados y renta fija. Buena opci\u00f3n para quien quiere todo en una plataforma regulada.'},{name:'B2PIX',text:'La \u00fanica opci\u00f3n no custodial de esta comparaci\u00f3n \u2014 tu Bitcoin queda en tu billetera en todo momento, sin crear cuenta ni verificaci\u00f3n de identidad. Tambi\u00e9n la \u00fanica que permite pagar facturas y hacer compras online directamente con BTC.'}]}
 };
 let lang='en';
 function t(k){return L[lang]?.[k]||L.en[k]||k}
 function tf(k,...a){let s=t(k);a.forEach((v,i)=>{s=s.replace('{'+i+'}',v)});return s}
 function detectLang(){const s=localStorage.getItem('btc_lang');if(s&&L[s])return s;const b=(navigator.language||'en').toLowerCase();return b.startsWith('pt')?'pt':b.startsWith('es')?'es':'en'}
 
-// ============================================================
-// CONSTANTS & HISTORICAL DATA
-// ============================================================
-const ATH=126296,ATHD=new Date('2025-10-06'),H4D=new Date('2024-04-20'),H5=new Date('2028-04-15'),SK='btc_c4_v7';
-const COL=['#378ADD','#1D9E75','#7F77DD','#D85A30'];
-// Historical cycles (weekly, % from ATH, x=weeks from ATH)
+// ============ CONSTANTS ============
+const ATH=126296,ATHD=new Date('2025-10-06'),H5=new Date('2028-04-15'),SK='btc_c4_v8',COL=['#378ADD','#1D9E75','#7F77DD','#D85A30'];
+function wk(d){return Math.floor((d-ATHD)/(7*864e5))}
+function fwk(d){return(d-ATHD)/(7*864e5)}
+function $(n){return'$'+Math.round(n).toLocaleString('en-US')}
+function ss(c,h){document.getElementById('sDot').className='sdot '+c;document.getElementById('sTxt').innerHTML=h}
+
+// ============ HISTORICAL CYCLES (weekly, x=weeks from ATH) ============
 const D1=[{x:-52,y:-99},{x:-50,y:-98},{x:-48,y:-97},{x:-46,y:-96},{x:-44,y:-95},{x:-42,y:-94},{x:-40,y:-93},{x:-38,y:-92},{x:-36,y:-90},{x:-34,y:-88},{x:-32,y:-86},{x:-30,y:-84},{x:-28,y:-80},{x:-26,y:-76},{x:-24,y:-72},{x:-22,y:-82},{x:-20,y:-85},{x:-18,y:-80},{x:-16,y:-75},{x:-14,y:-70},{x:-12,y:-65},{x:-10,y:-60},{x:-8,y:-50},{x:-6,y:-40},{x:-4,y:-25},{x:-3,y:-15},{x:-2,y:-8},{x:-1,y:-3},{x:0,y:0},{x:1,y:-10},{x:2,y:-22},{x:3,y:-25},{x:4,y:-28},{x:5,y:-30},{x:6,y:-26},{x:8,y:-50},{x:10,y:-43},{x:12,y:-42},{x:14,y:-46},{x:16,y:-52},{x:18,y:-53},{x:20,y:-58},{x:23,y:-62},{x:26,y:-50},{x:28,y:-49},{x:32,y:-56},{x:36,y:-55},{x:40,y:-63},{x:44,y:-67},{x:48,y:-70},{x:52,y:-74},{x:56,y:-80},{x:59,y:-85},{x:63,y:-81},{x:67,y:-79},{x:73,y:-78},{x:79,y:-79},{x:85,y:-76},{x:91,y:-72},{x:97,y:-74},{x:103,y:-68},{x:109,y:-64},{x:115,y:-63},{x:121,y:-57},{x:127,y:-50},{x:133,y:-45},{x:136,y:-43}];
 const D2=[{x:-75,y:-97},{x:-73,y:-96},{x:-71,y:-96},{x:-69,y:-96},{x:-67,y:-96},{x:-65,y:-95},{x:-63,y:-95},{x:-61,y:-95},{x:-59,y:-95},{x:-57,y:-95},{x:-55,y:-94},{x:-53,y:-94},{x:-51,y:-93},{x:-49,y:-92},{x:-47,y:-90},{x:-45,y:-88},{x:-43,y:-86},{x:-41,y:-83},{x:-39,y:-80},{x:-37,y:-78},{x:-35,y:-75},{x:-33,y:-72},{x:-31,y:-70},{x:-29,y:-65},{x:-27,y:-60},{x:-25,y:-55},{x:-23,y:-52},{x:-21,y:-50},{x:-19,y:-46},{x:-17,y:-42},{x:-15,y:-38},{x:-13,y:-35},{x:-11,y:-30},{x:-9,y:-25},{x:-7,y:-18},{x:-5,y:-12},{x:-3,y:-5},{x:-1,y:-1},{x:0,y:0},{x:1,y:-18},{x:2,y:-30},{x:3,y:-38},{x:4,y:-42},{x:5,y:-35},{x:7,y:-45},{x:9,y:-47},{x:11,y:-50},{x:13,y:-52},{x:15,y:-48},{x:17,y:-55},{x:19,y:-50},{x:21,y:-58},{x:23,y:-63},{x:25,y:-58},{x:27,y:-65},{x:30,y:-55},{x:34,y:-62},{x:38,y:-67},{x:42,y:-65},{x:46,y:-68},{x:50,y:-72},{x:52,y:-84},{x:56,y:-78},{x:60,y:-80},{x:64,y:-75},{x:68,y:-70},{x:72,y:-65},{x:76,y:-48},{x:78,y:-35},{x:82,y:-48},{x:86,y:-55},{x:90,y:-62},{x:94,y:-55},{x:98,y:-53},{x:102,y:-55},{x:106,y:-52},{x:110,y:-58},{x:114,y:-80},{x:118,y:-65},{x:122,y:-52},{x:125,y:-57}];
 const D3=[{x:-78,y:-88},{x:-76,y:-86},{x:-74,y:-85},{x:-72,y:-84},{x:-70,y:-86},{x:-68,y:-88},{x:-66,y:-94},{x:-64,y:-88},{x:-62,y:-85},{x:-60,y:-82},{x:-58,y:-80},{x:-56,y:-78},{x:-54,y:-76},{x:-52,y:-72},{x:-50,y:-68},{x:-48,y:-65},{x:-46,y:-60},{x:-44,y:-55},{x:-42,y:-50},{x:-40,y:-48},{x:-38,y:-52},{x:-36,y:-50},{x:-34,y:-48},{x:-32,y:-45},{x:-30,y:-42},{x:-28,y:-38},{x:-26,y:-32},{x:-24,y:-28},{x:-22,y:-25},{x:-20,y:-22},{x:-18,y:-18},{x:-16,y:-15},{x:-14,y:-12},{x:-12,y:-8},{x:-10,y:-10},{x:-8,y:-12},{x:-6,y:-7},{x:-4,y:-4},{x:-2,y:-2},{x:0,y:0},{x:1,y:-5},{x:2,y:-14},{x:3,y:-18},{x:4,y:-22},{x:5,y:-24},{x:6,y:-28},{x:8,y:-35},{x:10,y:-36},{x:12,y:-40},{x:14,y:-35},{x:16,y:-40},{x:18,y:-38},{x:20,y:-38},{x:23,y:-40},{x:25,y:-45},{x:27,y:-57},{x:30,y:-68},{x:32,y:-71},{x:36,y:-66},{x:40,y:-67},{x:44,y:-71},{x:48,y:-72},{x:52,y:-74},{x:54,y:-78},{x:58,y:-74},{x:62,y:-76},{x:66,y:-73},{x:70,y:-70},{x:74,y:-66},{x:78,y:-60},{x:82,y:-55},{x:86,y:-48},{x:90,y:-48},{x:94,y:-40},{x:98,y:-35},{x:102,y:-36},{x:106,y:-28},{x:110,y:-18},{x:114,y:-15},{x:118,y:-12},{x:122,y:-6},{x:127,y:-7}];
 
-// ============================================================
-// UTILS
-// ============================================================
-function daysATH(d){return Math.floor((d-ATHD)/(864e5))}
-function wksATH(d){return Math.floor((d-ATHD)/(7*864e5))}
-function $(n){return'$'+n.toLocaleString('en-US',{maximumFractionDigits:0})}
-function ld(){try{const r=localStorage.getItem(SK);return r?JSON.parse(r):null}catch(e){return null}}
-function sv(d){localStorage.setItem(SK,JSON.stringify(d))}
-function ss(c,h){document.getElementById('sDot').className='sdot '+c;document.getElementById('sTxt').innerHTML=h}
-
-// ============================================================
-// API
-// ============================================================
-async function fetchDailyPrices(days){
-  try{const r=await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}&interval=daily`);
-  const d=await r.json();return d.prices||[]}catch(e){return[]}
+// ============ BINANCE API (no key needed) ============
+async function fetchBinanceKlines(limit){
+  try{
+    const r=await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=${limit}`);
+    if(!r.ok)return[];
+    const d=await r.json();
+    return d.map(k=>({ts:k[0],close:parseFloat(k[4])}));
+  }catch(e){return[]}
+}
+async function fetchBinancePrice(){
+  try{
+    const r=await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+    const d=await r.json();return parseFloat(d.price);
+  }catch(e){return null}
 }
 async function fetchFNG(){
   try{const r=await fetch('https://api.alternative.me/fng/?limit=1');const d=await r.json();return d.data?.[0]||null}catch(e){return null}
 }
 
-// ============================================================
-// INDICATOR CALCULATIONS
-// ============================================================
-function calcMA(prices,period){
-  if(prices.length<period)return null;
-  const slice=prices.slice(-period);
-  return slice.reduce((a,b)=>a+b,0)/period;
-}
-function calcRSI(prices,period=14){
+// ============ INDICATORS ============
+function calcMA(prices,period){if(prices.length<period)return null;return prices.slice(-period).reduce((a,b)=>a+b,0)/period}
+function calcRSI(prices,period){
   if(prices.length<period+1)return null;
-  let gains=0,losses=0;
-  for(let i=prices.length-period;i<prices.length;i++){
-    const d=prices[i]-prices[i-1];
-    if(d>0)gains+=d;else losses-=d;
-  }
-  if(losses===0)return 100;
-  const rs=gains/losses;
-  return Math.round(100-100/(1+rs));
+  let g=0,l=0;
+  for(let i=prices.length-period;i<prices.length;i++){const d=prices[i]-prices[i-1];if(d>0)g+=d;else l-=d}
+  if(l===0)return 100;return Math.round(100-100/(1+g/l));
 }
-function calcIndicators(dailyPrices){
-  const prices=dailyPrices.map(p=>p[1]);
-  const current=prices[prices.length-1];
-  const ma200=calcMA(prices,200);
-  const ma111=calcMA(prices,111);
-  const ma350x2=calcMA(prices,350);
-  const ind={};
-  // Mayer Multiple
-  if(ma200){ind.mayer=Math.round(current/ma200*100)/100;ind.ma200=Math.round(ma200)}
-  // Pi Cycle: 111DMA vs 2*350DMA
-  if(ma350x2&&ma111){ind.piCrossed=ma111>=ma350x2*2;ind.ma111=Math.round(ma111);ind.ma350x2=Math.round(ma350x2*2)}
-  // Weekly RSI (use every 7th price)
-  const weekly=[];for(let i=0;i<prices.length;i+=7)weekly.push(prices[i]);
-  if(weekly.length>0)weekly.push(current);
-  ind.rsi=calcRSI(weekly);
-  // 200D MA distance
-  if(ma200)ind.ma200pct=Math.round(((current/ma200)-1)*100);
-  ind.price=current;
+function calcIndicators(closePrices){
+  const p=closePrices,cur=p[p.length-1],ind={price:cur};
+  const ma200=calcMA(p,200);if(ma200){ind.mayer=Math.round(cur/ma200*100)/100;ind.ma200=Math.round(ma200);ind.ma200pct=Math.round(((cur/ma200)-1)*100)}
+  const ma111=calcMA(p,111),ma350=calcMA(p,350);
+  if(ma350&&ma111){ind.piCrossed=ma111>=ma350*2;ind.ma111=Math.round(ma111);ind.ma350x2=Math.round(ma350*2)}
+  const weekly=[];for(let i=0;i<p.length;i+=7)weekly.push(p[i]);weekly.push(cur);
+  ind.rsi=calcRSI(weekly,14);
   return ind;
 }
 
-// ============================================================
-// SCORECARD
-// ============================================================
-let indicators={};
+// ============ SCORECARD ============
+let indicators={},lastFNG=null;
 function renderScorecard(ind,fng){
-  const g=document.getElementById('scGrid');g.innerHTML='';
-  const cards=[];
-  // Mayer Multiple
-  if(ind.mayer!==undefined){
-    const v=ind.mayer;const pct=Math.min(Math.max((v/3)*100,0),100);
-    let sig,cls;
-    if(v<0.8){sig=t('sc_buy');cls='sc-buy'}
-    else if(v>2.4){sig=t('sc_sell');cls='sc-sell'}
-    else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_mayer'),val:v.toFixed(2),pct,sig,cls,lo:'0',hi:'3.0+',
-      color:v<0.8?'var(--teal)':v>2.4?'var(--red)':'#EF9F27'});
-  }
-  // Price vs 200D MA
-  if(ind.ma200pct!==undefined){
-    const v=ind.ma200pct;const pct=Math.min(Math.max((v+100)/300*100,0),100);
-    let sig,cls;
-    if(v<-10){sig=t('sc_buy');cls='sc-buy'}
-    else if(v>100){sig=t('sc_sell');cls='sc-sell'}
-    else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_200d'),val:(v>0?'+':'')+v+'%',pct,sig,cls,lo:'-50%',hi:'+200%',
-      color:v<-10?'var(--teal)':v>100?'var(--red)':'#EF9F27'});
-  }
-  // Pi Cycle
-  if(ind.piCrossed!==undefined){
-    const fired=ind.piCrossed;
-    cards.push({name:t('sc_pi'),val:fired?t('sc_fired'):t('sc_not'),pct:fired?95:20,
-      sig:fired?t('sc_sell'):t('sc_neutral'),cls:fired?'sc-sell':'sc-neutral',lo:'',hi:'',
-      color:fired?'var(--red)':'#EF9F27',nobar:true});
-  }
-  // RSI
-  if(ind.rsi){
-    const v=ind.rsi;const pct=v;
-    let sig,cls;
-    if(v<30){sig=t('sc_oversold');cls='sc-buy'}
-    else if(v>70){sig=t('sc_overbought');cls='sc-sell'}
-    else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_rsi'),val:v,pct,sig,cls,lo:'0',hi:'100',
-      color:v<30?'var(--teal)':v>70?'var(--red)':'#EF9F27'});
-  }
-  // Fear & Greed
-  if(fng){
-    const v=parseInt(fng.value);const pct=v;
-    let sig,cls;
-    if(v<=25){sig=t('sc_fear');cls='sc-buy'}
-    else if(v>=75){sig=t('sc_greed');cls='sc-sell'}
-    else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_fng'),val:v+'/100',pct,sig,cls,lo:'0',hi:'100',
-      color:v<=25?'var(--teal)':v>=75?'var(--red)':'#EF9F27'});
-  }
+  const g=document.getElementById('scGrid');g.innerHTML='';const cards=[];
+  if(ind.mayer!==undefined){const v=ind.mayer,pct=Math.min(Math.max(v/3*100,0),100);let sig,cls;if(v<0.8){sig=t('sc_buy');cls='sc-buy'}else if(v>2.4){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
+    cards.push({name:t('sc_mayer'),val:v.toFixed(2),pct,sig,cls,lo:'0',hi:'3.0+',color:v<0.8?'var(--teal)':v>2.4?'var(--red)':'#EF9F27'})}
+  if(ind.ma200pct!==undefined){const v=ind.ma200pct,pct=Math.min(Math.max((v+100)/300*100,0),100);let sig,cls;if(v<-10){sig=t('sc_buy');cls='sc-buy'}else if(v>100){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
+    cards.push({name:t('sc_200d'),val:(v>0?'+':'')+v+'%',pct,sig,cls,lo:'-50%',hi:'+200%',color:v<-10?'var(--teal)':v>100?'var(--red)':'#EF9F27'})}
+  if(ind.piCrossed!==undefined){cards.push({name:t('sc_pi'),val:ind.piCrossed?t('sc_fired'):t('sc_not'),pct:ind.piCrossed?95:20,sig:ind.piCrossed?t('sc_sell'):t('sc_neutral'),cls:ind.piCrossed?'sc-sell':'sc-neutral',lo:'',hi:'',color:ind.piCrossed?'var(--red)':'#EF9F27',nobar:true})}
+  if(ind.rsi){const v=ind.rsi,pct=v;let sig,cls;if(v<30){sig=t('sc_oversold');cls='sc-buy'}else if(v>70){sig=t('sc_overbought');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
+    cards.push({name:t('sc_rsi'),val:v,pct,sig,cls,lo:'0',hi:'100',color:v<30?'var(--teal)':v>70?'var(--red)':'#EF9F27'})}
+  if(fng){const v=parseInt(fng.value),pct=v;let sig,cls;if(v<=25){sig=t('sc_fear');cls='sc-buy'}else if(v>=75){sig=t('sc_greed');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
+    cards.push({name:t('sc_fng'),val:v+'/100',pct,sig,cls,lo:'0',hi:'100',color:v<=25?'var(--teal)':v>=75?'var(--red)':'#EF9F27'})}
   cards.forEach(c=>{
-    const barHTML=c.nobar?`<div style="font-size:.75rem;color:var(--txt3);margin:8px 0">${c.val==='Fired'||c.val==='Disparou'||c.val==='Dispar\u00f3'?'111D MA crossed 2\u00d7350D MA near ATH':'Monitoring 111D vs 2\u00d7350D MA'}</div>`
-    :`<div class="sc-bar"><div class="sc-fill" style="width:${c.pct}%;background:${c.color}"></div><div class="sc-dot" style="left:calc(${c.pct}% - 5px);background:${c.color}"></div></div><div class="sc-labels"><span>${c.lo}</span><span>${c.hi}</span></div>`;
-    g.innerHTML+=`<div class="sc-card"><div class="sc-name"><span>${c.name}</span><span class="sc-signal ${c.cls}">${c.sig}</span></div><div class="sc-val" style="color:${c.color}">${c.val}</div>${barHTML}</div>`;
+    const bar=c.nobar
+      ?'<div class="sc-desc">'+(c.cls==='sc-sell'?'111D MA crossed 2\u00d7350D MA near ATH':'Monitoring 111D vs 2\u00d7350D MA')+'</div>'
+      :'<div class="sc-bar"><div class="sc-fill" style="width:'+c.pct+'%;background:'+c.color+'"></div><div class="sc-dot" style="left:calc('+c.pct+'% - 5px);background:'+c.color+'"></div></div><div class="sc-labels"><span>'+c.lo+'</span><span>'+c.hi+'</span></div>';
+    g.innerHTML+='<div class="sc-card"><div class="sc-name"><span>'+c.name+'</span><span class="sc-signal '+c.cls+'">'+c.sig+'</span></div><div class="sc-val" style="color:'+c.color+'">'+c.val+'</div>'+bar+'</div>';
   });
 }
 
-// ============================================================
-// PROCESS DAILY DATA INTO CYCLE 4
-// ============================================================
-function processDailyData(rawPrices){
-  const c4pre=[],c4post=[{x:0,y:0}];
-  for(const[ts,price]of rawPrices){
-    const dt=new Date(ts);
-    const wk=wksATH(dt);
-    const dd=Math.round(((price/ATH)-1)*100*10)/10;
-    if(dt<ATHD){c4pre.push({x:wk,y:dd})}
-    else if(wk>0){c4post.push({x:wk,y:dd})}
+// ============ PROCESS BINANCE DATA ============
+function processKlines(klines){
+  const c4pre=[],c4postW=[{x:0,y:0}],c4postD=[{x:0,y:0}];
+  const closePrices=[];
+  for(const k of klines){
+    const dt=new Date(k.ts),p=k.close;
+    closePrices.push(p);
+    const w=wk(dt),fw=fwk(dt),dd=Math.round(((p/ATH)-1)*1000)/10;
+    if(dt<ATHD){c4pre.push({x:w,y:dd})}
+    else if(w>0){
+      c4postD.push({x:Math.round(fw*100)/100,y:dd});
+      c4postW.push({x:w,y:dd});
+    }
   }
-  const dedup=(arr)=>{const m=new Map();arr.forEach(p=>m.set(p.x,p.y));return[...m.entries()].map(([x,y])=>({x,y})).sort((a,b)=>a.x-b.x)};
-  return{pre:dedup(c4pre),post:dedup(c4post)};
+  const dedup=arr=>{const m=new Map();arr.forEach(p=>m.set(p.x,p.y));return[...m.entries()].map(([x,y])=>({x,y})).sort((a,b)=>a.x-b.x)};
+  return{pre:dedup(c4pre),postW:dedup(c4postW),postD:c4postD.sort((a,b)=>a.x-b.x),closePrices};
 }
 
-// Also build daily post-ATH for the second chart (higher resolution)
-function processDailyPostATH(rawPrices){
-  const pts=[{x:0,y:0}];
-  for(const[ts,price]of rawPrices){
-    const dt=new Date(ts);if(dt<=ATHD)continue;
-    const wk=(dt-ATHD)/(7*864e5);
-    const dd=Math.round(((price/ATH)-1)*100*10)/10;
-    pts.push({x:Math.round(wk*100)/100,y:dd});
-  }
-  return pts;
-}
+// ============ COMPARISON ============
+function buildCmp(){const cards=t('cmp_cards'),feats=t('cmp_features'),fk=t('cmp_feat_keys'),notes=t('cmp_notes');const grid=document.getElementById('cmpGrid');grid.innerHTML='';const ck=['custody','kyc','fees','pix_speed','privacy'];cards.forEach(c=>{let rows='';ck.forEach(k=>{const li=fk.indexOf(k);rows+='<div class="cmp-row"><span class="cmp-k">'+(li>=0?feats[li]:k)+'</span><span class="cmp-v">'+c.rows[k]+'</span></div>'});grid.innerHTML+='<div class="cmp-card"><div class="cmp-name">'+c.name+'</div><div class="cmp-type">'+c.type+'</div>'+rows+'<div style="height:12px"></div><a href="'+c.url+'" target="_blank" rel="noopener" class="cmp-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'+t('cmp_visit')+' '+c.name+'</a></div>'});
+  document.getElementById('cmpTH').innerHTML='<tr>'+t('cmp_thead').map(h=>'<th>'+h+'</th>').join('')+'</tr>';let tb='';fk.forEach((k,i)=>{const vals=cards.map(c=>'<td>'+c.rows[k]+'</td>');tb+='<tr><td>'+feats[i]+'</td>'+vals.join('')+'</tr>'});document.getElementById('cmpTB').innerHTML=tb;
+  const nd=document.getElementById('cmpNotes');nd.innerHTML='';const cls=['var(--blue)','var(--green)','var(--orange)'];notes.forEach((n,i)=>{nd.innerHTML+='<div class="cmp-note" style="border-top-color:'+cls[i]+'"><b>'+n.name+'</b><br>'+n.text+'</div>'})}
 
-// ============================================================
-// COMPARISON, i18n, UI (same as v6 — compact)
-// ============================================================
-function buildComparison(){const cards=t('cmp_cards'),feats=t('cmp_features'),fk=t('cmp_feat_keys'),notes=t('cmp_notes');const grid=document.getElementById('cmpGrid');grid.innerHTML='';const cardKeys=['custody','kyc','fees','pix_speed','privacy'];cards.forEach(c=>{let rows='';cardKeys.forEach(k=>{const li=fk.indexOf(k);const label=li>=0?feats[li]:k;rows+=`<div class="cmp-row"><span class="cmp-k">${label}</span><span class="cmp-v">${c.rows[k]}</span></div>`});grid.innerHTML+=`<div class="cmp-card"><div class="cmp-name">${c.name}</div><div class="cmp-type">${c.type}</div>${rows}<div style="height:12px"></div><a href="${c.url}" target="_blank" rel="noopener" class="cmp-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>${t('cmp_visit')} ${c.name}</a></div>`});const thead=t('cmp_thead');document.getElementById('cmpTH').innerHTML='<tr>'+thead.map(h=>'<th>'+h+'</th>').join('')+'</tr>';let tb='';fk.forEach((k,i)=>{const vals=cards.map(c=>`<td>${c.rows[k]}</td>`);tb+=`<tr><td>${feats[i]}</td>${vals.join('')}</tr>`});document.getElementById('cmpTB').innerHTML=tb;const nDiv=document.getElementById('cmpNotes');nDiv.innerHTML='';const colors=['var(--blue)','var(--green)','var(--orange)'];notes.forEach((n,i)=>{nDiv.innerHTML+=`<div class="cmp-note" style="border-top-color:${colors[i]}"><b>${n.name}</b><br>${n.text}</div>`})}
-function applyI18n(){document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');if(L[lang]?.[k]!==undefined)el.textContent=L[lang][k];else if(L.en[k]!==undefined)el.textContent=L.en[k]});const mk=h=>h.map(x=>'<th>'+x+'</th>').join('');document.getElementById('th3').innerHTML='<tr>'+mk(t('h3'))+'</tr>';document.getElementById('th4').innerHTML='<tr>'+mk(t('h4'))+'</tr>';document.getElementById('th5').innerHTML='<tr>'+mk(t('h5'))+'</tr>';document.getElementById('langSel').innerHTML=['en','pt','es'].map(l=>`<button class="lbtn${l===lang?' on':''}" onclick="setLang('${l}')">${l==='pt'?'PT-BR':l.toUpperCase()}</button>`).join('');document.getElementById('rTxt').textContent=t('rr');document.title='Bitcoin Halving Cycles \u2014 '+t('subtitle');buildComparison()}
-function setLang(l){lang=l;localStorage.setItem('btc_lang',l);applyI18n();updateUI(lastPr,c4Post);renderScorecard(indicators,lastFNG);rebuild()}
+function applyI18n(){document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');const v=L[lang]?.[k]||L.en[k];if(v!==undefined)el.textContent=v});
+  const mk=h=>h.map(x=>'<th>'+x+'</th>').join('');document.getElementById('th3').innerHTML='<tr>'+mk(t('h3'))+'</tr>';document.getElementById('th4').innerHTML='<tr>'+mk(t('h4'))+'</tr>';document.getElementById('th5').innerHTML='<tr>'+mk(t('h5'))+'</tr>';
+  document.getElementById('langSel').innerHTML=['en','pt','es'].map(l=>'<button class="lbtn'+(l===lang?' on':'')+'" onclick="setLang(\''+l+'\')">'+({en:'EN',pt:'PT-BR',es:'ES'}[l])+'</button>').join('');
+  document.getElementById('rTxt').textContent=t('rr');document.title='Bitcoin Halving Cycles';buildCmp()}
+function setLang(l){lang=l;localStorage.setItem('btc_lang',l);applyI18n();updateUI();renderScorecard(indicators,lastFNG);rebuild()}
 
-let c4Pre=[],c4Post=[],c4Daily=[],lastPr=71000,lastFNG=null;
+// ============ UI UPDATE ============
+let lastPr=71000,c4Pre=[],c4PostW=[],c4PostD=[];
 function da(c,w){let b=c[0];for(const p of c){if(p.x<=w)b=p;else break}return b?b.y:null}
-function updateUI(pr,po){
-  lastPr=pr;const dd=Math.round(((pr/ATH)-1)*100),d=daysATH(new Date()),w=wksATH(new Date()),wh=Math.round((H5-new Date())/(7*864e5));
+function updateUI(){
+  const pr=lastPr,dd=Math.round(((pr/ATH)-1)*100),w=wk(new Date()),wh=Math.round((H5-new Date())/(7*864e5));
   document.getElementById('mP').textContent=$(pr);document.getElementById('mD').textContent=dd+'%';
   document.getElementById('mW').textContent=w;document.getElementById('mWH').textContent='~'+wh;
-  let mn=dd;for(const p of po)if(p.y<mn)mn=p.y;
+  let mn=dd;for(const p of c4PostW)if(p.y<mn)mn=p.y;
   document.getElementById('xP').textContent=$(Math.round(ATH*(1+mn/100)))+' ('+t('partial')+')';
   document.getElementById('xD').textContent=t('ongoing');document.getElementById('xW').textContent=w+'+';document.getElementById('xDD').textContent=Math.round(mn)+'%';
   const cs=[{k:'c1',d:D1.filter(p=>p.x>=0),f:-85},{k:'c2',d:D2.filter(p=>p.x>=0),f:-84},{k:'c3',d:D3.filter(p=>p.x>=0),f:-78},{k:'c4',d:null,f:null}];
   const tb=document.getElementById('tb5');tb.innerHTML='';
   for(const c of cs){const aw=c.d?da(c.d,w):dd;const rm=c.f!==null?(c.f-Math.round(aw))+' p.p.':'?';
-    tb.innerHTML+=`<tr><td><span class="ct ${c.k}">${t(c.k)}</span></td><td class="mn rd">${Math.round(aw)}%</td><td class="mn rd">${c.f!==null?c.f+'%':t('ongoing')}</td><td class="mn">${rm}</td></tr>`}
+    tb.innerHTML+='<tr><td><span class="ct '+c.k+'">'+t(c.k)+'</span></td><td class="mn rd">'+Math.round(aw)+'%</td><td class="mn rd">'+(c.f!==null?c.f+'%':t('ongoing'))+'</td><td class="mn">'+rm+'</td></tr>'}
   const loc=lang==='pt'?'pt-BR':lang==='es'?'es-ES':'en-US';
   document.getElementById('ftrD').textContent=new Date().toLocaleDateString(loc,{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
 }
 
-// ============================================================
-// CHARTS
-// ============================================================
+// ============ CHARTS ============
 let ch1=null,ch2=null;
-function ds(d,i,w){return{label:(t('cn')||[])[i]||'',data:d,borderColor:COL[i],backgroundColor:'transparent',borderWidth:w||( i===3?2.5:1.5),pointRadius:0,pointHoverRadius:4,pointHoverBackgroundColor:COL[i],tension:.3,fill:false}}
-function bl(id,ch){const el=document.getElementById(id);el.innerHTML='';(t('cn')||[]).forEach((n,i)=>{const s=document.createElement('span');s.className='legi';s.innerHTML=`<span class="legsq" style="background:${COL[i]}"></span>${n}`;s.onclick=()=>{const v=ch.isDatasetVisible(i);ch.setDatasetVisibility(i,!v);ch.update();s.classList.toggle('off',v)};el.appendChild(s)})}
-
+function ds(d,i){return{label:(t('cn')||[])[i]||'',data:d,borderColor:COL[i],backgroundColor:'transparent',borderWidth:i===3?2.5:1.5,pointRadius:0,pointHoverRadius:4,pointHoverBackgroundColor:COL[i],tension:.3,fill:false}}
+function bl(id,ch){const el=document.getElementById(id);el.innerHTML='';(t('cn')||[]).forEach((n,i)=>{const s=document.createElement('span');s.className='legi';s.innerHTML='<span class="legsq" style="background:'+COL[i]+'"></span>'+n;s.onclick=()=>{const v=ch.isDatasetVisible(i);ch.setDatasetVisibility(i,!v);ch.update();s.classList.toggle('off',v)};el.appendChild(s)})}
+const ttOpts={backgroundColor:'#1a1e26',titleColor:'#e8e6e1',bodyColor:'#9a9890',borderColor:'#252a35',borderWidth:1,padding:10,displayColors:true,boxWidth:10,boxHeight:10,boxPadding:3};
 function rebuild(){
   if(ch1){ch1.destroy();ch1=null}if(ch2){ch2.destroy();ch2=null}
-  const c4Full=[...c4Pre,...c4Post];
+  const c4Full=[...c4Pre,...c4PostW];
   ch1=new Chart(document.getElementById('ch1'),{type:'line',data:{datasets:[ds(D1,0),ds(D2,1),ds(D3,2),ds(c4Full,3)]},
     options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false,axis:'x'},
       scales:{x:{type:'linear',min:-82,max:140,title:{display:true,text:t('ax1'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v===0?t('la'):v>0?'+'+v:''+v}},y:{min:-100,max:5,title:{display:true,text:t('ay1'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v+'%'}}},
-      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a1e26',titleColor:'#e8e6e1',bodyColor:'#9a9890',borderColor:'#252a35',borderWidth:1,padding:10,displayColors:true,boxWidth:10,boxHeight:10,boxPadding:3,callbacks:{title:i=>{const w=Math.round(i[0].parsed.x);return w===0?t('la')+' ('+t('lw')+' 0)':w>0?t('lw')+' +'+w:t('lw')+' '+w},label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
+      plugins:{legend:{display:false},tooltip:{...ttOpts,callbacks:{title:i=>{const w=Math.round(i[0].parsed.x);return w===0?t('la'):t('lw')+' '+(w>0?'+':'')+w},label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
     plugins:[{id:'a',beforeDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(0);x.save();x.fillStyle='rgba(100,200,130,0.03)';x.fillRect(s.left,y.top,p-s.left,y.bottom-y.top);x.fillStyle='rgba(200,80,80,0.03)';x.fillRect(p,y.top,s.right-p,y.bottom-y.top);x.beginPath();x.setLineDash([4,3]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#e8e6e1';x.font='500 12px Outfit,sans-serif';x.textAlign='center';x.fillText(t('la'),p,y.top-8);x.fillStyle='#5f5e58';x.font='11px Outfit,sans-serif';x.fillText(t('ll'),s.left+(p-s.left)/2,y.bottom-8);x.fillText(t('lr'),(p+s.right)/2,y.bottom-8);x.restore()}},{id:'b',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.fillStyle='#F5C4B3';x.font='500 11px Outfit,sans-serif';x.textAlign='left';x.fillText(t('ln'),p.x+12,p.y+4);x.restore()}}]});
   bl('lg1',ch1);
-  // Chart 2: use daily data for cycle 4 if available, otherwise weekly
-  const c4ch2=c4Daily.length>2?c4Daily:c4Post;
-  const ap=[D1.filter(p=>p.x>=0),D2.filter(p=>p.x>=0),D3.filter(p=>p.x>=0),c4ch2];
-  ch2=new Chart(document.getElementById('ch2'),{type:'line',data:{datasets:ap.map((d,i)=>ds(d,i))},
+  const c4ch2=c4PostD.length>2?c4PostD:c4PostW;
+  ch2=new Chart(document.getElementById('ch2'),{type:'line',data:{datasets:[ds(D1.filter(p=>p.x>=0),0),ds(D2.filter(p=>p.x>=0),1),ds(D3.filter(p=>p.x>=0),2),ds(c4ch2,3)]},
     options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false,axis:'x'},
       scales:{x:{type:'linear',min:0,max:140,title:{display:true,text:t('ax2'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10}},y:{min:-92,max:5,title:{display:true,text:t('ay2'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v+'%'}}},
-      plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a1e26',titleColor:'#e8e6e1',bodyColor:'#9a9890',borderColor:'#252a35',borderWidth:1,padding:10,displayColors:true,boxWidth:10,boxHeight:10,boxPadding:3,callbacks:{title:i=>t('lw')+' '+Math.round(i[0].parsed.x*10)/10,label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
-    plugins:[{id:'c',afterDraw(c){const w=wksATH(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#9a9890';x.font='11px Outfit,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},{id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.restore()}}]});
+      plugins:{legend:{display:false},tooltip:{...ttOpts,callbacks:{title:i=>t('lw')+' '+Math.round(i[0].parsed.x*10)/10,label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
+    plugins:[{id:'c',afterDraw(c){const w=wk(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#9a9890';x.font='11px Outfit,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},{id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.restore()}}]});
   bl('lg2',ch2);
 }
 
-// ============================================================
-// REFRESH & INIT
-// ============================================================
+// ============ REFRESH & INIT ============
 async function refresh(){
-  const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd').catch(()=>null);
-  if(!r)return;const d=await r.json();const pr=d.bitcoin.usd;if(!pr)return;
-  const dd=Math.round(((pr/ATH)-1)*100*10)/10;
-  const wk=wksATH(new Date());
-  // Update post-ATH
-  const ei=c4Post.findIndex(p=>p.x===wk);
-  if(ei>=0)c4Post[ei].y=dd;else{c4Post.push({x:wk,y:dd});c4Post.sort((a,b)=>a.x-b.x)}
-  // Update daily
-  const fwk=(new Date()-ATHD)/(7*864e5);
-  c4Daily.push({x:Math.round(fwk*100)/100,y:dd});
-  sv({pre:c4Pre,post:c4Post,daily:c4Daily,lastUpdate:Date.now(),lastPrice:pr});
-  ss('ok',tf('so',$(pr),Math.round(dd)));
-  updateUI(pr,c4Post);rebuild();
+  const pr=await fetchBinancePrice();if(!pr)return;
+  lastPr=pr;const dd=Math.round(((pr/ATH)-1)*1000)/10,w=wk(new Date()),fw=fwk(new Date());
+  const eiW=c4PostW.findIndex(p=>p.x===w);if(eiW>=0)c4PostW[eiW].y=dd;else{c4PostW.push({x:w,y:dd});c4PostW.sort((a,b)=>a.x-b.x)}
+  c4PostD.push({x:Math.round(fw*100)/100,y:dd});
+  localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:pr,lastUpdate:Date.now()}));
+  ss('ok',tf('so',$(pr),Math.round(dd)));updateUI();rebuild();
 }
 let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=ctr%2===0?'0.7':'0.3';if(ctr<=0){ctr=60;refresh()}},1000);
 
-// Cycle 4 post-ATH seed data (fallback if API fails)
-const C4SEED=[{x:0,y:0},{x:1,y:-5},{x:2,y:-8},{x:3,y:-11},{x:4,y:-14},{x:5,y:-17},{x:6,y:-20},{x:7,y:-22},{x:8,y:-24},{x:9,y:-26},{x:10,y:-29},{x:11,y:-26},{x:12,y:-25},{x:13,y:-28},{x:14,y:-30},{x:15,y:-23},{x:16,y:-22},{x:17,y:-27},{x:18,y:-33},{x:19,y:-43},{x:20,y:-52},{x:21,y:-50},{x:22,y:-46},{x:23,y:-44}];
-
-let lastDailyRaw=null;
 (async function(){
   lang=detectLang();applyI18n();
-  const stored=ld();
   ss('ld',t('sf'));
 
-  // Fetch daily prices covering full cycle 4 + enough for MAs
-  const daysSinceHalving=Math.ceil((Date.now()-H4D.getTime())/864e5)+200;
-  ss('ld',tf('sw',daysSinceHalving));
-  let rawPrices=await fetchDailyPrices(daysSinceHalving);
+  // Fetch 1000 daily candles from Binance (no key needed)
+  const klines=await fetchBinanceKlines(1000);
 
-  if(rawPrices.length>0){
-    lastDailyRaw=rawPrices;
-    const processed=processDailyData(rawPrices);
-    c4Pre=processed.pre;
-    c4Post=processed.post.length>0?processed.post:C4SEED;
-    c4Daily=processDailyPostATH(rawPrices);
-    if(c4Daily.length<2)c4Daily=[{x:0,y:0},...C4SEED.map(p=>({x:p.x,y:p.y}))];
-    const currentPrice=rawPrices[rawPrices.length-1][1];
-    const dd=Math.round(((currentPrice/ATH)-1)*100*10)/10;
+  if(klines.length>0){
+    const d=processKlines(klines);
+    c4Pre=d.pre;c4PostW=d.postW;c4PostD=d.postD;
+    lastPr=klines[klines.length-1].close;
+    const dd=Math.round(((lastPr/ATH)-1)*100);
 
-    // Calculate indicators
-    indicators=calcIndicators(rawPrices);
-    const fng=await fetchFNG();lastFNG=fng;
-    renderScorecard(indicators,fng);
+    // Calculate indicators from close prices
+    indicators=calcIndicators(d.closePrices);
+    lastFNG=await fetchFNG();
+    renderScorecard(indicators,lastFNG);
 
-    sv({pre:c4Pre,post:c4Post,daily:c4Daily,lastUpdate:Date.now(),lastPrice:currentPrice});
-    ss('ok',tf('so',$(currentPrice),Math.round(dd)));
-    updateUI(currentPrice,c4Post);
-  } else if(stored){
-    if(stored.pre)c4Pre=stored.pre;
-    if(stored.post&&stored.post.length>0)c4Post=stored.post;else c4Post=C4SEED;
-    if(stored.daily&&stored.daily.length>1)c4Daily=stored.daily;else c4Daily=[{x:0,y:0},...C4SEED.map(p=>({x:p.x,y:p.y}))];
-    const pr=stored.lastPrice||71000;
-    // Try scorecard from stored data or current price
-    try{const fng=await fetchFNG();lastFNG=fng;
-      const tempRaw=await fetchDailyPrices(400);
-      if(tempRaw.length>0){indicators=calcIndicators(tempRaw);renderScorecard(indicators,fng)}
-      else if(fng){renderScorecard({},fng)}
-    }catch(e){}
-    ss('err',tf('sx',$(pr)));updateUI(pr,c4Post);
+    localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:lastPr,lastUpdate:Date.now()}));
+    ss('ok',tf('so',$(lastPr),dd));
   } else {
-    c4Post=C4SEED;c4Daily=[{x:0,y:0},...C4SEED.map(p=>({x:p.x,y:p.y}))];
-    ss('err',t('sn'));updateUI(71000,c4Post);
+    // Offline: try stored data
+    try{const stored=JSON.parse(localStorage.getItem(SK));
+      if(stored){c4Pre=stored.pre||[];c4PostW=stored.postW||[];c4PostD=stored.postD||[];lastPr=stored.lastPrice||71000;
+        ss('err',tf('sx',$(lastPr)))}
+      else{ss('err',t('sn'))}
+    }catch(e){ss('err',t('sn'))}
+    // Still try FNG
+    lastFNG=await fetchFNG();if(lastFNG)renderScorecard({},lastFNG);
   }
-  rebuild();
+  updateUI();rebuild();
 })();
 </script>
 </body>

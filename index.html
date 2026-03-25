@@ -34,6 +34,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-
 .stit{font-size:1rem;font-weight:500;color:var(--txt2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
 .cwrap{position:relative;width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:1rem}
 .cinn{position:relative;width:100%}
+#ch1{cursor:crosshair}
 .leg{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
 .legi{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--txt2);cursor:pointer;padding:4px 10px;border-radius:6px;border:1px solid transparent;transition:all .2s;user-select:none}
 .legi:hover{border-color:var(--border);background:var(--bg3)}.legi.off{opacity:.3}
@@ -75,6 +76,20 @@ tr:last-child td{border-bottom:none}
 .sc-neutral{background:#BA751733;color:#EF9F27}
 .sc-sell{background:#E24B4A33;color:var(--red)}
 .sc-desc{font-size:.72rem;color:var(--txt3);margin-top:6px}
+.cp{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:12px;display:none}
+.cp.show{display:block}
+.cp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cp-title{font-size:.9rem;font-weight:500}
+.cp-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:1.2rem;font-family:'Outfit',sans-serif;padding:4px 8px;border-radius:4px}
+.cp-close:hover{color:var(--txt);background:var(--bg3)}
+.cp-grid{display:grid;grid-template-columns:140px repeat(4,1fr);gap:0;font-size:.78rem}
+.cp-cell{padding:8px 10px;border-bottom:1px solid var(--border)}
+.cp-cell:first-child{color:var(--txt3)}
+.cp-hdr{font-weight:500;font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--txt3);padding:8px 10px;border-bottom:1.5px solid var(--border)}
+.cp-val{font-family:'JetBrains Mono',monospace;font-size:.78rem}
+.cp-na{color:var(--txt3);font-style:italic;font-family:'Outfit',sans-serif}
+.cp-buy{color:var(--teal)}.cp-sell{color:var(--red)}.cp-neut{color:#EF9F27}
+.cp-hint{font-size:.72rem;color:var(--txt3);margin-top:10px;font-style:italic}
 @media(max-width:700px){.cmp-grid,.cmp-notes{grid-template-columns:1fr}.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}.sc-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -91,7 +106,7 @@ tr:last-child td{border-bottom:none}
     <div class="met"><div class="lb" data-t="m_wh"></div><div class="vl" id="mWH">--</div></div>
   </div>
   <div class="sec"><div class="stit" data-t="sct"></div><div class="sc-grid" id="scGrid"></div><p class="nt" data-t="scn"></p></div>
-  <div class="sec"><div class="stit" data-t="s1t"></div><div class="cwrap"><div class="leg" id="lg1"></div><div class="cinn" style="height:460px"><canvas id="ch1"></canvas></div></div><p class="nt" data-t="s1n"></p></div>
+  <div class="sec"><div class="stit" data-t="s1t"></div><div class="cwrap"><div class="leg" id="lg1"></div><div class="cinn" style="height:460px"><canvas id="ch1"></canvas></div><div class="cp" id="cpPanel"><div class="cp-head"><span class="cp-title" id="cpTitle"></span><button class="cp-close" onclick="document.getElementById('cpPanel').classList.remove('show')">&times;</button></div><div class="cp-grid" id="cpGrid"></div><div class="cp-hint" data-t="cp_hint"></div></div></div><p class="nt" data-t="s1n"></p></div>
   <div class="sec"><div class="stit" data-t="s2t"></div><div class="cwrap"><div class="leg" id="lg2"></div><div class="cinn" style="height:380px"><canvas id="ch2"></canvas></div></div></div>
   <div class="sec"><div class="stit" data-t="s3t"></div><div style="overflow-x:auto"><table><thead id="th3"></thead><tbody>
     <tr><td><span class="ct c1" data-t="c1"></span></td><td>Nov 28, 2012</td><td class="mn">$12</td><td class="mn">$1,150</td><td>Nov 30, 2013</td><td class="mn">52</td><td class="gr mn">+9,483%</td></tr>
@@ -128,6 +143,7 @@ ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 daily via Binance public API. 
 cmp_title:'How to buy Bitcoin in Brazil',cmp_intro:'A comparison of the main ways to buy and sell Bitcoin in Brazil \u2014 from centralized exchanges to peer-to-peer.',cmp_visit:'Visit',
 sc_mayer:'Mayer Multiple',sc_200d:'Price vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'Weekly RSI',sc_fng:'Fear & Greed',
 sc_buy:'Buy zone',sc_sell:'Sell zone',sc_neutral:'Neutral',sc_fired:'Fired',sc_not:'Not fired',sc_oversold:'Oversold',sc_overbought:'Overbought',sc_fear:'Extreme fear',sc_greed:'Extreme greed',
+cp_title:'Indicators at week {0}',cp_hint:'Click any point on the chart above to compare indicators across all cycles at that week. Cycle 1 predates Binance data.',cp_na:'N/A (pre-2017)',cp_price:'Price',cp_dd:'Drawdown',
 cmp_cards:[{name:'Binance',type:'Centralized exchange',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'Full KYC required',fees:'~0.1% + withdrawal fees',pix_speed:'Minutes to hours',assets:'350+ cryptocurrencies',extra:'Futures, margin, staking, earn',privacy:'Low',best:'High-volume trading, altcoins, DeFi access'}},{name:'Mercado Bitcoin',type:'Centralized exchange',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'Full KYC (CPF required)',fees:'~1\u20132% + withdrawal fees',pix_speed:'Minutes to hours',assets:'200+ cryptocurrencies',extra:'Tokenized assets, fixed income',privacy:'Low',best:'Regulated Brazilian platform, diverse products'}},{name:'B2PIX',type:'P2P BTC/PIX platform',url:'https://b2pix.org/',rows:{custody:'Non-custodial (your keys)',kyc:'No KYC',fees:'~1\u20132% spread',pix_speed:'Instant',assets:'Bitcoin (sBTC on Stacks)',extra:'Pay bills & ecommerce with BTC via PIX',privacy:'High',best:'Self-custody, privacy, BTC payments'}}],
 cmp_thead:['Feature','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custody','KYC','Fees','PIX speed','Supported assets','Additional services','Privacy','Best for'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Best suited for experienced traders who need access to hundreds of altcoins, derivatives, and DeFi protocols. Ideal for high-volume operations where the low trading fee (0.1%) makes a significant difference.'},{name:'Mercado Bitcoin',text:'The most established Brazilian exchange, regulated and with a wide range of products beyond crypto, including tokenized assets and fixed income. A good choice for those who want everything in one regulated platform.'},{name:'B2PIX',text:'The only non-custodial option in this comparison \u2014 your Bitcoin stays in your wallet at all times, with no account creation or identity verification. Also the only platform that lets you pay PIX bills and make online purchases directly with BTC.'}]},
@@ -144,6 +160,7 @@ ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 di\u00e1rio via API p\u0
 cmp_title:'Como comprar Bitcoin no Brasil',cmp_intro:'Compara\u00e7\u00e3o dos principais meios de compra e venda de Bitcoin no Brasil \u2014 de exchanges centralizadas ao peer-to-peer.',cmp_visit:'Acessar',
 sc_mayer:'Mayer Multiple',sc_200d:'Pre\u00e7o vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
 sc_buy:'Zona de compra',sc_sell:'Zona de venda',sc_neutral:'Neutro',sc_fired:'Disparou',sc_not:'N\u00e3o disparou',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Medo extremo',sc_greed:'Gan\u00e2ncia extrema',
+cp_title:'Indicadores na semana {0}',cp_hint:'Clique em qualquer ponto no gr\u00e1fico acima para comparar indicadores de todos os ciclos naquela semana. Ciclo 1 \u00e9 anterior aos dados da Binance.',cp_na:'N/A (pr\u00e9-2017)',cp_price:'Pre\u00e7o',cp_dd:'Drawdown',
 cmp_cards:[{name:'Binance',type:'Exchange centralizada',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obrigat\u00f3rio',fees:'~0,1% + taxa de saque',pix_speed:'Minutos a horas',assets:'350+ criptomoedas',extra:'Futuros, margem, staking, earn',privacy:'Baixa',best:'Trading de alto volume, altcoins, acesso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizada',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obrigat\u00f3rio)',fees:'~1\u20132% + taxa de saque',pix_speed:'Minutos a horas',assets:'200+ criptomoedas',extra:'Ativos tokenizados, renda fixa',privacy:'Baixa',best:'Plataforma brasileira regulada, produtos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'N\u00e3o-custodial (suas chaves)',kyc:'Sem KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e2neo',assets:'Bitcoin (sBTC na Stacks)',extra:'Pague boletos e e-commerce com BTC via PIX',privacy:'Alta',best:'Autocust\u00f3dia, privacidade, pagamentos com BTC'}}],
 cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Cust\u00f3dia','KYC','Taxas','Velocidade PIX','Ativos suportados','Servi\u00e7os adicionais','Privacidade','Melhor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Mais indicada para traders experientes que precisam acessar centenas de altcoins, derivativos e protocolos DeFi. Ideal para opera\u00e7\u00f5es de alto volume, onde a taxa baixa (0,1%) faz diferen\u00e7a significativa.'},{name:'Mercado Bitcoin',text:'A exchange brasileira mais estabelecida, regulada e com uma ampla gama de produtos al\u00e9m de cripto, incluindo ativos tokenizados e renda fixa. Boa escolha para quem quer tudo em uma plataforma regulamentada.'},{name:'B2PIX',text:'A \u00fanica op\u00e7\u00e3o n\u00e3o-custodial desta compara\u00e7\u00e3o \u2014 seu Bitcoin fica na sua carteira o tempo todo, sem criar conta e sem verifica\u00e7\u00e3o de identidade. Tamb\u00e9m a \u00fanica que permite pagar boletos e fazer compras online diretamente com BTC.'}]},
@@ -160,6 +177,7 @@ ftr1:'Datos hist\u00f3ricos (ciclos 1-3) fijos. Ciclo 4 diario v\u00eda API p\u0
 cmp_title:'\u00bfC\u00f3mo comprar Bitcoin en Brasil?',cmp_intro:'Comparaci\u00f3n de las principales formas de comprar y vender Bitcoin en Brasil \u2014 desde exchanges centralizados hasta peer-to-peer.',cmp_visit:'Visitar',
 sc_mayer:'Mayer Multiple',sc_200d:'Precio vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
 sc_buy:'Zona de compra',sc_sell:'Zona de venta',sc_neutral:'Neutro',sc_fired:'Dispar\u00f3',sc_not:'No dispar\u00f3',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Miedo extremo',sc_greed:'Codicia extrema',
+cp_title:'Indicadores en la semana {0}',cp_hint:'Haz clic en cualquier punto del gr\u00e1fico para comparar indicadores de todos los ciclos en esa semana. Ciclo 1 es anterior a los datos de Binance.',cp_na:'N/A (pre-2017)',cp_price:'Precio',cp_dd:'Drawdown',
 cmp_cards:[{name:'Binance',type:'Exchange centralizado',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obligatorio',fees:'~0,1% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'350+ criptomonedas',extra:'Futuros, margen, staking, earn',privacy:'Baja',best:'Trading de alto volumen, altcoins, acceso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizado',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obligatorio)',fees:'~1\u20132% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'200+ criptomonedas',extra:'Activos tokenizados, renta fija',privacy:'Baja',best:'Plataforma brasile\u00f1a regulada, productos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'No custodial (tus claves)',kyc:'Sin KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e1neo',assets:'Bitcoin (sBTC en Stacks)',extra:'Paga facturas y e-commerce con BTC v\u00eda PIX',privacy:'Alta',best:'Autocustodia, privacidad, pagos con BTC'}}],
 cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custodia','KYC','Comisiones','Velocidad PIX','Activos soportados','Servicios adicionales','Privacidad','Mejor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'M\u00e1s indicada para traders experimentados que necesitan acceso a cientos de altcoins, derivados y protocolos DeFi. Ideal para operaciones de alto volumen donde la baja comisi\u00f3n (0,1%) marca una diferencia significativa.'},{name:'Mercado Bitcoin',text:'El exchange brasile\u00f1o m\u00e1s establecido, regulado y con una amplia gama de productos m\u00e1s all\u00e1 de cripto, incluyendo activos tokenizados y renta fija. Buena opci\u00f3n para quien quiere todo en una plataforma regulada.'},{name:'B2PIX',text:'La \u00fanica opci\u00f3n no custodial de esta comparaci\u00f3n \u2014 tu Bitcoin queda en tu billetera en todo momento, sin crear cuenta ni verificaci\u00f3n de identidad. Tambi\u00e9n la \u00fanica que permite pagar facturas y hacer compras online directamente con BTC.'}]}
@@ -198,6 +216,108 @@ async function fetchBinancePrice(){
 }
 async function fetchFNG(){
   try{const r=await fetch('https://api.alternative.me/fng/?limit=1');const d=await r.json();return d.data?.[0]||null}catch(e){return null}
+}
+
+// Cycle ATH dates and prices for indicator lookup
+const CYCLE_ATHS=[
+  {name:'Cycle 1',ath:1150,athDate:new Date('2013-11-30'),hasData:false},
+  {name:'Cycle 2',ath:19783,athDate:new Date('2017-12-17'),hasData:true},
+  {name:'Cycle 3',ath:69000,athDate:new Date('2021-11-10'),hasData:true},
+  {name:'Cycle 4',ath:126296,athDate:new Date('2025-10-06'),hasData:true}
+];
+
+// Fetch full daily history from Binance (Aug 2017 to now, ~3000 days in 3 parallel requests)
+let allDailyCloses=[];
+async function fetchAllHistory(){
+  const startMs=new Date('2017-08-01').getTime();
+  const batchMs=999*86400000;
+  const fetches=[];
+  for(let s=startMs;s<Date.now();s+=batchMs){
+    fetches.push(fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&startTime=${s}&limit=1000`)
+      .then(r=>r.ok?r.json():[]).catch(()=>[]));
+  }
+  const batches=await Promise.all(fetches);
+  const map=new Map();
+  for(const batch of batches){
+    for(const k of batch){map.set(k[0],parseFloat(k[4]))}
+  }
+  const sorted=[...map.entries()].sort((a,b)=>a[0]-b[0]);
+  allDailyCloses=sorted;
+  return sorted;
+}
+
+// Calculate indicators at a specific week relative to a cycle's ATH
+function calcAtWeek(weekNum,cycleIdx){
+  const cyc=CYCLE_ATHS[cycleIdx];
+  if(!cyc.hasData)return null;
+  const targetDate=new Date(cyc.athDate.getTime()+weekNum*7*86400000);
+  const targetTs=targetDate.getTime();
+  // Find the closest daily close at or before targetDate
+  let endIdx=-1;
+  for(let i=0;i<allDailyCloses.length;i++){
+    if(allDailyCloses[i][0]<=targetTs)endIdx=i;
+    else break;
+  }
+  if(endIdx<0)return null;
+  // Need at least 350 prices for Pi Cycle
+  const startIdx=Math.max(0,endIdx-400);
+  const prices=allDailyCloses.slice(startIdx,endIdx+1).map(p=>p[1]);
+  if(prices.length<50)return null;
+  const cur=prices[prices.length-1];
+  const dd=Math.round(((cur/cyc.ath)-1)*1000)/10;
+  const result={price:cur,dd:dd};
+  const ma200=calcMA(prices,200);
+  if(ma200){result.mayer=Math.round(cur/ma200*100)/100;result.ma200pct=Math.round(((cur/ma200)-1)*100)}
+  const ma111=calcMA(prices,111),ma350=calcMA(prices,350);
+  if(ma350&&ma111)result.piCrossed=ma111>=ma350*2;
+  const weekly=[];for(let i=0;i<prices.length;i+=7)weekly.push(prices[i]);weekly.push(cur);
+  result.rsi=calcRSI(weekly,14);
+  return result;
+}
+
+function renderClickPanel(weekNum){
+  const panel=document.getElementById('cpPanel');
+  const grid=document.getElementById('cpGrid');
+  document.getElementById('cpTitle').textContent=tf('cp_title',weekNum);
+  const labels=[t('cp_dd'),t('cp_price'),t('sc_mayer'),t('sc_200d'),t('sc_pi'),t('sc_rsi')];
+  const names=[t('c1'),t('c2'),t('c3'),t('c4')];
+  let html='<div class="cp-hdr"></div>';
+  names.forEach((n,i)=>{html+='<div class="cp-hdr" style="color:'+COL[i]+'">'+n+'</div>'});
+  labels.forEach((label,li)=>{
+    html+='<div class="cp-cell">'+label+'</div>';
+    for(let ci=0;ci<4;ci++){
+      const ind=calcAtWeek(weekNum,ci);
+      let val='<span class="cp-na">'+t('cp_na')+'</span>';
+      if(ind){
+        if(li===0)val='<span class="cp-val'+(ind.dd<-50?' rd':'')+'">'+ind.dd+'%</span>';
+        else if(li===1)val='<span class="cp-val">'+$(ind.price)+'</span>';
+        else if(li===2){
+          if(ind.mayer!==undefined){
+            const cls=ind.mayer<0.8?'cp-buy':ind.mayer>2.4?'cp-sell':'cp-neut';
+            val='<span class="cp-val '+cls+'">'+ind.mayer.toFixed(2)+'</span>';
+          }else val='<span class="cp-na">\u2014</span>';
+        }else if(li===3){
+          if(ind.ma200pct!==undefined){
+            const cls=ind.ma200pct<-10?'cp-buy':ind.ma200pct>100?'cp-sell':'cp-neut';
+            val='<span class="cp-val '+cls+'">'+(ind.ma200pct>0?'+':'')+ind.ma200pct+'%</span>';
+          }else val='<span class="cp-na">\u2014</span>';
+        }else if(li===4){
+          if(ind.piCrossed!==undefined){
+            val=ind.piCrossed?'<span class="cp-val cp-sell">'+t('sc_fired')+'</span>':'<span class="cp-val cp-neut">'+t('sc_not')+'</span>';
+          }else val='<span class="cp-na">\u2014</span>';
+        }else if(li===5){
+          if(ind.rsi){
+            const cls=ind.rsi<30?'cp-buy':ind.rsi>70?'cp-sell':'cp-neut';
+            val='<span class="cp-val '+cls+'">'+ind.rsi+'</span>';
+          }else val='<span class="cp-na">\u2014</span>';
+        }
+      }
+      html+='<div class="cp-cell">'+val+'</div>';
+    }
+  });
+  grid.innerHTML=html;
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 // ============ INDICATORS ============
@@ -295,7 +415,7 @@ function rebuild(){
   if(ch1){ch1.destroy();ch1=null}if(ch2){ch2.destroy();ch2=null}
   const c4Full=[...c4Pre,...c4PostW];
   ch1=new Chart(document.getElementById('ch1'),{type:'line',data:{datasets:[ds(D1,0),ds(D2,1),ds(D3,2),ds(c4Full,3)]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false,axis:'x'},
+    options:{responsive:true,maintainAspectRatio:false,onClick:(ev,el,chart)=>{if(allDailyCloses.length===0)return;const w=Math.round(chart.scales.x.getValueForPixel(ev.x));if(w>=-82&&w<=140)renderClickPanel(w)},interaction:{mode:'nearest',intersect:false,axis:'x'},
       scales:{x:{type:'linear',min:-82,max:140,title:{display:true,text:t('ax1'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v===0?t('la'):v>0?'+'+v:''+v}},y:{min:-100,max:5,title:{display:true,text:t('ay1'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v+'%'}}},
       plugins:{legend:{display:false},tooltip:{...ttOpts,callbacks:{title:i=>{const w=Math.round(i[0].parsed.x);return w===0?t('la'):t('lw')+' '+(w>0?'+':'')+w},label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
     plugins:[{id:'a',beforeDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(0);x.save();x.fillStyle='rgba(100,200,130,0.03)';x.fillRect(s.left,y.top,p-s.left,y.bottom-y.top);x.fillStyle='rgba(200,80,80,0.03)';x.fillRect(p,y.top,s.right-p,y.bottom-y.top);x.beginPath();x.setLineDash([4,3]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#e8e6e1';x.font='500 12px Outfit,sans-serif';x.textAlign='center';x.fillText(t('la'),p,y.top-8);x.fillStyle='#5f5e58';x.font='11px Outfit,sans-serif';x.fillText(t('ll'),s.left+(p-s.left)/2,y.bottom-8);x.fillText(t('lr'),(p+s.right)/2,y.bottom-8);x.restore()}},{id:'b',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.fillStyle='#F5C4B3';x.font='500 11px Outfit,sans-serif';x.textAlign='left';x.fillText(t('ln'),p.x+12,p.y+4);x.restore()}}]});
@@ -340,6 +460,8 @@ let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=
 
     localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:lastPr,lastUpdate:Date.now()}));
     ss('ok',tf('so',$(lastPr),dd));
+    // Fetch full history (Aug 2017 to now) in background for click-to-compare
+    fetchAllHistory().then(()=>{if(allDailyCloses.length>0)document.getElementById('ch1').style.cursor='crosshair'});
   } else {
     // Offline: try stored data
     try{const stored=JSON.parse(localStorage.getItem(SK));

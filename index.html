@@ -131,7 +131,7 @@ tr:last-child td{border-bottom:none}
 <script>
 // ============ i18n ============
 const L={en:{subtitle:'Auto-updating dashboard \u2014 daily resolution via Binance API',m_price:'Current price',m_ath:'Cycle 4 ATH',m_dd:'Drawdown from ATH',m_wk:'Weeks since ATH',m_nh:'Next halving',m_wh:'Weeks to halving',
-sct:'Cycle position scorecard',scn:'Mayer Multiple, Pi Cycle, 200D MA distance, and RSI calculated from daily price data. Fear & Greed from alternative.me. Green = historically favorable for buying. Red = historically favorable for selling.',
+sct:'Cycle position scorecard',scn:'Price indicators (Mayer Multiple, Pi Cycle, 200D MA, RSI) calculated live from Binance. Sentiment from alternative.me. On-chain metrics (Realized Price, MVRV Z-Score, NUPL, SOPR) updated daily via BGeometrics. Green = historically favorable for buying. Red = favorable for selling.',
 s1t:'Overlaid cycles \u2014 halving to halving (aligned by ATH)',s1n:'X-axis: weeks relative to ATH (0 = top). Cycle 4 uses daily data. Auto-updates every 60s.',
 s2t:'Post-ATH drawdown \u2014 same-week comparison',s3t:'Halving data',s4t:'Post-ATH bear market',s5t:'Same-week drawdown comparison',
 h3:['Cycle','Halving date','Price at halving','Post-halving high','High date','Weeks to high','Gain'],
@@ -143,12 +143,13 @@ ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 daily via Binance public API. 
 cmp_title:'How to buy Bitcoin in Brazil',cmp_intro:'A comparison of the main ways to buy and sell Bitcoin in Brazil \u2014 from centralized exchanges to peer-to-peer.',cmp_visit:'Visit',
 sc_mayer:'Mayer Multiple',sc_200d:'Price vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'Weekly RSI',sc_fng:'Fear & Greed',
 sc_buy:'Buy zone',sc_sell:'Sell zone',sc_neutral:'Neutral',sc_fired:'Fired',sc_not:'Not fired',sc_oversold:'Oversold',sc_overbought:'Overbought',sc_fear:'Extreme fear',sc_greed:'Extreme greed',
+sc_realized:'Realized Price',sc_mvrv_z:'MVRV Z-Score',sc_nupl:'NUPL',sc_sopr:'SOPR',sc_above:'Above',sc_below:'Below',sc_capitulation:'Capitulation',sc_euphoria:'Euphoria',sc_loss:'Selling at loss',sc_profit:'Selling at profit',
 cp_title:'Indicators at week {0}',cp_hint:'Click any point on the chart above to compare indicators across all cycles at that week. Cycle 1 predates Binance data.',cp_na:'N/A (pre-2017)',cp_price:'Price',cp_dd:'Drawdown',
 cmp_cards:[{name:'Binance',type:'Centralized exchange',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'Full KYC required',fees:'~0.1% + withdrawal fees',pix_speed:'Minutes to hours',assets:'350+ cryptocurrencies',extra:'Futures, margin, staking, earn',privacy:'Low',best:'High-volume trading, altcoins, DeFi access'}},{name:'Mercado Bitcoin',type:'Centralized exchange',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'Full KYC (CPF required)',fees:'~1\u20132% + withdrawal fees',pix_speed:'Minutes to hours',assets:'200+ cryptocurrencies',extra:'Tokenized assets, fixed income',privacy:'Low',best:'Regulated Brazilian platform, diverse products'}},{name:'B2PIX',type:'P2P BTC/PIX platform',url:'https://b2pix.org/',rows:{custody:'Non-custodial (your keys)',kyc:'No KYC',fees:'~1\u20132% spread',pix_speed:'Instant',assets:'Bitcoin (sBTC on Stacks)',extra:'Pay bills & ecommerce with BTC via PIX',privacy:'High',best:'Self-custody, privacy, BTC payments'}}],
 cmp_thead:['Feature','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custody','KYC','Fees','PIX speed','Supported assets','Additional services','Privacy','Best for'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Best suited for experienced traders who need access to hundreds of altcoins, derivatives, and DeFi protocols. Ideal for high-volume operations where the low trading fee (0.1%) makes a significant difference.'},{name:'Mercado Bitcoin',text:'The most established Brazilian exchange, regulated and with a wide range of products beyond crypto, including tokenized assets and fixed income. A good choice for those who want everything in one regulated platform.'},{name:'B2PIX',text:'The only non-custodial option in this comparison \u2014 your Bitcoin stays in your wallet at all times, with no account creation or identity verification. Also the only platform that lets you pay PIX bills and make online purchases directly with BTC.'}]},
 pt:{subtitle:'Dashboard auto-atualizado \u2014 resolu\u00e7\u00e3o di\u00e1ria via Binance API',m_price:'Pre\u00e7o atual',m_ath:'ATH ciclo 4',m_dd:'Drawdown da ATH',m_wk:'Semanas da ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas at\u00e9 halving',
-sct:'Scorecard de posi\u00e7\u00e3o no ciclo',scn:'Mayer Multiple, Pi Cycle, dist\u00e2ncia da 200D MA e RSI calculados dos pre\u00e7os di\u00e1rios. Fear & Greed via alternative.me. Verde = historicamente favor\u00e1vel para compra. Vermelho = favor\u00e1vel para venda.',
+sct:'Scorecard de posi\u00e7\u00e3o no ciclo',scn:'Indicadores de pre\u00e7o (Mayer Multiple, Pi Cycle, 200D MA, RSI) calculados ao vivo via Binance. Sentimento via alternative.me. M\u00e9tricas on-chain (Pre\u00e7o Realizado, MVRV Z-Score, NUPL, SOPR) atualizadas diariamente via BGeometrics. Verde = historicamente favor\u00e1vel para compra. Vermelho = favor\u00e1vel para venda.',
 s1t:'Ciclos sobrepostos \u2014 halving a halving (alinhados pela ATH)',s1n:'Eixo X: semanas relativas \u00e0 ATH (0 = topo). Ciclo 4 usa dados di\u00e1rios. Atualiza a cada 60s.',
 s2t:'Drawdown p\u00f3s-ATH \u2014 comparativo na mesma semana',s3t:'Dados por halving',s4t:'Bear market p\u00f3s-ATH',s5t:'Comparativo de drawdown na semana atual',
 h3:['Ciclo','Data halving','Pre\u00e7o no halving','M\u00e1xima p\u00f3s-halving','Data da m\u00e1xima','Sem. at\u00e9 m\u00e1xima','Valoriza\u00e7\u00e3o'],
@@ -160,12 +161,13 @@ ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 di\u00e1rio via API p\u0
 cmp_title:'Como comprar Bitcoin no Brasil',cmp_intro:'Compara\u00e7\u00e3o dos principais meios de compra e venda de Bitcoin no Brasil \u2014 de exchanges centralizadas ao peer-to-peer.',cmp_visit:'Acessar',
 sc_mayer:'Mayer Multiple',sc_200d:'Pre\u00e7o vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
 sc_buy:'Zona de compra',sc_sell:'Zona de venda',sc_neutral:'Neutro',sc_fired:'Disparou',sc_not:'N\u00e3o disparou',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Medo extremo',sc_greed:'Gan\u00e2ncia extrema',
+sc_realized:'Pre\u00e7o Realizado',sc_mvrv_z:'MVRV Z-Score',sc_nupl:'NUPL',sc_sopr:'SOPR',sc_above:'Acima',sc_below:'Abaixo',sc_capitulation:'Capitula\u00e7\u00e3o',sc_euphoria:'Euforia',sc_loss:'Vendendo com preju\u00edzo',sc_profit:'Vendendo com lucro',
 cp_title:'Indicadores na semana {0}',cp_hint:'Clique em qualquer ponto no gr\u00e1fico acima para comparar indicadores de todos os ciclos naquela semana. Ciclo 1 \u00e9 anterior aos dados da Binance.',cp_na:'N/A (pr\u00e9-2017)',cp_price:'Pre\u00e7o',cp_dd:'Drawdown',
 cmp_cards:[{name:'Binance',type:'Exchange centralizada',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obrigat\u00f3rio',fees:'~0,1% + taxa de saque',pix_speed:'Minutos a horas',assets:'350+ criptomoedas',extra:'Futuros, margem, staking, earn',privacy:'Baixa',best:'Trading de alto volume, altcoins, acesso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizada',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obrigat\u00f3rio)',fees:'~1\u20132% + taxa de saque',pix_speed:'Minutos a horas',assets:'200+ criptomoedas',extra:'Ativos tokenizados, renda fixa',privacy:'Baixa',best:'Plataforma brasileira regulada, produtos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'N\u00e3o-custodial (suas chaves)',kyc:'Sem KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e2neo',assets:'Bitcoin (sBTC na Stacks)',extra:'Pague boletos e e-commerce com BTC via PIX',privacy:'Alta',best:'Autocust\u00f3dia, privacidade, pagamentos com BTC'}}],
 cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Cust\u00f3dia','KYC','Taxas','Velocidade PIX','Ativos suportados','Servi\u00e7os adicionais','Privacidade','Melhor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Mais indicada para traders experientes que precisam acessar centenas de altcoins, derivativos e protocolos DeFi. Ideal para opera\u00e7\u00f5es de alto volume, onde a taxa baixa (0,1%) faz diferen\u00e7a significativa.'},{name:'Mercado Bitcoin',text:'A exchange brasileira mais estabelecida, regulada e com uma ampla gama de produtos al\u00e9m de cripto, incluindo ativos tokenizados e renda fixa. Boa escolha para quem quer tudo em uma plataforma regulamentada.'},{name:'B2PIX',text:'A \u00fanica op\u00e7\u00e3o n\u00e3o-custodial desta compara\u00e7\u00e3o \u2014 seu Bitcoin fica na sua carteira o tempo todo, sem criar conta e sem verifica\u00e7\u00e3o de identidade. Tamb\u00e9m a \u00fanica que permite pagar boletos e fazer compras online diretamente com BTC.'}]},
 es:{subtitle:'Dashboard auto-actualizado \u2014 resoluci\u00f3n diaria v\u00eda Binance API',m_price:'Precio actual',m_ath:'ATH ciclo 4',m_dd:'Drawdown del ATH',m_wk:'Semanas del ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas al halving',
-sct:'Scorecard de posici\u00f3n en el ciclo',scn:'Mayer Multiple, Pi Cycle, distancia 200D MA y RSI calculados de precios diarios. Fear & Greed v\u00eda alternative.me. Verde = hist\u00f3ricamente favorable para compra. Rojo = favorable para venta.',
+sct:'Scorecard de posici\u00f3n en el ciclo',scn:'Indicadores de precio (Mayer Multiple, Pi Cycle, 200D MA, RSI) calculados en vivo v\u00eda Binance. Sentimiento v\u00eda alternative.me. M\u00e9tricas on-chain (Precio Realizado, MVRV Z-Score, NUPL, SOPR) actualizadas diariamente v\u00eda BGeometrics. Verde = hist\u00f3ricamente favorable para compra. Rojo = favorable para venta.',
 s1t:'Ciclos superpuestos \u2014 halving a halving (alineados por ATH)',s1n:'Eje X: semanas relativas al ATH (0 = tope). Ciclo 4 usa datos diarios. Se actualiza cada 60s.',
 s2t:'Drawdown post-ATH \u2014 comparaci\u00f3n por semana',s3t:'Datos por halving',s4t:'Bear market post-ATH',s5t:'Comparaci\u00f3n de drawdown en la semana actual',
 h3:['Ciclo','Fecha halving','Precio en halving','M\u00e1ximo post-halving','Fecha del m\u00e1ximo','Sem. al m\u00e1ximo','Ganancia'],
@@ -177,6 +179,7 @@ ftr1:'Datos hist\u00f3ricos (ciclos 1-3) fijos. Ciclo 4 diario v\u00eda API p\u0
 cmp_title:'\u00bfC\u00f3mo comprar Bitcoin en Brasil?',cmp_intro:'Comparaci\u00f3n de las principales formas de comprar y vender Bitcoin en Brasil \u2014 desde exchanges centralizados hasta peer-to-peer.',cmp_visit:'Visitar',
 sc_mayer:'Mayer Multiple',sc_200d:'Precio vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
 sc_buy:'Zona de compra',sc_sell:'Zona de venta',sc_neutral:'Neutro',sc_fired:'Dispar\u00f3',sc_not:'No dispar\u00f3',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Miedo extremo',sc_greed:'Codicia extrema',
+sc_realized:'Precio Realizado',sc_mvrv_z:'MVRV Z-Score',sc_nupl:'NUPL',sc_sopr:'SOPR',sc_above:'Encima',sc_below:'Debajo',sc_capitulation:'Capitulaci\u00f3n',sc_euphoria:'Euforia',sc_loss:'Vendiendo con p\u00e9rdida',sc_profit:'Vendiendo con ganancia',
 cp_title:'Indicadores en la semana {0}',cp_hint:'Haz clic en cualquier punto del gr\u00e1fico para comparar indicadores de todos los ciclos en esa semana. Ciclo 1 es anterior a los datos de Binance.',cp_na:'N/A (pre-2017)',cp_price:'Precio',cp_dd:'Drawdown',
 cmp_cards:[{name:'Binance',type:'Exchange centralizado',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obligatorio',fees:'~0,1% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'350+ criptomonedas',extra:'Futuros, margen, staking, earn',privacy:'Baja',best:'Trading de alto volumen, altcoins, acceso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizado',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obligatorio)',fees:'~1\u20132% + comisi\u00f3n de retiro',pix_speed:'Minutos a horas',assets:'200+ criptomonedas',extra:'Activos tokenizados, renta fija',privacy:'Baja',best:'Plataforma brasile\u00f1a regulada, productos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'No custodial (tus claves)',kyc:'Sin KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e1neo',assets:'Bitcoin (sBTC en Stacks)',extra:'Paga facturas y e-commerce con BTC v\u00eda PIX',privacy:'Alta',best:'Autocustodia, privacidad, pagos con BTC'}}],
 cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custodia','KYC','Comisiones','Velocidad PIX','Activos soportados','Servicios adicionales','Privacidad','Mejor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
@@ -339,7 +342,19 @@ function calcIndicators(closePrices){
 }
 
 // ============ SCORECARD ============
-let indicators={},lastFNG=null;
+let indicators={},lastFNG=null,onChainData=null;
+
+// Fetch on-chain data from data.json (updated daily by GitHub Actions)
+async function fetchOnChainData(){
+  try{
+    const r=await fetch('data.json?t='+Date.now());
+    if(!r.ok)return null;
+    const d=await r.json();
+    onChainData=d;
+    return d;
+  }catch(e){return null}
+}
+
 function renderScorecard(ind,fng){
   const g=document.getElementById('scGrid');g.innerHTML='';const cards=[];
   if(ind.mayer!==undefined){const v=ind.mayer,pct=Math.min(Math.max(v/3*100,0),100);let sig,cls;if(v<0.8){sig=t('sc_buy');cls='sc-buy'}else if(v>2.4){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
@@ -351,6 +366,37 @@ function renderScorecard(ind,fng){
     cards.push({name:t('sc_rsi'),val:v,pct,sig,cls,lo:'0',hi:'100',color:v<30?'var(--teal)':v>70?'var(--red)':'#EF9F27'})}
   if(fng){const v=parseInt(fng.value),pct=v;let sig,cls;if(v<=25){sig=t('sc_fear');cls='sc-buy'}else if(v>=75){sig=t('sc_greed');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
     cards.push({name:t('sc_fng'),val:v+'/100',pct,sig,cls,lo:'0',hi:'100',color:v<=25?'var(--teal)':v>=75?'var(--red)':'#EF9F27'})}
+  // On-chain indicators from data.json (via GitHub Actions + BGeometrics)
+  if(onChainData){
+    const oc=onChainData;
+    // Realized Price
+    if(oc.realized_price!=null&&lastPr){
+      const rp=Math.round(oc.realized_price);const above=lastPr>rp;
+      const ratio=lastPr/rp;const pct=Math.min(Math.max((ratio-0.5)/3*100,0),100);
+      const sig=above?t('sc_above')+' (+'+Math.round((ratio-1)*100)+'%)':t('sc_below')+' ('+Math.round((ratio-1)*100)+'%)';
+      const cls=ratio<1?'sc-buy':ratio>3?'sc-sell':'sc-neutral';
+      const color=ratio<1?'var(--teal)':ratio>3?'var(--red)':'#EF9F27';
+      cards.push({name:t('sc_realized'),val:'$'+rp.toLocaleString('en-US'),pct,sig,cls,lo:'$0',hi:'$'+Math.round(lastPr*1.5).toLocaleString('en-US'),color});
+    }
+    // MVRV Z-Score
+    if(oc.mvrv_zscore!=null){
+      const v=Math.round(oc.mvrv_zscore*100)/100;const pct=Math.min(Math.max((v+1)/9*100,0),100);
+      let sig,cls;if(v<0){sig=t('sc_buy');cls='sc-buy'}else if(v>7){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
+      cards.push({name:t('sc_mvrv_z'),val:v.toFixed(2),pct,sig,cls,lo:'-1',hi:'8+',color:v<0?'var(--teal)':v>7?'var(--red)':'#EF9F27'});
+    }
+    // NUPL
+    if(oc.nupl!=null){
+      const v=Math.round(oc.nupl*1000)/1000;const pct=Math.min(Math.max((v+0.5)/1.25*100,0),100);
+      let sig,cls;if(v<0){sig=t('sc_capitulation');cls='sc-buy'}else if(v>0.75){sig=t('sc_euphoria');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
+      cards.push({name:t('sc_nupl'),val:v.toFixed(3),pct,sig,cls,lo:'-0.5',hi:'0.75+',color:v<0?'var(--teal)':v>0.75?'var(--red)':'#EF9F27'});
+    }
+    // SOPR
+    if(oc.sopr!=null){
+      const v=Math.round(oc.sopr*1000)/1000;const pct=Math.min(Math.max((v-0.8)/0.6*100,0),100);
+      let sig,cls;if(v<1){sig=t('sc_loss');cls='sc-buy'}else if(v>1.05){sig=t('sc_profit');cls='sc-neutral'}else{sig=t('sc_neutral');cls='sc-neutral'}
+      cards.push({name:t('sc_sopr'),val:v.toFixed(3),pct,sig,cls,lo:'0.8',hi:'1.4',color:v<1?'var(--teal)':v>1.1?'#EF9F27':'#EF9F27'});
+    }
+  }
   cards.forEach(c=>{
     const bar=c.nobar
       ?'<div class="sc-desc">'+(c.cls==='sc-sell'?'111D MA crossed 2\u00d7350D MA near ATH':'Monitoring 111D vs 2\u00d7350D MA')+'</div>'
@@ -456,6 +502,7 @@ let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=
     // Calculate indicators from close prices
     indicators=calcIndicators(d.closePrices);
     lastFNG=await fetchFNG();
+    await fetchOnChainData();
     renderScorecard(indicators,lastFNG);
 
     localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:lastPr,lastUpdate:Date.now()}));

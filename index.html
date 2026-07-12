@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bitcoin Halving Cycles Dashboard</title>
-<meta name="description" content="Single-file dashboard overlaying Bitcoin's 4 halving cycles by % drawdown from ATH, with live price updates">
+<meta name="description" content="Bitcoin cycle-bottom report: 4 halving cycles overlaid, timing & price convergence analysis, 12-signal bottom checklist and staged buy plan — with live data">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
@@ -90,7 +90,37 @@ tr:last-child td{border-bottom:none}
 .cp-na{color:var(--txt3);font-style:italic;font-family:'Outfit',sans-serif}
 .cp-buy{color:var(--teal)}.cp-sell{color:var(--red)}.cp-neut{color:#EF9F27}
 .cp-hint{font-size:.72rem;color:var(--txt3);margin-top:10px;font-style:italic}
-@media(max-width:700px){.cmp-grid,.cmp-notes{grid-template-columns:1fr}.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}.sc-grid{grid-template-columns:1fr 1fr}}
+.tip{position:relative;display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);color:var(--txt3);font-size:.62rem;font-weight:600;cursor:help;vertical-align:middle;margin-left:6px;flex:none;font-style:normal}
+.tip .tt{visibility:hidden;opacity:0;position:absolute;bottom:135%;left:50%;transform:translateX(-50%);width:min(310px,74vw);background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.72rem;font-weight:400;color:var(--txt2);line-height:1.5;z-index:30;transition:opacity .15s;text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.5);white-space:normal;cursor:default;pointer-events:none}
+.tip:hover .tt,.tip:focus .tt{visibility:visible;opacity:1}
+.thesis{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:8px;padding:20px;margin-bottom:2rem}
+.thesis h2{font-size:1.05rem;font-weight:600;margin-bottom:12px;display:flex;align-items:center;flex-wrap:wrap}
+.th-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:14px}
+.th-stat{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.th-stat .lb{font-size:.68rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:flex;align-items:center}
+.th-stat .vl{font-size:1.15rem;font-weight:500;font-family:'JetBrains Mono',monospace}
+.thesis p{font-size:.85rem;color:var(--txt2)}
+.asof{display:inline-block;font-size:.62rem;color:var(--txt3);border:1px solid var(--border);border-radius:4px;padding:1px 6px;margin-left:10px;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-weight:400;text-transform:none;letter-spacing:0}
+.conv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.conv-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.conv-card .cc-m{font-size:.75rem;color:var(--txt2);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.conv-card .cc-v{font-size:1.05rem;font-weight:500;font-family:'JetBrains Mono',monospace;margin-bottom:4px;color:var(--teal)}
+.conv-card .cc-d{font-size:.72rem;color:var(--txt3)}
+.conv-sum{margin-top:10px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:8px;font-size:.82rem;color:var(--txt2)}
+.conv-sum b{color:var(--txt);font-weight:500}
+.bs-chip{display:inline-block;padding:2px 9px;border-radius:5px;font-size:.68rem;font-weight:600;letter-spacing:.3px;white-space:nowrap}
+.bs-on{background:#1D9E7533;color:var(--teal)}.bs-part{background:#BA751733;color:#EF9F27}.bs-off{background:#252a35;color:var(--txt3)}
+.bs-live{font-size:.6rem;color:var(--teal);border:1px solid #1D9E7555;border-radius:3px;padding:0 4px;margin-left:6px;vertical-align:middle;font-family:'JetBrains Mono',monospace}
+.lad-tbl .hit td{background:#1D9E7511}
+.lad-band{font-weight:600;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.lad-now{color:var(--orange);font-size:.7rem;font-weight:600;margin-left:6px;white-space:nowrap}
+.mac-chip{display:inline-block;padding:2px 9px;border-radius:5px;font-size:.68rem;font-weight:600;white-space:nowrap}
+.mac-head{background:#E24B4A22;color:var(--red)}.mac-tail{background:#1D9E7533;color:var(--teal)}.mac-mix{background:#BA751733;color:#EF9F27}
+.trig-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:12px}
+.trig{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:.78rem;color:var(--txt2);display:flex;gap:10px;align-items:flex-start}
+.trig .tk{width:18px;height:18px;border-radius:50%;border:2px solid var(--txt3);flex:none;margin-top:1px}
+.trig b{color:var(--txt);font-weight:500}
+@media(max-width:700px){.cmp-grid,.cmp-notes{grid-template-columns:1fr}.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}.sc-grid{grid-template-columns:1fr 1fr}.th-stats{grid-template-columns:1fr 1fr}.tip .tt{left:auto;right:-10px;transform:none}}
 </style>
 </head>
 <body>
@@ -102,12 +132,20 @@ tr:last-child td{border-bottom:none}
     <div class="met"><div class="lb" data-t="m_ath"></div><div class="vl">$126,296</div></div>
     <div class="met"><div class="lb" data-t="m_dd"></div><div class="vl rd" id="mD">--</div></div>
     <div class="met"><div class="lb" data-t="m_wk"></div><div class="vl" id="mW">--</div></div>
+    <div class="met"><div class="lb" data-t="m_low"></div><div class="vl rd" id="mLow">--</div></div>
+    <div class="met"><div class="lb" data-t="m_200w"></div><div class="vl" id="m200w">--</div></div>
     <div class="met"><div class="lb" data-t="m_nh"></div><div class="vl">~Apr 2028</div></div>
     <div class="met"><div class="lb" data-t="m_wh"></div><div class="vl" id="mWH">--</div></div>
   </div>
+  <div class="thesis" id="thesis"></div>
   <div class="sec"><div class="stit" data-t="sct"></div><div class="sc-grid" id="scGrid"></div><p class="nt" data-t="scn"></p></div>
   <div class="sec"><div class="stit" data-t="s1t"></div><div class="cwrap"><div class="leg" id="lg1"></div><div class="cinn" style="height:460px"><canvas id="ch1"></canvas></div><div class="cp" id="cpPanel"><div class="cp-head"><span class="cp-title" id="cpTitle"></span><button class="cp-close" onclick="document.getElementById('cpPanel').classList.remove('show')">&times;</button></div><div class="cp-grid" id="cpGrid"></div><div class="cp-hint" data-t="cp_hint"></div></div></div><p class="nt" data-t="s1n"></p></div>
-  <div class="sec"><div class="stit" data-t="s2t"></div><div class="cwrap"><div class="leg" id="lg2"></div><div class="cinn" style="height:380px"><canvas id="ch2"></canvas></div></div></div>
+  <div class="sec"><div class="stit" data-t="s2t"></div><div class="cwrap"><div class="leg" id="lg2"></div><div class="cinn" style="height:380px"><canvas id="ch2"></canvas></div></div><p class="nt" data-t="s2n"></p></div>
+  <div class="sec"><div class="stit" id="cvtT"></div><div class="conv-grid" id="cvtGrid"></div><div class="conv-sum" id="cvtSum"></div></div>
+  <div class="sec"><div class="stit" id="cvpT"></div><div class="conv-grid" id="cvpGrid"></div><div class="conv-sum" id="cvpSum"></div></div>
+  <div class="sec"><div class="stit" id="bsT"></div><div style="overflow-x:auto"><table><thead id="bsTH"></thead><tbody id="bsTB"></tbody></table></div><p class="nt" id="bsN"></p></div>
+  <div class="sec"><div class="stit" id="ladT"></div><div style="overflow-x:auto"><table class="lad-tbl"><thead id="ladTH"></thead><tbody id="ladTB"></tbody></table></div><div class="stit" id="trigT" style="margin-top:1.5rem"></div><div class="trig-grid" id="trigGrid"></div><p class="nt" id="trigN"></p></div>
+  <div class="sec"><div class="stit" id="macT"></div><div style="overflow-x:auto"><table><thead id="macTH"></thead><tbody id="macTB"></tbody></table></div></div>
   <div class="sec"><div class="stit" data-t="s3t"></div><div style="overflow-x:auto"><table><thead id="th3"></thead><tbody>
     <tr><td><span class="ct c1" data-t="c1"></span></td><td>Nov 28, 2012</td><td class="mn">$12</td><td class="mn">$1,150</td><td>Nov 30, 2013</td><td class="mn">52</td><td class="gr mn">+9,483%</td></tr>
     <tr><td><span class="ct c2" data-t="c2"></span></td><td>Jul 9, 2016</td><td class="mn">$650</td><td class="mn">$19,783</td><td>Dec 17, 2017</td><td class="mn">75</td><td class="gr mn">+2,943%</td></tr>
@@ -130,7 +168,7 @@ tr:last-child td{border-bottom:none}
 </div>
 <script>
 // ============ i18n ============
-const L={en:{subtitle:'Auto-updating dashboard \u2014 daily resolution via Binance API',m_price:'Current price',m_ath:'Cycle 4 ATH',m_dd:'Drawdown from ATH',m_wk:'Weeks since ATH',m_nh:'Next halving',m_wh:'Weeks to halving',
+const L={en:{subtitle:'Cycle-bottom report \u2014 live data via Binance API + halving-cycle convergence analysis',m_price:'Current price',m_ath:'Cycle 4 ATH',m_dd:'Drawdown from ATH',m_wk:'Weeks since ATH',m_nh:'Next halving',m_wh:'Weeks to halving',
 sct:'Cycle position scorecard',scn:'Price indicators (Mayer Multiple, Pi Cycle, 200D MA, RSI) calculated live from Binance. Sentiment from alternative.me. On-chain metrics (Realized Price, MVRV Z-Score, NUPL, SOPR) updated daily via BGeometrics. Green = historically favorable for buying. Red = favorable for selling.',
 s1t:'Overlaid cycles \u2014 halving to halving (aligned by ATH)',s1n:'X-axis: weeks relative to ATH (0 = top). Cycle 4 uses daily data. Auto-updates every 60s.',
 s2t:'Post-ATH drawdown \u2014 same-week comparison',s3t:'Halving data',s4t:'Post-ATH bear market',s5t:'Same-week drawdown comparison',
@@ -139,16 +177,83 @@ h4:['Cycle','ATH','Bear low','Low date','Weeks to low','Drawdown'],h5:['Cycle','
 c1:'1st',c2:'2nd',c3:'3rd',c4:'4th',cn:['Cycle 1 \xb7 2012\u21922016','Cycle 2 \xb7 2016\u21922020','Cycle 3 \xb7 2020\u21922024','Cycle 4 \xb7 2024\u21922028 (daily)'],
 ax1:'Weeks (0 = ATH)',ay1:'% relative to ATH',ax2:'Weeks after ATH',ay2:'% drawdown from ATH',la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 NEXT HALVING',ln:'now',lw:'week',
 sf:'Fetching daily data from Binance...',so:'Connected \u2014 BTC <b>{0}</b> ({1}% from ATH)',sx:'Offline \u2014 last saved: <b>{0}</b>',sn:'No connection, no saved data.',rr:'auto-refresh 60s',ongoing:'ongoing',partial:'partial',
-ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 daily via Binance public API. Indicators calculated client-side.',ftr2:'Last update:',
+ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 daily via Binance public API. Indicators calculated client-side. Cycle analysis is historical pattern matching — not financial advice.',ftr2:'Last update:',
 cmp_title:'How to buy Bitcoin in Brazil',cmp_intro:'A comparison of the main ways to buy and sell Bitcoin in Brazil \u2014 from centralized exchanges to peer-to-peer.',cmp_visit:'Visit',
 sc_mayer:'Mayer Multiple',sc_200d:'Price vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'Weekly RSI',sc_fng:'Fear & Greed',
 sc_buy:'Buy zone',sc_sell:'Sell zone',sc_neutral:'Neutral',sc_fired:'Fired',sc_not:'Not fired',sc_oversold:'Oversold',sc_overbought:'Overbought',sc_fear:'Extreme fear',sc_greed:'Extreme greed',
 sc_realized:'Realized Price',sc_mvrv_z:'MVRV Z-Score',sc_nupl:'NUPL',sc_sopr:'SOPR',sc_above:'Above',sc_below:'Below',sc_capitulation:'Capitulation',sc_euphoria:'Euphoria',sc_loss:'Selling at loss',sc_profit:'Selling at profit',
 cp_title:'Indicators at week {0}',cp_hint:'Click any point on the chart above to compare indicators across all cycles at that week. Cycle 1 predates Binance data.',cp_na:'N/A (pre-2017)',cp_price:'Price',cp_dd:'Drawdown',
+m_low:'Cycle 4 low',m_200w:'200-week MA',
+an_asof:'research: Jul 12, 2026',
+s2n:'Shaded box = projected bottom window (weeks 50–60 × −55% to −70%). Dashed lines mark the buy-ladder band boundaries.',
+th_t:'Conclusion — projected bottom & buy plan',
+th_tip:'Synthesis of three independent frameworks: (1) halving-cycle timing (post-ATH duration + pre-halving distance), (2) drawdown projections adjusted for the diminishing-drawdown trend, (3) on-chain valuation (Realized Price, MVRV-Z, NUPL). Methodology detailed in the sections below.',
+th_win:'Bottom window',th_win_v:'Sep–Nov 2026',th_win_tip:'Weeks 50–60 after the ATH. Cycle 2 bottomed at week 52, Cycle 3 at week 54, Cycle 1 at week 59. Center of mass: October 2026.',
+th_core:'Core buy zone',th_core_tip:'Overlap of the diminishing-drawdown consensus (−65% ≈ $44K) and the on-chain floor (0.75–0.85× Realized Price). First probe buys start higher, at $52–57K (200W MA / Realized Price zone).',
+th_sig:'Bottom signals active',th_sig_tip:'Out of the 12-signal bottom checklist below. Prior cycle bottoms fired 8+ of these simultaneously.',
+th_p:'Price {0} is {1}% from the ATH but still above the Realized Price ({2}) — the average holder remains in profit, which has never marked a cycle bottom. Plan: probe 20% at $52–57K, core 45% at $44–50K, capitulation tranche 35% at $38–44K only if a 2nd crypto-native catalyst fires. Sub-$35K targets are discarded — they would require an unprecedented −50% break below the 200-week MA.',
+cvt_t:'Timing convergence — 4 independent methods',
+cvt_sum:'All four methods land on the same window: <b>Sep–Nov 2026, centered on October</b>. Agreement across independent methods is what gives the window its weight.',
+cvt:[
+{m:'Post-ATH duration',v:'~Oct 2026',d:'C2: 363d · C3: 376d after ATH → Oct 6, 2025 + ~368d',tip:'Both prior bear markets lasted ~12 months from ATH to bottom. Applied to the Oct 6, 2025 ATH, this points to early October 2026.'},
+{m:'Weeks to low (all cycles)',v:'week 52–59',d:'C1: 59 · C2: 52 · C3: 54 weeks → Oct–Nov 2026',tip:'Weeks from ATH to bear-market low in every prior cycle. Week 52 = Oct 5, week 59 = Nov 23, 2026.'},
+{m:'Pre-halving distance',v:'Oct–Nov 2026',d:'Bottoms form ~17–18 months before the next halving (~Apr 2028)',tip:'Dec 2018 bottom → May 2020 halving (17m). Nov 2022 bottom → Apr 2024 halving (17m). Apr 2028 − 17.5m = Oct–Nov 2026. Fully independent of the ATH date.'},
+{m:'Capitulation phase length',v:'Sep–Oct 2026',d:'C2: 176d · C3: 161d of capitulation; C4 entered it ~Jul 2026',tip:'The final capitulation phase lasted ~5–6 months in prior cycles, but C4 runs phases ~15% faster. If it began around the Jul 1 low ($58.6K), it completes in early autumn 2026.'}],
+cvp_t:'Price convergence — where the bands overlap',
+cvp_sum:'The naive historical projection (−78–84% = $20–28K) is rejected by every modern method. Overlap of all four: <b>core $44–50K, probes from $57K</b>.',
+cvp:[
+{m:'Diminishing-drawdown consensus',v:'~$44K (−65%)',d:'C1 −86% → C2 −84% → C3 −78% → C4 est. −55…−77%',tip:'Each cycle bottoms at a shallower drawdown as market cap grows, and the reduction is accelerating (2pp → 6.6pp per cycle). Four projection methods (linear, exponential, log-regression, mcap-adjusted) give $29–57K with consensus −65% ≈ $44K.'},
+{m:'On-chain floor',v:'{0}',d:'0.75–0.85 × Realized Price ({1})',tip:'Cycle bottoms print below the network’s aggregate cost basis: NUPL < 0, MVRV-Z ≈ 0, price at 0.75–0.85× Realized Price (2018: 0.76× · 2022: 0.83×). This card updates live from data.json.'},
+{m:'200-week MA',v:'{0}',d:'2018 bottomed AT it · 2022 wicked −37% below',tip:'The 200W MA has contained every bear-market low since 2015. Calculated live from Binance daily closes (1,400 days). A −50% break below it has never happened — which is why sub-$35K targets are discarded.'},
+{m:'Polymarket implied distribution',v:'$40–55K',d:'P(<$55K)=77% · P(<$50K)≈57% · P(<$40K)=30%',tip:'Prediction-market odds for BTC price levels in 2026 (as of Jul 2026). The market concentrates the bottom between $40K and $55K and gives only 30% to a sub-$40K print.'}],
+bs_t:'Bottom checklist — 12 signals',
+bs_h:['Signal','Current reading','Bottom threshold','Status'],
+bs_n:'Rows marked LIVE recompute from Binance / data.json on every load. The rest come from the Jul 12, 2026 research snapshot and need periodic manual refresh. Prior cycle bottoms fired 8+ of the 12 simultaneously.',
+bs_on:'ACTIVE',bs_part:'PARTIAL',bs_off:'NOT YET',
+bs:[
+{k:'rp',n:'Price below Realized Price',th:'Spot < Realized Price',r:'—',tip:'Realized Price is the average on-chain cost basis of all coins. Every cycle bottom printed below it — the average holder must be underwater before final capitulation.'},
+{k:'nupl',n:'NUPL below zero',th:'NUPL < 0',r:'—',tip:'Net Unrealized Profit/Loss. Below 0 the average holder is at a loss — the classic capitulation zone that marked 2015, 2018 and 2022 bottoms.'},
+{k:'mvrv',n:'MVRV Z-Score near zero',th:'< 0.5',r:'—',tip:'Standard deviations between market cap and realized cap. Bottoms printed at Z ≈ 0 or below (2018: −0.3, 2022: −0.2).'},
+{k:'sopr',n:'SOPR below 1 sustained',th:'< 1 for weeks',r:'—',tip:'Spent Output Profit Ratio: below 1 means coins move at a loss. Sustained sub-1 SOPR = ongoing capitulation.'},
+{k:'ma200w',n:'Price at/below 200-week MA',th:'≤ 200W MA',r:'—',tip:'Every prior bottom formed at (2018) or below (2022, briefly −37%) the 200W MA. Computed live from Binance history.'},
+{k:'dd55',n:'Drawdown beyond −55%',th:'≤ −55% from ATH',r:'—',tip:'The trend-adjusted optimistic bottom target. The Jul 1 low (−54%) came within a whisker; a sustained close below ~$57K activates it.'},
+{k:'puell',n:'Puell Multiple in bottom zone',th:'< 0.5',r:'0.75 (Jun 22, 2026)',st:'part',tip:'Daily miner revenue vs its 365-day average. Below 0.5 = deep miner-income stress, historically the bottom zone. At 0.75 it is stressed but not there yet.'},
+{k:'hash',n:'Hash Ribbons buy cross',th:'30d hashrate MA > 60d after capitulation',r:'Capitulation confirmed (one of the longest on record; production cost ~$87K vs price $64K); buy cross unconfirmed',st:'part',tip:'Miner capitulation ending (hashrate 30d MA crossing back above 60d) is among the most reliable bottom signals. 2026 sources conflict on whether the cross has fired.'},
+{k:'lth',n:'Long-term holders accumulating',th:'LTH supply rising',r:'Record 16.64M BTC (~83% of supply), +2M BTC this bear',st:'on',tip:'Long-term holder supply at record highs = smart money is absorbing the sell-off. One of the strongest accumulation signals (May 2026, Glassnode via CoinDesk).'},
+{k:'resv',n:'Exchange reserves falling + SSR low',th:'Multi-month reserve decline',r:'~2.4M BTC on exchanges, falling; whales +270K BTC/mo; SSR at multi-year low',st:'on',tip:'Coins leaving exchanges = accumulation into cold storage. Low Stablecoin Supply Ratio = record dry powder ($300B+ stablecoins) ready to buy.'},
+{k:'cbp',n:'Coinbase Premium positive',th:'Sustained > 0',r:'−0.07%, negative 50 straight days (record streak)',st:'off',tip:'Coinbase price minus Binance price. Positive = US institutional buying leads. The record negative streak means the US bid has not returned — key missing ingredient.'},
+{k:'fed',n:'Liquidity turn (Fed + DXY)',th:'Cuts signaled + DXY falling',r:'No 2026 cuts priced (tariff inflation); DXY ~101 rising',st:'off',tip:'Cycle bottoms coincide with the macro liquidity turn. As of Jul 2026 the Fed is hawkish and the dollar is strengthening — the turn has not begun.'}],
+lad_t:'Buy ladder — staged accumulation plan',
+lad_h:['Tranche','Price band','Drawdown','Allocation','Confirmation'],
+lad:[
+{t:'Probe',b:'$52K–57K',dd:'−55…−59%',a:'20%',c:'Sustained close below $57K (200W MA / Realized Price zone)'},
+{t:'Core',b:'$44K–50K',dd:'−60…−65%',a:'45%',c:'NUPL < 0 · MVRV-Z < 0.5 · Puell < 0.5 · Coinbase Premium turning'},
+{t:'Capitulation',b:'$38K–44K',dd:'−65…−70%',a:'35%',c:'Only on a 2nd crypto-native catalyst (exchange failure, depeg, >$500M exploit) + funding z < −2'},
+{t:'Discarded',b:'< $35K',dd:'< −72%',a:'0%',c:'Would require −50% below the 200W MA — unprecedented in BTC history'}],
+lad_now:'◀ current price',
+trig_t:'Aggressive-buy triggers — override the ladder at any price',
+trig_n:'When all four fire together, prior bottoms were already in: buy without waiting for lower bands.',
+trig:[
+{b:'Coinbase Premium flips positive',d:'sustained — the US institutional bid returns. Jul 2026: −0.07%, record 50-day negative streak.'},
+{b:'ETF inflows 3+ weeks',d:'consecutive net inflows. Jul 2026: the record 8-week outflow streak ($5.4B YTD) just flipped to +$510M in 3 sessions — watch for follow-through.'},
+{b:'Hash Ribbons buy cross',d:'30d hashrate MA back above 60d after one of the longest miner capitulations on record.'},
+{b:'Fed pivot + DXY rolling over',d:'rate cuts signaled and the dollar weakening. Jul 2026: no cuts priced, DXY rising — the liquidity turn is the missing piece.'}],
+mac_t:'Macro & flow context',
+mac_h:['Factor','Reading (Jul 2026)','Effect on bottom'],
+mac_head:'Headwind',mac_tail:'Tailwind',mac_mix:'Mixed',
+mac:[
+{f:'Fed policy',r:'3.50–3.75%; no cuts priced for 2026 (tariff inflation); futures drift toward ~4%',e:'h',tip:'Cycle bottoms historically coincide with the liquidity turn: Fed easing + falling dollar. Neither exists yet — consistent with a bottom later in 2026, not now.'},
+{f:'US dollar (DXY)',r:'~101 and rising; year-end forecasts ~103.6',e:'h'},
+{f:'Trade war',r:'USMCA not renewed (Jul 1 deadline missed); EU deal at 15%; new digital-tax tariff threats',e:'h'},
+{f:'US recession odds',r:'Polymarket ~11% (down from 30% in April); NY Fed model 16%',e:'m',tip:'Falling recession risk supports risk assets broadly, but also removes the Fed’s urgency to cut rates.'},
+{f:'Spot ETF flows',r:'Record 8-week outflow streak reversed: +$510M in 3 sessions; YTD still −$5.4B',e:'t'},
+{f:'Options positioning',r:'Deribit OI 58.5% calls; max pain rises to ~$75K for Sep–Dec expiries',e:'t'},
+{f:'2nd crypto-native catalyst',r:'Not fired. C2 needed 3 shocks; C3 needed 3 (Luna → 3AC → FTX); C4 has had only the tariff shock',e:'m',tip:'Every prior bottom required 2–3 cascading catalysts, the later ones crypto-native (exchange failure, stablecoin depeg, major exploit). Its absence is the main remaining downside risk — and the trigger condition for the capitulation tranche.'},
+{f:'Equities divergence',r:'S&P at ATHs (+15% in Q2) while BTC fell −14% — idiosyncratic crypto weakness',e:'h'}],
 cmp_cards:[{name:'Binance',type:'Centralized exchange',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'Full KYC required',fees:'~0.1% + withdrawal fees',pix_speed:'Minutes to hours',assets:'350+ cryptocurrencies',extra:'Futures, margin, staking, earn',privacy:'Low',best:'High-volume trading, altcoins, DeFi access'}},{name:'Mercado Bitcoin',type:'Centralized exchange',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'Full KYC (CPF required)',fees:'~1\u20132% + withdrawal fees',pix_speed:'Minutes to hours',assets:'200+ cryptocurrencies',extra:'Tokenized assets, fixed income',privacy:'Low',best:'Regulated Brazilian platform, diverse products'}},{name:'B2PIX',type:'P2P BTC/PIX platform',url:'https://b2pix.org/',rows:{custody:'Non-custodial (your keys)',kyc:'No KYC',fees:'~1\u20132% spread',pix_speed:'Instant',assets:'Bitcoin (sBTC on Stacks)',extra:'Pay bills & ecommerce with BTC via PIX',privacy:'High',best:'Self-custody, privacy, BTC payments'}}],
 cmp_thead:['Feature','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custody','KYC','Fees','PIX speed','Supported assets','Additional services','Privacy','Best for'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Best suited for experienced traders who need access to hundreds of altcoins, derivatives, and DeFi protocols. Ideal for high-volume operations where the low trading fee (0.1%) makes a significant difference.'},{name:'Mercado Bitcoin',text:'The most established Brazilian exchange, regulated and with a wide range of products beyond crypto, including tokenized assets and fixed income. A good choice for those who want everything in one regulated platform.'},{name:'B2PIX',text:'The only non-custodial option in this comparison \u2014 your Bitcoin stays in your wallet at all times, with no account creation or identity verification. Also the only platform that lets you pay PIX bills and make online purchases directly with BTC.'}]},
-pt:{subtitle:'Dashboard auto-atualizado \u2014 resolu\u00e7\u00e3o di\u00e1ria via Binance API',m_price:'Pre\u00e7o atual',m_ath:'ATH ciclo 4',m_dd:'Drawdown da ATH',m_wk:'Semanas da ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas at\u00e9 halving',
+pt:{subtitle:'Relat\u00f3rio de fundo de ciclo \u2014 dados ao vivo via Binance API + an\u00e1lise de converg\u00eancia dos halvings',m_price:'Pre\u00e7o atual',m_ath:'ATH ciclo 4',m_dd:'Drawdown da ATH',m_wk:'Semanas da ATH',m_nh:'Pr\u00f3ximo halving',m_wh:'Semanas at\u00e9 halving',
 sct:'Scorecard de posi\u00e7\u00e3o no ciclo',scn:'Indicadores de pre\u00e7o (Mayer Multiple, Pi Cycle, 200D MA, RSI) calculados ao vivo via Binance. Sentimento via alternative.me. M\u00e9tricas on-chain (Pre\u00e7o Realizado, MVRV Z-Score, NUPL, SOPR) atualizadas diariamente via BGeometrics. Verde = historicamente favor\u00e1vel para compra. Vermelho = favor\u00e1vel para venda.',
 s1t:'Ciclos sobrepostos \u2014 halving a halving (alinhados pela ATH)',s1n:'Eixo X: semanas relativas \u00e0 ATH (0 = topo). Ciclo 4 usa dados di\u00e1rios. Atualiza a cada 60s.',
 s2t:'Drawdown p\u00f3s-ATH \u2014 comparativo na mesma semana',s3t:'Dados por halving',s4t:'Bear market p\u00f3s-ATH',s5t:'Comparativo de drawdown na semana atual',
@@ -157,12 +262,79 @@ h4:['Ciclo','ATH','M\u00ednima','Data da m\u00ednima','Sem. at\u00e9 m\u00ednima
 c1:'1\u00ba',c2:'2\u00ba',c3:'3\u00ba',c4:'4\u00ba',cn:['Ciclo 1 \xb7 2012\u21922016','Ciclo 2 \xb7 2016\u21922020','Ciclo 3 \xb7 2020\u21922024','Ciclo 4 \xb7 2024\u21922028 (di\u00e1rio)'],
 ax1:'Semanas (0 = ATH)',ay1:'% em rela\u00e7\u00e3o \u00e0 ATH',ax2:'Semanas ap\u00f3s ATH',ay2:'% drawdown da ATH',la:'ATH',ll:'HALVING \u2192 ATH',lr:'ATH \u2192 PR\u00d3XIMO HALVING',ln:'hoje',lw:'sem.',
 sf:'Buscando dados di\u00e1rios da Binance...',so:'Conectado \u2014 BTC <b>{0}</b> ({1}% da ATH)',sx:'Offline \u2014 \u00faltimo pre\u00e7o: <b>{0}</b>',sn:'Sem conex\u00e3o e sem dados.',rr:'atualiza\u00e7\u00e3o a cada 60s',ongoing:'em andamento',partial:'parcial',
-ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 di\u00e1rio via API p\u00fablica da Binance. Indicadores calculados no cliente.',ftr2:'\u00daltima atualiza\u00e7\u00e3o:',
+ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 di\u00e1rio via API p\u00fablica da Binance. Indicadores calculados no cliente. An\u00e1lise de ciclos \u00e9 correspond\u00eancia de padr\u00f5es hist\u00f3ricos \u2014 n\u00e3o \u00e9 recomenda\u00e7\u00e3o de investimento.',ftr2:'\u00daltima atualiza\u00e7\u00e3o:',
 cmp_title:'Como comprar Bitcoin no Brasil',cmp_intro:'Compara\u00e7\u00e3o dos principais meios de compra e venda de Bitcoin no Brasil \u2014 de exchanges centralizadas ao peer-to-peer.',cmp_visit:'Acessar',
 sc_mayer:'Mayer Multiple',sc_200d:'Pre\u00e7o vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
 sc_buy:'Zona de compra',sc_sell:'Zona de venda',sc_neutral:'Neutro',sc_fired:'Disparou',sc_not:'N\u00e3o disparou',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Medo extremo',sc_greed:'Gan\u00e2ncia extrema',
 sc_realized:'Pre\u00e7o Realizado',sc_mvrv_z:'MVRV Z-Score',sc_nupl:'NUPL',sc_sopr:'SOPR',sc_above:'Acima',sc_below:'Abaixo',sc_capitulation:'Capitula\u00e7\u00e3o',sc_euphoria:'Euforia',sc_loss:'Vendendo com preju\u00edzo',sc_profit:'Vendendo com lucro',
 cp_title:'Indicadores na semana {0}',cp_hint:'Clique em qualquer ponto no gr\u00e1fico acima para comparar indicadores de todos os ciclos naquela semana. Ciclo 1 \u00e9 anterior aos dados da Binance.',cp_na:'N/A (pr\u00e9-2017)',cp_price:'Pre\u00e7o',cp_dd:'Drawdown',
+m_low:'M\u00ednima ciclo 4',m_200w:'M\u00e9dia 200 semanas',
+an_asof:'pesquisa: 12 jul 2026',
+s2n:'Caixa sombreada = janela projetada do fundo (semanas 50\u201360 \u00d7 \u221255% a \u221270%). Linhas tracejadas marcam as faixas da escada de compra.',
+th_t:'Conclus\u00e3o \u2014 fundo projetado e plano de compra',
+th_tip:'S\u00edntese de tr\u00eas frameworks independentes: (1) timing do ciclo de halving (dura\u00e7\u00e3o p\u00f3s-ATH + dist\u00e2ncia pr\u00e9-halving), (2) proje\u00e7\u00f5es de drawdown ajustadas pela tend\u00eancia de drawdowns decrescentes, (3) valua\u00e7\u00e3o on-chain (Pre\u00e7o Realizado, MVRV-Z, NUPL). Metodologia detalhada nas se\u00e7\u00f5es abaixo.',
+th_win:'Janela do fundo',th_win_v:'Set\u2013Nov 2026',th_win_tip:'Semanas 50\u201360 ap\u00f3s a ATH. Ciclo 2 fez fundo na semana 52, Ciclo 3 na 54, Ciclo 1 na 59. Centro de massa: outubro de 2026.',
+th_core:'Zona n\u00facleo de compra',th_core_tip:'Sobreposi\u00e7\u00e3o do consenso de drawdown decrescente (\u221265% \u2248 $44K) com o piso on-chain (0,75\u20130,85\u00d7 Pre\u00e7o Realizado). As primeiras sondagens come\u00e7am mais acima, em $52\u201357K (zona da 200W MA / Pre\u00e7o Realizado).',
+th_sig:'Sinais de fundo ativos',th_sig_tip:'Do checklist de 12 sinais abaixo. Fundos de ciclos anteriores dispararam 8+ deles simultaneamente.',
+th_p:'O pre\u00e7o {0} est\u00e1 a {1}% da ATH mas ainda acima do Pre\u00e7o Realizado ({2}) \u2014 o detentor m\u00e9dio segue no lucro, o que nunca marcou um fundo de ciclo. Plano: sondar 20% em $52\u201357K, n\u00facleo 45% em $44\u201350K, tranche de capitula\u00e7\u00e3o 35% em $38\u201344K apenas se um 2\u00ba catalisador cripto-nativo disparar. Alvos abaixo de $35K foram descartados \u2014 exigiriam um rompimento in\u00e9dito de \u221250% abaixo da m\u00e9dia de 200 semanas.',
+cvt_t:'Converg\u00eancia de tempo \u2014 4 m\u00e9todos independentes',
+cvt_sum:'Os quatro m\u00e9todos apontam para a mesma janela: <b>set\u2013nov 2026, centro em outubro</b>. A concord\u00e2ncia entre m\u00e9todos independentes \u00e9 o que d\u00e1 peso \u00e0 janela.',
+cvt:[
+{m:'Dura\u00e7\u00e3o p\u00f3s-ATH',v:'~Out 2026',d:'C2: 363d \u00b7 C3: 376d ap\u00f3s a ATH \u2192 6 out 2025 + ~368d',tip:'Os dois bear markets anteriores duraram ~12 meses da ATH ao fundo. Aplicado \u00e0 ATH de 6 out 2025, aponta para o in\u00edcio de outubro de 2026.'},
+{m:'Semanas at\u00e9 a m\u00ednima (todos os ciclos)',v:'semana 52\u201359',d:'C1: 59 \u00b7 C2: 52 \u00b7 C3: 54 semanas \u2192 out\u2013nov 2026',tip:'Semanas da ATH at\u00e9 a m\u00ednima do bear market em todos os ciclos anteriores. Semana 52 = 5 out, semana 59 = 23 nov 2026.'},
+{m:'Dist\u00e2ncia pr\u00e9-halving',v:'Out\u2013Nov 2026',d:'Fundos se formam ~17\u201318 meses antes do pr\u00f3ximo halving (~abr 2028)',tip:'Fundo dez 2018 \u2192 halving mai 2020 (17m). Fundo nov 2022 \u2192 halving abr 2024 (17m). Abr 2028 \u2212 17,5m = out\u2013nov 2026. Totalmente independente da data da ATH.'},
+{m:'Dura\u00e7\u00e3o da fase de capitula\u00e7\u00e3o',v:'Set\u2013Out 2026',d:'C2: 176d \u00b7 C3: 161d de capitula\u00e7\u00e3o; C4 entrou nela ~jul 2026',tip:'A fase final de capitula\u00e7\u00e3o durou ~5\u20136 meses nos ciclos anteriores, mas o C4 roda as fases ~15% mais r\u00e1pido. Se come\u00e7ou perto da m\u00ednima de 1\u00ba jul ($58,6K), completa no in\u00edcio do outono de 2026.'}],
+cvp_t:'Converg\u00eancia de pre\u00e7o \u2014 onde as faixas se sobrep\u00f5em',
+cvp_sum:'A proje\u00e7\u00e3o hist\u00f3rica ing\u00eanua (\u221278\u201384% = $20\u201328K) \u00e9 rejeitada por todos os m\u00e9todos modernos. Sobreposi\u00e7\u00e3o dos quatro: <b>n\u00facleo $44\u201350K, sondagens a partir de $57K</b>.',
+cvp:[
+{m:'Consenso de drawdown decrescente',v:'~$44K (\u221265%)',d:'C1 \u221286% \u2192 C2 \u221284% \u2192 C3 \u221278% \u2192 C4 est. \u221255\u2026\u221277%',tip:'Cada ciclo faz fundo com drawdown mais raso conforme o market cap cresce, e a redu\u00e7\u00e3o est\u00e1 acelerando (2pp \u2192 6,6pp por ciclo). Quatro m\u00e9todos de proje\u00e7\u00e3o (linear, exponencial, regress\u00e3o log, ajuste por mcap) d\u00e3o $29\u201357K com consenso em \u221265% \u2248 $44K.'},
+{m:'Piso on-chain',v:'{0}',d:'0,75\u20130,85 \u00d7 Pre\u00e7o Realizado ({1})',tip:'Fundos de ciclo imprimem abaixo do custo m\u00e9dio agregado da rede: NUPL < 0, MVRV-Z \u2248 0, pre\u00e7o a 0,75\u20130,85\u00d7 o Pre\u00e7o Realizado (2018: 0,76\u00d7 \u00b7 2022: 0,83\u00d7). Este card atualiza ao vivo via data.json.'},
+{m:'M\u00e9dia de 200 semanas',v:'{0}',d:'2018 fez fundo NELA \u00b7 2022 furou \u221237% abaixo no wick',tip:'A 200W MA conteve todas as m\u00ednimas de bear market desde 2015. Calculada ao vivo dos fechamentos di\u00e1rios da Binance (1.400 dias). Um rompimento de \u221250% abaixo dela nunca aconteceu \u2014 por isso alvos abaixo de $35K foram descartados.'},
+{m:'Distribui\u00e7\u00e3o impl\u00edcita do Polymarket',v:'$40\u201355K',d:'P(<$55K)=77% \u00b7 P(<$50K)\u224857% \u00b7 P(<$40K)=30%',tip:'Odds do mercado de previs\u00f5es para n\u00edveis de pre\u00e7o do BTC em 2026 (jul 2026). O mercado concentra o fundo entre $40K e $55K e d\u00e1 apenas 30% para um fundo abaixo de $40K.'}],
+bs_t:'Checklist de fundo \u2014 12 sinais',
+bs_h:['Sinal','Leitura atual','Gatilho de fundo','Status'],
+bs_n:'Linhas marcadas LIVE recalculam via Binance / data.json a cada carregamento. As demais v\u00eam do snapshot de pesquisa de 12 jul 2026 e precisam de atualiza\u00e7\u00e3o manual peri\u00f3dica. Fundos anteriores dispararam 8+ dos 12 simultaneamente.',
+bs_on:'ATIVO',bs_part:'PARCIAL',bs_off:'AINDA N\u00c3O',
+bs:[
+{k:'rp',n:'Pre\u00e7o abaixo do Pre\u00e7o Realizado',th:'Spot < Pre\u00e7o Realizado',r:'\u2014',tip:'O Pre\u00e7o Realizado \u00e9 o custo m\u00e9dio on-chain de todas as moedas. Todo fundo de ciclo imprimiu abaixo dele \u2014 o detentor m\u00e9dio precisa estar no preju\u00edzo antes da capitula\u00e7\u00e3o final.'},
+{k:'nupl',n:'NUPL abaixo de zero',th:'NUPL < 0',r:'\u2014',tip:'Net Unrealized Profit/Loss. Abaixo de 0 o detentor m\u00e9dio est\u00e1 no preju\u00edzo \u2014 a cl\u00e1ssica zona de capitula\u00e7\u00e3o que marcou os fundos de 2015, 2018 e 2022.'},
+{k:'mvrv',n:'MVRV Z-Score perto de zero',th:'< 0,5',r:'\u2014',tip:'Desvios-padr\u00e3o entre market cap e realized cap. Fundos imprimiram em Z \u2248 0 ou abaixo (2018: \u22120,3, 2022: \u22120,2).'},
+{k:'sopr',n:'SOPR abaixo de 1 sustentado',th:'< 1 por semanas',r:'\u2014',tip:'Spent Output Profit Ratio: abaixo de 1 significa moedas sendo movidas com preju\u00edzo. SOPR sub-1 sustentado = capitula\u00e7\u00e3o em curso.'},
+{k:'ma200w',n:'Pre\u00e7o na/abaixo da 200W MA',th:'\u2264 200W MA',r:'\u2014',tip:'Todo fundo anterior se formou na (2018) ou abaixo (2022, brevemente \u221237%) da 200W MA. Calculado ao vivo do hist\u00f3rico da Binance.'},
+{k:'dd55',n:'Drawdown al\u00e9m de \u221255%',th:'\u2264 \u221255% da ATH',r:'\u2014',tip:'O alvo otimista ajustado pela tend\u00eancia. A m\u00ednima de 1\u00ba jul (\u221254%) chegou a um triz; um fechamento sustentado abaixo de ~$57K ativa o sinal.'},
+{k:'puell',n:'Puell Multiple na zona de fundo',th:'< 0,5',r:'0,75 (22 jun 2026)',st:'part',tip:'Receita di\u00e1ria dos mineradores vs sua m\u00e9dia de 365 dias. Abaixo de 0,5 = estresse profundo de renda mineradora, historicamente a zona de fundo. Em 0,75 est\u00e1 estressado mas ainda n\u00e3o l\u00e1.'},
+{k:'hash',n:'Hash Ribbons buy cross',th:'MA 30d do hashrate > 60d ap\u00f3s capitula\u00e7\u00e3o',r:'Capitula\u00e7\u00e3o confirmada (uma das mais longas j\u00e1 registradas; custo de produ\u00e7\u00e3o ~$87K vs pre\u00e7o $64K); cross de recompra n\u00e3o confirmado',st:'part',tip:'O fim da capitula\u00e7\u00e3o dos mineradores (MA 30d do hashrate cruzando de volta acima da 60d) est\u00e1 entre os sinais de fundo mais confi\u00e1veis. Fontes de 2026 divergem sobre se o cross j\u00e1 disparou.'},
+{k:'lth',n:'Holders de longo prazo acumulando',th:'Supply LTH subindo',r:'Recorde de 16,64M BTC (~83% do supply), +2M BTC neste bear',st:'on',tip:'Supply dos holders de longo prazo em m\u00e1ximas hist\u00f3ricas = smart money absorvendo a venda. Um dos sinais de acumula\u00e7\u00e3o mais fortes (mai 2026, Glassnode via CoinDesk).'},
+{k:'resv',n:'Reservas em exchanges caindo + SSR baixo',th:'Queda de reservas por v\u00e1rios meses',r:'~2,4M BTC em exchanges, caindo; baleias +270K BTC/m\u00eas; SSR em m\u00ednima de v\u00e1rios anos',st:'on',tip:'Moedas saindo das exchanges = acumula\u00e7\u00e3o em cold storage. SSR baixo = p\u00f3lvora seca recorde ($300B+ em stablecoins) pronta para comprar.'},
+{k:'cbp',n:'Coinbase Premium positivo',th:'Sustentado > 0',r:'\u22120,07%, negativo h\u00e1 50 dias seguidos (streak recorde)',st:'off',tip:'Pre\u00e7o na Coinbase menos pre\u00e7o na Binance. Positivo = compra institucional dos EUA liderando. O streak negativo recorde significa que o bid americano n\u00e3o voltou \u2014 ingrediente-chave ausente.'},
+{k:'fed',n:'Virada de liquidez (Fed + DXY)',th:'Cortes sinalizados + DXY caindo',r:'Nenhum corte precificado p/ 2026 (infla\u00e7\u00e3o de tarifas); DXY ~101 subindo',st:'off',tip:'Fundos de ciclo coincidem com a virada de liquidez macro. Em jul 2026 o Fed est\u00e1 hawkish e o d\u00f3lar fortalecendo \u2014 a virada n\u00e3o come\u00e7ou.'}],
+lad_t:'Escada de compra \u2014 plano de acumula\u00e7\u00e3o em degraus',
+lad_h:['Tranche','Faixa de pre\u00e7o','Drawdown','Aloca\u00e7\u00e3o','Confirma\u00e7\u00e3o'],
+lad:[
+{t:'Sondagem',b:'$52K\u201357K',dd:'\u221255\u2026\u221259%',a:'20%',c:'Fechamento sustentado abaixo de $57K (zona 200W MA / Pre\u00e7o Realizado)'},
+{t:'N\u00facleo',b:'$44K\u201350K',dd:'\u221260\u2026\u221265%',a:'45%',c:'NUPL < 0 \u00b7 MVRV-Z < 0,5 \u00b7 Puell < 0,5 \u00b7 Coinbase Premium virando'},
+{t:'Capitula\u00e7\u00e3o',b:'$38K\u201344K',dd:'\u221265\u2026\u221270%',a:'35%',c:'Apenas com 2\u00ba catalisador cripto-nativo (quebra de exchange, depeg, exploit >$500M) + funding z < \u22122'},
+{t:'Descartado',b:'< $35K',dd:'< \u221272%',a:'0%',c:'Exigiria \u221250% abaixo da 200W MA \u2014 sem precedente na hist\u00f3ria do BTC'}],
+lad_now:'\u25c0 pre\u00e7o atual',
+trig_t:'Gatilhos de compra agressiva \u2014 ignoram a escada em qualquer pre\u00e7o',
+trig_n:'Quando os quatro disparam juntos, os fundos anteriores j\u00e1 estavam feitos: compre sem esperar faixas mais baixas.',
+trig:[
+{b:'Coinbase Premium vira positivo',d:'de forma sustentada \u2014 o bid institucional americano voltou. Jul 2026: \u22120,07%, streak negativo recorde de 50 dias.'},
+{b:'Entradas de ETF por 3+ semanas',d:'consecutivas. Jul 2026: o streak recorde de 8 semanas de sa\u00eddas ($5,4B no ano) acabou de virar +$510M em 3 sess\u00f5es \u2014 aguardar continuidade.'},
+{b:'Hash Ribbons buy cross',d:'MA 30d do hashrate de volta acima da 60d ap\u00f3s uma das capitula\u00e7\u00f5es de mineradores mais longas j\u00e1 registradas.'},
+{b:'Piv\u00f4 do Fed + DXY virando',d:'cortes sinalizados e d\u00f3lar enfraquecendo. Jul 2026: nenhum corte precificado, DXY subindo \u2014 a virada de liquidez \u00e9 a pe\u00e7a que falta.'}],
+mac_t:'Contexto macro e de fluxos',
+mac_h:['Fator','Leitura (jul 2026)','Efeito no fundo'],
+mac_head:'Vento contra',mac_tail:'Vento a favor',mac_mix:'Misto',
+mac:[
+{f:'Pol\u00edtica do Fed',r:'3,50\u20133,75%; nenhum corte precificado p/ 2026 (infla\u00e7\u00e3o de tarifas); futuros derivam para ~4%',e:'h',tip:'Fundos de ciclo coincidem historicamente com a virada de liquidez: Fed afrouxando + d\u00f3lar caindo. Nenhum dos dois existe ainda \u2014 consistente com fundo mais adiante em 2026, n\u00e3o agora.'},
+{f:'D\u00f3lar (DXY)',r:'~101 e subindo; proje\u00e7\u00f5es de fim de ano ~103,6',e:'h'},
+{f:'Guerra comercial',r:'USMCA n\u00e3o renovado (prazo de 1\u00ba jul perdido); acordo com a UE a 15%; novas amea\u00e7as de tarifas sobre impostos digitais',e:'h'},
+{f:'Odds de recess\u00e3o nos EUA',r:'Polymarket ~11% (queda de 30% em abril); modelo do NY Fed 16%',e:'m',tip:'Risco de recess\u00e3o caindo apoia ativos de risco em geral, mas tamb\u00e9m tira a urg\u00eancia do Fed em cortar juros.'},
+{f:'Fluxos de ETF spot',r:'Streak recorde de 8 semanas de sa\u00eddas revertido: +$510M em 3 sess\u00f5es; ano ainda em \u2212$5,4B',e:'t'},
+{f:'Posicionamento em op\u00e7\u00f5es',r:'OI na Deribit 58,5% calls; max pain sobe para ~$75K nos vencimentos set\u2013dez',e:'t'},
+{f:'2\u00ba catalisador cripto-nativo',r:'N\u00e3o disparou. C2 precisou de 3 choques; C3 de 3 (Luna \u2192 3AC \u2192 FTX); C4 teve s\u00f3 o choque das tarifas',e:'m',tip:'Todo fundo anterior exigiu 2\u20133 catalisadores em cascata, os \u00faltimos cripto-nativos (quebra de exchange, depeg de stablecoin, exploit grande). Sua aus\u00eancia \u00e9 o principal risco de queda restante \u2014 e a condi\u00e7\u00e3o de gatilho da tranche de capitula\u00e7\u00e3o.'},
+{f:'Diverg\u00eancia com a bolsa',r:'S&P em ATHs (+15% no Q2) enquanto o BTC caiu \u221214% \u2014 fraqueza idiossincr\u00e1tica de cripto',e:'h'}],
 cmp_cards:[{name:'Binance',type:'Exchange centralizada',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obrigat\u00f3rio',fees:'~0,1% + taxa de saque',pix_speed:'Minutos a horas',assets:'350+ criptomoedas',extra:'Futuros, margem, staking, earn',privacy:'Baixa',best:'Trading de alto volume, altcoins, acesso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizada',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obrigat\u00f3rio)',fees:'~1\u20132% + taxa de saque',pix_speed:'Minutos a horas',assets:'200+ criptomoedas',extra:'Ativos tokenizados, renda fixa',privacy:'Baixa',best:'Plataforma brasileira regulada, produtos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'N\u00e3o-custodial (suas chaves)',kyc:'Sem KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e2neo',assets:'Bitcoin (sBTC na Stacks)',extra:'Pague boletos e e-commerce com BTC via PIX',privacy:'Alta',best:'Autocust\u00f3dia, privacidade, pagamentos com BTC'}}],
 cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Cust\u00f3dia','KYC','Taxas','Velocidade PIX','Ativos suportados','Servi\u00e7os adicionais','Privacidade','Melhor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Mais indicada para traders experientes que precisam acessar centenas de altcoins, derivativos e protocolos DeFi. Ideal para opera\u00e7\u00f5es de alto volume, onde a taxa baixa (0,1%) faz diferen\u00e7a significativa.'},{name:'Mercado Bitcoin',text:'A exchange brasileira mais estabelecida, regulada e com uma ampla gama de produtos al\u00e9m de cripto, incluindo ativos tokenizados e renda fixa. Boa escolha para quem quer tudo em uma plataforma regulamentada.'},{name:'B2PIX',text:'A \u00fanica op\u00e7\u00e3o n\u00e3o-custodial desta compara\u00e7\u00e3o \u2014 seu Bitcoin fica na sua carteira o tempo todo, sem criar conta e sem verifica\u00e7\u00e3o de identidade. Tamb\u00e9m a \u00fanica que permite pagar boletos e fazer compras online diretamente com BTC.'}]},
@@ -354,7 +526,8 @@ async function fetchOnChainData(){
       realized_price: d.realized_price?.realizedPrice ?? null,
       mvrv_zscore: d.mvrv_zscore?.mvrv ?? null,
       nupl: d.nupl?.nupl ?? null,
-      sopr: d.sopr?.sopr ?? null
+      sopr: d.sopr?.sopr ?? null,
+      puell: typeof d.puell==='number' ? d.puell : (d.puell?.puellMultiple ?? d.puell?.puell ?? null)
     };
     return onChainData;
   }catch(e){return null}
@@ -410,6 +583,67 @@ function renderScorecard(ind,fng){
   });
 }
 
+// ============ BOTTOM ANALYSIS (research snapshot: 2026-07-12) ============
+function tip(s){return s?'<span class="tip" tabindex="0">?<span class="tt">'+s+'</span></span>':''}
+function ma200w(){if(!allDailyCloses||allDailyCloses.length<1400)return null;const p=allDailyCloses.slice(-1400);return p.reduce((a,b)=>a+b[1],0)/1400}
+const LAD_BANDS=[[52000,57000],[44000,50000],[38000,44000],[0,35000]];
+function renderAnalysis(){
+  if(!document.getElementById('thesis'))return;
+  const rp=onChainData?.realized_price||null,m2=ma200w();
+  const dd=Math.round(((lastPr/ATH)-1)*1000)/10;
+  // live signal resolution (falls back to research snapshot when data missing)
+  const live={};
+  if(rp){const r=lastPr/rp;live.rp={v:$(lastPr)+' vs '+$(Math.round(rp))+' ('+(r>=1?'+':'')+Math.round((r-1)*100)+'%)',st:r<1?'on':r<1.05?'part':'off'}}
+  if(onChainData?.nupl!=null){const v=onChainData.nupl;live.nupl={v:v.toFixed(3),st:v<0?'on':v<0.1?'part':'off'}}
+  if(onChainData?.mvrv_zscore!=null){const v=onChainData.mvrv_zscore;live.mvrv={v:v.toFixed(2),st:v<0.5?'on':v<1?'part':'off'}}
+  if(onChainData?.sopr!=null){const v=onChainData.sopr;live.sopr={v:v.toFixed(4),st:v<0.99?'on':v<1.005?'part':'off'}}
+  if(onChainData?.puell!=null){const v=onChainData.puell;live.puell={v:v.toFixed(2),st:v<0.5?'on':v<0.9?'part':'off'}}
+  if(m2){const p=Math.round((lastPr/m2-1)*100);live.ma200w={v:$(m2)+' ('+(p>=0?'+':'')+p+'%)',st:lastPr<=m2?'on':p<=10?'part':'off'}}
+  live.dd55={v:dd+'%',st:dd<=-55?'on':dd<=-48?'part':'off'};
+  const rows=t('bs').map(b=>({...b,live:live[b.k]||null,st:(live[b.k]?.st)||b.st||'off'}));
+  const act=rows.filter(r=>r.st==='on').length;
+  const asof='<span class="asof">'+t('an_asof')+'</span>';
+  // thesis banner
+  document.getElementById('thesis').innerHTML='<h2>'+t('th_t')+tip(t('th_tip'))+asof+'</h2>'
+    +'<div class="th-stats">'
+    +'<div class="th-stat"><div class="lb"><span>'+t('th_win')+'</span>'+tip(t('th_win_tip'))+'</div><div class="vl">'+t('th_win_v')+'</div></div>'
+    +'<div class="th-stat"><div class="lb"><span>'+t('th_core')+'</span>'+tip(t('th_core_tip'))+'</div><div class="vl">$44K–50K</div></div>'
+    +'<div class="th-stat"><div class="lb"><span>'+t('th_sig')+'</span>'+tip(t('th_sig_tip'))+'</div><div class="vl">'+act+' / '+rows.length+'</div></div>'
+    +'</div><p>'+tf('th_p',$(lastPr),Math.round((lastPr/ATH-1)*100),rp?$(Math.round(rp)):'$52,571')+'</p>';
+  // timing convergence
+  document.getElementById('cvtT').innerHTML=t('cvt_t')+asof;
+  document.getElementById('cvtGrid').innerHTML=t('cvt').map(c=>'<div class="conv-card"><div class="cc-m"><span>'+c.m+'</span>'+tip(c.tip)+'</div><div class="cc-v">'+c.v+'</div><div class="cc-d">'+c.d+'</div></div>').join('');
+  document.getElementById('cvtSum').innerHTML=t('cvt_sum');
+  // price convergence (cards 2 & 3 update live)
+  const ocv=rp?($(Math.round(rp*0.75))+'–'+$(Math.round(rp*0.85))):'$40K–45K';
+  const m2s=m2?$(m2):'~$59–61K';
+  document.getElementById('cvpT').innerHTML=t('cvp_t')+asof;
+  document.getElementById('cvpGrid').innerHTML=t('cvp').map((c,i)=>{let v=c.v,d=c.d;
+    if(i===1){v=v.replace('{0}',ocv);d=d.replace('{1}',rp?$(Math.round(rp)):'—')}
+    if(i===2){v=v.replace('{0}',m2s)}
+    return '<div class="conv-card"><div class="cc-m"><span>'+c.m+'</span>'+tip(c.tip)+'</div><div class="cc-v">'+v+'</div><div class="cc-d">'+d+'</div></div>'}).join('');
+  document.getElementById('cvpSum').innerHTML=t('cvp_sum');
+  // 12-signal bottom checklist
+  document.getElementById('bsT').innerHTML=t('bs_t')+asof;
+  document.getElementById('bsTH').innerHTML='<tr>'+t('bs_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  const chip=s=>'<span class="bs-chip bs-'+(s==='on'?'on':s==='part'?'part':'off')+'">'+t(s==='on'?'bs_on':s==='part'?'bs_part':'bs_off')+'</span>';
+  document.getElementById('bsTB').innerHTML=rows.map(b=>'<tr><td>'+b.n+tip(b.tip)+(b.live?'<span class="bs-live">LIVE</span>':'')+'</td><td>'+(b.live?b.live.v:b.r)+'</td><td class="mn">'+b.th+'</td><td>'+chip(b.st)+'</td></tr>').join('');
+  document.getElementById('bsN').textContent=t('bs_n');
+  // buy ladder + triggers
+  document.getElementById('ladT').innerHTML=t('lad_t')+asof;
+  document.getElementById('ladTH').innerHTML='<tr>'+t('lad_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  document.getElementById('ladTB').innerHTML=t('lad').map((r,i)=>{const hit=lastPr>=LAD_BANDS[i][0]&&lastPr<LAD_BANDS[i][1];
+    return '<tr'+(hit?' class="hit"':'')+'><td>'+r.t+'</td><td class="lad-band">'+r.b+(hit?'<span class="lad-now">'+t('lad_now')+'</span>':'')+'</td><td class="mn rd">'+r.dd+'</td><td class="mn">'+r.a+'</td><td>'+r.c+'</td></tr>'}).join('');
+  document.getElementById('trigT').textContent=t('trig_t');
+  document.getElementById('trigGrid').innerHTML=t('trig').map(g=>'<div class="trig"><span class="tk"></span><div><b>'+g.b+'</b> — '+g.d+'</div></div>').join('');
+  document.getElementById('trigN').textContent=t('trig_n');
+  // macro table
+  document.getElementById('macT').innerHTML=t('mac_t')+asof;
+  document.getElementById('macTH').innerHTML='<tr>'+t('mac_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  const mch=e=>'<span class="mac-chip mac-'+(e==='h'?'head':e==='t'?'tail':'mix')+'">'+t(e==='h'?'mac_head':e==='t'?'mac_tail':'mac_mix')+'</span>';
+  document.getElementById('macTB').innerHTML=t('mac').map(m=>'<tr><td>'+m.f+(m.tip?tip(m.tip):'')+'</td><td>'+m.r+'</td><td>'+mch(m.e)+'</td></tr>').join('');
+}
+
 // ============ PROCESS BINANCE DATA ============
 function processKlines(klines){
   const c4pre=[],c4postW=[{x:0,y:0}],c4postD=[{x:0,y:0}];
@@ -447,6 +681,9 @@ function updateUI(){
   document.getElementById('mP').textContent=$(pr);document.getElementById('mD').textContent=dd+'%';
   document.getElementById('mW').textContent=w;document.getElementById('mWH').textContent='~'+wh;
   let mn=dd;for(const p of c4PostW)if(p.y<mn)mn=p.y;
+  document.getElementById('mLow').textContent=$(Math.round(ATH*(1+mn/100)));
+  const m2=ma200w();document.getElementById('m200w').textContent=m2?$(m2):'--';
+  renderAnalysis();
   document.getElementById('xP').textContent=$(Math.round(ATH*(1+mn/100)))+' ('+t('partial')+')';
   document.getElementById('xD').textContent=t('ongoing');document.getElementById('xW').textContent=w+'+';document.getElementById('xDD').textContent=Math.round(mn)+'%';
   const cs=[{k:'c1',d:D1.filter(p=>p.x>=0),f:-85},{k:'c2',d:D2.filter(p=>p.x>=0),f:-84},{k:'c3',d:D3.filter(p=>p.x>=0),f:-78},{k:'c4',d:null,f:null}];
@@ -476,7 +713,16 @@ function rebuild(){
     options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false,axis:'x'},
       scales:{x:{type:'linear',min:0,max:140,title:{display:true,text:t('ax2'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10}},y:{min:-92,max:5,title:{display:true,text:t('ay2'),color:'#5f5e58',font:{size:12,family:'Outfit'}},grid:{color:'#252a3544'},ticks:{color:'#5f5e58',font:{size:11},stepSize:10,callback:v=>v+'%'}}},
       plugins:{legend:{display:false},tooltip:{...ttOpts,callbacks:{title:i=>t('lw')+' '+Math.round(i[0].parsed.x*10)/10,label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
-    plugins:[{id:'c',afterDraw(c){const w=wk(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#9a9890';x.font='11px Outfit,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},{id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.restore()}}]});
+    plugins:[{id:'bz',beforeDatasetsDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y;
+      const yd=v=>y.getPixelForValue((v/ATH-1)*100);
+      const x0=s.getPixelForValue(50),x1=s.getPixelForValue(60),y0=yd(57000),y1=yd(38000);
+      x.save();
+      x.fillStyle='rgba(216,90,48,0.07)';x.fillRect(x0,y0,x1-x0,y1-y0);
+      x.strokeStyle='rgba(216,90,48,0.45)';x.setLineDash([5,4]);x.lineWidth=1;x.strokeRect(x0,y0,x1-x0,y1-y0);
+      x.strokeStyle='rgba(232,230,225,0.16)';x.setLineDash([3,4]);
+      [57000,50000,44000,38000].forEach(p=>{const yy=yd(p);x.beginPath();x.moveTo(s.left,yy);x.lineTo(s.right,yy);x.stroke();x.fillStyle='#5f5e58';x.font='10px JetBrains Mono,monospace';x.textAlign='right';x.fillText('$'+(p/1000)+'K',s.right-4,yy-3)});
+      x.setLineDash([]);x.fillStyle='rgba(245,196,179,0.85)';x.font='500 10px Outfit,sans-serif';x.textAlign='center';x.fillText(t('th_win'),(x0+x1)/2,y0-6);x.restore()}},
+    {id:'c',afterDraw(c){const w=wk(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle='rgba(255,255,255,0.2)';x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle='#9a9890';x.font='11px Outfit,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},{id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle='#D85A30';x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle='#0c0e12';x.fill();x.restore()}}]});
   bl('lg2',ch2);
 }
 
@@ -513,7 +759,7 @@ let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=
     localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:lastPr,lastUpdate:Date.now()}));
     ss('ok',tf('so',$(lastPr),dd));
     // Fetch full history (Aug 2017 to now) in background for click-to-compare
-    fetchAllHistory().then(()=>{if(allDailyCloses.length>0)document.getElementById('ch1').style.cursor='crosshair'});
+    fetchAllHistory().then(()=>{if(allDailyCloses.length>0){document.getElementById('ch1').style.cursor='crosshair';updateUI()}});
   } else {
     // Offline: try stored data
     try{const stored=JSON.parse(localStorage.getItem(SK));

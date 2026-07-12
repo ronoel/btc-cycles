@@ -34,6 +34,9 @@ jobs:
           echo "Fetching sopr..."
           SOPR=$(curl -sf "${API}/sopr?token=${TOKEN}" || echo "null")
 
+          echo "Fetching puell-multiple..."
+          PUELL=$(curl -sf "${API}/puell-multiple?token=${TOKEN}" || echo "null")
+
           # Extract latest values from each response
           # BGeometrics returns arrays of [date, value] or objects with date/value
           # We use jq to safely extract the last entry
@@ -56,11 +59,13 @@ jobs:
           M_VAL=$(extract_latest "$MVRV")
           N_VAL=$(extract_latest "$NUPL")
           S_VAL=$(extract_latest "$SOPR")
-          
+          P_VAL=$(extract_latest "$PUELL")
+
           echo "Realized Price: $R_VAL"
           echo "MVRV Z-Score: $M_VAL"
           echo "NUPL: $N_VAL"
           echo "SOPR: $S_VAL"
+          echo "Puell: $P_VAL"
           
           # Build data.json
           NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -71,6 +76,7 @@ jobs:
             "mvrv_zscore": ${M_VAL:-null},
             "nupl": ${N_VAL:-null},
             "sopr": ${S_VAL:-null},
+            "puell": ${P_VAL:-null},
             "raw": {
               "realized_price_response": ${REALIZED},
               "mvrv_response": ${MVRV},
@@ -88,7 +94,7 @@ jobs:
           # Remove raw responses to keep file small, keep only latest values
           clean = {k:v for k,v in data.items() if k != 'raw'}
           # If values look like arrays, extract just the last value
-          for key in ['realized_price','mvrv_zscore','nupl','sopr']:
+          for key in ['realized_price','mvrv_zscore','nupl','sopr','puell']:
               val = clean.get(key)
               if isinstance(val, list):
                   clean[key] = val[-1] if val else None

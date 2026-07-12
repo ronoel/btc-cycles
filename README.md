@@ -1,52 +1,47 @@
-# Bitcoin Halving Cycles Dashboard
+# Bitcoin Cycle-Bottom Report
 
-A self-updating, single-file dashboard that overlays all 4 Bitcoin halving cycles aligned by their ATH (all-time high). Auto-fetches live BTC price from the CoinGecko API and persists weekly data in localStorage.
+A self-updating, single-file report that combines all 4 Bitcoin halving cycles with a full **cycle-bottom analysis**: timing & price convergence across independent methods, a 12-signal bottom checklist, a staged buy ladder, and macro/flow context. Live BTC data via Binance API, on-chain metrics via daily GitHub Actions.
 
 ## Live demo
 
 👉 **https://ronoel.github.io/btc-cycles/**
 
-## Features
+## What's inside
 
-- **Auto-updating**: fetches current BTC price on every page load via CoinGecko API (free, no key needed)
-- **Persistent data**: weekly drawdown data saved in localStorage — only fetches the delta since last visit
-- **Offline-capable**: works with cached data when there's no internet connection
-- **4 overlaid cycles**: halving-to-halving view aligned by ATH for direct comparison
-- **Post-ATH drawdown chart**: isolated bear market comparison
-- **Interactive legends**: click to toggle individual cycles on/off
-- **Full data tables**: halving stats, bear market data, same-week comparison
-- **Mobile responsive**: works on desktop and mobile
+| Section | Data | Description |
+|---|---|---|
+| **Conclusion banner** | live + research | Projected bottom window (Sep–Nov 2026), core buy zone ($44–50K), live count of active bottom signals |
+| **Cycle position scorecard** | live | Mayer Multiple, 200D MA, Pi Cycle, weekly RSI, Fear & Greed, Realized Price, MVRV-Z, NUPL, SOPR |
+| **Overlaid cycles chart** | live | All 4 cycles aligned by ATH, halving-to-halving, click any week to compare indicators across cycles |
+| **Post-ATH drawdown chart** | live | Bear-market comparison with the **projected bottom window** (weeks 50–60 × −55…−70%) and buy-ladder bands drawn on the chart |
+| **Timing convergence** | research | 4 independent methods (post-ATH duration, weeks-to-low, pre-halving distance, capitulation phase) → all point to Oct 2026 |
+| **Price convergence** | live + research | Diminishing-drawdown consensus, on-chain floor (0.75–0.85× Realized Price, live), 200-week MA (live), Polymarket implied distribution |
+| **12-signal bottom checklist** | live + research | On-chain (live), miner, accumulation, flow and macro signals with ACTIVE / PARTIAL / NOT YET status |
+| **Buy ladder** | live | Staged accumulation plan (probe / core / capitulation tranches) — highlights the band the live price is in |
+| **Aggressive-buy triggers** | research | The 4 signals that override the ladder when they fire together |
+| **Macro & flow context** | research | Fed, DXY, tariffs, ETF flows, options positioning, 2nd-catalyst risk |
+| **Historical tables** | fixed + live | Halving data, post-ATH bear markets, same-week drawdown comparison |
+
+Every analysis card and table row carries a **`?` tooltip** explaining the methodology, thresholds and historical precedents. Interface in **EN / PT-BR / ES**.
+
+## Data sources & freshness
+
+- **Cycles 1–3**: historical data hardcoded (fixed, won't change)
+- **Cycle 4**: daily via [Binance public API](https://api.binance.com) (no key needed), auto-refresh every 60s
+- **On-chain metrics** (Realized Price, MVRV-Z, NUPL, SOPR, Puell): updated daily at 06:00 UTC by GitHub Actions → `data.json` (BGeometrics API)
+- **Sentiment**: [alternative.me](https://alternative.me/crypto/fear-and-greed-index/) Fear & Greed
+- **Research snapshot**: rows/cards tagged `research: Jul 12, 2026` come from a manual research pass (web + on-chain sources) and need periodic manual refresh — everything else recomputes live
+- **ATH reference**: $126,296 on October 6, 2025 · next halving ~Apr 2028
 
 ## Setup (GitHub Pages)
 
-1. Create a new repository on GitHub (e.g., `btc-cycles`)
-2. Upload `index.html` to the repository root
-3. Go to **Settings → Pages → Source** → select `main` branch, `/ (root)` folder
-4. Click **Save** — your dashboard will be live at `https://YOUR_USERNAME.github.io/btc-cycles/`
+1. Fork/create the repo, upload `index.html` + `data.json` + `.github/workflows/update-data.yml`
+2. Add the `BGEOMETRICS_TOKEN` secret (Settings → Secrets → Actions) for the daily on-chain update
+3. **Settings → Pages → Source** → `main` branch, `/ (root)` → Save
 
-## Data sources
+## Disclaimer
 
-- **Cycles 1-3**: historical data hardcoded (fixed, won't change)
-- **Cycle 4**: seed data up to week 23 + auto-extended via [CoinGecko API](https://www.coingecko.com/en/api)
-- **ATH reference**: $126,296 on October 6, 2025
-
-## How the auto-update works
-
-```
-Page load
-  ↓
-Check localStorage for saved cycle 4 data
-  ↓
-Fetch current BTC price from CoinGecko
-  ↓
-Calculate current week number from ATH
-  ↓
-If weeks are missing → fetch historical range from CoinGecko
-  ↓
-Merge new data with saved data → save to localStorage
-  ↓
-Render all charts and tables
-```
+Cycle analysis is historical pattern matching, not financial advice. Past cycles do not guarantee future outcomes.
 
 ## License
 

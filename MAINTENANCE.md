@@ -1,0 +1,53 @@
+# Maintenance & Update Schedule
+
+What keeps this report accurate, who updates it (automatic vs manual), and how often.
+
+## 1. Automatic — no action required
+
+| Data | Source | Frequency | Where |
+|---|---|---|---|
+| BTC price, drawdown, cycle-4 chart lines, cycle low | Binance public API | On page load + every 60s | client-side JS |
+| Price indicators (Mayer Multiple, 200D MA, Pi Cycle Top, weekly RSI, 200-week MA) | Computed from Binance daily closes | On page load | client-side JS |
+| Fear & Greed | alternative.me API | On page load | client-side JS |
+| On-chain metrics (Realized Price, MVRV-Z, NUPL, SOPR, Puell) | BGeometrics API → `data.json` | **Daily 06:00 UTC** | GitHub Action `update-data.yml` |
+| Live checklist rows (tagged `LIVE`), on-chain floor card, 200W MA card, buy-ladder highlight, active-signal count | Derived from the above | On page load | client-side JS |
+
+**Health check (monthly):** confirm the GitHub Action is green (repo → Actions → "Update on-chain data") and `data.json`'s `updated` field is recent. If BGeometrics changes its response shape, `extract_latest` in the workflow and `fetchOnChainData()` in `index.html` are the two places to fix.
+
+## 2. Manual — research snapshot (tagged `research: Jul 12, 2026` in the UI)
+
+**Frequency: every 2–4 weeks.** Tighten to **weekly** when either happens:
+- we enter the projected bottom window (**Sep–Nov 2026**), or
+- BTC closes below **$57K** (probe band reached), or
+- a 2nd crypto-native catalyst fires (exchange failure, stablecoin depeg, >$500M exploit).
+
+What to refresh (all live in the `L.en` / `L.pt` i18n objects in `index.html`):
+
+| Item | i18n keys | What to look up |
+|---|---|---|
+| Static checklist rows | `bs` entries `puell`*, `hash`, `lth`, `resv`, `cbp`, `fed` (fields `r` + `st`) | Hash Ribbons cross status, LTH supply, exchange reserves + SSR, Coinbase Premium streak, Fed/DXY liquidity turn |
+| Macro & flow table | `mac` (fields `r` + `e`) | Fed rate path, DXY, tariffs, recession odds, weekly ETF flows, Deribit OI/max pain, catalyst watch, BTC-vs-equities |
+| Polymarket card | `cvp[3]` (fields `v` + `d`) | P(BTC < $55K / $50K / $40K) for 2026 |
+| Trigger cards' current readings | `trig` (field `d`, the "Jul 2026:" part) | Coinbase Premium, ETF streak, hash ribbons, Fed pricing |
+| Snapshot date badge | `an_asof` (EN + PT) | set to the new research date |
+
+\* `puell` auto-switches to LIVE if `data.json` provides it — only its static fallback text needs the date kept honest.
+
+**Procedure:** run a research pass (web search: each item above), edit the i18n arrays in `index.html` (EN + PT-BR; ES falls back to EN), bump `an_asof`, verify locally (`python3 -m http.server` + open), commit & push.
+
+## 3. Event-driven — rewrite, not refresh
+
+| Event | Action |
+|---|---|
+| **2nd crypto-native catalyst fires** | Update `mac` catalyst row + checklist; capitulation tranche ($38–44K) becomes actionable — reflect in thesis if bands shift |
+| **Bottom confirmed** (8+ checklist signals active, price reclaims Realized Price and holds) | Rewrite thesis banner (`th_*` keys) from "projected bottom" to "bottom in / accumulation"; fill Cycle 4 row in the "Post-ATH bear market" table (low, date, weeks, drawdown); retire or archive the buy ladder |
+| **Thesis invalidated** (e.g. sustained reclaim of ~$90K+ with bottom signals still inactive, or new ATH) | Re-derive the whole convergence analysis — bands and window are no longer valid |
+| **Price bands/window revised by new research** | Update in ALL places at once: `LAD_BANDS` const, `lad` rows, ch2 band plugin price levels (`[57000,50000,44000,38000]` + window weeks 50–60), `th_core` value in thesis HTML, `cvp` cards, `th_p` text |
+| **New halving date estimate** | `H5` const in `index.html` |
+
+## 4. Fixed — never touch
+
+Cycles 1–3 historical data (`D1`/`D2`/`D3` arrays, halving & bear-market tables), ATH reference ($126,296 / Oct 6, 2025 — `ATH`/`ATHD` consts), phase history.
+
+---
+**Last research snapshot: Jul 12, 2026** · next manual refresh due: **late Jul 2026**

@@ -39,6 +39,10 @@ Every analysis card and table row carries a **`?` tooltip** explaining the metho
 2. Add the `BGEOMETRICS_TOKEN` secret (Settings → Secrets → Actions) for the daily on-chain update
 3. **Settings → Pages → Source** → `main` branch, `/ (root)` → Save
 
+## Maintenance
+
+See [`MAINTENANCE.md`](MAINTENANCE.md) — what updates automatically (Binance live, daily on-chain Action), what needs a manual research refresh (**every 2–4 weeks**, weekly inside the Sep–Nov 2026 bottom window), and which events require rewriting the thesis.
+
 ## Disclaimer
 
 Cycle analysis is historical pattern matching, not financial advice. Past cycles do not guarantee future outcomes.

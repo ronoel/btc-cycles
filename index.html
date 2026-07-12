@@ -350,8 +350,13 @@ async function fetchOnChainData(){
     const r=await fetch('data.json?t='+Date.now());
     if(!r.ok)return null;
     const d=await r.json();
-    onChainData=d;
-    return d;
+    onChainData={
+      realized_price: d.realized_price?.realizedPrice ?? null,
+      mvrv_zscore: d.mvrv_zscore?.mvrv ?? null,
+      nupl: d.nupl?.nupl ?? null,
+      sopr: d.sopr?.sopr ?? null
+    };
+    return onChainData;
   }catch(e){return null}
 }
 

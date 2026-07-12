@@ -180,6 +180,15 @@ sf:'Fetching daily data from Binance...',so:'Connected \u2014 BTC <b>{0}</b> ({1
 ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 daily via Binance public API. Indicators calculated client-side. Cycle analysis is historical pattern matching — not financial advice.',ftr2:'Last update:',
 cmp_title:'How to buy Bitcoin in Brazil',cmp_intro:'A comparison of the main ways to buy and sell Bitcoin in Brazil \u2014 from centralized exchanges to peer-to-peer.',cmp_visit:'Visit',
 sc_mayer:'Mayer Multiple',sc_200d:'Price vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'Weekly RSI',sc_fng:'Fear & Greed',
+sc_mayer_tip:'Price ÷ 200-day MA (Trace Mayer). Below 0.8 = historical accumulation zone (bottoms: 2015 ~0.55 · 2018 ~0.5 · 2022 ~0.6); above 2.4 = overheated. Simple but robust across all cycles.',
+sc_200d_tip:'Distance between spot price and the 200-day moving average — the classic bull/bear dividing line. Deeply negative (< −10%) = bear-market stress zone; above +100% preceded every cycle top.',
+sc_pi_tip:'TOP detector: fires when the 111-day MA crosses above 2× the 350-day MA (350/111 ≈ 3.14 ≈ π). Nailed the cycle top within ±3 days in 2013, 2017 and 2021. In a bear market it works as confirmation — "Not fired" means we are nowhere near euphoria. It says nothing about the bottom: for that, see the on-chain metrics and the Pi Cycle Bottom status in the convergence section.',
+sc_rsi_tip:'14-week Relative Strength Index — momentum on the weekly chart. Below 30 = oversold; prior bear-market bottoms printed weekly RSI ~28–30 (2015, 2018, 2022). Above 70 marked euphoria phases.',
+sc_fng_tip:'Composite sentiment index (volatility, volume, social media, dominance, trends). ≤ 25 = extreme fear, historically favorable for accumulation — cycle bottoms saw single-digit readings sustained for weeks. Contrarian: necessary for a bottom, but not sufficient alone.',
+sc_realized_tip:'Average on-chain acquisition cost of all coins (realized cap ÷ supply). Price below it = the average holder is underwater; every cycle bottom (2015, 2018, 2022) printed below the Realized Price. Our floor estimate: 0.75–0.85× this value.',
+sc_mvrv_tip:'How many standard deviations market cap sits above/below realized cap. Bottoms: Z ≈ 0 or negative (2018: −0.3 · 2022: −0.2). Tops: Z > 7. The core on-chain valuation gauge.',
+sc_nupl_tip:'Net Unrealized Profit/Loss — the share of market cap that is unrealized profit. Below 0 = capitulation zone (all prior bottoms); above 0.75 = euphoria (all prior tops).',
+sc_sopr_tip:'Spent Output Profit Ratio — profit ratio of coins moved on-chain that day. Below 1 = coins changing hands at a loss; sustained sub-1 readings mark capitulation. Reclaiming 1 as support historically signals the trend turn.',
 sc_buy:'Buy zone',sc_sell:'Sell zone',sc_neutral:'Neutral',sc_fired:'Fired',sc_not:'Not fired',sc_oversold:'Oversold',sc_overbought:'Overbought',sc_fear:'Extreme fear',sc_greed:'Extreme greed',
 sc_realized:'Realized Price',sc_mvrv_z:'MVRV Z-Score',sc_nupl:'NUPL',sc_sopr:'SOPR',sc_above:'Above',sc_below:'Below',sc_capitulation:'Capitulation',sc_euphoria:'Euphoria',sc_loss:'Selling at loss',sc_profit:'Selling at profit',
 cp_title:'Indicators at week {0}',cp_hint:'Click any point on the chart above to compare indicators across all cycles at that week. Cycle 1 predates Binance data.',cp_na:'N/A (pre-2017)',cp_price:'Price',cp_dd:'Drawdown',
@@ -265,6 +274,15 @@ sf:'Buscando dados di\u00e1rios da Binance...',so:'Conectado \u2014 BTC <b>{0}</
 ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 di\u00e1rio via API p\u00fablica da Binance. Indicadores calculados no cliente. An\u00e1lise de ciclos \u00e9 correspond\u00eancia de padr\u00f5es hist\u00f3ricos \u2014 n\u00e3o \u00e9 recomenda\u00e7\u00e3o de investimento.',ftr2:'\u00daltima atualiza\u00e7\u00e3o:',
 cmp_title:'Como comprar Bitcoin no Brasil',cmp_intro:'Compara\u00e7\u00e3o dos principais meios de compra e venda de Bitcoin no Brasil \u2014 de exchanges centralizadas ao peer-to-peer.',cmp_visit:'Acessar',
 sc_mayer:'Mayer Multiple',sc_200d:'Pre\u00e7o vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
+sc_mayer_tip:'Pre\u00e7o \u00f7 m\u00e9dia m\u00f3vel de 200 dias (Trace Mayer). Abaixo de 0,8 = zona hist\u00f3rica de acumula\u00e7\u00e3o (fundos: 2015 ~0,55 \u00b7 2018 ~0,5 \u00b7 2022 ~0,6); acima de 2,4 = superaquecido. Simples mas robusto em todos os ciclos.',
+sc_200d_tip:'Dist\u00e2ncia entre o pre\u00e7o spot e a m\u00e9dia m\u00f3vel de 200 dias \u2014 a cl\u00e1ssica linha divis\u00f3ria bull/bear. Muito negativo (< \u221210%) = zona de estresse de bear market; acima de +100% antecedeu todos os topos de ciclo.',
+sc_pi_tip:'Detector de TOPO: dispara quando a MA de 111 dias cruza acima de 2\u00d7 a MA de 350 dias (350/111 \u2248 3,14 \u2248 \u03c0). Acertou o topo dos ciclos de 2013, 2017 e 2021 com precis\u00e3o de \u00b13 dias. Em bear market funciona como confirma\u00e7\u00e3o \u2014 "N\u00e3o disparou" significa que estamos longe de euforia. Ele n\u00e3o diz nada sobre o fundo: para isso, veja as m\u00e9tricas on-chain e o status do Pi Cycle Bottom na se\u00e7\u00e3o de converg\u00eancia.',
+sc_rsi_tip:'\u00cdndice de For\u00e7a Relativa de 14 semanas \u2014 momentum no gr\u00e1fico semanal. Abaixo de 30 = sobrevendido; fundos de bear markets anteriores imprimiram RSI semanal ~28\u201330 (2015, 2018, 2022). Acima de 70 marcou as fases de euforia.',
+sc_fng_tip:'\u00cdndice composto de sentimento (volatilidade, volume, redes sociais, domin\u00e2ncia, buscas). \u2264 25 = medo extremo, historicamente favor\u00e1vel para acumula\u00e7\u00e3o \u2014 fundos de ciclo viram leituras de um d\u00edgito sustentadas por semanas. Contr\u00e1rio: necess\u00e1rio para um fundo, mas n\u00e3o suficiente sozinho.',
+sc_realized_tip:'Custo m\u00e9dio de aquisi\u00e7\u00e3o on-chain de todas as moedas (realized cap \u00f7 supply). Pre\u00e7o abaixo dele = detentor m\u00e9dio no preju\u00edzo; todo fundo de ciclo (2015, 2018, 2022) imprimiu abaixo do Pre\u00e7o Realizado. Nossa estimativa de piso: 0,75\u20130,85\u00d7 este valor.',
+sc_mvrv_tip:'Quantos desvios-padr\u00e3o o market cap est\u00e1 acima/abaixo do realized cap. Fundos: Z \u2248 0 ou negativo (2018: \u22120,3 \u00b7 2022: \u22120,2). Topos: Z > 7. O principal term\u00f4metro de valua\u00e7\u00e3o on-chain.',
+sc_nupl_tip:'Net Unrealized Profit/Loss \u2014 a fra\u00e7\u00e3o do market cap que \u00e9 lucro n\u00e3o realizado. Abaixo de 0 = zona de capitula\u00e7\u00e3o (todos os fundos anteriores); acima de 0,75 = euforia (todos os topos).',
+sc_sopr_tip:'Spent Output Profit Ratio \u2014 raz\u00e3o de lucro das moedas movidas on-chain no dia. Abaixo de 1 = moedas trocando de m\u00e3os com preju\u00edzo; leituras sub-1 sustentadas marcam capitula\u00e7\u00e3o. Recuperar o 1 como suporte historicamente sinaliza a virada de tend\u00eancia.',
 sc_buy:'Zona de compra',sc_sell:'Zona de venda',sc_neutral:'Neutro',sc_fired:'Disparou',sc_not:'N\u00e3o disparou',sc_oversold:'Sobrevendido',sc_overbought:'Sobrecomprado',sc_fear:'Medo extremo',sc_greed:'Gan\u00e2ncia extrema',
 sc_realized:'Pre\u00e7o Realizado',sc_mvrv_z:'MVRV Z-Score',sc_nupl:'NUPL',sc_sopr:'SOPR',sc_above:'Acima',sc_below:'Abaixo',sc_capitulation:'Capitula\u00e7\u00e3o',sc_euphoria:'Euforia',sc_loss:'Vendendo com preju\u00edzo',sc_profit:'Vendendo com lucro',
 cp_title:'Indicadores na semana {0}',cp_hint:'Clique em qualquer ponto no gr\u00e1fico acima para comparar indicadores de todos os ciclos naquela semana. Ciclo 1 \u00e9 anterior aos dados da Binance.',cp_na:'N/A (pr\u00e9-2017)',cp_price:'Pre\u00e7o',cp_dd:'Drawdown',
@@ -536,14 +554,14 @@ async function fetchOnChainData(){
 function renderScorecard(ind,fng){
   const g=document.getElementById('scGrid');g.innerHTML='';const cards=[];
   if(ind.mayer!==undefined){const v=ind.mayer,pct=Math.min(Math.max(v/3*100,0),100);let sig,cls;if(v<0.8){sig=t('sc_buy');cls='sc-buy'}else if(v>2.4){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_mayer'),val:v.toFixed(2),pct,sig,cls,lo:'0',hi:'3.0+',color:v<0.8?'var(--teal)':v>2.4?'var(--red)':'#EF9F27'})}
+    cards.push({name:t('sc_mayer'),tp:t('sc_mayer_tip'),val:v.toFixed(2),pct,sig,cls,lo:'0',hi:'3.0+',color:v<0.8?'var(--teal)':v>2.4?'var(--red)':'#EF9F27'})}
   if(ind.ma200pct!==undefined){const v=ind.ma200pct,pct=Math.min(Math.max((v+100)/300*100,0),100);let sig,cls;if(v<-10){sig=t('sc_buy');cls='sc-buy'}else if(v>100){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_200d'),val:(v>0?'+':'')+v+'%',pct,sig,cls,lo:'-50%',hi:'+200%',color:v<-10?'var(--teal)':v>100?'var(--red)':'#EF9F27'})}
-  if(ind.piCrossed!==undefined){cards.push({name:t('sc_pi'),val:ind.piCrossed?t('sc_fired'):t('sc_not'),pct:ind.piCrossed?95:20,sig:ind.piCrossed?t('sc_sell'):t('sc_neutral'),cls:ind.piCrossed?'sc-sell':'sc-neutral',lo:'',hi:'',color:ind.piCrossed?'var(--red)':'#EF9F27',nobar:true})}
+    cards.push({name:t('sc_200d'),tp:t('sc_200d_tip'),val:(v>0?'+':'')+v+'%',pct,sig,cls,lo:'-50%',hi:'+200%',color:v<-10?'var(--teal)':v>100?'var(--red)':'#EF9F27'})}
+  if(ind.piCrossed!==undefined){cards.push({name:t('sc_pi'),tp:t('sc_pi_tip'),val:ind.piCrossed?t('sc_fired'):t('sc_not'),pct:ind.piCrossed?95:20,sig:ind.piCrossed?t('sc_sell'):t('sc_neutral'),cls:ind.piCrossed?'sc-sell':'sc-neutral',lo:'',hi:'',color:ind.piCrossed?'var(--red)':'#EF9F27',nobar:true})}
   if(ind.rsi){const v=ind.rsi,pct=v;let sig,cls;if(v<30){sig=t('sc_oversold');cls='sc-buy'}else if(v>70){sig=t('sc_overbought');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_rsi'),val:v,pct,sig,cls,lo:'0',hi:'100',color:v<30?'var(--teal)':v>70?'var(--red)':'#EF9F27'})}
+    cards.push({name:t('sc_rsi'),tp:t('sc_rsi_tip'),val:v,pct,sig,cls,lo:'0',hi:'100',color:v<30?'var(--teal)':v>70?'var(--red)':'#EF9F27'})}
   if(fng){const v=parseInt(fng.value),pct=v;let sig,cls;if(v<=25){sig=t('sc_fear');cls='sc-buy'}else if(v>=75){sig=t('sc_greed');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
-    cards.push({name:t('sc_fng'),val:v+'/100',pct,sig,cls,lo:'0',hi:'100',color:v<=25?'var(--teal)':v>=75?'var(--red)':'#EF9F27'})}
+    cards.push({name:t('sc_fng'),tp:t('sc_fng_tip'),val:v+'/100',pct,sig,cls,lo:'0',hi:'100',color:v<=25?'var(--teal)':v>=75?'var(--red)':'#EF9F27'})}
   // On-chain indicators from data.json (via GitHub Actions + BGeometrics)
   if(onChainData){
     const oc=onChainData;
@@ -554,32 +572,32 @@ function renderScorecard(ind,fng){
       const sig=above?t('sc_above')+' (+'+Math.round((ratio-1)*100)+'%)':t('sc_below')+' ('+Math.round((ratio-1)*100)+'%)';
       const cls=ratio<1?'sc-buy':ratio>3?'sc-sell':'sc-neutral';
       const color=ratio<1?'var(--teal)':ratio>3?'var(--red)':'#EF9F27';
-      cards.push({name:t('sc_realized'),val:'$'+rp.toLocaleString('en-US'),pct,sig,cls,lo:'$0',hi:'$'+Math.round(lastPr*1.5).toLocaleString('en-US'),color});
+      cards.push({name:t('sc_realized'),tp:t('sc_realized_tip'),val:'$'+rp.toLocaleString('en-US'),pct,sig,cls,lo:'$0',hi:'$'+Math.round(lastPr*1.5).toLocaleString('en-US'),color});
     }
     // MVRV Z-Score
     if(oc.mvrv_zscore!=null){
       const v=Math.round(oc.mvrv_zscore*100)/100;const pct=Math.min(Math.max((v+1)/9*100,0),100);
       let sig,cls;if(v<0){sig=t('sc_buy');cls='sc-buy'}else if(v>7){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
-      cards.push({name:t('sc_mvrv_z'),val:v.toFixed(2),pct,sig,cls,lo:'-1',hi:'8+',color:v<0?'var(--teal)':v>7?'var(--red)':'#EF9F27'});
+      cards.push({name:t('sc_mvrv_z'),tp:t('sc_mvrv_tip'),val:v.toFixed(2),pct,sig,cls,lo:'-1',hi:'8+',color:v<0?'var(--teal)':v>7?'var(--red)':'#EF9F27'});
     }
     // NUPL
     if(oc.nupl!=null){
       const v=Math.round(oc.nupl*1000)/1000;const pct=Math.min(Math.max((v+0.5)/1.25*100,0),100);
       let sig,cls;if(v<0){sig=t('sc_capitulation');cls='sc-buy'}else if(v>0.75){sig=t('sc_euphoria');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
-      cards.push({name:t('sc_nupl'),val:v.toFixed(3),pct,sig,cls,lo:'-0.5',hi:'0.75+',color:v<0?'var(--teal)':v>0.75?'var(--red)':'#EF9F27'});
+      cards.push({name:t('sc_nupl'),tp:t('sc_nupl_tip'),val:v.toFixed(3),pct,sig,cls,lo:'-0.5',hi:'0.75+',color:v<0?'var(--teal)':v>0.75?'var(--red)':'#EF9F27'});
     }
     // SOPR
     if(oc.sopr!=null){
       const v=Math.round(oc.sopr*1000)/1000;const pct=Math.min(Math.max((v-0.8)/0.6*100,0),100);
       let sig,cls;if(v<1){sig=t('sc_loss');cls='sc-buy'}else if(v>1.05){sig=t('sc_profit');cls='sc-neutral'}else{sig=t('sc_neutral');cls='sc-neutral'}
-      cards.push({name:t('sc_sopr'),val:v.toFixed(3),pct,sig,cls,lo:'0.8',hi:'1.4',color:v<1?'var(--teal)':v>1.1?'#EF9F27':'#EF9F27'});
+      cards.push({name:t('sc_sopr'),tp:t('sc_sopr_tip'),val:v.toFixed(3),pct,sig,cls,lo:'0.8',hi:'1.4',color:v<1?'var(--teal)':v>1.1?'#EF9F27':'#EF9F27'});
     }
   }
   cards.forEach(c=>{
     const bar=c.nobar
       ?'<div class="sc-desc">'+(c.cls==='sc-sell'?'111D MA crossed 2\u00d7350D MA near ATH':'Monitoring 111D vs 2\u00d7350D MA')+'</div>'
       :'<div class="sc-bar"><div class="sc-fill" style="width:'+c.pct+'%;background:'+c.color+'"></div><div class="sc-dot" style="left:calc('+c.pct+'% - 5px);background:'+c.color+'"></div></div><div class="sc-labels"><span>'+c.lo+'</span><span>'+c.hi+'</span></div>';
-    g.innerHTML+='<div class="sc-card"><div class="sc-name"><span>'+c.name+'</span><span class="sc-signal '+c.cls+'">'+c.sig+'</span></div><div class="sc-val" style="color:'+c.color+'">'+c.val+'</div>'+bar+'</div>';
+    g.innerHTML+='<div class="sc-card"><div class="sc-name"><span>'+c.name+tip(c.tp||'')+'</span><span class="sc-signal '+c.cls+'">'+c.sig+'</span></div><div class="sc-val" style="color:'+c.color+'">'+c.val+'</div>'+bar+'</div>';
   });
 }
 

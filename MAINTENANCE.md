@@ -46,6 +46,7 @@ What to refresh (all live in the `L.en` / `L.pt` i18n objects in `index.html`):
 | **Thesis invalidated** (e.g. sustained reclaim of ~$90K+ with bottom signals still inactive, or new ATH) | Re-derive the whole convergence analysis — bands and window are no longer valid |
 | **Price bands/window revised by new research** | Update in ALL places at once: `LAD_BANDS` const, `lad` rows, ch2 band plugin price levels (`[57000,50000,44000,38000]` + window weeks 50–60), `th_core` value in thesis HTML, `cvp` cards, `th_p` text |
 | **New halving date estimate** | `H5` const in `index.html` |
+| **Window or thesis changed (any of the above)** | Also update the OG/Twitter meta descriptions in the `<head>` of `index.html` (they cite the Sep–Nov 2026 window and $44–50K zone) and regenerate the share image: edit `og-card.html`, open it in a 1200×630 window, screenshot → replace `og.png` |
 
 ## 4. Fixed — never touch
 

@@ -1,8 +1,28 @@
 {
-  "updated": "2026-07-12T20:42:12Z",
-  "realized_price": {"d":"2026-07-11","unixTs":1783728000,"realizedPrice":52571.52},
-  "mvrv_zscore": {"d":"2026-07-11","unixTs":1783728000,"mvrv":1.214},
-  "nupl": {"d":"2026-07-11","unixTs":1783728000,"nupl":0.1763},
-  "sopr": {"d":"2026-07-11","unixTs":1783728000,"sopr":1.0007},
-  "puell": {"d":"2026-07-11","unixTs":1783728000,"puellMultiple":0.6928}
+  "updated": "2026-07-13T07:07:47Z",
+  "realized_price": {
+    "d": "2026-07-12",
+    "unixTs": 1783814400,
+    "realizedPrice": 52570.5
+  },
+  "mvrv_zscore": {
+    "d": "2026-07-12",
+    "unixTs": 1783814400,
+    "mvrv": 1.2134
+  },
+  "nupl": {
+    "d": "2026-07-12",
+    "unixTs": 1783814400,
+    "nupl": 0.1759
+  },
+  "sopr": {
+    "d": "2026-07-12",
+    "unixTs": 1783814400,
+    "sopr": 1.0002
+  },
+  "puell": {
+    "d": "2026-07-12",
+    "unixTs": 1783814400,
+    "puellMultiple": 0.7168
+  }
 }

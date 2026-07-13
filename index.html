@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bitcoin Halving Cycles Dashboard</title>
-<meta name="description" content="Bitcoin cycle-bottom report: 4 halving cycles overlaid, timing & price convergence analysis, 12-signal bottom checklist and staged buy plan — with live data">
+<meta name="description" content="Bitcoin cycle-bottom report: 4 halving cycles overlaid, cycle-phase timeline, timing & price convergence analysis, 13-signal bottom checklist and staged buy plan — with live data">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
@@ -120,7 +120,22 @@ tr:last-child td{border-bottom:none}
 .trig{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:.78rem;color:var(--txt2);display:flex;gap:10px;align-items:flex-start}
 .trig .tk{width:18px;height:18px;border-radius:50%;border:2px solid var(--txt3);flex:none;margin-top:1px}
 .trig b{color:var(--txt);font-weight:500}
-@media(max-width:700px){.cmp-grid,.cmp-notes{grid-template-columns:1fr}.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}.sc-grid{grid-template-columns:1fr 1fr}.th-stats{grid-template-columns:1fr 1fr}.tip .tt{left:auto;right:-10px;transform:none}}
+.ph-wrap{margin-bottom:16px}
+.ph-rowlab{font-size:.72rem;color:var(--txt3);margin-bottom:3px}
+.ph-barbox{position:relative;margin-top:16px}
+.ph-row{display:flex;width:100%;height:34px;border-radius:6px;border:1px solid var(--border)}
+.ph-seg{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;cursor:default}
+.ph-seg:first-child{border-radius:6px 0 0 6px}.ph-seg:last-child{border-radius:0 6px 6px 0}
+.ph-seglab{max-width:100%;font-size:.58rem;color:#fff;white-space:nowrap;padding:0 2px;overflow:hidden;text-overflow:clip;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.ph-now{position:absolute;top:-3px;bottom:-3px;width:0;border-left:2px dashed var(--txt);z-index:6;pointer-events:none}
+.ph-now-lab{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:.58rem;color:var(--txt);white-space:nowrap;font-weight:600}
+.ph-tt{visibility:hidden;opacity:0;position:absolute;bottom:130%;left:50%;transform:translateX(-50%);width:min(230px,70vw);background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:.7rem;color:var(--txt2);line-height:1.5;z-index:30;transition:opacity .15s;text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.5);pointer-events:none}
+.ph-seg:hover .ph-tt{visibility:visible;opacity:1}
+.ph-tbl td:first-child{color:var(--txt2)}.ph-tbl tr.ph-tot td{font-weight:600;color:var(--txt);border-top:1.5px solid var(--border)}
+.rdy{display:inline-block;font-size:.62rem;color:var(--teal);border:1px solid #1D9E7555;border-radius:4px;padding:1px 6px;margin-left:10px;vertical-align:middle;font-family:'JetBrains Mono',monospace;font-weight:400}
+.th-bar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-top:8px}
+.th-bar-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .5s}
+@media(max-width:700px){.cmp-grid,.cmp-notes{grid-template-columns:1fr}.ctn{padding:1rem}h1{font-size:1.4rem}.mets{grid-template-columns:repeat(2,1fr)}.met .vl{font-size:1.1rem}th,td{padding:8px 6px;font-size:.75rem}.hdr{flex-direction:column}.sc-grid{grid-template-columns:1fr 1fr}.th-stats{grid-template-columns:1fr 1fr}.tip .tt{left:auto;right:-10px;transform:none}.ph-tt{left:auto;right:0;transform:none}}
 </style>
 </head>
 <body>
@@ -141,6 +156,7 @@ tr:last-child td{border-bottom:none}
   <div class="sec"><div class="stit" data-t="sct"></div><div class="sc-grid" id="scGrid"></div><p class="nt" data-t="scn"></p></div>
   <div class="sec"><div class="stit" data-t="s1t"></div><div class="cwrap"><div class="leg" id="lg1"></div><div class="cinn" style="height:460px"><canvas id="ch1"></canvas></div><div class="cp" id="cpPanel"><div class="cp-head"><span class="cp-title" id="cpTitle"></span><button class="cp-close" onclick="document.getElementById('cpPanel').classList.remove('show')">&times;</button></div><div class="cp-grid" id="cpGrid"></div><div class="cp-hint" data-t="cp_hint"></div></div></div><p class="nt" data-t="s1n"></p></div>
   <div class="sec"><div class="stit" data-t="s2t"></div><div class="cwrap"><div class="leg" id="lg2"></div><div class="cinn" style="height:380px"><canvas id="ch2"></canvas></div></div><p class="nt" data-t="s2n"></p></div>
+  <div class="sec"><div class="stit" id="phT"></div><div id="phTL"></div><div style="overflow-x:auto;margin-top:1rem"><table class="ph-tbl"><thead id="phTblH"></thead><tbody id="phTblB"></tbody></table></div><div class="conv-grid" id="phNotes" style="margin-top:1.25rem"></div><p class="nt" id="phFoot"></p></div>
   <div class="sec"><div class="stit" id="cvtT"></div><div class="conv-grid" id="cvtGrid"></div><div class="conv-sum" id="cvtSum"></div></div>
   <div class="sec"><div class="stit" id="cvpT"></div><div class="conv-grid" id="cvpGrid"></div><div class="conv-sum" id="cvpSum"></div></div>
   <div class="sec"><div class="stit" id="bsT"></div><div style="overflow-x:auto"><table><thead id="bsTH"></thead><tbody id="bsTB"></tbody></table></div><p class="nt" id="bsN"></p></div>
@@ -199,7 +215,7 @@ th_t:'Conclusion — projected bottom & buy plan',
 th_tip:'Synthesis of three independent frameworks: (1) halving-cycle timing (post-ATH duration + pre-halving distance), (2) drawdown projections adjusted for the diminishing-drawdown trend, (3) on-chain valuation (Realized Price, MVRV-Z, NUPL). Methodology detailed in the sections below.',
 th_win:'Bottom window',th_win_v:'Sep–Nov 2026',th_win_tip:'Weeks 50–60 after the ATH. Cycle 2 bottomed at week 52, Cycle 3 at week 54, Cycle 1 at week 59. Center of mass: October 2026.',
 th_core:'Core buy zone',th_core_tip:'Overlap of the diminishing-drawdown consensus (−65% ≈ $44K) and the on-chain floor (0.75–0.85× Realized Price). First probe buys start higher, at $52–57K (200W MA / Realized Price zone).',
-th_sig:'Bottom signals active',th_sig_tip:'Out of the 12-signal bottom checklist below. Prior cycle bottoms fired 8+ of these simultaneously.',
+th_sig:'Bottom signals active',th_sig_tip:'Out of the 13-signal bottom checklist below, plus a weighted readiness score. Structural/valuation signals (drawdown depth, price vs Realized Price / 200W MA, NUPL) carry more weight than sentiment/flow ones; PARTIAL counts as half. Prior cycle bottoms fired 8+ of these simultaneously and would have scored ≳75% weighted.',
 th_p:'Price {0} is {1}% from the ATH but still above the Realized Price ({2}) — the average holder remains in profit, which has never marked a cycle bottom. Plan: probe 20% at $52–57K, core 45% at $44–50K, capitulation tranche 35% at $38–44K only if a 2nd crypto-native catalyst fires. Sub-$35K targets are discarded — they would require an unprecedented −50% break below the 200-week MA.',
 cvt_t:'Timing convergence — 4 independent methods',
 cvt_sum:'All four methods land on the same window: <b>Sep–Nov 2026, centered on October</b>. Agreement across independent methods is what gives the window its weight.',
@@ -215,15 +231,16 @@ cvp:[
 {m:'On-chain floor',v:'{0}',d:'0.75–0.85 × Realized Price ({1})',tip:'Cycle bottoms print below the network’s aggregate cost basis: NUPL < 0, MVRV-Z ≈ 0, price at 0.75–0.85× Realized Price (2018: 0.76× · 2022: 0.83×). This card updates live from data.json.'},
 {m:'200-week MA',v:'{0}',d:'2018 bottomed AT it · 2022 wicked −37% below',tip:'The 200W MA has contained every bear-market low since 2015. Calculated live from Binance daily closes (1,400 days). A −50% break below it has never happened — which is why sub-$35K targets are discarded.'},
 {m:'Polymarket implied distribution',v:'$40–55K',d:'P(<$55K)=77% · P(<$50K)≈57% · P(<$40K)=30%',tip:'Prediction-market odds for BTC price levels in 2026 (as of Jul 2026). The market concentrates the bottom between $40K and $55K and gives only 30% to a sub-$40K print.'}],
-bs_t:'Bottom checklist — 12 signals',
+bs_t:'Bottom checklist — 13 signals',
 bs_h:['Signal','Current reading','Bottom threshold','Status'],
-bs_n:'Rows marked LIVE recompute from Binance / data.json on every load. The rest come from the Jul 12, 2026 research snapshot and need periodic manual refresh. Prior cycle bottoms fired 8+ of the 12 simultaneously.',
+bs_n:'Rows marked LIVE recompute from Binance / data.json on every load. The rest come from the Jul 12, 2026 research snapshot and need periodic manual refresh. Prior cycle bottoms fired 8+ of the 13 simultaneously.',
 bs_on:'ACTIVE',bs_part:'PARTIAL',bs_off:'NOT YET',
 bs:[
 {k:'rp',n:'Price below Realized Price',th:'Spot < Realized Price',r:'—',tip:'Realized Price is the average on-chain cost basis of all coins. Every cycle bottom printed below it — the average holder must be underwater before final capitulation.'},
 {k:'nupl',n:'NUPL below zero',th:'NUPL < 0',r:'—',tip:'Net Unrealized Profit/Loss. Below 0 the average holder is at a loss — the classic capitulation zone that marked 2015, 2018 and 2022 bottoms.'},
 {k:'mvrv',n:'MVRV Z-Score near zero',th:'< 0.5',r:'—',tip:'Standard deviations between market cap and realized cap. Bottoms printed at Z ≈ 0 or below (2018: −0.3, 2022: −0.2).'},
 {k:'sopr',n:'SOPR below 1 sustained',th:'< 1 for weeks',r:'—',tip:'Spent Output Profit Ratio: below 1 means coins move at a loss. Sustained sub-1 SOPR = ongoing capitulation.'},
+{k:'fund',n:'Funding rate deeply negative',th:'7d avg < −0.005%/8h',r:'+0.010%/8h avg (neutral-positive) — research Jul 12',st:'off',tip:'Perpetual-futures funding is what longs pay shorts; the baseline is +0.01%/8h. Sustained deeply negative funding means the crowd is short into weakness — a classic capitulation-bottom marker (Dec 2018, Mar 2020 and Nov 2022 lows all printed it). Computed live from Binance Futures, 7-day average of the 8-hourly funding.'},
 {k:'ma200w',n:'Price at/below 200-week MA',th:'≤ 200W MA',r:'—',tip:'Every prior bottom formed at (2018) or below (2022, briefly −37%) the 200W MA. Computed live from Binance history.'},
 {k:'dd55',n:'Drawdown beyond −55%',th:'≤ −55% from ATH',r:'—',tip:'The trend-adjusted optimistic bottom target. The Jul 1 low (−54%) came within a whisker; a sustained close below ~$57K activates it.'},
 {k:'puell',n:'Puell Multiple in bottom zone',th:'< 0.5',r:'0.75 (Jun 22, 2026)',st:'part',tip:'Daily miner revenue vs its 365-day average. Below 0.5 = deep miner-income stress, historically the bottom zone. At 0.75 it is stressed but not there yet.'},
@@ -259,6 +276,20 @@ mac:[
 {f:'Options positioning',r:'Deribit OI 58.5% calls; max pain rises to ~$75K for Sep–Dec expiries',e:'t'},
 {f:'2nd crypto-native catalyst',r:'Not fired. C2 needed 3 shocks; C3 needed 3 (Luna → 3AC → FTX); C4 has had only the tariff shock',e:'m',tip:'Every prior bottom required 2–3 cascading catalysts, the later ones crypto-native (exchange failure, stablecoin depeg, major exploit). Its absence is the main remaining downside risk — and the trigger condition for the capitulation tranche.'},
 {f:'Equities divergence',r:'S&P at ATHs (+15% in Q2) while BTC fell −14% — idiosyncratic crypto weakness',e:'h'}],
+ph_t:'Cycle phases timeline',
+ph_cycle:'Cycle',ph_days:'days',ph_proj:'(proj.)',ph_now:'NOW',
+ph_names:{acc:'Accumulation',eb:'Early Bull',mk:'Markup/Euphoria',dist:'Distribution',ed:'Early Decline',cap:'Capitulation'},
+ph_tbl_h:['Phase','C2 days','C2 return','C3 days','C3 return','C4 days','C4 return'],
+ph_total:'ATH → bottom (total)',
+ph_foot:'* ongoing — C4 numbers through the Jul 1, 2026 low. C4 capitulation dates are projected until an on-chain bottom is confirmed.',
+ph_defs:{acc:'Accumulation — smart money quietly builds positions at the lows while sentiment is dead; a sideways-to-up base after the prior bottom.',eb:'Early Bull — the first sustained markup off the base; price reclaims key moving averages and breaks the prior range while the crowd is still skeptical.',mk:'Markup/Euphoria — the parabolic advance into the ATH; retail FOMO, leverage and euphoria peak.',dist:'Distribution — smart money sells into strength near the top; a choppy range as the ATH is put in and momentum stalls.',ed:'Early Decline — the first leg down; lower highs and lower lows, denial and bull-trap bounces.',cap:'Capitulation — the final flush; forced selling, maximum pain and despair carve out the cycle bottom.'},
+ph_notes:[
+{n:'Accumulation is shrinking',v:'717 → 656 → 405 days',d:'−44% over two cycles',tip:'Institutional rails and spot ETFs deploy capital faster each cycle, so the base-building phase keeps compressing. Supports the thesis that C4 phases run ~15% faster than prior cycles.'},
+{n:'Distribution is lengthening',v:'31 → 75 → 92 days',d:'2025-10 → 2026-01 for C4',tip:'Growing institutional participation distributes the top over months instead of weeks — large holders exit into strength gradually rather than in a single blow-off.'},
+{n:'Current phase: Capitulation (projected)',v:'entered ~Jul 2026',d:'at the $58.6K low → bottom ~Oct–Nov 2026',tip:'Historical capitulation lasted 176d (C2) / 161d (C3); at ~15% faster that implies ~140–150 days to the bottom, i.e. Oct–Nov 2026 — consistent with the timing-convergence section. The phase boundary is only confirmable in hindsight, so it stays projected until on-chain capitulation signals (NUPL < 0, price < Realized Price) confirm.'}],
+th_clock:'Cycle clock',th_clock_v:'day {0} of ~368 ({1}%)',th_clock_tip:'Days since the Oct 6, 2025 ATH vs the C2/C3 average ATH→bottom duration (363 & 376 days → ~368). Caveat: only N=2 completed modern cycles — a tiny sample. The drawdown chart’s window (weeks 50–60) gives the fuller range.',
+th_ddp:'Drawdown progress',th_ddp_v:'low −{0}% of −65% target ({1}%)',th_ddp_tip:'The deepest live cycle-4 drawdown vs the −65% diminishing-drawdown consensus target. The optimistic band (−55%) is already nearly touched, so the remaining estimated downside is −2%…−31% from the low depending on scenario.',
+th_weighted:'weighted',bs_ready:'ready',
 cmp_cards:[{name:'Binance',type:'Centralized exchange',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'Full KYC required',fees:'~0.1% + withdrawal fees',pix_speed:'Minutes to hours',assets:'350+ cryptocurrencies',extra:'Futures, margin, staking, earn',privacy:'Low',best:'High-volume trading, altcoins, DeFi access'}},{name:'Mercado Bitcoin',type:'Centralized exchange',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'Full KYC (CPF required)',fees:'~1\u20132% + withdrawal fees',pix_speed:'Minutes to hours',assets:'200+ cryptocurrencies',extra:'Tokenized assets, fixed income',privacy:'Low',best:'Regulated Brazilian platform, diverse products'}},{name:'B2PIX',type:'P2P BTC/PIX platform',url:'https://b2pix.org/',rows:{custody:'Non-custodial (your keys)',kyc:'No KYC',fees:'~1\u20132% spread',pix_speed:'Instant',assets:'Bitcoin (sBTC on Stacks)',extra:'Pay bills & ecommerce with BTC via PIX',privacy:'High',best:'Self-custody, privacy, BTC payments'}}],
 cmp_thead:['Feature','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Custody','KYC','Fees','PIX speed','Supported assets','Additional services','Privacy','Best for'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Best suited for experienced traders who need access to hundreds of altcoins, derivatives, and DeFi protocols. Ideal for high-volume operations where the low trading fee (0.1%) makes a significant difference.'},{name:'Mercado Bitcoin',text:'The most established Brazilian exchange, regulated and with a wide range of products beyond crypto, including tokenized assets and fixed income. A good choice for those who want everything in one regulated platform.'},{name:'B2PIX',text:'The only non-custodial option in this comparison \u2014 your Bitcoin stays in your wallet at all times, with no account creation or identity verification. Also the only platform that lets you pay PIX bills and make online purchases directly with BTC.'}]},
@@ -293,7 +324,7 @@ th_t:'Conclus\u00e3o \u2014 fundo projetado e plano de compra',
 th_tip:'S\u00edntese de tr\u00eas frameworks independentes: (1) timing do ciclo de halving (dura\u00e7\u00e3o p\u00f3s-ATH + dist\u00e2ncia pr\u00e9-halving), (2) proje\u00e7\u00f5es de drawdown ajustadas pela tend\u00eancia de drawdowns decrescentes, (3) valua\u00e7\u00e3o on-chain (Pre\u00e7o Realizado, MVRV-Z, NUPL). Metodologia detalhada nas se\u00e7\u00f5es abaixo.',
 th_win:'Janela do fundo',th_win_v:'Set\u2013Nov 2026',th_win_tip:'Semanas 50\u201360 ap\u00f3s a ATH. Ciclo 2 fez fundo na semana 52, Ciclo 3 na 54, Ciclo 1 na 59. Centro de massa: outubro de 2026.',
 th_core:'Zona n\u00facleo de compra',th_core_tip:'Sobreposi\u00e7\u00e3o do consenso de drawdown decrescente (\u221265% \u2248 $44K) com o piso on-chain (0,75\u20130,85\u00d7 Pre\u00e7o Realizado). As primeiras sondagens come\u00e7am mais acima, em $52\u201357K (zona da 200W MA / Pre\u00e7o Realizado).',
-th_sig:'Sinais de fundo ativos',th_sig_tip:'Do checklist de 12 sinais abaixo. Fundos de ciclos anteriores dispararam 8+ deles simultaneamente.',
+th_sig:'Sinais de fundo ativos',th_sig_tip:'Do checklist de 13 sinais abaixo, mais uma pontuação de prontidão ponderada. Sinais estruturais/de valuação (profundidade do drawdown, preço vs Preço Realizado / 200W MA, NUPL) pesam mais que os de sentimento/fluxo; PARCIAL conta metade. Fundos de ciclos anteriores dispararam 8+ deles simultaneamente e teriam pontuado ≳75% no score ponderado.',
 th_p:'O pre\u00e7o {0} est\u00e1 a {1}% da ATH mas ainda acima do Pre\u00e7o Realizado ({2}) \u2014 o detentor m\u00e9dio segue no lucro, o que nunca marcou um fundo de ciclo. Plano: sondar 20% em $52\u201357K, n\u00facleo 45% em $44\u201350K, tranche de capitula\u00e7\u00e3o 35% em $38\u201344K apenas se um 2\u00ba catalisador cripto-nativo disparar. Alvos abaixo de $35K foram descartados \u2014 exigiriam um rompimento in\u00e9dito de \u221250% abaixo da m\u00e9dia de 200 semanas.',
 cvt_t:'Converg\u00eancia de tempo \u2014 4 m\u00e9todos independentes',
 cvt_sum:'Os quatro m\u00e9todos apontam para a mesma janela: <b>set\u2013nov 2026, centro em outubro</b>. A concord\u00e2ncia entre m\u00e9todos independentes \u00e9 o que d\u00e1 peso \u00e0 janela.',
@@ -309,15 +340,16 @@ cvp:[
 {m:'Piso on-chain',v:'{0}',d:'0,75\u20130,85 \u00d7 Pre\u00e7o Realizado ({1})',tip:'Fundos de ciclo imprimem abaixo do custo m\u00e9dio agregado da rede: NUPL < 0, MVRV-Z \u2248 0, pre\u00e7o a 0,75\u20130,85\u00d7 o Pre\u00e7o Realizado (2018: 0,76\u00d7 \u00b7 2022: 0,83\u00d7). Este card atualiza ao vivo via data.json.'},
 {m:'M\u00e9dia de 200 semanas',v:'{0}',d:'2018 fez fundo NELA \u00b7 2022 furou \u221237% abaixo no wick',tip:'A 200W MA conteve todas as m\u00ednimas de bear market desde 2015. Calculada ao vivo dos fechamentos di\u00e1rios da Binance (1.400 dias). Um rompimento de \u221250% abaixo dela nunca aconteceu \u2014 por isso alvos abaixo de $35K foram descartados.'},
 {m:'Distribui\u00e7\u00e3o impl\u00edcita do Polymarket',v:'$40\u201355K',d:'P(<$55K)=77% \u00b7 P(<$50K)\u224857% \u00b7 P(<$40K)=30%',tip:'Odds do mercado de previs\u00f5es para n\u00edveis de pre\u00e7o do BTC em 2026 (jul 2026). O mercado concentra o fundo entre $40K e $55K e d\u00e1 apenas 30% para um fundo abaixo de $40K.'}],
-bs_t:'Checklist de fundo \u2014 12 sinais',
+bs_t:'Checklist de fundo \u2014 13 sinais',
 bs_h:['Sinal','Leitura atual','Gatilho de fundo','Status'],
-bs_n:'Linhas marcadas LIVE recalculam via Binance / data.json a cada carregamento. As demais v\u00eam do snapshot de pesquisa de 12 jul 2026 e precisam de atualiza\u00e7\u00e3o manual peri\u00f3dica. Fundos anteriores dispararam 8+ dos 12 simultaneamente.',
+bs_n:'Linhas marcadas LIVE recalculam via Binance / data.json a cada carregamento. As demais v\u00eam do snapshot de pesquisa de 12 jul 2026 e precisam de atualiza\u00e7\u00e3o manual peri\u00f3dica. Fundos anteriores dispararam 8+ dos 13 simultaneamente.',
 bs_on:'ATIVO',bs_part:'PARCIAL',bs_off:'AINDA N\u00c3O',
 bs:[
 {k:'rp',n:'Pre\u00e7o abaixo do Pre\u00e7o Realizado',th:'Spot < Pre\u00e7o Realizado',r:'\u2014',tip:'O Pre\u00e7o Realizado \u00e9 o custo m\u00e9dio on-chain de todas as moedas. Todo fundo de ciclo imprimiu abaixo dele \u2014 o detentor m\u00e9dio precisa estar no preju\u00edzo antes da capitula\u00e7\u00e3o final.'},
 {k:'nupl',n:'NUPL abaixo de zero',th:'NUPL < 0',r:'\u2014',tip:'Net Unrealized Profit/Loss. Abaixo de 0 o detentor m\u00e9dio est\u00e1 no preju\u00edzo \u2014 a cl\u00e1ssica zona de capitula\u00e7\u00e3o que marcou os fundos de 2015, 2018 e 2022.'},
 {k:'mvrv',n:'MVRV Z-Score perto de zero',th:'< 0,5',r:'\u2014',tip:'Desvios-padr\u00e3o entre market cap e realized cap. Fundos imprimiram em Z \u2248 0 ou abaixo (2018: \u22120,3, 2022: \u22120,2).'},
 {k:'sopr',n:'SOPR abaixo de 1 sustentado',th:'< 1 por semanas',r:'\u2014',tip:'Spent Output Profit Ratio: abaixo de 1 significa moedas sendo movidas com preju\u00edzo. SOPR sub-1 sustentado = capitula\u00e7\u00e3o em curso.'},
+{k:'fund',n:'Funding rate profundamente negativo',th:'m\u00e9dia 7d < \u22120,005%/8h',r:'+0,010%/8h m\u00e9dia (neutro-positivo) \u2014 pesquisa 12 jul',st:'off',tip:'O funding dos perp\u00e9tuos \u00e9 o que os comprados pagam aos vendidos; a linha de base \u00e9 +0,01%/8h. Funding profundamente negativo e sustentado significa que a multid\u00e3o est\u00e1 vendida na fraqueza \u2014 um marcador cl\u00e1ssico de fundo por capitula\u00e7\u00e3o (as m\u00ednimas de dez 2018, mar 2020 e nov 2022 todas o imprimiram). Calculado ao vivo da Binance Futures, m\u00e9dia de 7 dias do funding de 8 em 8 horas.'},
 {k:'ma200w',n:'Pre\u00e7o na/abaixo da 200W MA',th:'\u2264 200W MA',r:'\u2014',tip:'Todo fundo anterior se formou na (2018) ou abaixo (2022, brevemente \u221237%) da 200W MA. Calculado ao vivo do hist\u00f3rico da Binance.'},
 {k:'dd55',n:'Drawdown al\u00e9m de \u221255%',th:'\u2264 \u221255% da ATH',r:'\u2014',tip:'O alvo otimista ajustado pela tend\u00eancia. A m\u00ednima de 1\u00ba jul (\u221254%) chegou a um triz; um fechamento sustentado abaixo de ~$57K ativa o sinal.'},
 {k:'puell',n:'Puell Multiple na zona de fundo',th:'< 0,5',r:'0,75 (22 jun 2026)',st:'part',tip:'Receita di\u00e1ria dos mineradores vs sua m\u00e9dia de 365 dias. Abaixo de 0,5 = estresse profundo de renda mineradora, historicamente a zona de fundo. Em 0,75 est\u00e1 estressado mas ainda n\u00e3o l\u00e1.'},
@@ -353,6 +385,20 @@ mac:[
 {f:'Posicionamento em op\u00e7\u00f5es',r:'OI na Deribit 58,5% calls; max pain sobe para ~$75K nos vencimentos set\u2013dez',e:'t'},
 {f:'2\u00ba catalisador cripto-nativo',r:'N\u00e3o disparou. C2 precisou de 3 choques; C3 de 3 (Luna \u2192 3AC \u2192 FTX); C4 teve s\u00f3 o choque das tarifas',e:'m',tip:'Todo fundo anterior exigiu 2\u20133 catalisadores em cascata, os \u00faltimos cripto-nativos (quebra de exchange, depeg de stablecoin, exploit grande). Sua aus\u00eancia \u00e9 o principal risco de queda restante \u2014 e a condi\u00e7\u00e3o de gatilho da tranche de capitula\u00e7\u00e3o.'},
 {f:'Diverg\u00eancia com a bolsa',r:'S&P em ATHs (+15% no Q2) enquanto o BTC caiu \u221214% \u2014 fraqueza idiossincr\u00e1tica de cripto',e:'h'}],
+ph_t:'Linha do tempo das fases do ciclo',
+ph_cycle:'Ciclo',ph_days:'dias',ph_proj:'(proj.)',ph_now:'HOJE',
+ph_names:{acc:'Acumula\u00e7\u00e3o',eb:'In\u00edcio do Bull',mk:'Markup/Euforia',dist:'Distribui\u00e7\u00e3o',ed:'In\u00edcio da Queda',cap:'Capitula\u00e7\u00e3o'},
+ph_tbl_h:['Fase','Dias C2','Retorno C2','Dias C3','Retorno C3','Dias C4','Retorno C4'],
+ph_total:'ATH \u2192 fundo (total)',
+ph_foot:'* em andamento \u2014 n\u00fameros do C4 at\u00e9 a m\u00ednima de 1 jul 2026. As datas de capitula\u00e7\u00e3o do C4 s\u00e3o projetadas at\u00e9 um fundo on-chain ser confirmado.',
+ph_defs:{acc:'Acumula\u00e7\u00e3o \u2014 o smart money constr\u00f3i posi\u00e7\u00f5es nas m\u00ednimas em sil\u00eancio enquanto o sentimento est\u00e1 morto; uma base de lado para cima ap\u00f3s o fundo anterior.',eb:'In\u00edcio do Bull \u2014 o primeiro markup sustentado a partir da base; o pre\u00e7o recupera m\u00e9dias m\u00f3veis-chave e rompe a faixa anterior enquanto a multid\u00e3o ainda est\u00e1 c\u00e9tica.',mk:'Markup/Euforia \u2014 o avan\u00e7o parab\u00f3lico at\u00e9 a ATH; FOMO do varejo, alavancagem e euforia no pico.',dist:'Distribui\u00e7\u00e3o \u2014 o smart money vende na for\u00e7a perto do topo; uma faixa lateral e vol\u00e1til enquanto a ATH se forma e o momentum perde for\u00e7a.',ed:'In\u00edcio da Queda \u2014 a primeira perna de baixa; topos e fundos descendentes, nega\u00e7\u00e3o e repiques de bull-trap.',cap:'Capitula\u00e7\u00e3o \u2014 o flush final; vendas for\u00e7adas, dor m\u00e1xima e desespero esculpem o fundo do ciclo.'},
+ph_notes:[
+{n:'A acumula\u00e7\u00e3o est\u00e1 encurtando',v:'717 \u2192 656 \u2192 405 dias',d:'\u221244% em dois ciclos',tip:'Trilhos institucionais e ETFs \u00e0 vista alocam capital mais r\u00e1pido a cada ciclo, ent\u00e3o a fase de constru\u00e7\u00e3o de base segue comprimindo. Refor\u00e7a a tese de que as fases do C4 rodam ~15% mais r\u00e1pido que nos ciclos anteriores.'},
+{n:'A distribui\u00e7\u00e3o est\u00e1 alongando',v:'31 \u2192 75 \u2192 92 dias',d:'2025-10 \u2192 2026-01 no C4',tip:'A crescente participa\u00e7\u00e3o institucional distribui o topo ao longo de meses em vez de semanas \u2014 grandes detentores saem na for\u00e7a gradualmente, n\u00e3o em um \u00fanico blow-off.'},
+{n:'Fase atual: Capitula\u00e7\u00e3o (projetada)',v:'iniciada ~jul 2026',d:'na m\u00ednima de $58,6K \u2192 fundo ~out\u2013nov 2026',tip:'A capitula\u00e7\u00e3o hist\u00f3rica durou 176d (C2) / 161d (C3); a ~15% mais r\u00e1pido isso implica ~140\u2013150 dias at\u00e9 o fundo, ou seja out\u2013nov 2026 \u2014 consistente com a se\u00e7\u00e3o de converg\u00eancia de tempo. A fronteira da fase s\u00f3 \u00e9 confirm\u00e1vel em retrospecto, ent\u00e3o permanece projetada at\u00e9 que sinais on-chain de capitula\u00e7\u00e3o (NUPL < 0, pre\u00e7o < Pre\u00e7o Realizado) confirmem.'}],
+th_clock:'Rel\u00f3gio do ciclo',th_clock_v:'dia {0} de ~368 ({1}%)',th_clock_tip:'Dias desde a ATH de 6 out 2025 vs a dura\u00e7\u00e3o m\u00e9dia ATH\u2192fundo de C2/C3 (363 e 376 dias \u2192 ~368). Ressalva: apenas N=2 ciclos modernos completos \u2014 uma amostra min\u00fascula. A janela do gr\u00e1fico de drawdown (semanas 50\u201360) d\u00e1 a faixa mais completa.',
+th_ddp:'Progresso do drawdown',th_ddp_v:'m\u00ednima \u2212{0}% de \u221265% alvo ({1}%)',th_ddp_tip:'O drawdown mais profundo do ciclo 4 ao vivo vs o alvo de consenso de drawdown decrescente de \u221265%. A faixa otimista (\u221255%) j\u00e1 foi quase tocada, ent\u00e3o a queda estimada restante \u00e9 \u22122%\u2026\u221231% a partir da m\u00ednima conforme o cen\u00e1rio.',
+th_weighted:'ponderado',bs_ready:'pronto',
 cmp_cards:[{name:'Binance',type:'Exchange centralizada',url:'https://www.binance.com/',rows:{custody:'Custodial',kyc:'KYC completo obrigat\u00f3rio',fees:'~0,1% + taxa de saque',pix_speed:'Minutos a horas',assets:'350+ criptomoedas',extra:'Futuros, margem, staking, earn',privacy:'Baixa',best:'Trading de alto volume, altcoins, acesso DeFi'}},{name:'Mercado Bitcoin',type:'Exchange centralizada',url:'https://www.mercadobitcoin.com.br/',rows:{custody:'Custodial',kyc:'KYC completo (CPF obrigat\u00f3rio)',fees:'~1\u20132% + taxa de saque',pix_speed:'Minutos a horas',assets:'200+ criptomoedas',extra:'Ativos tokenizados, renda fixa',privacy:'Baixa',best:'Plataforma brasileira regulada, produtos diversificados'}},{name:'B2PIX',type:'Plataforma P2P de BTC/PIX',url:'https://b2pix.org/',rows:{custody:'N\u00e3o-custodial (suas chaves)',kyc:'Sem KYC',fees:'~1\u20132% de spread',pix_speed:'Instant\u00e2neo',assets:'Bitcoin (sBTC na Stacks)',extra:'Pague boletos e e-commerce com BTC via PIX',privacy:'Alta',best:'Autocust\u00f3dia, privacidade, pagamentos com BTC'}}],
 cmp_thead:['Caracter\u00edstica','Binance','Mercado Bitcoin','B2PIX'],cmp_features:['Cust\u00f3dia','KYC','Taxas','Velocidade PIX','Ativos suportados','Servi\u00e7os adicionais','Privacidade','Melhor para'],cmp_feat_keys:['custody','kyc','fees','pix_speed','assets','extra','privacy','best'],
 cmp_notes:[{name:'Binance',text:'Mais indicada para traders experientes que precisam acessar centenas de altcoins, derivativos e protocolos DeFi. Ideal para opera\u00e7\u00f5es de alto volume, onde a taxa baixa (0,1%) faz diferen\u00e7a significativa.'},{name:'Mercado Bitcoin',text:'A exchange brasileira mais estabelecida, regulada e com uma ampla gama de produtos al\u00e9m de cripto, incluindo ativos tokenizados e renda fixa. Boa escolha para quem quer tudo em uma plataforma regulamentada.'},{name:'B2PIX',text:'A \u00fanica op\u00e7\u00e3o n\u00e3o-custodial desta compara\u00e7\u00e3o \u2014 seu Bitcoin fica na sua carteira o tempo todo, sem criar conta e sem verifica\u00e7\u00e3o de identidade. Tamb\u00e9m a \u00fanica que permite pagar boletos e fazer compras online diretamente com BTC.'}]},
@@ -382,6 +428,16 @@ function detectLang(){const s=localStorage.getItem('btc_lang');if(s&&L[s])return
 
 // ============ CONSTANTS ============
 const ATH=126296,ATHD=new Date('2025-10-06'),H5=new Date('2028-04-15'),SK='btc_c4_v8',COL=['#378ADD','#1D9E75','#7F77DD','#D85A30'];
+// Cycle phases (language-neutral; names via i18n ph_names). s=start,e=end,d=days,r=return%,proj=projected
+const PH_ORDER=['acc','eb','mk','dist','ed','cap'];
+const PH_COL={acc:'#378ADD',eb:'#5DCAA5',mk:'#1D9E75',dist:'#EF9F27',ed:'#D85A30',cap:'#E24B4A'};
+const PHASES={
+  c2:[{k:'acc',s:'2015-01-14',e:'2016-12-31',d:717,r:534},{k:'eb',s:'2016-12-31',e:'2017-03-10',d:69,r:24},{k:'mk',s:'2017-03-10',e:'2017-12-17',d:282,r:1563},{k:'dist',s:'2017-12-17',e:'2018-01-17',d:31,r:-44},{k:'ed',s:'2018-01-17',e:'2018-06-22',d:156,r:-46},{k:'cap',s:'2018-06-22',e:'2018-12-15',d:176,r:-48}],
+  c3:[{k:'acc',s:'2018-12-15',e:'2020-10-01',d:656,r:230},{k:'eb',s:'2020-10-01',e:'2021-01-08',d:99,r:277},{k:'mk',s:'2021-01-08',e:'2021-11-10',d:306,r:61},{k:'dist',s:'2021-11-10',e:'2022-01-24',d:75,r:-44},{k:'ed',s:'2022-01-24',e:'2022-06-13',d:140,r:-41},{k:'cap',s:'2022-06-13',e:'2022-11-21',d:161,r:-26}],
+  c4:[{k:'acc',s:'2022-11-21',e:'2024-01-01',d:405,r:185},{k:'eb',s:'2024-01-01',e:'2024-03-14',d:73,r:52},{k:'mk',s:'2024-03-14',e:'2025-10-06',d:571,r:80},{k:'dist',s:'2025-10-06',e:'2026-01-06',d:92,r:-25},{k:'ed',s:'2026-01-06',e:'2026-07-12',d:187,r:-31},{k:'cap',s:'2026-07-12',e:'2026-10-15',d:null,r:null,proj:true}]
+};
+// Bottom-signal weights (sum=100). Structural/valuation signals weighted above sentiment/flow
+const BS_W={rp:10,nupl:10,mvrv:8,sopr:6,ma200w:10,dd55:12,puell:6,hash:8,lth:6,resv:4,cbp:5,fed:7,fund:8};
 function wk(d){return Math.floor((d-ATHD)/(7*864e5))}
 function fwk(d){return(d-ATHD)/(7*864e5)}
 function $(n){return'$'+Math.round(n).toLocaleString('en-US')}
@@ -409,6 +465,21 @@ async function fetchBinancePrice(){
 }
 async function fetchFNG(){
   try{const r=await fetch('https://api.alternative.me/fng/?limit=1');const d=await r.json();return d.data?.[0]||null}catch(e){return null}
+}
+// Binance Futures funding rate (CORS enabled). Last 21 x 8h = 7 days
+let fundingData=null;
+async function fetchFunding(){
+  try{
+    const r=await fetch('https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&limit=21');
+    if(!r.ok)return null;
+    const d=await r.json();
+    if(!Array.isArray(d)||!d.length)return null;
+    const vals=d.map(x=>parseFloat(x.fundingRate)).filter(v=>!isNaN(v));
+    if(!vals.length)return null;
+    const avg7d=vals.reduce((a,b)=>a+b,0)/vals.length,last=vals[vals.length-1];
+    fundingData={avg7d,last};
+    return fundingData;
+  }catch(e){return null}
 }
 
 // Cycle ATH dates and prices for indicator lookup
@@ -618,15 +689,23 @@ function renderAnalysis(){
   if(onChainData?.puell!=null){const v=onChainData.puell;live.puell={v:v.toFixed(2),st:v<0.5?'on':v<0.9?'part':'off'}}
   if(m2){const p=Math.round((lastPr/m2-1)*100);live.ma200w={v:$(m2)+' ('+(p>=0?'+':'')+p+'%)',st:lastPr<=m2?'on':p<=10?'part':'off'}}
   live.dd55={v:dd+'%',st:dd<=-55?'on':dd<=-48?'part':'off'};
+  if(fundingData){const a=fundingData.avg7d,l=fundingData.last,fp=v=>(v>=0?'+':'')+(v*100).toFixed(4)+'%';live.fund={v:'last '+fp(l)+' · 7d avg '+fp(a),st:a<-0.00005?'on':a<=0.00003?'part':'off'}}
   const rows=t('bs').map(b=>({...b,live:live[b.k]||null,st:(live[b.k]?.st)||b.st||'off'}));
   const act=rows.filter(r=>r.st==='on').length;
+  const readiness=Math.round(rows.reduce((s,b)=>s+(BS_W[b.k]||0)*(b.st==='on'?1:b.st==='part'?0.5:0),0));
+  // live "where are we" progress: days since ATH vs ~368d avg; deepest cycle-4 drawdown vs −65% target
+  let lowdd=dd;for(const p of c4PostW)if(p.y<lowdd)lowdd=p.y;if(!(lowdd<0))lowdd=-54;
+  const clockN=Math.round((new Date()-ATHD)/864e5),clockPct=Math.round(clockN/368*100);
+  const ddAbs=Math.round(Math.abs(lowdd)),ddPct=Math.round(ddAbs/65*100);
   const asof='<span class="asof">'+t('an_asof')+'</span>';
   // thesis banner
   document.getElementById('thesis').innerHTML='<h2>'+t('th_t')+tip(t('th_tip'))+asof+'</h2>'
     +'<div class="th-stats">'
     +'<div class="th-stat"><div class="lb"><span>'+t('th_win')+'</span>'+tip(t('th_win_tip'))+'</div><div class="vl">'+t('th_win_v')+'</div></div>'
     +'<div class="th-stat"><div class="lb"><span>'+t('th_core')+'</span>'+tip(t('th_core_tip'))+'</div><div class="vl">$44K–50K</div></div>'
-    +'<div class="th-stat"><div class="lb"><span>'+t('th_sig')+'</span>'+tip(t('th_sig_tip'))+'</div><div class="vl">'+act+' / '+rows.length+'</div></div>'
+    +'<div class="th-stat"><div class="lb"><span>'+t('th_sig')+'</span>'+tip(t('th_sig_tip'))+'</div><div class="vl">'+act+' / '+rows.length+' · '+readiness+'% '+t('th_weighted')+'</div></div>'
+    +'<div class="th-stat"><div class="lb"><span>'+t('th_clock')+'</span>'+tip(t('th_clock_tip'))+'</div><div class="vl">'+tf('th_clock_v',clockN,clockPct)+'</div><div class="th-bar"><div class="th-bar-fill" style="width:'+Math.min(clockPct,100)+'%"></div></div></div>'
+    +'<div class="th-stat"><div class="lb"><span>'+t('th_ddp')+'</span>'+tip(t('th_ddp_tip'))+'</div><div class="vl">'+tf('th_ddp_v',ddAbs,ddPct)+'</div><div class="th-bar"><div class="th-bar-fill" style="width:'+Math.min(ddPct,100)+'%"></div></div></div>'
     +'</div><p>'+tf('th_p',$(lastPr),Math.round((lastPr/ATH-1)*100),rp?$(Math.round(rp)):'$52,571')+'</p>';
   // timing convergence
   document.getElementById('cvtT').innerHTML=t('cvt_t')+asof;
@@ -641,8 +720,8 @@ function renderAnalysis(){
     if(i===2){v=v.replace('{0}',m2s)}
     return '<div class="conv-card"><div class="cc-m"><span>'+c.m+'</span>'+tip(c.tip)+'</div><div class="cc-v">'+v+'</div><div class="cc-d">'+d+'</div></div>'}).join('');
   document.getElementById('cvpSum').innerHTML=t('cvp_sum');
-  // 12-signal bottom checklist
-  document.getElementById('bsT').innerHTML=t('bs_t')+asof;
+  // 13-signal bottom checklist
+  document.getElementById('bsT').innerHTML=t('bs_t')+asof+'<span class="rdy">'+readiness+'% '+t('bs_ready')+'</span>';
   document.getElementById('bsTH').innerHTML='<tr>'+t('bs_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
   const chip=s=>'<span class="bs-chip bs-'+(s==='on'?'on':s==='part'?'part':'off')+'">'+t(s==='on'?'bs_on':s==='part'?'bs_part':'bs_off')+'</span>';
   document.getElementById('bsTB').innerHTML=rows.map(b=>'<tr><td>'+b.n+tip(b.tip)+(b.live?'<span class="bs-live">LIVE</span>':'')+'</td><td>'+(b.live?b.live.v:b.r)+'</td><td class="mn">'+b.th+'</td><td>'+chip(b.st)+'</td></tr>').join('');
@@ -660,6 +739,48 @@ function renderAnalysis(){
   document.getElementById('macTH').innerHTML='<tr>'+t('mac_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
   const mch=e=>'<span class="mac-chip mac-'+(e==='h'?'head':e==='t'?'tail':'mix')+'">'+t(e==='h'?'mac_head':e==='t'?'mac_tail':'mac_mix')+'</span>';
   document.getElementById('macTB').innerHTML=t('mac').map(m=>'<tr><td>'+m.f+(m.tip?tip(m.tip):'')+'</td><td>'+m.r+'</td><td>'+mch(m.e)+'</td></tr>').join('');
+  renderPhases();
+}
+
+// ============ CYCLE PHASES TIMELINE ============
+function renderPhases(){
+  if(!document.getElementById('phT'))return;
+  const asof='<span class="asof">'+t('an_asof')+'</span>';
+  const nm=t('ph_names'),defs=t('ph_defs');
+  const loc=lang==='pt'?'pt-BR':lang==='es'?'es-ES':'en-US';
+  const fmtD=s=>new Date(s+'T00:00:00Z').toLocaleDateString(loc,{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
+  const pd=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
+  const retTxt=r=>r==null?'—':(r>=0?'+':'')+r+'%';
+  document.getElementById('phT').innerHTML=t('ph_t')+asof;
+  // horizontal phase bars, one row per cycle
+  let tl='';
+  [['c2','2'],['c3','3'],['c4','4']].forEach(([ck,num])=>{
+    const ph=PHASES[ck],tot=ph.reduce((s,p)=>s+pd(p.s,p.e),0);
+    let segs='';
+    ph.forEach(p=>{
+      const days=pd(p.s,p.e),w=days/tot*100,col=PH_COL[p.k],label=nm[p.k]+(p.proj?' '+t('ph_proj'):'');
+      const bg=p.proj?'repeating-linear-gradient(45deg,'+col+'55,'+col+'55 6px,transparent 6px,transparent 12px)':col+'99';
+      const bd=p.proj?'1px dashed '+col:'3px solid '+col;
+      const tt='<b>'+label+'</b><br>'+fmtD(p.s)+' → '+fmtD(p.e)+'<br>'+days+' '+t('ph_days')+' · '+retTxt(p.r);
+      segs+='<div class="ph-seg" style="flex:0 0 '+w+'%;background:'+bg+';border-left:'+bd+'"><span class="ph-seglab">'+label+'</span><span class="ph-tt">'+tt+'</span></div>';
+    });
+    let now='';
+    if(ck==='c4'){const start=new Date(ph[0].s),end=new Date(ph[ph.length-1].e),np=Math.min(Math.max((new Date()-start)/(end-start)*100,0),100);
+      now='<div class="ph-now" style="left:'+np+'%"><span class="ph-now-lab">'+t('ph_now')+'</span></div>'}
+    tl+='<div class="ph-wrap"><div class="ph-rowlab">'+t('ph_cycle')+' '+num+'</div><div class="ph-barbox"><div class="ph-row">'+segs+'</div>'+now+'</div></div>';
+  });
+  document.getElementById('phTL').innerHTML=tl;
+  // table: 6 phases + total row
+  document.getElementById('phTblH').innerHTML='<tr>'+t('ph_tbl_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  const cell=(ck,pk)=>{const p=PHASES[ck].find(x=>x.k===pk);const dTxt=p.proj?pd(p.s,p.e)+' '+t('ph_proj'):p.d;const rc=p.r==null?'':p.r>=0?'gr':'rd';
+    return '<td class="mn">'+dTxt+'</td><td class="mn '+rc+'">'+retTxt(p.r)+'</td>'};
+  let tb='';
+  PH_ORDER.forEach(pk=>{tb+='<tr><td>'+nm[pk]+tip(defs[pk])+'</td>'+cell('c2',pk)+cell('c3',pk)+cell('c4',pk)+'</tr>'});
+  tb+='<tr class="ph-tot"><td>'+t('ph_total')+'</td><td class="mn">363</td><td class="mn rd">−84%</td><td class="mn">376</td><td class="mn rd">−77%</td><td class="mn">279*</td><td class="mn rd">−54%*</td></tr>';
+  document.getElementById('phTblB').innerHTML=tb;
+  // trend notes
+  document.getElementById('phNotes').innerHTML=t('ph_notes').map(n=>'<div class="conv-card"><div class="cc-m"><span>'+n.n+'</span>'+tip(n.tip)+'</div><div class="cc-v">'+n.v+'</div><div class="cc-d">'+n.d+'</div></div>').join('');
+  document.getElementById('phFoot').textContent=t('ph_foot');
 }
 
 // ============ PROCESS BINANCE DATA ============
@@ -770,8 +891,9 @@ let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=
 
     // Calculate indicators from close prices
     indicators=calcIndicators(d.closePrices);
-    lastFNG=await fetchFNG();
-    await fetchOnChainData();
+    // parallel, failure-tolerant: FNG, on-chain data.json, Binance Futures funding
+    const parRes=await Promise.all([fetchFNG(),fetchOnChainData(),fetchFunding()]);
+    lastFNG=parRes[0];
     renderScorecard(indicators,lastFNG);
 
     localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:lastPr,lastUpdate:Date.now()}));

@@ -1,28 +1,8 @@
 {
-  "updated": "2026-07-15T06:46:27Z",
-  "realized_price": {
-    "d": "2026-07-14",
-    "unixTs": 1783987200,
-    "realizedPrice": 52450.54
-  },
-  "mvrv_zscore": {
-    "d": "2026-07-14",
-    "unixTs": 1783987200,
-    "mvrv": 1.2376
-  },
-  "nupl": {
-    "d": "2026-07-14",
-    "unixTs": 1783987200,
-    "nupl": 0.192
-  },
-  "sopr": {
-    "d": "2026-07-14",
-    "unixTs": 1783987200,
-    "sopr": 0.991
-  },
-  "puell": {
-    "d": "2026-07-14",
-    "unixTs": 1783987200,
-    "puellMultiple": 0.7622
-  }
+  "updated": "2026-07-16T06:50:17Z",
+  "realized_price": null,
+  "mvrv_zscore": null,
+  "nupl": null,
+  "sopr": null,
+  "puell": null
 }

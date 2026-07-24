@@ -32,7 +32,7 @@ Every analysis card and table row carries a **`?` tooltip** explaining the metho
 - **On-chain metrics** (Realized Price, MVRV-Z, NUPL, SOPR, Puell): updated daily at 06:00 UTC by GitHub Actions → `data.json` (BGeometrics API)
 - **Funding rate**: [Binance Futures public API](https://fapi.binance.com) (`fapi/v1/fundingRate`, CORS-enabled, no key) — 7-day average of the 8-hourly BTCUSDT perpetual funding, computed live on page load
 - **Sentiment**: [alternative.me](https://alternative.me/crypto/fear-and-greed-index/) Fear & Greed
-- **Research snapshot**: rows/cards tagged `research: Jul 12, 2026` come from a manual research pass (web + on-chain sources) and need periodic manual refresh — everything else recomputes live
+- **Research snapshot**: rows/cards tagged `research: Jul 24, 2026` come from a manual research pass (web + on-chain sources) and need periodic manual refresh — everything else recomputes live
 - **ATH reference**: $126,296 on October 6, 2025 · next halving ~Apr 2028
 
 ## Setup (GitHub Pages)

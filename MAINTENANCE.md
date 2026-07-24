@@ -15,7 +15,7 @@ What keeps this report accurate, who updates it (automatic vs manual), and how o
 
 **Health check (monthly):** confirm the GitHub Action is green (repo → Actions → "Update on-chain data") and `data.json`'s `updated` field is recent. If BGeometrics changes its response shape, `extract_latest` in the workflow and `fetchOnChainData()` in `index.html` are the two places to fix.
 
-## 2. Manual — research snapshot (tagged `research: Jul 12, 2026` in the UI)
+## 2. Manual — research snapshot (tagged `research: Jul 24, 2026` in the UI)
 
 **Frequency: every 2–4 weeks.** Tighten to **weekly** when either happens:
 - we enter the projected bottom window (**Sep–Nov 2026**), or
@@ -28,14 +28,28 @@ What to refresh (all live in the `L.en` / `L.pt` i18n objects in `index.html`):
 |---|---|---|
 | Static checklist rows | `bs` entries `puell`*, `hash`, `lth`, `resv`, `cbp`, `fed` (fields `r` + `st`) | Hash Ribbons cross status, LTH supply, exchange reserves + SSR, Coinbase Premium streak, Fed/DXY liquidity turn |
 | Macro & flow table | `mac` (fields `r` + `e`) | Fed rate path, DXY, tariffs, recession odds, weekly ETF flows, Deribit OI/max pain, catalyst watch, BTC-vs-equities |
-| Polymarket card | `cvp[3]` (fields `v` + `d`) | P(BTC < $55K / $50K / $40K) for 2026 |
-| Trigger cards' current readings | `trig` (field `d`, the "Jul 2026:" part) | Coinbase Premium, ETF streak, hash ribbons, Fed pricing |
+| Polymarket card | `cvp[3]` (fields `v` + `d`) | P(BTC < $55K / $50K / $40K) for 2026, plus P(BTC tags $70K) as the market's counter-read |
+| Trigger cards' current readings | `trig` (field `d`) | Coinbase Premium, ETF streak, hash ribbons, Fed pricing. Lead each with its status in bold (`FIRED` / `PARTIAL` / `NOT FIRED`) and keep the tally in `trig_n` in sync |
 | Cycle-phase timeline (C4) | `PHASES.c4` const (Distribution / Early Decline / projected Capitulation dates) + phase table totals row in `renderPhases()` | Refine the C4 phase boundaries as new price action confirms them; the Capitulation segment stays `proj:true` (striped bar, "(proj.)" label, NOW marker) until the bottom is confirmed |
 | Snapshot date badge | `an_asof` (EN + PT) | set to the new research date |
 
 \* `puell` auto-switches to LIVE if `data.json` provides it — only its static fallback text needs the date kept honest. The `fund` (funding rate) row is normally LIVE from Binance Futures; only its static fallback text (`bs` entry `fund`, field `r`) matters when the Futures API is unreachable — keep the date honest there too.
 
 **Procedure:** run a research pass (web search: each item above), edit the i18n arrays in `index.html` (EN + PT-BR; ES falls back to EN), bump `an_asof`, verify locally (`python3 -m http.server` + open), commit & push.
+
+## 2b. Signal & trigger conventions
+
+Rules that keep the checklist honest over time. **Never retro-edit a threshold because you dislike the reading it just produced** — change the spec prospectively and record it here.
+
+**Latched vs live signals.** Some checklist rows are state ("is it true right now"), others are events ("has it happened this cycle"). The 200W MA row is an *event*: once a weekly close prints below the line, the signal has fired for the cycle even if price reclaims it. The row keeps rendering LIVE state — the latch lives in its tooltip and must be kept there.
+- Latched so far in cycle 4: **200W MA — week of Jun 29, 2026 closed $59,486 vs a $62,443 200W MA** (first since 2022; reclaimed after).
+
+**Trigger changelog.**
+
+| Date | Trigger | Change |
+|---|---|---|
+| Jul 24, 2026 | ETF inflows 3+ weeks | Fired on the letter of the spec (+$197M / +$76M / +$274M) but with ~7% of the outflow recovered. Marked *fired — low conviction*; magnitude stated inline rather than moving the goalposts. **v2 spec, applies from the next firing:** require cumulative net inflows ≥ $1.5–2B, or ≥ 25% of the preceding outflow streak, alongside the 3-week condition. |
+| Jul 24, 2026 | Capitulation tranche gate | Stays strictly crypto-native, but gained a documented parallel **macro gate** (Fed hike odds repriced + DXY breaks 103 + 200W MA lost again) so an oil-shock → CPI-reacceleration path to $38–44K is not silently uncovered. |
 
 ## 3. Event-driven — rewrite, not refresh
 
@@ -53,4 +67,6 @@ What to refresh (all live in the `L.en` / `L.pt` i18n objects in `index.html`):
 Cycles 1–3 historical data (`D1`/`D2`/`D3` arrays, halving & bear-market tables), ATH reference ($126,296 / Oct 6, 2025 — `ATH`/`ATHD` consts), phase history.
 
 ---
-**Last research snapshot: Jul 12, 2026** · next manual refresh due: **late Jul 2026**
+**Last research snapshot: Jul 24, 2026** · next manual refresh due: **early–mid Aug 2026** (switch to **weekly** from September — projected bottom window)
+
+Bring the Jul 28–29 FOMC outcome into the next pass: it is the single scheduled event that can move the `fed` checklist row and the Fed-pivot trigger.

@@ -26,8 +26,8 @@ What to refresh (all live in the `L.en` / `L.pt` i18n objects in `index.html`):
 
 | Item | i18n keys | What to look up |
 |---|---|---|
-| Static checklist rows | `bs` entries `puell`*, `hash`, `lth`, `resv`, `cbp`, `fed` (fields `r` + `st`) | Hash Ribbons cross status, LTH supply, exchange reserves + SSR, Coinbase Premium streak, Fed/DXY liquidity turn |
-| Macro & flow table | `mac` (fields `r` + `e`) | Fed rate path, DXY, tariffs, recession odds, weekly ETF flows, Deribit OI/max pain, catalyst watch, BTC-vs-equities |
+| Static checklist rows | `bs` entries `puell`*, `hash`, `lth`, `resv`, `sthmvrv`, `cbp`, `fed` (fields `r` + `st`) | Hash Ribbons cross status, LTH supply, exchange reserves + SSR, **STH-MVRV + short-term-holder realized price**, Coinbase Premium streak, Fed/DXY liquidity turn |
+| Macro & flow table | `mac` (fields `r` + `e`) | Fed rate path, DXY, tariffs, recession odds, weekly ETF flows, Deribit OI/max pain, catalyst watch, geopolitics, **Strategy holdings / mNAV / BTC sales**, BTC-vs-equities |
 | Polymarket card | `cvp[3]` (fields `v` + `d`) | P(BTC < $55K / $50K / $40K) for 2026, plus P(BTC tags $70K) as the market's counter-read |
 | Trigger cards' current readings | `trig` (field `d`) | Coinbase Premium, ETF streak, hash ribbons, Fed pricing. Lead each with its status in bold (`FIRED` / `PARTIAL` / `NOT FIRED`) and keep the tally in `trig_n` in sync |
 | Cycle-phase timeline (C4) | `PHASES.c4` const (Distribution / Early Decline / projected Capitulation dates) + phase table totals row in `renderPhases()` | Refine the C4 phase boundaries as new price action confirms them; the Capitulation segment stays `proj:true` (striped bar, "(proj.)" label, NOW marker) until the bottom is confirmed |
@@ -50,17 +50,20 @@ Rules that keep the checklist honest over time. **Never retro-edit a threshold b
 |---|---|---|
 | Jul 24, 2026 | ETF inflows 3+ weeks | Fired on the letter of the spec (+$197M / +$76M / +$274M) but with ~7% of the outflow recovered. Marked *fired — low conviction*; magnitude stated inline rather than moving the goalposts. **v2 spec, applies from the next firing:** require cumulative net inflows ≥ $1.5–2B, or ≥ 25% of the preceding outflow streak, alongside the 3-week condition. |
 | Jul 24, 2026 | Capitulation tranche gate | Stays strictly crypto-native, but gained a documented parallel **macro gate** (Fed hike odds repriced + DXY breaks 103 + 200W MA lost again) so an oil-shock → CPI-reacceleration path to $38–44K is not silently uncovered. |
+| Jul 24, 2026 | Checklist grew 13 → **14 signals** | Added `sthmvrv` (short-term-holder MVRV, coins under 155 days). Rationale: it is the only valuation signal not diluted by permanently-held supply — ancient coins, Strategy's treasury, ETF holdings — so it reads the cohort that actually capitulates. `BS_W` was rebalanced to keep the total at **100**: it took 7 points from the aggregate signals it partly supersedes (`rp` 10→9, `nupl` 10→9, `mvrv` 8→6, `hash` 8→7, `fund` 8→7, `resv` 4→3). Readiness moved 31% → 33% at the time of the change — verify the sum is still 100 if you ever touch these. |
+| Jul 24, 2026 | Capitulation gate marked **partially armed** | Strategy began selling BTC to fund preferred dividends (3,588 BTC / $216M, Jun 29–Jul 5; $1.25B authorised). That is genuine non-discretionary selling, so the `mac` catalyst row moved `m` → `h` and its wording from "not fired" to "emerging, not fired". It is a drip, not a cascade — the tranche still requires funding z < −2. Do not promote it to fired without an accelerating, forced sale. |
 
 ## 3. Event-driven — rewrite, not refresh
 
 | Event | Action |
 |---|---|
 | **2nd crypto-native catalyst fires** | Update `mac` catalyst row + checklist; capitulation tranche ($38–44K) becomes actionable — reflect in thesis if bands shift |
+| **Strategy escalates** (sales beyond the $1.25B programme, mNAV holding below 1, a dividend cut/suspension, or forced deleveraging) | This is the leading 2nd-catalyst candidate. Update the `Strategy / corporate treasuries` and catalyst rows in `mac`, promote the capitulation gate from *partially armed*, and re-check the counter-scenario probability in `th_p` — it is the main thing that can invalidate "the low is already in". Track: holdings, average cost ($75,476), mNAV, preferred dividend run-rate ($1.76B/yr), USD reserve, and whether weekly filings show equity raises with no BTC bought |
 | **Bottom confirmed** (8+ checklist signals active, price reclaims Realized Price and holds) | Rewrite thesis banner (`th_*` keys) from "projected bottom" to "bottom in / accumulation"; fill Cycle 4 row in the "Post-ATH bear market" table (low, date, weeks, drawdown); retire or archive the buy ladder; in the **cycle-phase timeline** (`PHASES.c4` const) set the projected Capitulation segment's real end date and remove the `proj:true` flag (fill `d`/`r`), so the bar, NOW marker and phase table reflect the confirmed bottom |
 | **Thesis invalidated** (e.g. sustained reclaim of ~$90K+ with bottom signals still inactive, or new ATH) | Re-derive the whole convergence analysis — bands and window are no longer valid |
 | **Price bands/window revised by new research** | Update in ALL places at once: `LAD_BANDS` const, `lad` rows, ch2 band plugin price levels (`[57000,50000,44000,38000]` + window weeks 50–60), `th_core` value in thesis HTML, `cvp` cards, `th_p` text |
 | **New halving date estimate** | `H5` const in `index.html` |
-| **Window or thesis changed (any of the above)** | Also update the OG/Twitter meta descriptions in the `<head>` of `index.html` (they cite the Sep–Nov 2026 window and $44–50K zone) and regenerate the share image: edit `og-card.html`, open it in a 1200×630 window, screenshot → replace `og.png` |
+| **Window or thesis changed (any of the above)** | Also update the OG/Twitter meta descriptions in the `<head>` of `index.html` (they cite the Sep–Nov 2026 window, the $44–50K zone and the signal count) and regenerate the share image: edit `og-card.html`, then run<br>`google-chrome --headless --disable-gpu --hide-scrollbars --window-size=1200,630 --screenshot=og.png og-card.html`<br>The card also carries the **checklist signal count**, so changing the number of signals requires a regeneration too. Its C4 chart line stays a static snapshot — the `now · −N%` label drifts from the live drawdown by design |
 
 ## 4. Fixed — never touch
 

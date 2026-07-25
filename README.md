@@ -1,6 +1,6 @@
 # Bitcoin Cycle-Bottom Report
 
-A self-updating, single-file report that combines all 4 Bitcoin halving cycles with a full **cycle-bottom analysis**: a cycle-phase timeline, timing & price convergence across independent methods, a 13-signal bottom checklist with a weighted readiness score, a staged buy ladder, and macro/flow context. Live BTC data via Binance API, on-chain metrics via daily GitHub Actions.
+A self-updating, single-file report that combines all 4 Bitcoin halving cycles with a full **cycle-bottom analysis**: a cycle-phase timeline, timing & price convergence across independent methods, a 14-signal bottom checklist with a weighted readiness score, a staged buy ladder, and macro/flow context. Live BTC data via Binance API, on-chain metrics via daily GitHub Actions.
 
 ## Live demo
 
@@ -17,10 +17,10 @@ A self-updating, single-file report that combines all 4 Bitcoin halving cycles w
 | **Cycle phase timeline** | research | Per-cycle phase bars (Accumulation → Early Bull → Markup → Distribution → Early Decline → Capitulation) with hover tooltips, a live NOW marker and a projected C4 capitulation segment; comparison table + trend notes (accumulation shrinking, distribution lengthening) |
 | **Timing convergence** | research | 4 independent methods (post-ATH duration, weeks-to-low, pre-halving distance, capitulation phase) → all point to Oct 2026 |
 | **Price convergence** | live + research | Diminishing-drawdown consensus, on-chain floor (0.75–0.85× Realized Price, live), 200-week MA (live), Polymarket implied distribution |
-| **13-signal bottom checklist** | live + research | On-chain (live), miner, accumulation, flow and macro signals — including a **live funding rate** row (Binance Futures 7-day average) — with ACTIVE / PARTIAL / NOT YET status and a weighted readiness % (structural/valuation signals weighted above sentiment/flow) |
+| **14-signal bottom checklist** | live + research | On-chain (live), miner, accumulation, flow and macro signals — including a **live funding rate** row (Binance Futures 7-day average) — with ACTIVE / PARTIAL / NOT YET status and a weighted readiness % (structural/valuation signals weighted above sentiment/flow) |
 | **Buy ladder** | live | Staged accumulation plan (probe / core / capitulation tranches) — highlights the band the live price is in |
 | **Aggressive-buy triggers** | research | The 4 signals that override the ladder when they fire together |
-| **Macro & flow context** | research | Fed, DXY, tariffs, ETF flows, options positioning, 2nd-catalyst risk |
+| **Macro & flow context** | research | Fed, DXY, tariffs, ETF flows, options positioning, geopolitics, Strategy/corporate-treasury flow, 2nd-catalyst risk |
 | **Historical tables** | fixed + live | Halving data, post-ATH bear markets, same-week drawdown comparison |
 
 Every analysis card and table row carries a **`?` tooltip** explaining the methodology, thresholds and historical precedents. Interface in **EN / PT-BR / ES**.

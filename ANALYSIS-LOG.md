@@ -23,6 +23,55 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-07-25 — "Recovery" ≠ "bottom is in": the flush → rally → bottom precedent
+
+**Question raised:** if July is already a recovery, haven't we passed the bottom?
+
+Fair confusion, caused by loose wording in the phase note written earlier the same day
+("that is a recovery, not a flush in progress"). There are **three** states, not two:
+
+| | |
+|---|---|
+| **A** capitulation underway | the bottom is being carved now |
+| **B** bear-market rally | the flush is still ahead ← base case |
+| **C** bottom already in | new cycle has begun ← counter-scenario (~25%) |
+
+July's data (STH-MVRV 0.82 → 0.92, price $58.6K → ~$64K, 200W MA reclaimed, three
+positive ETF weeks, whales accumulating) **rules out A. It does not distinguish B from C.**
+The original wording ruled out A but read as C.
+
+**What separates B from C is valuation, and it is unambiguous:** price 22% *above*
+Realized Price where every prior bottom printed below; NUPL 0.195 (bottoms < 0); MVRV-Z
+1.24 (bottoms ≈ 0 or negative); STH-MVRV 0.92 (bottom zone ≤ 0.80); 2/14 signals active
+at 33% weighted against 8+ and ≳75% at prior bottoms. A bottom formed with none of these
+would be unprecedented.
+
+**The shape has an exact precedent in both modern cycles** — verified from Binance daily
+candles, not from memory:
+
+| Cycle | Flush low | Relief rally | Real bottom |
+|---|---|---|---|
+| C2 | 2018-06-24 · $5,750 | 2018-07-25 · $8,492 (**+48%**) | **2018-12-15 · $3,156** — 45% below the flush, 174d later |
+| C3 | 2022-06-18 · $17,622 | 2022-08-15 · $25,211 (**+43%**) | **2022-11-21 · $15,476** — 12% below the flush, 156d later |
+| C4 | 2026-07-01 · $57,800 | 2026-07-21 · $66,956 (**+16%**) | ? |
+
+In both cases the June flush was bought, rallied 43–48%, and the real bottom arrived 5–6
+months later *below* the flush low — in C3 after a second catalyst (FTX in November). The
+current bounce is +16%, smaller than either. So this recovery is not evidence against the
+base case; in both precedents it is what **preceded** the bottom.
+
+**Changed:** the phase note now states explicitly that this reads as a bear-market rally
+and not a completed bottom, carries the C2/C3 precedent inline, and points at the
+valuation rows as the thing that settles it.
+
+**Secondary finding — the window's right edge is the tight constraint.** Measured from the
+Jun 22 breakdown with the *raw* historical capitulation durations: C3's 161 days lands on
+**2026-11-30, exactly week 60** — the closing edge of the window — and C2's 176 days lands
+**2026-12-15, two weeks past it**. The window only has margin because C4 is assumed to run
+~15% faster (140–150 days → Nov 9–19). If that assumption is wrong the window closes too
+early, not too late. Added to `th_win_tip`, and `th_win_tip`'s "center of mass" aligned to
+"late October" to match `cvt_sum`.
+
 ## 2026-07-25 — Audit: why the bottom window did *not* move
 
 **Question raised:** after the STH-MVRV addition, the Strategy reversal and the Pi Cycle

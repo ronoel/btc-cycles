@@ -45,6 +45,8 @@ Every analysis card and table row carries a **`?` tooltip** explaining the metho
 
 See [`MAINTENANCE.md`](MAINTENANCE.md) — what updates automatically (Binance live, daily on-chain Action), what needs a manual research refresh (**every 2–4 weeks**, weekly inside the Sep–Nov 2026 bottom window), and which events require rewriting the thesis.
 
+See [`ANALYSIS-LOG.md`](ANALYSIS-LOG.md) for the reasoning behind the conclusions — the calculations, the counter-arguments tested, rejected hypotheses and data limitations, dated. A conclusion lives in `index.html`; a procedure in `MAINTENANCE.md`; a derivation in the analysis log.
+
 ## Support
 
 If this report is useful, you can send a Lightning tip: `squashycolumn40@walletofsatoshi.com` ⚡

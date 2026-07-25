@@ -41,6 +41,10 @@ What to refresh (all live in the `L.en` / `L.pt` i18n objects in `index.html`):
 
 Rules that keep the checklist honest over time. **Never retro-edit a threshold because you dislike the reading it just produced** — change the spec prospectively and record it here.
 
+This section holds *conventions*. The derivations, tested counter-arguments and data
+limitations behind each conclusion go in [`ANALYSIS-LOG.md`](ANALYSIS-LOG.md); add an
+entry there whenever a research pass changes a threshold, a weight or the thesis.
+
 **Latched vs live signals.** Some checklist rows are state ("is it true right now"), others are events ("has it happened this cycle"). The 200W MA row is an *event*: once a weekly close prints below the line, the signal has fired for the cycle even if price reclaims it. The row keeps rendering LIVE state — the latch lives in its tooltip and must be kept there.
 - Latched so far in cycle 4: **200W MA — week of Jun 29, 2026 closed $59,486 vs a $62,443 200W MA** (first since 2022; reclaimed after).
 

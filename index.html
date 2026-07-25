@@ -219,9 +219,10 @@ sf:'Fetching daily data from Binance...',so:'Connected \u2014 BTC <b>{0}</b> ({1
 ftr1:'Historical data (cycles 1-3) fixed. Cycle 4 daily via Binance public API. Indicators calculated client-side. Cycle analysis is historical pattern matching — not financial advice.',ftr2:'Last update:',ftr_don:'Support this free report:',ftr_cp:'copy',ftr_cpd:'copied!',
 cmp_title:'How to buy Bitcoin in Brazil',cmp_intro:'A comparison of the main ways to buy and sell Bitcoin in Brazil \u2014 from centralized exchanges to peer-to-peer. Some links are referral links: using them supports this free report at no extra cost to you.',cmp_visit:'Visit',
 sc_mayer:'Mayer Multiple',sc_200d:'Price vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'Weekly RSI',sc_fng:'Fear & Greed',
+sc_pi_never:'Never fired in cycle 4 · peaked at {0}× the trigger ({1})',sc_pi_fired:'Fired {0} — 111D MA above 2×350D MA',
 sc_mayer_tip:'Price ÷ 200-day MA (Trace Mayer). Below 0.8 = historical accumulation zone (bottoms: 2015 ~0.55 · 2018 ~0.5 · 2022 ~0.6); above 2.4 = overheated. Simple but robust across all cycles.',
 sc_200d_tip:'Distance between spot price and the 200-day moving average — the classic bull/bear dividing line. Deeply negative (< −10%) = bear-market stress zone; above +100% preceded every cycle top.',
-sc_pi_tip:'TOP detector: fires when the 111-day MA crosses above 2× the 350-day MA (350/111 ≈ 3.14 ≈ π). Nailed the cycle top within ±3 days in 2013, 2017 and 2021. In a bear market it works as confirmation — "Not fired" means we are nowhere near euphoria. It says nothing about the bottom: for that, see the on-chain metrics and the Pi Cycle Bottom status in the convergence section.',
+sc_pi_tip:'TOP detector: fires when the 111-day MA crosses above 2× the 350-day MA (350/111 ≈ 3.14 ≈ π). It called the 2013, 2017 and 2021 tops within days — and then <b>failed in cycle 4</b>. The value shown is the live ratio of 111D MA to 2×350D MA: 1.00× is the trigger. Cycle 4 never got there, peaking at 0.74× in Jun 2024 and not even matching that at the Oct 2025 ATH, because the top was built slowly enough that the 111D MA never ran far ahead of the 350D. That miss is not noise — it is direct evidence for the diminishing-amplitude thesis this whole report rests on: a fixed 2× multiple calibrated to 2013/2017 volatility no longer fits an institutional market. It says nothing about where the bottom is; the on-chain rows and the 14-signal checklist do that. Caveat: computed from Binance daily closes, which start Aug 2017, so the 2013 and 2017 calls cannot be verified on this page.',
 sc_rsi_tip:'14-week Relative Strength Index — momentum on the weekly chart. Below 30 = oversold; prior bear-market bottoms printed weekly RSI ~28–30 (2015, 2018, 2022). Above 70 marked euphoria phases.',
 sc_fng_tip:'Composite sentiment index (volatility, volume, social media, dominance, trends). ≤ 25 = extreme fear, historically favorable for accumulation — cycle bottoms saw single-digit readings sustained for weeks. Contrarian: necessary for a bottom, but not sufficient alone.',
 sc_realized_tip:'Average on-chain acquisition cost of all coins (realized cap ÷ supply). Price below it = the average holder is underwater; every cycle bottom (2015, 2018, 2022) printed below the Realized Price. Our floor estimate: 0.75–0.85× this value.',
@@ -248,7 +249,7 @@ cvt:[
 {m:'Pre-halving distance',v:'Oct–Nov 2026',d:'Bottoms form ~17–18 months before the next halving (~Apr 2028)',tip:'Dec 2018 bottom → May 2020 halving (17m). Nov 2022 bottom → Apr 2024 halving (17m). Apr 2028 − 17.5m = Oct–Nov 2026. Fully independent of the ATH date.'},
 {m:'Capitulation phase length',v:'Sep–Oct 2026',d:'C2: 176d · C3: 161d of capitulation; C4 entered it ~Jul 2026',tip:'The final capitulation phase lasted ~5–6 months in prior cycles, but C4 runs phases ~15% faster. If it began around the Jul 1 low ($58.6K), it completes in early autumn 2026.'}],
 cvp_t:'Price convergence — where the bands overlap',
-cvp_sum:'The naive historical projection (−78–84% = $20–28K) is rejected by every modern method. Overlap of all four: <b>core $44–50K, probes from $57K</b>.',
+cvp_sum:'The naive historical projection (−78–84% = $20–28K) is rejected by every modern method. Overlap of all four: <b>core $44–50K, probes from $57K</b>. Independent corroboration: the Pi Cycle Top never fired this cycle, peaking at 0.74× its trigger — cycle 4’s amplitude was too compressed for a threshold calibrated on 2013/2017, on the way up as much as on the way down.',
 cvp:[
 {m:'Diminishing-drawdown consensus',v:'~$44K (−65%)',d:'C1 −86% → C2 −84% → C3 −78% → C4 est. −55…−77%',tip:'Each cycle bottoms at a shallower drawdown as market cap grows, and the reduction is accelerating (2pp → 6.6pp per cycle). Four projection methods (linear, exponential, log-regression, mcap-adjusted) give $29–57K with consensus −65% ≈ $44K.'},
 {m:'On-chain floor',v:'{0}',d:'0.75–0.85 × Realized Price ({1})',tip:'Cycle bottoms print below the network’s aggregate cost basis: NUPL < 0, MVRV-Z ≈ 0, price at 0.75–0.85× Realized Price (2018: 0.76× · 2022: 0.83×). This card updates live from data.json.'},
@@ -331,9 +332,10 @@ sf:'Buscando dados di\u00e1rios da Binance...',so:'Conectado \u2014 BTC <b>{0}</
 ftr1:'Dados hist\u00f3ricos (ciclos 1-3) fixos. Ciclo 4 di\u00e1rio via API p\u00fablica da Binance. Indicadores calculados no cliente. An\u00e1lise de ciclos \u00e9 correspond\u00eancia de padr\u00f5es hist\u00f3ricos \u2014 n\u00e3o \u00e9 recomenda\u00e7\u00e3o de investimento.',ftr2:'\u00daltima atualiza\u00e7\u00e3o:',ftr_don:'Apoie este relat\u00f3rio gratuito:',ftr_cp:'copiar',ftr_cpd:'copiado!',
 cmp_title:'Como comprar Bitcoin no Brasil',cmp_intro:'Compara\u00e7\u00e3o dos principais meios de compra e venda de Bitcoin no Brasil \u2014 de exchanges centralizadas ao peer-to-peer. Alguns links s\u00e3o de indica\u00e7\u00e3o: us\u00e1-los apoia este relat\u00f3rio gratuito sem custo extra para voc\u00ea.',cmp_visit:'Acessar',
 sc_mayer:'Mayer Multiple',sc_200d:'Pre\u00e7o vs 200D MA',sc_pi:'Pi Cycle Top',sc_rsi:'RSI Semanal',sc_fng:'Fear & Greed',
+sc_pi_never:'Nunca disparou no ciclo 4 \u00b7 pico de {0}\u00d7 o gatilho ({1})',sc_pi_fired:'Disparou em {0} \u2014 MA 111d acima de 2\u00d7 a MA 350d',
 sc_mayer_tip:'Pre\u00e7o \u00f7 m\u00e9dia m\u00f3vel de 200 dias (Trace Mayer). Abaixo de 0,8 = zona hist\u00f3rica de acumula\u00e7\u00e3o (fundos: 2015 ~0,55 \u00b7 2018 ~0,5 \u00b7 2022 ~0,6); acima de 2,4 = superaquecido. Simples mas robusto em todos os ciclos.',
 sc_200d_tip:'Dist\u00e2ncia entre o pre\u00e7o spot e a m\u00e9dia m\u00f3vel de 200 dias \u2014 a cl\u00e1ssica linha divis\u00f3ria bull/bear. Muito negativo (< \u221210%) = zona de estresse de bear market; acima de +100% antecedeu todos os topos de ciclo.',
-sc_pi_tip:'Detector de TOPO: dispara quando a MA de 111 dias cruza acima de 2\u00d7 a MA de 350 dias (350/111 \u2248 3,14 \u2248 \u03c0). Acertou o topo dos ciclos de 2013, 2017 e 2021 com precis\u00e3o de \u00b13 dias. Em bear market funciona como confirma\u00e7\u00e3o \u2014 "N\u00e3o disparou" significa que estamos longe de euforia. Ele n\u00e3o diz nada sobre o fundo: para isso, veja as m\u00e9tricas on-chain e o status do Pi Cycle Bottom na se\u00e7\u00e3o de converg\u00eancia.',
+sc_pi_tip:'Detector de TOPO: dispara quando a MA de 111 dias cruza acima de 2\u00d7 a MA de 350 dias (350/111 \u2248 3,14 \u2248 \u03c0). Acertou os topos de 2013, 2017 e 2021 com poucos dias de erro \u2014 e depois <b>falhou no ciclo 4</b>. O valor mostrado \u00e9 a raz\u00e3o ao vivo entre a MA de 111d e 2\u00d7 a MA de 350d: 1,00\u00d7 \u00e9 o gatilho. O ciclo 4 nunca chegou l\u00e1, com pico de 0,74\u00d7 em jun 2024 e sem nem igualar isso na ATH de out 2025, porque o topo foi constru\u00eddo devagar o suficiente para a MA de 111d nunca disparar muito \u00e0 frente da de 350d. Essa falha n\u00e3o \u00e9 ru\u00eddo \u2014 \u00e9 evid\u00eancia direta da tese de amplitude decrescente sobre a qual todo este relat\u00f3rio se apoia: um m\u00faltiplo fixo de 2\u00d7, calibrado na volatilidade de 2013/2017, j\u00e1 n\u00e3o serve para um mercado institucional. Ele n\u00e3o diz nada sobre onde est\u00e1 o fundo; para isso servem as linhas on-chain e o checklist de 14 sinais. Ressalva: calculado dos fechamentos di\u00e1rios da Binance, que come\u00e7am em ago 2017, ent\u00e3o os acertos de 2013 e 2017 n\u00e3o podem ser verificados nesta p\u00e1gina.',
 sc_rsi_tip:'\u00cdndice de For\u00e7a Relativa de 14 semanas \u2014 momentum no gr\u00e1fico semanal. Abaixo de 30 = sobrevendido; fundos de bear markets anteriores imprimiram RSI semanal ~28\u201330 (2015, 2018, 2022). Acima de 70 marcou as fases de euforia.',
 sc_fng_tip:'\u00cdndice composto de sentimento (volatilidade, volume, redes sociais, domin\u00e2ncia, buscas). \u2264 25 = medo extremo, historicamente favor\u00e1vel para acumula\u00e7\u00e3o \u2014 fundos de ciclo viram leituras de um d\u00edgito sustentadas por semanas. Contr\u00e1rio: necess\u00e1rio para um fundo, mas n\u00e3o suficiente sozinho.',
 sc_realized_tip:'Custo m\u00e9dio de aquisi\u00e7\u00e3o on-chain de todas as moedas (realized cap \u00f7 supply). Pre\u00e7o abaixo dele = detentor m\u00e9dio no preju\u00edzo; todo fundo de ciclo (2015, 2018, 2022) imprimiu abaixo do Pre\u00e7o Realizado. Nossa estimativa de piso: 0,75\u20130,85\u00d7 este valor.',
@@ -360,7 +362,7 @@ cvt:[
 {m:'Dist\u00e2ncia pr\u00e9-halving',v:'Out\u2013Nov 2026',d:'Fundos se formam ~17\u201318 meses antes do pr\u00f3ximo halving (~abr 2028)',tip:'Fundo dez 2018 \u2192 halving mai 2020 (17m). Fundo nov 2022 \u2192 halving abr 2024 (17m). Abr 2028 \u2212 17,5m = out\u2013nov 2026. Totalmente independente da data da ATH.'},
 {m:'Dura\u00e7\u00e3o da fase de capitula\u00e7\u00e3o',v:'Set\u2013Out 2026',d:'C2: 176d \u00b7 C3: 161d de capitula\u00e7\u00e3o; C4 entrou nela ~jul 2026',tip:'A fase final de capitula\u00e7\u00e3o durou ~5\u20136 meses nos ciclos anteriores, mas o C4 roda as fases ~15% mais r\u00e1pido. Se come\u00e7ou perto da m\u00ednima de 1\u00ba jul ($58,6K), completa no in\u00edcio do outono de 2026.'}],
 cvp_t:'Converg\u00eancia de pre\u00e7o \u2014 onde as faixas se sobrep\u00f5em',
-cvp_sum:'A proje\u00e7\u00e3o hist\u00f3rica ing\u00eanua (\u221278\u201384% = $20\u201328K) \u00e9 rejeitada por todos os m\u00e9todos modernos. Sobreposi\u00e7\u00e3o dos quatro: <b>n\u00facleo $44\u201350K, sondagens a partir de $57K</b>.',
+cvp_sum:'A proje\u00e7\u00e3o hist\u00f3rica ing\u00eanua (\u221278\u201384% = $20\u201328K) \u00e9 rejeitada por todos os m\u00e9todos modernos. Sobreposi\u00e7\u00e3o dos quatro: <b>n\u00facleo $44\u201350K, sondagens a partir de $57K</b>. Corrobora\u00e7\u00e3o independente: o Pi Cycle Top nunca disparou neste ciclo, com pico de 0,74\u00d7 o gatilho \u2014 a amplitude do ciclo 4 foi comprimida demais para um limiar calibrado em 2013/2017, tanto na subida quanto na descida.',
 cvp:[
 {m:'Consenso de drawdown decrescente',v:'~$44K (\u221265%)',d:'C1 \u221286% \u2192 C2 \u221284% \u2192 C3 \u221278% \u2192 C4 est. \u221255\u2026\u221277%',tip:'Cada ciclo faz fundo com drawdown mais raso conforme o market cap cresce, e a redu\u00e7\u00e3o est\u00e1 acelerando (2pp \u2192 6,6pp por ciclo). Quatro m\u00e9todos de proje\u00e7\u00e3o (linear, exponencial, regress\u00e3o log, ajuste por mcap) d\u00e3o $29\u201357K com consenso em \u221265% \u2248 $44K.'},
 {m:'Piso on-chain',v:'{0}',d:'0,75\u20130,85 \u00d7 Pre\u00e7o Realizado ({1})',tip:'Fundos de ciclo imprimem abaixo do custo m\u00e9dio agregado da rede: NUPL < 0, MVRV-Z \u2248 0, pre\u00e7o a 0,75\u20130,85\u00d7 o Pre\u00e7o Realizado (2018: 0,76\u00d7 \u00b7 2022: 0,83\u00d7). Este card atualiza ao vivo via data.json.'},
@@ -623,6 +625,27 @@ function calcRSI(prices,period){
   for(let i=prices.length-period;i<prices.length;i++){const d=prices[i]-prices[i-1];if(d>0)g+=d;else l-=d}
   if(l===0)return 100;return Math.round(100-100/(1+g/l));
 }
+// Pi Cycle Top over the whole daily history: how close 111D MA got to 2x350D MA.
+// Returns the live ratio, the peak reached in cycle 4 (from the C3 bottom onward)
+// and the date of the last firing, so the card can report a non-firing honestly
+// instead of showing a permanently uninformative "not fired".
+function calcPiCycle(){
+  if(!allDailyCloses||allDailyCloses.length<351)return null;
+  const c=allDailyCloses,pre=[0];
+  for(let i=0;i<c.length;i++)pre.push(pre[i]+c[i][1]);
+  const ma=(i,n)=>i+1-n>=0?(pre[i+1]-pre[i+1-n])/n:null;
+  const c4start=new Date(PHASES.c4[0].s).getTime();
+  let ratio=null,peak=null,lastFired=null;
+  for(let i=0;i<c.length;i++){
+    const a=ma(i,111),b=ma(i,350);
+    if(a==null||b==null)continue;
+    const r=a/(b*2);
+    if(r>=1)lastFired=c[i][0];
+    if(c[i][0]>=c4start&&(!peak||r>peak.r))peak={r,ts:c[i][0]};
+    ratio=r;
+  }
+  return {ratio,peak,lastFired,fired:ratio>=1};
+}
 function calcIndicators(closePrices){
   const p=closePrices,cur=p[p.length-1],ind={price:cur};
   const ma200=calcMA(p,200);if(ma200){ind.mayer=Math.round(cur/ma200*100)/100;ind.ma200=Math.round(ma200);ind.ma200pct=Math.round(((cur/ma200)-1)*100)}
@@ -659,7 +682,11 @@ function renderScorecard(ind,fng){
     cards.push({name:t('sc_mayer'),tp:t('sc_mayer_tip'),val:v.toFixed(2),pct,sig,cls,lo:'0',hi:'3.0+',color:v<0.8?'var(--teal)':v>2.4?'var(--red)':'#EF9F27'})}
   if(ind.ma200pct!==undefined){const v=ind.ma200pct,pct=Math.min(Math.max((v+100)/300*100,0),100);let sig,cls;if(v<-10){sig=t('sc_buy');cls='sc-buy'}else if(v>100){sig=t('sc_sell');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
     cards.push({name:t('sc_200d'),tp:t('sc_200d_tip'),val:(v>0?'+':'')+v+'%',pct,sig,cls,lo:'-50%',hi:'+200%',color:v<-10?'var(--teal)':v>100?'var(--red)':'#EF9F27'})}
-  if(ind.piCrossed!==undefined){cards.push({name:t('sc_pi'),tp:t('sc_pi_tip'),val:ind.piCrossed?t('sc_fired'):t('sc_not'),pct:ind.piCrossed?95:20,sig:ind.piCrossed?t('sc_sell'):t('sc_neutral'),cls:ind.piCrossed?'sc-sell':'sc-neutral',lo:'',hi:'',color:ind.piCrossed?'var(--red)':'#EF9F27',nobar:true})}
+  const pi=calcPiCycle();
+  if(pi){const fm=ts=>new Date(ts).toLocaleDateString(lang==='pt'?'pt-BR':lang==='es'?'es-ES':'en-US',{month:'short',year:'numeric',timeZone:'UTC'});
+    const desc=pi.fired?tf('sc_pi_fired',fm(pi.lastFired))
+      :tf('sc_pi_never',pi.peak?pi.peak.r.toFixed(2):'—',pi.peak?fm(pi.peak.ts):'—');
+    cards.push({name:t('sc_pi'),tp:t('sc_pi_tip'),val:pi.ratio.toFixed(2)+'\u00d7',pct:Math.min(pi.ratio*100,100),sig:pi.fired?t('sc_sell'):t('sc_not'),cls:pi.fired?'sc-sell':'sc-neutral',lo:'',hi:'',color:pi.fired?'var(--red)':'#EF9F27',nobar:true,desc})}
   if(ind.rsi){const v=ind.rsi,pct=v;let sig,cls;if(v<30){sig=t('sc_oversold');cls='sc-buy'}else if(v>70){sig=t('sc_overbought');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
     cards.push({name:t('sc_rsi'),tp:t('sc_rsi_tip'),val:v,pct,sig,cls,lo:'0',hi:'100',color:v<30?'var(--teal)':v>70?'var(--red)':'#EF9F27'})}
   if(fng){const v=parseInt(fng.value),pct=v;let sig,cls;if(v<=25){sig=t('sc_fear');cls='sc-buy'}else if(v>=75){sig=t('sc_greed');cls='sc-sell'}else{sig=t('sc_neutral');cls='sc-neutral'}
@@ -697,7 +724,7 @@ function renderScorecard(ind,fng){
   }
   cards.forEach(c=>{
     const bar=c.nobar
-      ?'<div class="sc-desc">'+(c.cls==='sc-sell'?'111D MA crossed 2\u00d7350D MA near ATH':'Monitoring 111D vs 2\u00d7350D MA')+'</div>'
+      ?'<div class="sc-desc">'+(c.desc||'')+'</div>'
       :'<div class="sc-bar"><div class="sc-fill" style="width:'+c.pct+'%;background:'+c.color+'"></div><div class="sc-dot" style="left:calc('+c.pct+'% - 5px);background:'+c.color+'"></div></div><div class="sc-labels"><span>'+c.lo+'</span><span>'+c.hi+'</span></div>';
     g.innerHTML+='<div class="sc-card"><div class="sc-name"><span>'+c.name+tip(c.tp||'')+'</span><span class="sc-signal '+c.cls+'">'+c.sig+'</span></div><div class="sc-val" style="color:'+c.color+'">'+c.val+'</div>'+bar+'</div>';
   });
@@ -931,7 +958,9 @@ let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=
     localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:lastPr,lastUpdate:Date.now()}));
     ss('ok',tf('so',$(lastPr),dd));
     // Fetch full history (Aug 2017 to now) in background for click-to-compare
-    fetchAllHistory().then(()=>{if(allDailyCloses.length>0){document.getElementById('ch1').style.cursor='crosshair';updateUI()}});
+    // Pi Cycle needs the full daily history (350D MA + the cycle-4 peak), so the
+    // scorecard is re-rendered once it lands — otherwise that card never appears.
+    fetchAllHistory().then(()=>{if(allDailyCloses.length>0){document.getElementById('ch1').style.cursor='crosshair';updateUI();renderScorecard(indicators,lastFNG)}});
   } else {
     // Offline: try stored data
     try{const stored=JSON.parse(localStorage.getItem(SK));

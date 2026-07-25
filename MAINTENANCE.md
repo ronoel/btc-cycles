@@ -46,7 +46,9 @@ limitations behind each conclusion go in [`ANALYSIS-LOG.md`](ANALYSIS-LOG.md); a
 entry there whenever a research pass changes a threshold, a weight or the thesis.
 
 **Latched vs live signals.** Some checklist rows are state ("is it true right now"), others are events ("has it happened this cycle"). The 200W MA row is an *event*: once a weekly close prints below the line, the signal has fired for the cycle even if price reclaims it. The row keeps rendering LIVE state — the latch lives in its tooltip and must be kept there.
-- Latched so far in cycle 4: **200W MA — week of Jun 29, 2026 closed $59,486 vs a $62,443 200W MA** (first since 2022; reclaimed after).
+- Latched so far in cycle 4: **200W MA — week of Jun 22–28, 2026 closed $59,577 vs a $62,414 200W MA** (−4.5%; first since 2022; reclaimed after).
+  Figures are Binance-derived, matching what the page computes — prefer those over news-reported values from other indices.
+- **Cycle-phase anchoring:** the capitulation phase is dated from the *flush*, not the low, matching C2 (2018-06-22) and C3 (2022-06-13). C4 is anchored on the Jun 22–28, 2026 breakdown week. Whenever `PHASES.c4` boundaries move, re-check that each `d` still equals its date span and that the ~140–150-day capitulation estimate still lands inside the stated window.
 
 **Trigger changelog.**
 

@@ -23,6 +23,102 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-07-25 — Audit: why the bottom window did *not* move
+
+**Question raised:** after the STH-MVRV addition, the Strategy reversal and the Pi Cycle
+finding, does the shaded window on the post-ATH drawdown chart still hold?
+
+**Answer: yes — weeks 50–60 × $57K–$38K stands.** Recorded here because "we looked and
+decided not to change it" is a decision, and without a record the next pass cannot tell
+it apart from "we never looked".
+
+First, an implementation fact that settles half the question: the box is **not an
+independent constant**. It is drawn from the ladder's own price levels —
+`y0=yd(57000), y1=yd(38000)` — so −54.9% and −69.9% are the probe top and capitulation
+floor, and the box cannot drift from the ladder. "Did the window move?" reduces to "did
+the ladder move?"
+
+**Depth — the two new findings cancel:**
+
+| Finding | Direction |
+|---|---|
+| Pi Cycle Top never fired (0.74× peak) | compressed amplitude → argues **shallower** |
+| Strategy turned structural seller | supply pressure → argues the deep end is **more reachable** |
+
+And the Pi Cycle result is *corroborating* evidence for a thesis already adopted — it is
+why the target is −65% rather than −80%. It carries no new quantitative estimate of
+depth, so moving the band on it would double-count one insight.
+
+**Timing — nothing touched the four methods, but one needed recomputing.** See the entry
+below: correcting the capitulation phase anchor moved that method from Sep–Oct to
+Oct–Nov, which *tightened* the convergence rather than shifting the window. Three of four
+methods now read Oct–Nov, midpoints clustering near Oct 27, all inside weeks 50–60
+(Sep 21 – Nov 30). `cvt_sum` updated from "centered on October" to "centered on late
+October"; the window itself is unchanged.
+
+**The one live risk to the window, and it points later:** the capitulation-phase method
+assumes the phase has begun. July's data argues it has not — see below.
+
+## 2026-07-25 — Capitulation phase was anchored on the wrong date
+
+**Found while checking the above.** `PHASES.c4` had the capitulation phase starting
+**2026-07-12**, while the thesis text said it "began around the Jul 1 low". Two problems,
+and the second is the real one:
+
+1. Under the file's own C2/C3 convention the phase starts at the **flush** and *ends* at
+   the low — C2: 2018-06-22 → 2018-12-15; C3: 2022-06-13 → 2022-11-21. So dating C4's
+   start "at the low" inverts the convention.
+2. Jul 12 is not a breakdown at all. It closed at **$63,780** — *above* the Jun 30 low
+   close of $58,625 and after the Jul 1 intraday low of $57,800. It was a recovery date.
+
+**Corrected to 2026-06-22**, the start of the week that broke down to $58,115 and closed
+at **$59,577** — the first weekly close below the 200W MA since 2022. That is the true
+analogue of the C2/C3 anchors. `ed` becomes 2026-01-06 → 2026-06-22 = **167 days** (was
+187). Phase list stays contiguous; verified every coded `d` against its date span.
+
+**This fixed an inconsistency the old anchor was hiding.** The tooltip claims ~140–150
+days of capitulation at C4's ~15%-faster pace. From the old Jul 12 anchor that lands
+**Nov 29 – Dec 9 — outside** the stated Oct–Nov window. From Jun 22 it lands **Nov 9–19**,
+inside it. The projected phase end moved 2026-10-15 → **2026-11-09** to match; Oct 15
+implied only 115 days, contradicting the same tooltip.
+
+**Also corrected — my own earlier figures:**
+- The 200W MA latch was recorded as "week of Jun 29 closed $59,486 vs $62,443". Per
+  Binance, the page's own source, it is the week of **Jun 22–28 closing $59,577** against
+  a **$62,414** 200W MA (−4.5%). The earlier numbers came from a news article on a
+  different index; the report should quote what it can compute. Fixed in the tooltip and
+  in `MAINTENANCE.md`.
+- "The Jul 1 low ($58.6K)" conflated two things: **$58,625 was the lowest daily close, on
+  Jun 30**; **$57,800 was the intraday low, on Jul 1**. `ph_foot` now states both.
+
+**Left alone deliberately:** `ed`'s return stays `r:-31` — the anchor shift moves it from
+−32.0% to −31.7%, inside the existing rounding, and the sibling rows use a price source I
+cannot fully reconcile (`dist` codes −25 where closes give −25.8). Not worth churn.
+Separately, `acc` codes 405 days where its span is 406; pre-existing, cosmetic, and the
+"717 → 656 → 405 days" note depends on it, so left as-is.
+
+## 2026-07-25 — July argues the capitulation phase has not begun
+
+The phase timeline asserts "Capitulation (projected)" from Jun 22. The evidence gathered
+during this pass runs against it:
+
+| | late Jun | Jul 25 |
+|---|---|---|
+| STH-MVRV | 0.82 | **0.92** (less underwater) |
+| Price | $58.6K close | **~$64K** |
+| 200W MA | first weekly close below since 2022 | **reclaimed** |
+| ETF flows | record 8-week outflow streak | **3 positive weeks** |
+| Whales | — | **accumulating (+66.7K BTC / 60d)** |
+
+That is a recovery, not a flush in progress. The phase label was already hedged
+generically ("only confirmable in hindsight"); it now states the contradicting evidence
+explicitly and tells the reader to read the label sceptically.
+
+**Consequence for the window:** if the start date slips forward, the projected bottom
+slips with it. This is the only vector currently acting on the window, and it pushes
+**later**, not earlier — worth remembering when the temptation is to pull the window
+forward because price is holding up.
+
 ## 2026-07-24 — Pi Cycle Top never fired in cycle 4
 
 **Question raised:** does a *top* detector belong on a bottom-focused report?

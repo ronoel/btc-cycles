@@ -2,7 +2,8 @@ name: Update on-chain data
 
 on:
   schedule:
-    # Runs daily at 06:00 UTC
+    # Runs daily at 06:00 UTC. FRED daily series post with a ~1 business-day lag,
+    # BGeometrics rolls over shortly after UTC midnight.
     - cron: '0 6 * * *'
   workflow_dispatch: # Allow manual trigger
 
@@ -15,101 +16,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch BGeometrics on-chain metrics
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # All sources are keyless; the token only lifts bitcoin-data.com's
+      # anonymous rate limit (10 req/h) and may widen the history window.
+      # The script never fails the build — a source that errors keeps its
+      # previous value and is listed in data.json's `stale` array.
+      - name: Build data.json + history.json
         env:
-          TOKEN: ${{ secrets.BGEOMETRICS_TOKEN }}
-        run: |
-          set -e
-          API="https://api.bgeometrics.com/v1"
-          
-          echo "Fetching realized-price..."
-          REALIZED=$(curl -sf "${API}/realized-price?token=${TOKEN}" || echo "null")
-          
-          echo "Fetching mvrv..."
-          MVRV=$(curl -sf "${API}/mvrv?token=${TOKEN}" || echo "null")
-          
-          echo "Fetching nupl..."
-          NUPL=$(curl -sf "${API}/nupl?token=${TOKEN}" || echo "null")
-          
-          echo "Fetching sopr..."
-          SOPR=$(curl -sf "${API}/sopr?token=${TOKEN}" || echo "null")
-
-          echo "Fetching puell-multiple..."
-          PUELL=$(curl -sf "${API}/puell-multiple?token=${TOKEN}" || echo "null")
-
-          # Extract latest values from each response
-          # BGeometrics returns arrays of [date, value] or objects with date/value
-          # We use jq to safely extract the last entry
-          extract_latest() {
-            local data="$1"
-            if [ "$data" = "null" ] || [ -z "$data" ]; then
-              echo "null"
-              return
-            fi
-            # Try array of arrays [[date,val],...] → last element's value
-            val=$(echo "$data" | jq -r 'if type == "array" then (if (.[0] | type) == "array" then .[-1][1] elif (.[0] | type) == "object" then .[-1].value // .[-1].v // .[-1].y else .[-1] end) else .value // .v // . end' 2>/dev/null)
-            if [ "$val" = "null" ] || [ -z "$val" ]; then
-              # Fallback: try to get last numeric value
-              val=$(echo "$data" | jq -r 'if type == "array" then .[-1] else . end' 2>/dev/null)
-            fi
-            echo "$val"
-          }
-          
-          R_VAL=$(extract_latest "$REALIZED")
-          M_VAL=$(extract_latest "$MVRV")
-          N_VAL=$(extract_latest "$NUPL")
-          S_VAL=$(extract_latest "$SOPR")
-          P_VAL=$(extract_latest "$PUELL")
-
-          echo "Realized Price: $R_VAL"
-          echo "MVRV Z-Score: $M_VAL"
-          echo "NUPL: $N_VAL"
-          echo "SOPR: $S_VAL"
-          echo "Puell: $P_VAL"
-          
-          # Build data.json
-          NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          cat > data.json << EOF
-          {
-            "updated": "${NOW}",
-            "realized_price": ${R_VAL:-null},
-            "mvrv_zscore": ${M_VAL:-null},
-            "nupl": ${N_VAL:-null},
-            "sopr": ${S_VAL:-null},
-            "puell": ${P_VAL:-null},
-            "raw": {
-              "realized_price_response": ${REALIZED},
-              "mvrv_response": ${MVRV},
-              "nupl_response": ${NUPL},
-              "sopr_response": ${SOPR}
-            }
-          }
-          EOF
-          
-          # Clean up indentation
-          python3 -c "
-          import json
-          with open('data.json') as f:
-              data = json.load(f)
-          # Remove raw responses to keep file small, keep only latest values
-          clean = {k:v for k,v in data.items() if k != 'raw'}
-          # If values look like arrays, extract just the last value
-          for key in ['realized_price','mvrv_zscore','nupl','sopr','puell']:
-              val = clean.get(key)
-              if isinstance(val, list):
-                  clean[key] = val[-1] if val else None
-                  if isinstance(clean[key], list):
-                      clean[key] = clean[key][-1] if clean[key] else None
-          with open('data.json','w') as f:
-              json.dump(clean, f, indent=2)
-          print('data.json written:', json.dumps(clean, indent=2))
-          "
+          BGEOMETRICS_TOKEN: ${{ secrets.BGEOMETRICS_TOKEN }}
+        run: python3 scripts/build_data.py
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
+          git add data.json history.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

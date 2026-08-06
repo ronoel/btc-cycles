@@ -1,0 +1,220 @@
+#!/usr/bin/env python3
+"""Build data.json (latest readings) and history.json (series for the retro-calibration).
+
+Runs in the daily GitHub Action and locally (`python3 scripts/build_data.py`).
+Every source below is keyless; BGEOMETRICS_TOKEN, when present, only lifts the
+bitcoin-data.com rate limit (10 req/h anonymous) and may extend the history window.
+
+Sources
+  on-chain  bitcoin-data.com/v1/*          (BGeometrics)
+  macro     fred.stlouisfed.org/graph/fredgraph.csv?id=*   (keyless CSV; no CORS,
+            which is why it has to come through this Action rather than the page)
+  ETF flow  api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart  (undocumented;
+            see MAINTENANCE.md — treated as best-effort, never fatal)
+
+Nothing here is allowed to fail the build. A source that errors keeps its previous
+value in data.json and is marked stale, because a report that silently drops a row
+is worse than one that says "as of three days ago".
+"""
+import json, os, sys, time, csv, io, urllib.request, urllib.error, datetime
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TOKEN = os.environ.get("BGEOMETRICS_TOKEN", "").strip()
+UA = {"User-Agent": "btc-cycles/1.0 (+https://github.com/ronoel/btc-cycles)"}
+
+
+def get(url, data=None, headers=None, tries=3):
+    h = dict(UA)
+    if headers:
+        h.update(headers)
+    body = json.dumps(data).encode() if data is not None else None
+    if body:
+        h["Content-Type"] = "application/json"
+    last = None
+    for i in range(tries):
+        try:
+            req = urllib.request.Request(url, data=body, headers=h)
+            return urllib.request.urlopen(req, timeout=45).read()
+        except Exception as e:  # noqa: BLE001 - any failure is non-fatal by design
+            last = e
+            time.sleep(2 + 3 * i)
+    print(f"  ! {url} failed: {last}", file=sys.stderr)
+    return None
+
+
+# ---------------------------------------------------------------- on-chain
+# Endpoint -> (key in the JSON rows, name we publish under).
+# NOTE: `mvrv` and `mvrv-zscore` are DIFFERENT series. The ratio is market cap /
+# realized cap (~1.24 today); the Z-score is that gap in standard deviations
+# (~0.39 today). Until Aug 2026 this file fetched the ratio and published it as
+# `mvrv_zscore`, so the report scored a Z-score threshold against a ratio. Both
+# are published now, under honest names.
+ONCHAIN = [
+    ("realized-price", "realizedPrice", "realized_price"),
+    ("mvrv-zscore",    "mvrvZscore",    "mvrv_zscore"),
+    ("mvrv",           "mvrv",          "mvrv"),
+    ("nupl",           "nupl",          "nupl"),
+    ("sopr",           "sopr",          "sopr"),
+    ("puell-multiple", "puellMultiple", "puell"),
+]
+
+
+def fetch_onchain():
+    latest, hist = {}, {}
+    for path, field, name in ONCHAIN:
+        url = f"https://bitcoin-data.com/v1/{path}"
+        if TOKEN:
+            url += f"?token={TOKEN}"
+        raw = get(url)
+        if not raw:
+            continue
+        try:
+            rows = json.loads(raw)
+        except Exception:
+            print(f"  ! {path}: unparseable response", file=sys.stderr)
+            continue
+        if not isinstance(rows, list) or not rows:
+            print(f"  ! {path}: unexpected shape", file=sys.stderr)
+            continue
+        rows = [r for r in rows if r.get(field) is not None]
+        rows.sort(key=lambda r: r["d"])
+        latest[name] = {"d": rows[-1]["d"], "v": round(float(rows[-1][field]), 4)}
+        hist[name] = {"d0": rows[0]["d"],
+                      "v": [round(float(r[field]), 4) for r in rows]}
+        print(f"  {name:15} {latest[name]['v']:>12}  ({latest[name]['d']}, {len(rows)}d)")
+        time.sleep(1)  # be polite to the anonymous rate limit
+    return latest, hist
+
+
+# ------------------------------------------------------------------- macro
+FRED = ["M2SL", "WALCL", "WTREGEN", "RRPONTSYD", "DFII10", "DGS10", "DGS2",
+        "BAMLH0A0HYM2", "DTWEXBGS"]
+
+
+def fetch_fred():
+    out = {}
+    for sid in FRED:
+        raw = get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}")
+        if not raw:
+            continue
+        rows = list(csv.reader(io.StringIO(raw.decode())))[1:]
+        pts = [(r[0], float(r[1])) for r in rows if len(r) > 1 and r[1] not in (".", "")]
+        if pts:
+            out[sid] = pts
+            print(f"  {sid:14} {pts[-1][1]:>12}  ({pts[-1][0]}, {len(pts)} obs)")
+    return out
+
+
+def ma(pts, n):
+    v = [p[1] for p in pts[-n:]]
+    return sum(v) / len(v) if v else None
+
+
+def build_macro(f):
+    """Reduce the FRED series to the handful of readings the page actually scores.
+
+    Deliberately small: DXY, real rates, the Fed balance sheet and M2 are one
+    collinear liquidity factor, so they feed ONE composite row rather than four
+    checklist rows. Credit spreads stay separate — they measure systemic stress,
+    not liquidity, and the report uses them for drawdown DEPTH, not timing.
+    """
+    m = {}
+    if "M2SL" in f:
+        p = f["M2SL"]
+        m["m2"] = {"d": p[-1][0], "level": p[-1][1],
+                   "yoy": round((p[-1][1] / p[-13][1] - 1) * 100, 2) if len(p) > 13 else None,
+                   "yoy_3m": round((p[-4][1] / p[-16][1] - 1) * 100, 2) if len(p) > 16 else None,
+                   "yoy_6m": round((p[-7][1] / p[-19][1] - 1) * 100, 2) if len(p) > 19 else None}
+    if all(k in f for k in ("WALCL", "WTREGEN", "RRPONTSYD")):
+        tga, rrp = dict(f["WTREGEN"]), dict(f["RRPONTSYD"])
+        # RRP is daily, TGA/WALCL weekly (Wednesday) — align on the WALCL dates.
+        nl = []
+        for d, v in f["WALCL"]:
+            if d in tga and d in rrp:
+                nl.append((d, round(v / 1000 - tga[d] / 1000 - rrp[d], 1)))
+        if nl:
+            m["netliq"] = {"d": nl[-1][0], "v": nl[-1][1],
+                           "w4": nl[-5][1] if len(nl) > 5 else None,
+                           "w13": nl[-14][1] if len(nl) > 14 else None,
+                           "w52": nl[-53][1] if len(nl) > 53 else None,
+                           "assets": round(f["WALCL"][-1][1] / 1000, 1),
+                           "tga": round(f["WTREGEN"][-1][1] / 1000, 1),
+                           "rrp": round(f["RRPONTSYD"][-1][1], 1)}
+    for sid, name, win in (("DFII10", "real10y", 200), ("DGS10", "nom10y", 200),
+                           ("DGS2", "nom2y", 200), ("BAMLH0A0HYM2", "hy_oas", 200),
+                           ("DTWEXBGS", "dxy", 200)):
+        if sid not in f:
+            continue
+        p = f[sid]
+        v = [x[1] for x in p]
+        m[name] = {"d": p[-1][0], "v": p[-1][1],
+                   "ma": round(ma(p, win), 2),
+                   "hi2y": max(v[-500:]), "lo2y": min(v[-500:])}
+    m["dxy_src"] = "FRED DTWEXBGS (broad trade-weighted USD) — the ICE DXY is licensed"
+    return m
+
+
+# --------------------------------------------------------------- ETF flows
+def fetch_etf():
+    raw = get("https://api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart",
+              data={"type": "us-btc-spot"})
+    if not raw:
+        return None
+    try:
+        rows = json.loads(raw)["data"]
+    except Exception:
+        print("  ! ETF: unexpected response shape", file=sys.stderr)
+        return None
+    if not isinstance(rows, list) or not rows:
+        return None
+    rows.sort(key=lambda r: r["date"])
+    B = 1e9
+    s = lambda n: round(sum(r["totalNetInflow"] for r in rows[-n:]) / B, 2)
+    yr = datetime.date.today().year
+    ytd = round(sum(r["totalNetInflow"] for r in rows
+                    if r["date"] >= f"{yr}-01-01") / B, 2)
+    out = {"d": rows[-1]["date"], "d5": s(5), "d20": s(20), "d60": s(60),
+           "ytd": ytd, "ytd_partial": rows[0]["date"] > f"{yr}-01-01",
+           "cum": round(rows[-1]["cumNetInflow"] / B, 1),
+           "aum": round(rows[-1]["totalNetAssets"] / B, 1)}
+    print(f"  etf 20d {out['d20']:+.2f}B  60d {out['d60']:+.2f}B  ytd {out['ytd']:+.2f}B  ({out['d']})")
+    return out
+
+
+# ------------------------------------------------------------------- write
+def main():
+    prev = {}
+    try:
+        with open(os.path.join(ROOT, "data.json")) as fh:
+            prev = json.load(fh)
+    except Exception:
+        pass
+
+    print("on-chain:")
+    onchain, hist = fetch_onchain()
+    print("macro (FRED):")
+    macro = build_macro(fetch_fred())
+    print("etf:")
+    etf = fetch_etf()
+
+    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    data = {"updated": now, "onchain": onchain or prev.get("onchain", {}),
+            "macro": macro or prev.get("macro", {}),
+            "etf": etf or prev.get("etf")}
+    # A section we failed to refresh keeps its old values; say so rather than
+    # letting the page present stale numbers as current.
+    data["stale"] = [k for k, fresh in
+                     (("onchain", onchain), ("macro", macro), ("etf", etf)) if not fresh]
+
+    with open(os.path.join(ROOT, "data.json"), "w") as fh:
+        json.dump(data, fh, indent=2)
+    if hist:
+        with open(os.path.join(ROOT, "history.json"), "w") as fh:
+            json.dump({"updated": now, "series": hist}, fh, separators=(",", ":"))
+    print(f"\nwrote data.json ({len(json.dumps(data))}B)"
+          + (f" + history.json" if hist else "")
+          + (f"  STALE: {data['stale']}" if data["stale"] else ""))
+
+
+if __name__ == "__main__":
+    main()

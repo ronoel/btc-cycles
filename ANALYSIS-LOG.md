@@ -23,6 +23,259 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-08-06 — The MVRV row was scoring a Z-score threshold against a ratio
+
+**Found while testing whether `bitcoin-data.com` could be reached without the API
+token.** It can, and its `/v1/mvrv-zscore` endpoint returned **0.3918** for the same
+day `data.json` recorded `mvrv_zscore: 1.2254`. Those are different series:
+
+    price / realized price = 64,524 / 52,328 = 1.233   ← the plain MVRV RATIO
+    MVRV Z-Score                              = 0.392   ← standard deviations
+
+The daily Action was calling BGeometrics' `/v1/mvrv` — the ratio — and writing it under
+the key `mvrv_zscore`. The page then applied Z-score logic to it: the scorecard card
+scaled the bar as `(v+1)/9` and coloured on `v<0` / `v>7`, and the checklist row scored
+`< 0.5 = ACTIVE`. **The row has been fed the wrong series since it was created**, which
+means it has never once been evaluated against the number its threshold was written for.
+
+**Verified against the last confirmed bottom** (free 4-year window, 2022-08-06 onward):
+
+| 2022-11-21 (C3 bottom) | value |
+|---|---|
+| MVRV Z-Score | **−0.316** (troughed −0.360 on Nov 9) |
+| MVRV ratio | 0.780 |
+
+So the tooltip's claim that bottoms print at "Z ≈ 0 or below" is right, and its quoted
+2022 figure (−0.2) was slightly off — it is −0.32 at the low close.
+
+**Threshold: specified, not retro-edited.** The standing rule is never to move a
+threshold because of the reading it just produced. That rule does not apply here,
+because `< 0.5` had never been evaluated against a Z-score at all — there was no reading
+to dislike. It was specified from the measured precedent instead: **ACTIVE at Z < 0**
+(where 2018 ≈ −0.3 and 2022 = −0.32 printed), **PARTIAL below 0.5**. Note the direction
+this cuts: the loose reading of the old text (`< 0.5` on a Z-score) would have scored
+today's 0.39 as ACTIVE. The specified threshold scores it PARTIAL. The correction still
+*raised* the row, from a false OFF, but by less than the sloppy reading would have.
+
+**Both series are now published** (`mvrv_zscore` and `mvrv`) and the row displays both,
+so this class of confusion cannot recur silently.
+
+## 2026-08-06 — What the checklist actually read at the last confirmed bottom
+
+The largest addition of this pass, and the answer to the fair objection that a
+"33% weighted readiness" reads like a calibrated probability when nothing calibrated it.
+
+**Method.** Seven of the fifteen signals have clean daily history in both eras —
+Realized Price, NUPL, MVRV Z-Score, SOPR, Puell, 200-week MA, drawdown depth. The other
+eight (miner, supply, flow, macro) have no comparable free daily series back to 2022, so
+they are excluded from **both** sides rather than estimated on one. The rules are not
+re-implemented for the historical run: `RULE` is a single object in `index.html` that
+both the live checklist and the retro trace call, so the two cannot drift apart.
+
+**Result** (expert weights, renormalised over the seven; equal weights in brackets):
+
+| | reading |
+|---|---|
+| 2022-08-11 · bear-rally high $23,934 | **53%** [50%] |
+| 2022-09-18 | 96% |
+| **2022-11-21 · confirmed C3 bottom** | **100%** [100%] — 7 of 7 active |
+| 2023-01-01 | 90% |
+| 2023-04-16 · +92% off the low | 25% [21%] |
+| **2026-08-05 · cycle 4 today** | **34%** [36%] — 0 of 7 active |
+
+The discrimination is real: 80–100% through the bottom zone, ~50% at the bear-market
+rally high that preceded it, under 30% once the recovery was underway.
+
+**Two caveats stated in the UI rather than buried here.** First, cycle 3 held above 80%
+for roughly four months around its low — this identifies a **zone, not a date**, which
+is the strongest argument yet for the price ladder over the calendar. Second, **N=1**:
+only one confirmed bottom falls inside the free on-chain window. The keyless
+`bitcoin-data.com` history is exactly 1,461 days, so December 2018 cannot be scored from
+the report's own data and is not claimed.
+
+**Consequence for the thesis.** This is now the single strongest piece of evidence for
+the base case, and it is measured rather than argued: the same rules that printed 100%
+at a confirmed bottom print 34% today.
+
+## 2026-08-06 — Testing the "don't use fixed weights" objection, and largely dismissing it
+
+**Objection raised externally:** avoid fixed weights unless validated out of sample,
+because hand-weighting overfits.
+
+**The prescription is unimplementable and the diagnosis is half right.** Out-of-sample
+validation of 15 weights against 2 historical bottoms is arithmetically vacuous — you
+cannot validate 15 parameters on 2 observations. The relevant small-sample result is the
+opposite one (Dawes 1979, improper linear models): with few observations and correlated
+predictors, **equal weights tend to beat estimated weights**, because estimation adds
+variance without removing bias.
+
+**So the honest test is whether the weighting choice changes the answer. It does not:**
+
+| | expert | equal |
+|---|---|---|
+| C3 bottom, 2022-11-21 | 100% | 100% |
+| C3 bear-rally high | 53% | 50% |
+| C4 today | 34% | 36% |
+| full 15-signal live checklist today | 40% | 43% |
+
+Maximum divergence across the whole trace is about 7 points. **Both numbers are now
+published side by side**, permanently, and the standing instruction is that a material
+divergence between them is itself the finding.
+
+**What was changed instead, because the diagnosis was half right.** The single
+percentage was demoted from headline to footnote and replaced by an ordinal. The 15
+signals group into four families — Valuation, Capitulation, Supply & flows, Macro — and
+the headline is how many are lit. The grouping exists because the signals are not
+independent: four are functions of realized cap, five read the same capitulation event.
+
+**A bug this immediately exposed.** The first implementation lit a family on
+`value >= n/2` with PARTIAL counting a half. A family whose signals are *all* PARTIAL
+sums to exactly `n/2`, so it lit with nothing active — and the banner rendered
+**"BOTTOM ZONE, 3 of 4 families lit" on 2 of 15 active signals**. Caught by rendering
+the page, not by reading the code. Fixed to a strict majority (`> n/2`), which reads
+"Too early, 0 of 4 lit" today. *Lesson repeated: read the rendered value.*
+
+## 2026-08-06 — Macro: one composite row, not seven
+
+**Objection raised externally:** add Global M2, Fed balance sheet, real rates, credit
+spreads, DXY, a liquidity index, and ETF flows.
+
+**Accepted in substance, rejected in form.** DXY, real rates, the Fed balance sheet and
+global M2 are one collinear liquidity factor. Adding seven rows would have taken macro
+from 7/100 to roughly 40/100 of the checklist without anyone deciding to — the same
+overfitting the objection was warning against, arriving through the front door.
+
+**What was built.** One computable `fed` row, three *directions* rather than levels
+(levels need a regime-specific baseline; directions do not): M2 y/y accelerating vs three
+months ago, dollar below its 200-day average, real 10-year yield below its 200-day
+average. 3 of 3 = ACTIVE, 2 = PARTIAL. Plus one `etf` row, weighted below its narrative
+prominence because it overlaps the Coinbase Premium row (both read US institutional
+demand) and because flows chase price. Checklist grew 14 → **15**; `BS_W` rebalanced to
+keep the sum at 100 by taking 5 points from the rows the new ones partly duplicate
+(`sopr` 6→5, `hash` 7→6, `lth` 6→5, `cbp` 5→3).
+
+**Credit spreads were deliberately kept OUT of the score** and put in the macro table as
+a **depth** modifier. They are the one variable on the list that is not collinear with
+liquidity, but they do not time bottoms — they discriminate an idiosyncratic drawdown
+from a systemic one. At HY OAS **273bp** (below its 200-day average of 289bp, against a
+long-run median near 450bp and a 600bp+ stress threshold) this drawdown is
+crypto-idiosyncratic, which historically bottoms **shallower and faster**. That is
+independent support for the damped −65% target over the historical −78%.
+
+**Data-sourcing results** (all tested with live requests, 2026-08-06):
+
+| Series | Source | Verdict |
+|---|---|---|
+| M2, Fed assets, TGA, RRP, DGS10, DFII10, DGS2, HY/IG OAS, broad USD | `fred.stlouisfed.org/graph/fredgraph.csv?id=` | keyless, works — **but sends no CORS header**, so it must go through the Action, not the browser |
+| US spot ETF net flows | SoSoValue `api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart` (POST) | keyless, daily, works; **undocumented** internal endpoint — routed through the Action so a breakage degrades gracefully |
+| ICE DXY | licensed | substituted `DTWEXBGS`, the broad trade-weighted index, and labelled as such |
+| **Global M2** | — | **not obtainable free.** US (FRED) and euro area (ECB SDMX, CORS-open) are live; Japan's FRED series are stale since 2017–2023 and no free current China series exists. The report therefore does **not** claim a global M2 or a "global liquidity index"; it publishes USD net liquidity and says so. |
+| Farside / CoinGlass ETF flows | Cloudflare 403 / API key required | ruled out |
+
+**Rejected outright:** bootstraps, confidence intervals or p-values on three
+observations, and any additional on-chain indicators. Each would lower honesty while
+appearing to raise rigour.
+
+## 2026-08-06 — The contradiction the report was hiding from itself
+
+Surfaced by an outside methodological review and **not resolved, only stated**, because
+resolving it would mean guessing.
+
+The headline thesis is that institutionalisation damps amplitude, so cycle 4 bottoms
+near **−65%** rather than the historical −78% and deeper. But the checklist thresholds
+are the *undamped* ones: MVRV-Z < 0, NUPL < 0, price below Realized Price were all
+features of −77%-and-deeper capitulations. **If the damping thesis is right, MVRV-Z may
+trough near 0.3, price may never close below Realized Price, and the checklist
+structurally cannot exceed roughly 70% at the actual low — it would read "not yet" at
+the bottom it predicted.**
+
+Both cannot be right. Rather than retro-fit a "cycle-4 adjusted" threshold column —
+which would be inventing damped thresholds with no observation to calibrate them
+against — this was written into `bs_n` in the UI and registered as **falsifier #5**:
+a confirmed bottom forming with fewer than 8 of 15 signals ever firing means the
+thresholds belong to a regime that ended, and the response is to rebuild them, not to
+trust them.
+
+**Related and also now stated in the UI:** the −65% target is an *assumption*, not an
+extrapolation. From −85% → −84% → −78%, repeating cycle 3 gives −78% (~$28K) and the
+linear trend gives −75% (~$31K). **Both land below the report's own $35K black-swan
+tranche** — the buy ladder is priced entirely for the damping thesis being right. Said
+plainly in `cvp_sum` rather than left for a reader to derive.
+
+**Falsifiers.** A new section lists six pre-registered kill conditions, because every
+signal here moves toward ACTIVE as price falls: the framework can say "not yet" or
+"buy", but had no way to say "I am broken". The sixth is not a falsifier but the
+symmetric-error remedy — if price reclaims Realized Price and the 200-week MA and holds
+30 days on positive 4-week ETF flows, the probe and core tranches deploy regardless of
+the readiness reading, because unfilled lower rungs are otherwise a way of never buying.
+
+**Also relabelled:** the four timing methods are described as *internal consistency*,
+not corroboration. They are re-parameterisations of the same three observed cycle
+lengths, so they cannot fail independently.
+
+## 2026-08-06 — Research pass: the Fed moved away, Strategy escalated, valuation moved backwards
+
+Twelve days since the last snapshot. Price is unchanged in substance — $64.5K, −48.9%,
+ranging $62.8–66.6K since Jul 21 — but three inputs moved materially, and two of the
+three run **against** the thesis timing.
+
+**1. The Fed moved further from easing, not closer.** The Jul 28–29 FOMC held at
+3.50–3.75% for a fifth time, but **9–3 with all three dissents wanting a hike**
+(Hammack, Kashkari, Logan). Kevin Warsh has chaired since May 22, 2026 — the report
+still described a Powell-era Fed. Core PCE 3.3% y/y, headline 3.7%. QT ended Dec 2025.
+The real 10-year yield is **2.40%**, near a two-year high of 2.47% and far above its
+200-day average of 1.98%; the 10-year nominal is at fresh 2026 highs. The committee
+debate is now hold-versus-hike, not cut-versus-hold. **This pushes the liquidity turn
+later**, and it is why the macro composite reads 2 of 3 rather than 3.
+
+**2. Strategy's selling hardened from an event into a programme.** Holdings
+843,775 → **842,138 BTC**, another ~1,638 BTC sold for ~$105M, and **five consecutive
+weeks with zero purchases**. USD reserve built to $4B. Separately, and worth recording:
+Strategy **redefined its own mNAV methodology on Jul 23**; its metric reads ~1.04× while
+third-party basic mNAV computes ~0.68×. Those numbers are not comparable and the report
+should never quote them as if they were. The `mac` row moves from "began selling" to
+**escalating**; the capitulation gate stays *partially armed* — this is still a drip
+against the treasury, not a cascade.
+
+**3. Valuation moved the wrong way.** STH-MVRV **0.82 (Jun) → 0.92 (mid-Jul) → 0.95
+(Aug 4)**. The cohort that actually capitulates is being *relieved*, not forced out.
+This is the clearest single confirmation of the Jul 25 "bear-market rally, not a
+completed bottom" reading — a flush in progress does not walk STH-MVRV up three
+consecutive readings.
+
+**4. Coinbase Premium set a record and kept it.** 78 consecutive negative days as of
+Aug 4 (from May 19), against a prior record of 40. It survived both the July ETF-inflow
+run and the August stabilisation. US spot demand has not returned.
+
+**5. ETF flows stabilised without returning.** 4-week net **+$0.34B** against a 3-month
+net of **−$7.78B** and 2026 year-to-date **−$4.91B** (cumulative since launch $51.7B,
+AUM $78.3B). Under the v2 trigger spec adopted on Jul 24 — which requires ≥$1.5–2B —
+this is **not fired**, where the old three-consecutive-weeks wording had it *fired,
+low conviction*. The v2 spec is now doing the work it was written for.
+
+**6. Geopolitics flipped sign.** The July pass recorded Hormuz blockaded and Brent above
+$76. Brent is now **~$70.8**, about 38% off its post-invasion peak on ceasefire
+expectations, and that energy unwind is most of why headline PCE fell 4.1% → 3.7%. The
+oil shock is currently a tailwind to disinflation, not a threat to it — the reverse of
+what the `fed` trigger tooltip assumed twelve days ago.
+
+**Funding: measured, not assumed.** Research sources described long negative funding
+streaks earlier in 2026. Binance Futures gives the 7-day average as **+0.0058%/8h with
+zero negative periods in the last 21** — the row is OFF. The live computation governs;
+the narrative did not.
+
+**Not changed, deliberately:** the window (Sep–Nov 2026, weeks 50–60) and the ladder.
+Nothing this pass touched the four timing methods or the price bands. Two forces act on
+the window and they point opposite ways — the hawkish Fed argues later, tight credit
+spreads argue shallower and faster — so moving it on either alone would be noise.
+
+**Could not source, and said so in the UI:** a consistent same-day Polymarket snapshot.
+Quoted figures ranged across months and disagreed by more than 10 points on P(<$50K),
+so the card now shows a range, is labelled stale, and no reading is taken from it. Also
+not found: a numeric Stablecoin Supply Ratio, current Deribit skew/max-pain, and an
+exchange-reserve figure in BTC — the `resv` row rests on the trend alone, which is
+recorded in its tooltip.
+
 ## 2026-07-25 — "Recovery" ≠ "bottom is in": the flush → rally → bottom precedent
 
 **Question raised:** if July is already a recovery, haven't we passed the bottom?

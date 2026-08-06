@@ -23,6 +23,134 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-08-06 (external review triage) — Two adoptions from a reader review, six rejections with reasons
+
+A reader sent a written review of the dashboard. The source file lived outside the
+repo and is not durable, so its substance is preserved here rather than referenced.
+Most of it was already built or had already been considered and rejected on record;
+two items were genuinely new and are now in the page. Logging the **rejections**
+matters more than the adoptions — a suggestion that keeps arriving from different
+readers and keeps getting declined needs its reason written once, in a place that can
+be pointed at.
+
+| # | The reviewer's suggestion | Disposition |
+|---|---|---|
+| 1 | Classify indicators by speed (fast / medium / slow) | **Adopted** — `BS_SPEED`, display only |
+| 2 | Split into categories with explicit weights (Macro 30% …) | **Half adopted** — family weight *shares* now shown; top-down re-weighting rejected |
+| 3 | Add Global M2 / macro liquidity | **Already built, more honestly** — a computed composite over **US** series; "global" is deliberately not claimed |
+| 4 | Add ETF flows | **Already built** — `etf` row, live from SoSoValue since Aug 6 |
+| 5 | Add more independent signals | **Already built** — four families exist precisely because the signals are *not* independent |
+| 6 | Display "Bottom Probability: 15%" instead of a score | **Rejected** — reverses this month's deliberate demotion of the percentage headline |
+| 7 | Rename to "Probability Dashboard" / "Probability Model" | **Rejected** — same calibration claim, in the title |
+| 8 | Reduce the weight on weeks-since-ATH | **Already true** — time is not in `BS_W` at all |
+| 9 | Frame it as Bayesian / "estimate probability of attractive returns" | **Already embodied, rejected in letter** — no priors exist to update |
+| 10 | Add government accumulation, dormant supply / CDD | **Blocked on sourcing** — no free daily series; also a thesis-level change |
+| 11 | Rating table (macro awareness 3 → 8.5, etc.) | **Not a finding** — unsourced scores, no methodology stated |
+
+**Adopted 1 — response-latency tags on every checklist row.** The reviewer's framing
+was "classify indicators by speed; this helps explain why indicators can disagree
+without necessarily conflicting." That is a real gap: nothing on the page told a reader
+that the rows operate on different clocks. Added `BS_SPEED` (display-only, touches no
+score) tagging each of the 15 rows FAST (days) / MEDIUM (weeks) / SLOW (months):
+
+| Speed | Rows | Why |
+|---|---|---|
+| fast (5) | funding, ETF flows, Coinbase premium, drawdown, 200W-MA cross | price- and flow-derived; can flip in days |
+| medium (3) | SOPR, STH-MVRV, macro composite | weeks — the 155-day cohort, monthly M2, 200d averages |
+| slow (7) | Realized Price, NUPL, MVRV-Z, Puell, Hash Ribbons, LTH supply, exchange reserves | realized cap, a 365-day miner-revenue average and holder/reserve stocks cannot move quickly |
+
+The count is the finding, not the labels: **7 of 15 rows are slow by construction and
+only 5 are fast.** That is the mechanical reason the checklist confirms a bottom rather
+than calls one, and it means the current split — funding/flows/premium moving while
+every valuation row stays dark — is the expected behaviour of a mostly-slow instrument
+mid-turn, not a contradiction between signals. Written into the `bs_n` note in all
+three languages. It also sharpens the existing "structurally cannot exceed ~70% at the
+real low" caveat: the rows that cap out are disproportionately the slow ones.
+
+**Adopted 2 — each family card now states its share of the expert-weighted score**
+(Valuation 31% · Capitulation 39% · Supply & flows 23% · Macro liquidity 7%). This is
+the honest half of the reviewer's "assign category weights" proposal. The shares were
+always implied by `BS_W` but never shown, so a reader could not see that macro carries
+7% until they summed the weights by hand. Computed from `BS_W` at render time rather
+than written into the text, so it cannot drift if a weight changes.
+
+**Rejected 1 — top-down category weights (the reviewer proposed Macro 30% / on-chain 30%
+/ market structure 20% / sentiment 10% / time cycle 10%).** Three separate problems.
+(a) The taxonomy does not map: there is **no sentiment row** in the checklist (Fear &
+Greed lives in the scorecard, deliberately out of the score) and **time is not scored at
+all**, so two of the five categories have nothing to weight. (b) Macro at 30% would
+undo the collinearity fix on purpose. M2, the dollar, real rates and the Fed balance
+sheet correlate 0.7–0.9 pairwise, which is why they were collapsed into **one**
+composite row in the first place; a category budget re-inflates a single factor to
+nearly a third of the checklist by fiat. (c) N=3 bear markets cannot fit 15 parameters,
+let alone a second layer of category weights on top — the page already publishes the
+equal-weighted score beside the expert-weighted one precisely to show how little the
+weighting choice moves the answer (they agreed within 1pt at the Nov 2022 bottom).
+Re-weighting to taste, without new evidence, is the retro-edit this project's
+conventions exist to prevent.
+
+**Rejected 2 — display "Bottom Probability: 15%" instead of a score.** This reverses a
+documented decision taken **this month** and for the opposite reason. In Aug 2026 the
+single readiness percentage was demoted from the headline in favour of the ordinal
+family stage, because with three completed bear markets a number like "33%" implies a
+calibration nobody has. A percentage labelled *probability* is strictly worse than one
+labelled *readiness*: it asserts a frequency claim over N=3. The percentages are still
+shown, one level down, and the retro-calibration is the only honest probability-adjacent
+statement available — and it says N=1, marks a zone not a date, and says so.
+
+**Rejected 2b — rename the page to "Bitcoin Market Probability Dashboard" or "Bitcoin
+Cycle Probability Model".** Same objection as above, moved into the title where it is
+harder to qualify. The premise — "don't call it a prediction tool" — is already
+satisfied: the page is titled *Bitcoin Halving Cycles Dashboard*, describes itself as a
+report, and pre-registers six falsifiers. Putting *Probability* in the name would assert
+in three words the calibration the body of the page spends several tooltips declining to
+claim.
+
+**Rejected 3 — reduce the weight on "weeks since ATH".** Already true, and the
+reviewer assumed otherwise: **there is no time signal in `BS_W`.** Time appears only in
+the banner's cycle clock and in the timing-convergence section, both outside the score.
+No change.
+
+**Rejected 4 — add Global M2 / global liquidity.** Also assumed rather than checked: the
+reviewer credited the dashboard with a Global M2 metric and called it the single most
+important addition. The page deliberately does **not** claim one — Japan and China have
+no free, current, programmatic series, so it publishes **US** net liquidity and labels
+it as such. Adding a "global" label to a US-only series to satisfy the suggestion would
+be the exact dishonesty the current wording avoids.
+
+**Rejected 5 — new rows for government accumulation and dormant supply / CDD.** Wanted,
+but blocked on sourcing: no free programmatic daily series (the same constraint already
+caveated on the SSR row). And a new checklist row is not a cosmetic addition — it
+perturbs `BS_W`'s sum to 100, shifts a family's majority threshold, and changes which
+signals the retro-calibration can replay in both eras. That is a thesis-level change and
+needs its own pass with data in hand, not a reviewer's wish list. Corporate-treasury
+accumulation, the third item in that group, is already covered as a narrative macro row
+and as the Strategy leg of the capitulation-tranche trigger.
+
+**Already embodied, rejected in letter — the "biggest recommendation": treat this as a
+Bayesian model and shift from "predict the bottom" to "estimate the probability that
+expected long-term returns are unusually attractive."** The philosophy is what the page
+already does: the headline is an ordinal that updates as families light, the falsifiers
+pre-register what would make the thesis wrong, both weighting schemes are published
+rather than one being chosen, and the retro-calibration replays today's rules over 2022
+to test whether the score means anything. What cannot be adopted is the *literal* form —
+the reviewer's worked example (50% → 65% → 72% → 61% → 55%) requires a prior and a
+likelihood ratio per signal, and neither exists: N=3 bear markets, with signals that are
+correlated by construction, cannot produce calibrated update factors. Writing them down
+anyway would dress up judgement as arithmetic. The retro-calibration is the closest
+honest statement available, and it already carries its own N=1 and zone-not-date
+caveats.
+
+**Not treated as a finding — the reviewer's rating table** (macro awareness 3 → 8.5,
+etc.). Unsourced scores from a reader with no stated methodology are not evidence about
+the page and did not drive any decision here.
+
+Verified by headless render: all 15 rows carry a latency tag, the four family cards
+report 31/39/23/7 (sums to 100), and EN/PT-BR/ES are at full key parity with the three
+new keys present in each.
+
+---
+
 ## 2026-08-06 (coherence pass) — Falsifier #6 was nearly vacuous, and two smaller drifts
 
 A same-day review of the whole analysis for internal consistency. Three findings.

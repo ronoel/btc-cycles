@@ -182,6 +182,16 @@ def fetch_etf():
 
 
 # ------------------------------------------------------------------- write
+# Every series each section is expected to deliver. A PARTIAL failure (e.g. the
+# on-chain rate limit tripping mid-fetch) must not shrink the published dict —
+# fresh values are merged OVER the previous ones, and the section is marked stale
+# whenever anything expected is missing from the fresh batch. Replacing instead
+# of merging once lost four of six on-chain series without any flag.
+EXPECT = {"onchain": [name for _, _, name in ONCHAIN],
+          "macro": ["m2", "netliq", "real10y", "nom10y", "nom2y", "hy_oas", "dxy"],
+          "etf": ["d20"]}
+
+
 def main():
     prev = {}
     try:
@@ -198,21 +208,32 @@ def main():
     etf = fetch_etf()
 
     now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    data = {"updated": now, "onchain": onchain or prev.get("onchain", {}),
-            "macro": macro or prev.get("macro", {}),
+    data = {"updated": now,
+            "onchain": {**prev.get("onchain", {}), **onchain},
+            "macro": {**prev.get("macro", {}), **macro},
             "etf": etf or prev.get("etf")}
-    # A section we failed to refresh keeps its old values; say so rather than
-    # letting the page present stale numbers as current.
-    data["stale"] = [k for k, fresh in
-                     (("onchain", onchain), ("macro", macro), ("etf", etf)) if not fresh]
+    # A section whose fresh batch is incomplete keeps the old values for the gaps
+    # and is flagged, so the page says "stale" rather than presenting them as new.
+    fresh = {"onchain": onchain, "macro": macro, "etf": etf or {}}
+    data["stale"] = [k for k in EXPECT if any(n not in fresh[k] for n in EXPECT[k])]
 
     with open(os.path.join(ROOT, "data.json"), "w") as fh:
         json.dump(data, fh, indent=2)
+
+    # history.json gets the same treatment: merge fresh series over the stored
+    # ones so a partial on-chain fetch never truncates the calibration's inputs.
     if hist:
+        stored = {}
+        try:
+            with open(os.path.join(ROOT, "history.json")) as fh:
+                stored = json.load(fh).get("series", {})
+        except Exception:
+            pass
         with open(os.path.join(ROOT, "history.json"), "w") as fh:
-            json.dump({"updated": now, "series": hist}, fh, separators=(",", ":"))
+            json.dump({"updated": now, "series": {**stored, **hist}},
+                      fh, separators=(",", ":"))
     print(f"\nwrote data.json ({len(json.dumps(data))}B)"
-          + (f" + history.json" if hist else "")
+          + (" + history.json" if hist else "")
           + (f"  STALE: {data['stale']}" if data["stale"] else ""))
 
 

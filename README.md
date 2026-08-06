@@ -27,7 +27,7 @@ A self-updating, single-file report that combines all 4 Bitcoin halving cycles w
 | **Macro & flow context** | live + research | Rows tagged `LIVE` compute from FRED and SoSoValue: rates & real yields, USD net liquidity (Fed assets − TGA − RRP), the dollar index, credit spreads and ETF flows. Narrative rows cover Fed policy, tariffs/legal risk, geopolitics, Strategy/corporate-treasury flow, 2nd-catalyst risk and the **dated events scheduled inside the bottom window**. Credit spreads are deliberately kept *out* of the score and used as a drawdown-**depth** modifier |
 | **Historical tables** | fixed + live | Halving data, post-ATH bear markets, same-week drawdown comparison |
 
-Every analysis card and table row carries a **`?` tooltip** explaining the methodology, thresholds and historical precedents. Interface in **EN / PT-BR / ES**.
+Every analysis card and table row carries a **`?` tooltip** explaining the methodology, thresholds and historical precedents. Fully translated into **EN / PT-BR / ES** — including the analysis, which until Aug 2026 fell back to English in Spanish.
 
 ## Data sources & freshness
 

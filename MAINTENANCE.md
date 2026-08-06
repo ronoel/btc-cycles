@@ -45,7 +45,22 @@ What to refresh (all live in the `L.en` / `L.pt` i18n objects in `index.html`):
 
 \* The `fed` (macro liquidity) and `etf` rows are now **fully LIVE** and need no research refresh — do not hand-edit their `r`/`st`. `puell` auto-switches to LIVE if `data.json` provides it — only its static fallback text needs the date kept honest. The `fund` (funding rate) row is normally LIVE from Binance Futures; only its static fallback text (`bs` entry `fund`, field `r`) matters when the Futures API is unreachable — keep the date honest there too.
 
-**Procedure:** run a research pass (web search: each item above), edit the i18n arrays in `index.html` (EN + PT-BR; ES falls back to EN), bump `an_asof`, verify locally (`python3 -m http.server` + open), commit & push.
+**Procedure:** run a research pass (web search: each item above), edit the i18n arrays in `index.html`, bump `an_asof`, verify locally, commit & push.
+
+**All three languages are now full translations.** ES stopped being an EN fallback in Aug 2026 (it was 81 of 173 keys, so the entire analysis rendered in English for Spanish readers). **EN, PT-BR and ES must all stay at key parity** — a missing key silently falls back to English and nobody notices. PT/ES values are stored `\uXXXX`-escaped; EN is mostly literal. Verify parity after any i18n change:
+
+```
+node -e "const fs=require('fs');let s=fs.readFileSync('index.html','utf8');
+let i=s.indexOf('const L={'),d=0,k=s.indexOf('{',i),st=k;
+while(true){if(s[k]==='{')d++;else if(s[k]==='}'){d--;if(d===0)break}k++}
+const L=eval('('+s.slice(st,k+1)+')');const en=Object.keys(L.en);
+for(const lg of ['pt','es'])console.log(lg,Object.keys(L[lg]).length,'/',en.length,
+  'missing:',en.filter(x=>!(x in L[lg])).join(',')||'none');
+for(const lg of ['pt','es'])L.en.bs.forEach((o,ix)=>{if(o.k!==L[lg].bs[ix].k||o.st!==L[lg].bs[ix].st)
+  console.log('BS MISMATCH',lg,ix)});"
+```
+
+`k:`, `st:` and the `mac` `e:`/`k:` fields are **logic, not text** — they must be byte-identical across languages. Notes that contain markup (`bs_n`, `trig_n`, `s2n`) must be assigned with `innerHTML`, not `textContent`; getting that wrong renders the tags literally.
 
 ## 2b. Signal & trigger conventions
 

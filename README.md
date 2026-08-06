@@ -12,7 +12,7 @@ A self-updating, single-file report that combines all 4 Bitcoin halving cycles w
 
 | Section | Data | Description |
 |---|---|---|
-| **Conclusion banner** | live + research | Projected bottom window (Sep–Nov 2026), core buy zone ($44–50K), live active-signal count + weighted readiness score, and two live "where are we" progress stats (**cycle clock** = days since ATH vs the ~368-day average, **drawdown progress** = deepest low vs the −65% target) with mini progress bars |
+| **Conclusion banner** | live + research | Projected bottom window (Sep–Nov 2026), core buy zone ($44–50K), live active-signal count + weighted readiness score, and two live "where are we" progress stats (**cycle clock** = days since ATH vs the ~370-day C2/C3 average, **drawdown progress** = deepest low vs the −65% target) with mini progress bars |
 | **Cycle position scorecard** | live | Mayer Multiple, 200D MA, Pi Cycle, weekly RSI, Fear & Greed, Realized Price, MVRV-Z, NUPL, SOPR |
 | **Overlaid cycles chart** | live | All 4 cycles aligned by ATH, halving-to-halving, click any week to compare indicators across cycles |
 | **Post-ATH drawdown chart** | live | Bear-market comparison with the **projected bottom window** (weeks 50–60 × −55…−70%) and buy-ladder bands drawn on the chart |

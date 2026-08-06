@@ -23,7 +23,51 @@ thing you decided *not* to change** goes here.
 
 ---
 
-## 2026-08-06 — The MVRV row was scoring a Z-score threshold against a ratio
+## 2026-08-06 (coherence pass) — Falsifier #6 was nearly vacuous, and two smaller drifts
+
+A same-day review of the whole analysis for internal consistency. Three findings.
+
+**1. Falsifier #6's deploy trigger was almost satisfied on the day it was written.**
+As registered, it deployed the remaining probe + core tranches (65% of the plan) when
+"price reclaims both Realized Price and the 200-week MA and holds 30 days on positive
+4-week ETF flows". But price **never traded below Realized Price this cycle** — the
+"reclaim" is vacuous — it sits ~1% above the 200-week MA, and 4-week flows are positive.
+Only the 30-day hold was missing (price closed below the 200W MA Aug 1–3). A quiet
+month would have fired it at ~$64K, against a page reading 0 of 7 core signals and
+calling the current move a bear-market rally — while the thesis paragraph's own
+confirmation for the same counter-scenario demands a weekly close above ~$70K with the
+Coinbase Premium positive and 4-week flows above $1.5B. Two confirmations for the same
+event, one weak and one strong, is incoherent; the weak one governs 65% of the capital.
+
+**Fixed by unifying them:** #6 now uses exactly the thesis paragraph's confirmation.
+This is a change to a pre-registered condition, which is why it is logged loudly: it
+was **tightened before ever firing**, the old wording is preserved inside the falsifier
+itself, and the direction of the change is against the report's own convenience (it
+makes the "deploy anyway" escape harder, not easier).
+
+**2. The cycle clock said "~368 days" from an average that computes to 369.5.**
+`(363 + 376) / 2 = 369.5 ≈ 370`, not 368. Plain arithmetic slip, present since the
+stat was added; fixed to ~370 in the code and all three languages (banner now reads
+day *n* of ~370). Sub-1% effect on the progress bar, but a stated derivation should
+compute to its own number.
+
+**3. The ETF trigger card froze research figures that a live row contradicts.**
+The card quoted "+$0.34B" (Aug 6 research pass) while the checklist's LIVE row showed
++$0.67B on the same page — the feed updated within a day of the snapshot. The card now
+carries `{ETF4W}`/`{ETF3M}` placeholders filled from the live feed, with the snapshot
+as offline fallback. Checked the other trigger cards for the same disease: Coinbase
+Premium quotes a dated streak ("78 days as of Aug 4"), which is honest because dated;
+the drift problem was specific to undated figures duplicating a live computation.
+
+**Verified consistent, no change needed:** window weeks 50–60 ⇔ Sep 21–Nov 30 ⇔ the
+capitulation-phase arithmetic (Jun 22 + 140–150d = Nov 9–19, inside); banner counts
+(2/15, 9 partial) ⇔ family cards (0+0+2+0 active, 2+5+1+1 partial); drawdown steps
+−85/−84/−78 consistent across cvp, tables and log; on-chain floor card 0.75–0.85×
+against the measured 0.78×/0.76× precedent, with the band's lower edge correctly
+flagged as the realistic end; ladder bands ⇔ chart lines ⇔ dd55/probe thresholds; all
+directional cross-references between sections. The C3 low appears as both $15,476
+(intraday-derived) and $15,479 (close-derived) in different tables — pre-existing,
+sub-rounding, left alone.
 
 **Found while testing whether `bitcoin-data.com` could be reached without the API
 token.** It can, and its `/v1/mvrv-zscore` endpoint returned **0.3918** for the same

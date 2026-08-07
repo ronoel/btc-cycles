@@ -14,9 +14,13 @@ jobs:
   update-data:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # v7 for both: v4/v5 target Node 20, which the runners now force onto Node 24
+      # and will eventually stop supporting. checkout v6 moved the persisted
+      # credential into a separate file — the "Commit and push" step below relies on
+      # it, so verify that step after any future bump of this action.
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 

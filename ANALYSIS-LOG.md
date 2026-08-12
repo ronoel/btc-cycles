@@ -23,6 +23,84 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-08-12 — Research refresh: the supply-floor story takes its first hit; Polymarket finally sourced clean
+
+Scheduled-ahead-of-schedule pass (the cadence said late Aug; the Aug 12 CPI, the
+Aug 7 payrolls and the Aug 11–13 refunding all landed this week, so the snapshot was
+taken while they were fresh). Live state at the time of the pass, read from the
+rendered page: BTC $63.4K, −50%, week 44, stage **Too early — 1 of 4 families lit**.
+
+**Two checklist downgrades, both in Supply & flows (`lth`, `resv`: ACTIVE → PARTIAL).**
+The Coldcard hardware-wallet firmware exploit (from Jul 30, ~$120–140M / ~1,816 BTC
+stolen) triggered a mass wallet migration: ~210K BTC left old wallets in early August
+(Coindesk, Aug 7 — the largest LTH outflow since Dec 2024) and ~20K BTC landed on
+exchanges in a week, lifting aggregate reserves to a one-month high and Binance
+reserves to a six-month high (multiple sources, Aug 11–12). Neither is economic
+distribution — moving coins to a new wallet mechanically resets their age, and moving
+them to an exchange for custody is not selling — but the rows are scored on what the
+series *say*, and both thresholds ("LTH supply rising", "multi-month reserve decline")
+read broken this week. Applied the hash-row convention: **event-contaminated +
+provider-divergent ⇒ PARTIAL, not read either way.** Effect: 3/15 → 1/15 active,
+expert 45% → 41%, equal 47% → 40% (still within the ~3-point agreement band). Stage
+unchanged. To be reversed (either way) once the migration washes out of the series.
+
+**Polymarket re-sourced — the stale label comes off.** The Aug 6 failure mode
+(figures spread across months) was solved by hitting the Gamma API directly for the
+"What price will Bitcoin hit in 2026?" event ($52M volume): one same-day snapshot,
+Aug 12. P(<$55K) 57% · P(<$50K) 35.5% · P(<$45K) 22.5% · P(<$40K) 14.5% ·
+P(tags $70K) 67.5%. Against the July figures the market moved hard toward the shallow
+scenario (P(<$50K) was 45–59%, P(<$40K) was ~38%). Two readings worth writing down:
+the market puts ~1-in-3 on price ever reaching the $44–50K core zone, and ~43% on
+no new low below $55K — vs this report's ~25% counter-scenario. **The 25% was kept**:
+it was set on the Jul 24 evidence and nothing in this pass's on-chain data (STH-MVRV
+still rising, no catalyst, CBP streak intact) argues the flush is off the table — but
+the gap to the market's 43% is now stated in the UI instead of hidden. The sourcing
+procedure went into MAINTENANCE so the next pass doesn't rediscover it.
+
+**Macro: the hike scare deflated without turning into easing.** Sep hike odds
+~62% (Aug 4) → ~42% (after payrolls −23K, unemployment 4.1%, −103K revisions) →
+~38% (after in-line CPI: 3.4% headline / 2.5% core). That un-fires the "Fed moved
+backwards" texture from Aug 6 but is hold-not-cut; the real 10y (2.43% vs 1.99% 200d
+MA) keeps the liquidity composite at 2 of 3. Refunding cleared its 3y/10y legs with
+above-average bid-to-cover (2.57/2.53) — the drained-RRP stress scenario did not
+materialise this week. Note logged for the tariff row: the earlier "re-imposed via
+Section 301" wording was corrected to the fuller legal picture (Section 122 struck by
+CIT in May, stayed by the Federal Circuit Jun 11 pending appeal; Section 338 Canada
+tariffs land Aug 19) per law-firm client alerts — better sources than the news pieces
+the July pass had.
+
+**Strategy: reclassified from "Escalating" to "Escalating on flow, cushioned on
+solvency."** Fifth 2026 sale tranche (1,690 BTC / ~$109M, Aug 3–9; YTD ~6,948 BTC /
+~$432M), no purchases since late June — but the USD reserve nearly doubled to $4.65B
+(a $653M equity raise routed straight to it), STRC was held at 12% rather than cut,
+and Q2's $8.6B loss was ~96% non-cash. The dilution machine is currently refilling
+the cash buffer faster than the BTC sales drain the treasury, so the second-catalyst
+gate stays **partially armed** — the stress signal to watch is the ~0.68× basic mNAV,
+not the sale pace.
+
+**Indicator add/remove review — no change, three candidates rejected on record:**
+- *Binance-reserve row*: provider- and venue-specific; duplicates `resv` with a noisier series.
+- *Recession-odds row*: the macro composite already carries the regime read; a
+  prediction-market level needs a regime baseline (the exact objection that kept
+  levels out of the `fed` row), and N=3 bottoms give nothing to calibrate it on.
+- *BTC/S&P ratio row*: the equities divergence is context (it lives in `mac`), not a
+  bottom signal — it has no threshold that ever fired at a prior bottom.
+
+**One code fix found by the render check:** `applyI18n()` set every `[data-t]`
+element via `textContent`, so the `s2n` chart note — the only `data-t` string with
+markup — rendered its `<b>` tags literally. Pre-existing (visible in the morning
+render, before this pass touched anything); now routed through `innerHTML` only when
+the string contains `<b>`/`<i>`. Exactly the bug class MAINTENANCE §2 warns about,
+caught exactly the way §5 says to catch it.
+
+**Number drift fixed while passing through:** the head meta descriptions said the
+checklist "reads 34% today" (frozen Aug 6 figure); the same seven rules read **43%**
+at this pass's price/week and the metas plus `th_p` now say so. The `rp` tooltip's
+strip-the-institutions arithmetic was re-based to the current $52.3K Realized Price
+(spot +21%, ex-premium +27%).
+
+---
+
 ## 2026-08-06 (external review triage) — Two adoptions from a reader review, six rejections with reasons
 
 A reader sent a written review of the dashboard. The source file lived outside the

@@ -206,6 +206,33 @@ a bug class, not a typo: any figure typed into prose that is also computed on th
 page will drift. Both figures are now interpolated into `th_p` via `calibNums()`, as is
 the premium over Realized Price (which read a hardcoded "21%" against a live 33%).
 
+### A dated failure found while checking the interpolation fix
+
+Fixing the stale-figure bug surfaced a worse one it would have masked. The free
+bitcoin-data.com window is a **rolling** 1,461 days: every daily run returns a series
+whose first date is one day later than yesterday's, and `build_data.py` replaced each
+stored series wholesale. So `history.json` was losing its left edge every day, silently.
+
+That has a date on it. The Nov 21, 2022 bottom — the calibration's only anchor, and the
+source of the "95% at the confirmed bottom" figure now quoted in the thesis paragraph,
+`cal_sum`, the README and the share card — **leaves the free window on Nov 20, 2026**,
+92 days from this pass and *inside* the projected Sep–Nov bottom window. On that day
+`coreOnDate('2022-11-21')` would have returned null, `calibNums()` with it, and the
+thesis paragraph would have rendered em-dashes where its centrepiece numbers go, while
+the cycle-3 trace eroded from the left. Interpolating those figures had converted them
+from stale-but-present into computed-but-vanishing.
+
+Fixed at the source rather than noted: `extend_series()` unions the stored series with
+the fresh one and keeps the older head permanently. Fresh values win on overlap (the
+provider does restate), the output is forced contiguous because `coreAt()` indexes by
+day offset, and genuinely disjoint ranges keep the fresh series alone rather than
+emitting a plausible-looking but misaligned array. Six merge cases were tested directly,
+including idempotency and the disjoint refusal.
+
+The consequence worth writing down: **`history.json` is now a data asset, not a
+derivable artefact.** Its pre-Aug-2022 head cannot be re-fetched at any price once the
+window slides past it, so it must never be regenerated from scratch or "cleaned".
+
 ### Also on the record
 
 - **The Fed trigger does not test what actually moved.** "Fed pivot + dollar rolling

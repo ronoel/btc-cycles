@@ -216,6 +216,55 @@ EXPECT = {"onchain": [name for _, _, name in ONCHAIN],
           "etf": ["d20"]}
 
 
+def extend_series(stored, fresh, name):
+    """Union a stored series with a freshly fetched one, keeping the older head.
+
+    Why this exists: the free bitcoin-data.com window is a rolling 1,461 days, so every
+    daily run returns a series whose FIRST date is one day later than yesterday's. The
+    old behaviour replaced each series wholesale, which meant history.json silently lost
+    its left edge every single day. That matters on a dated schedule: the Nov 21, 2022
+    bottom -- the calibration's only anchor, and the source of the "95% at the confirmed
+    bottom" figure in the thesis and the README -- drops out of the free window on
+    **Nov 20, 2026**, in the middle of this report's own projected bottom window. When it
+    did, `coreOnDate('2022-11-21')` would have started returning null, `calibNums()` with
+    it, and the thesis paragraph would have rendered em-dashes where its centrepiece
+    figures go. The 2022 slice is immutable history, so the fix is simply never to throw
+    it away.
+
+    Emits a contiguous daily array, because `coreAt()` in index.html indexes by
+    (date - d0) in days and a gap would misalign every reading after it. Disjoint ranges
+    therefore keep the fresh series alone rather than producing a plausible-looking but
+    wrong array.
+    """
+    if not stored or not stored.get("v") or not stored.get("d0"):
+        return fresh
+    def spread(entry):
+        d0 = datetime.date.fromisoformat(entry["d0"])
+        return {d0 + datetime.timedelta(days=i): v for i, v in enumerate(entry["v"])}
+    old, new = spread(stored), spread(fresh)
+    lo, hi = min(old), max(new)
+    if min(new) > max(old) + datetime.timedelta(days=1):
+        print(f"  ! {name}: stored and fresh ranges are disjoint "
+              f"({max(old)} -> {min(new)}); keeping fresh only", file=sys.stderr)
+        return fresh
+    old.update(new)  # fresh wins wherever the two overlap (restatements happen)
+    out, cur, missing = [], lo, 0
+    while cur <= hi:
+        if cur in old:
+            out.append(old[cur])
+        else:  # carry forward rather than shift every later index by one
+            out.append(out[-1] if out else None)
+            missing += 1
+        cur += datetime.timedelta(days=1)
+    if missing:
+        print(f"  ! {name}: {missing} day(s) carried forward to keep the series "
+              f"contiguous", file=sys.stderr)
+    if len(out) > len(fresh["v"]):
+        print(f"  {name:15} history extended {len(fresh['v'])}d -> {len(out)}d "
+              f"(from {lo})")
+    return {"d0": lo.isoformat(), "v": out}
+
+
 def main():
     prev = {}
     try:
@@ -253,8 +302,11 @@ def main():
                 stored = json.load(fh).get("series", {})
         except Exception:
             pass
+        merged = dict(stored)
+        for name, fresh in hist.items():
+            merged[name] = extend_series(stored.get(name), fresh, name)
         with open(os.path.join(ROOT, "history.json"), "w") as fh:
-            json.dump({"updated": now, "series": {**stored, **hist}},
+            json.dump({"updated": now, "series": merged},
                       fh, separators=(",", ":"))
     print(f"\nwrote data.json ({len(json.dumps(data))}B)"
           + (" + history.json" if hist else "")

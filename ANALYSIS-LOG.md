@@ -249,6 +249,19 @@ window slides past it, so it must never be regenerated from scratch or "cleaned"
   rather than forced, which weakens the leading second-catalyst candidate.
 - **Fed pricing kept deflating:** Sep hike odds ~38% → ~32%, hold ~68%. Still
   hold-not-cut with no easing priced. Recession odds 9% → 8% (Polymarket, Aug 19).
+- **Follow-up (Aug 20), on what else the rally day held.** Three more same-day items
+  were checked for whether they change the read. The **Jul 28–29 FOMC minutes** (2pm ET
+  Aug 19) were *hawkish* — participants beyond the three dissenters said tightening
+  "would likely be necessary" if inflation does not decline — and the market rallied
+  through them, which supports the positioning/Treasury reading of the day over any
+  monetary one. **Trump hosted crypto leaders at the White House** and pushed the
+  Clarity Act — same regulatory-clarity cluster as the SEC proposal, added to that row.
+  **Whale accumulation (~$2.9B / ~43K BTC over 60 days)** made headlines but is not
+  new — it is the same 1K+ BTC cohort the report has tracked at ~3.06M BTC since July.
+  Nothing in the three constitutes bottom *confirmation* under the pre-registered
+  criteria; the F&G flip 46 → 62 in a day and an 82 hourly RSI are bear-rally
+  signatures, not capitulation ones. Also added to the events row: **Jackson Hole
+  Aug 27–29, Warsh's first keynote as chair Aug 28**, same day as the BLS revision.
 - **Hash ribbons are converging fast:** the 30d/60d gap closed from −2.0% (Aug 6) to
   −1.5% (Aug 11) to −0.7% (Aug 16). Still no cross. The ~Aug 22 retarget projects +0.45%,
   a second consecutive positive print after +0.99% on Aug 8. Row stays PARTIAL, now on a

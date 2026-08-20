@@ -23,6 +23,214 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-08-19 — The week the counter-scenario got its best evidence, and the checklist did not move
+
+Scheduled refresh (the cadence said late Aug). It landed on the most eventful day of
+the drawdown so far, so most of this entry is about telling a large price move apart
+from a change in the evidence. Live state read from the rendered page: BTC $69.3K,
+**−45%**, week 45, stage **Too early — 0 of 4 families lit**, 0 of 15 active, 9 partial,
+expert 27% · equal 30%. On Aug 12 the same page read −50%, 1 of 15 active,
+expert 41% · equal 40%.
+
+**What happened on Aug 19.** The US Treasury announced it will at least **double its
+long-end liquidity-support buybacks, from $2B to ≥$4B per operation** in the 10–20y and
+20–30y sectors, effective Sep 9 and running through Nov 4. The 30-year fell 9bp to
+5.196%, the dollar weakened, and BTC ran from an intraday $64,112 to **$70,022** — a
++9.2% day, ~$1.44B of short liquidations, and the **first daily close above the 200-day
+MA since Dec 4, 2025** — 258 days below it, Mayer 1.004, measured from Binance closes. Two smaller tailwinds landed the same day: the SEC proposed
+*Regulation Crypto Assets* (offering exemptions plus a token safe harbour), and the 50%
+Section 338 tariff on Canadian goods was **paused three days at its deadline** pending a
+USMCA deal.
+
+Worth being precise about the causal chain, because the report had this scenario
+half-written already. The Aug 12 pass noted that reverse repo is drained so refunding
+lands directly on reserves, and recorded that the 3y and 10y legs cleared without
+stress. The **30y leg did not**: on Aug 13 it cleared at 5.216%, the highest yield the
+US has paid on 30-year debt since 2001, with a 2.39 bid-to-cover against a 2.43 average,
+a 0.4bp tail, and dealers taking 11.6% versus a 10.6% norm. A long-end selloff followed.
+The buyback expansion is the policy response to that. So the liquidity turn this report
+has been waiting for did begin — from **debt management rather than monetary policy**,
+which is why the `netliq` macro row moves from headwind to *mixed* while the Fed row
+stays a headwind. It is a duration swap, not reserve creation; it is also a deliberate
+intervention landing inside the projected bottom window.
+
+**The counter-scenario is raised 25% → 30%, and the derivation matters more than the
+number.** Three arguments for a larger increase, and one against that caps it:
+
+1. *The market's own counter-read resolved in its favour.* The Aug 12 pass quoted
+   Polymarket pricing a $70K retag at 68%. That contract **settled YES on Aug 19** when
+   BTC tagged exactly $70,000. This is the first time this report has recorded a
+   prediction-market disagreement and then watched it resolve, and it resolved against
+   the report.
+2. *The market moved hard.* Same-day Gamma snapshot, Aug 19, $54.5M event volume:
+   P(<$55K) **57% → 37.5%**, P(<$50K) 36% → 25%, P(<$45K) 22.5% → 17.5%, P(<$40K)
+   15% → 12.5%. The no-new-low side is now ~62.5% against this report's 30%. The
+   re-listed sub-$60K contract prices a *return* below $60K at ~53% — the cleanest
+   statement of the disagreement: the market thinks a revisit is a coin flip and a new
+   low is not.
+3. *The supply-floor damage stopped — but only stopped.* Pulling the LTH series
+   directly (see below) shows the Coldcard-migration drawdown ended on Aug 11 and supply
+   has risen every week since. It also shows the recovery is small: +40,279 BTC (+0.24%)
+   against a −249,798 BTC (−1.48%) fall, still **1.24% below the Jul 24 record**. This
+   argument was drafted as "fully reversed" on the strength of one data point matching a
+   figure the Aug 12 pass had quoted from news reports; the series says otherwise, and
+   the leg is weaker than it first looked.
+4. *Against all three — the measured size of the bounce.* This is +21% off the $57,800
+   low. The two precedent bear rallies inside a capitulation phase ran **+48%**
+   (Jun→Jul 2018, $5,750 → $8,492) and **+43%** (Jun→Aug 2022, $17,622 → $25,211), and
+   both were followed by lower lows 5–6 months later. At +21% both prior cycles were not
+   even halfway through their relief rally. A price move of this size is inside the
+   distribution of what a bear rally does; it is not evidence about the bottom.
+
+Net: +5 points, not +20. The number moved because the *evidence* moved (a resolved
+contract, a reversed supply series, a liquidity intervention), and was held down by the
+one measurement that directly addresses the question being asked.
+
+**The checklist did not move, and that is the finding.** A +9% day, a $70,000 tag, a
+Treasury liquidity intervention, a tariff pause and a regulatory-clarity proposal
+produced: zero triggers fired (third consecutive pass at 0 fired · 1 partial · 3 not
+fired), zero families lit, and a readiness reading that went *down*. Valuation is why —
+price at 33% above Realized Price, NUPL 0.19, MVRV-Z 0.41, against −0.28 and −0.32 at
+the confirmed 2022 bottom. Everything that improved was fast; nothing slow moved.
+
+**Short-term-holder MVRV crossed above 1.00 — PARTIAL → NOT YET.** 0.84 (Jun 30) → 0.96
+(Aug 18) → 1.03 (Aug 19), against an STH cost basis of $67,244. The cohort that
+actually capitulates is back in profit. This is the single clearest statement available
+that no flush is underway, and it is worth separating from the shallow-bottom argument:
+it says the bottom is not happening *now*, not that it already happened.
+
+### Data-source work: four manual rows examined, one converted
+
+The user asked whether indicators should be added or removed. The answer is neither: no
+row was added or removed, and the useful finding was that **rows already in the
+checklist could stop being hand-quoted**. The BGeometrics OpenAPI spec
+(`https://api.bitcoin-data.com/v3/api-docs`, 688 paths) was read for the first time.
+
+| Row | Endpoint | Verdict |
+|---|---|---|
+| `sthmvrv` | `sth-mvrv` + `realized-price-sth` | **Adopted — now LIVE**, and added to `CORE` |
+| `hash` | `hashribbons` (free; `{sma_30, sma_60, state}`) | Deferred — numbers quoted, not scored. See below |
+| `lth` | `long-term-hodler-supply-btc` | Used to settle this pass's reading and correct two published figures; left manual |
+| `resv` | `exchange-reserve-btc` | **Impossible — HTTP 403, subscription only** |
+
+- **`sthmvrv` went live and joined the calibration.** The series carries the full
+  1,461-day free window, which reaches back past the Nov 2022 bottom, so it satisfies
+  both `CORE` membership tests: clean daily history in *both* eras, and a threshold
+  fixed **before** the series was in hand (≤0.80 ACTIVE / <1.00 PARTIAL, specified
+  Jul 24, 2026 when the row was added). The order of operations was deliberate:
+  membership was decided on those grounds and the historical reading was looked at
+  afterwards, because conditioning inclusion on what a signal does to the 2022 figure is
+  precisely how a calibration turns into a fit. The calibration subset is therefore
+  **8 rules, not 7**, and the published pair is now 95% at the Nov 2022 bottom
+  against 21% today — *not* 100%, for the reason below. The live row is built as spot ÷ published cohort cost basis,
+  the same construction as the Realized Price row, so it reads against spot rather than
+  lagging a day on the published ratio.
+- **`hashribbons` deliberately not scored yet.** It is free and it works, and it
+  independently confirms the hand-computed figures (BGeometrics Aug 18: sma30 911.8 EH/s,
+  sma60 925.6 EH/s, state "Down"; blockchain.info over the same window: 912.2 / 918.5).
+  But the classic signal is *stateful* — a cross **after** a capitulation — and a naive
+  `sma_30 > sma_60` rule reads ACTIVE through any ordinary bull market. Before wiring it
+  into `RULE`, its state field has to be checked against Jan 2026 (the known misfire,
+  followed by a further 20%+ decline) and Nov 2022. Recorded in MAINTENANCE §2b.
+- **`resv` stays manual on missing data, not on a reading.** The reserve endpoint is now
+  paywalled. `exchange-supply-ratio` is free (14.04% of circulating supply, Aug 18) but
+  measures something adjacent, and substituting it would be a spec change dressed as a
+  data upgrade. The row says the data is missing instead.
+- **Rejected, again:** adding any new row. Nothing in this pass's evidence is
+  un-represented. The Treasury buyback is the closest call — it is a genuine liquidity
+  mechanism the macro composite does not test — but macro is deliberately one composite
+  row, and a second macro row would re-inflate exactly the collinear factor the families
+  exist to collapse. It is recorded in the `netliq` narrative and in the Fed-trigger card
+  instead.
+
+### The calibration's first act was to fail one of the checklist's own thresholds
+
+This is the most consequential thing in this pass, and it is a correction to a claim the
+report has been making since Jul 24, 2026.
+
+The `sthmvrv` row said prior cycle bottoms printed "well below 0.80". That was asserted
+without the series, because the series was not available. With it in hand:
+
+| Date | STH-MVRV | What it was |
+|---|---|---|
+| 2022-11-14 | **0.833** | trough of the window around the bottom |
+| **2022-11-21** | **0.84** | the confirmed cycle-3 bottom |
+| 2022-08-25 | **0.831** | the *bear-rally high*, $21,559 — **lower than the bottom** |
+| 2026-02-05 | **0.70** | mid-decline, five months before the Jul 1 low |
+| 2026-08-19 | 1.03 | today |
+
+Three things follow. **First, the stated premise is false:** 0.80 was never reached at
+the one confirmed bottom inside the free window, so the rule reads PARTIAL there and the
+8-rule calibration publishes **95%**, not 100%. **Second, the threshold has already
+misfired this cycle** — the series sat at or below 0.80 for **32 consecutive days** in
+Feb–Mar 2026 (low 0.70 on Feb 5), plus shorter dips in Nov 2025 and Mar 2026, none of
+which marked anything; the real low came in July. **Third, and most damning for a
+level-based reading:** the summer-2022 bear-rally high printed *lower* than the bottom
+itself. Sub-0.80 evidently marks "recent buyers are deeply underwater", which is a
+mid-decline condition, not a bottom.
+
+**The threshold is left at ≤0.80 anyway.** Re-specifying it in the same pass that found
+it inconvenient is exactly what the no-retro-edit rule exists to prevent, and the
+direction of the convenience is not the point — loosening it to ≤0.85 would restore the
+100% headline, which is precisely why it is not being done now. A revision goes in
+prospectively, with its derivation, in a later pass. What is fixed immediately is the
+false *justification*, in the row's tooltip and in `cal_sum`.
+
+Note this is *not* the same situation as the Aug 6 MVRV-Z fix. There, a threshold had
+never once been evaluated against the series it was written for, so specifying it was
+the only way to make the row mean anything. Here the threshold has been evaluated
+against the right series all along — it was only the historical *precedent cited for it*
+that was unverified. That is a claim to correct, not a threshold to re-derive.
+
+The wider reading is that this strengthens falsifier #5 rather than weakening the
+report: a checklist whose thresholds were calibrated on −78%-and-deeper capitulations now
+has one measured instance of a threshold that the last confirmed bottom did not satisfy.
+
+### Two measurement findings
+
+**The Coinbase Premium streak is mostly a stablecoin artifact.** Measured directly from
+public APIs rather than taken from news: the raw gap (Coinbase BTC-USD minus Binance
+BTC-USDT, the standard convention) has run −0.08% to −0.11% for weeks and is now
+**−0.016%** (Aug 20), from −0.108% on Aug 12. But USDT itself trades at 0.9990–0.9994,
+and **normalising for that discount puts the premium at ~0.00%**, printing slightly
+positive on Aug 19–20. So the "record 93-day negative streak" is largely the USDT basis,
+not an absent US bid. The row's status is left at NOT YET on the standard convention —
+the threshold is not retro-edited because a better measurement flatters it — but the
+caveat is now in the row text, and it materially weakens how much the streak should be
+read as evidence about US demand.
+
+**The thesis paragraph's calibration figures were stale within a week.** The Aug 12 text
+hardcoded "read 100% at the 2022 bottom … 43% today" while the live section rendered
+**24%** by Aug 19 — the drawdown and 200W-MA rules flipped off as price rallied. That is
+a bug class, not a typo: any figure typed into prose that is also computed on the same
+page will drift. Both figures are now interpolated into `th_p` via `calibNums()`, as is
+the premium over Realized Price (which read a hardcoded "21%" against a live 33%).
+
+### Also on the record
+
+- **The Fed trigger does not test what actually moved.** "Fed pivot + dollar rolling
+  over" was written for monetary policy; the Aug 19 liquidity impulse came from the
+  Treasury. The trigger is **left exactly as specified** and the gap is recorded here
+  rather than patched mid-move. If a future pass wants to broaden it, that is a
+  prospective spec change with an entry in the changelog.
+- **Strategy paused.** The Aug 17 8-K reports *no* BTC bought or sold Aug 10–16 — the
+  first such week since the selling began — holdings flat at 840,447 BTC (avg $75,385),
+  USD reserve up to $4.80B, and $333.7M of Class A stock sold in the week of which
+  **$132.2M went to buying STRC back**. Flow pressure eased; the equity signal worsened
+  (basic mNAV ~0.66× from ~0.68×). One paused week is not a policy change — the dividend
+  run-rate does not pause — but it is the first evidence the sales are discretionary
+  rather than forced, which weakens the leading second-catalyst candidate.
+- **Fed pricing kept deflating:** Sep hike odds ~38% → ~32%, hold ~68%. Still
+  hold-not-cut with no easing priced. Recession odds 9% → 8% (Polymarket, Aug 19).
+- **Hash ribbons are converging fast:** the 30d/60d gap closed from −2.0% (Aug 6) to
+  −1.5% (Aug 11) to −0.7% (Aug 16). Still no cross. The ~Aug 22 retarget projects +0.45%,
+  a second consecutive positive print after +0.99% on Aug 8. Row stays PARTIAL, now on a
+  measured basis rather than an asserted one.
+- **Puell drifted the wrong way**, 0.67 → 0.80, as the hashrate stabilised. Still
+  PARTIAL.
+
+---
+
 ## 2026-08-12 — Research refresh: the supply-floor story takes its first hit; Polymarket finally sourced clean
 
 Scheduled-ahead-of-schedule pass (the cadence said late Aug; the Aug 12 CPI, the

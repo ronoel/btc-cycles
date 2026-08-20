@@ -49,6 +49,28 @@ def get(url, data=None, headers=None, tries=3):
 # (~0.39 today). Until Aug 2026 this file fetched the ratio and published it as
 # `mvrv_zscore`, so the report scored a Z-score threshold against a ratio. Both
 # are published now, under honest names.
+#
+# Request budget: bitcoin-data.com allows 10 requests/hour anonymously and this list
+# is now EIGHT of them, so retries are the thing that trips the limit, not the list.
+# `fetch_onchain` therefore passes tries=2. If more series are ever added here, set
+# BGEOMETRICS_TOKEN (the limit is the only thing it buys) rather than hoping.
+#
+# Added Aug 19, 2026: `sth-mvrv` plus `realized-price-sth`. The ratio carries 1,461
+# days of daily history — the whole
+# free window, which reaches back past the Nov 2022 bottom — so the short-term-holder
+# row stopped being a hand-quoted research figure and joined the retro-calibration. The
+# cost basis is fetched alongside it so the live row can be built as spot / cost basis,
+# the same construction as the Realized Price row, instead of lagging on yesterday's
+# published ratio. Note `sth-realized-price` and `/{last}` suffixes return empty bodies
+# for several series on this API — `realized-price-sth` with no suffix is the one that
+# works.
+# Still deliberately NOT fetched, and why:
+#   exchange-reserve-btc  HTTP 403, subscription only as of Aug 19, 2026.
+#   hashribbons           free and returns {sma_30, sma_60, hashribbons:"Down"|...},
+#                         but the classic signal is stateful ("cross AFTER capitulation")
+#                         and a naive sma30>sma60 rule reads ACTIVE through any bull
+#                         market. Validate the state field against Jan 2026 (the known
+#                         misfire) and Nov 2022 before scoring on it.
 ONCHAIN = [
     ("realized-price", "realizedPrice", "realized_price"),
     ("mvrv-zscore",    "mvrvZscore",    "mvrv_zscore"),
@@ -56,6 +78,8 @@ ONCHAIN = [
     ("nupl",           "nupl",          "nupl"),
     ("sopr",           "sopr",          "sopr"),
     ("puell-multiple", "puellMultiple", "puell"),
+    ("sth-mvrv",       "sthMvrv",       "sth_mvrv"),
+    ("realized-price-sth", "realizedPriceSth", "sth_realized_price"),
 ]
 
 
@@ -65,7 +89,7 @@ def fetch_onchain():
         url = f"https://bitcoin-data.com/v1/{path}"
         if TOKEN:
             url += f"?token={TOKEN}"
-        raw = get(url)
+        raw = get(url, tries=2)
         if not raw:
             continue
         try:

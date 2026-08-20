@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T06:09:50Z",
+  "updated": "2026-08-20T03:35:22Z",
   "onchain": {
     "realized_price": {
       "d": "2026-08-18",
@@ -24,6 +24,14 @@
     "puell": {
       "d": "2026-08-18",
       "v": 0.7958
+    },
+    "sth_mvrv": {
+      "d": "2026-08-19",
+      "v": 1.03
+    },
+    "sth_realized_price": {
+      "d": "2026-08-19",
+      "v": 67243.51
     }
   },
   "macro": {
@@ -79,7 +87,7 @@
       "hi2y": 130.0413,
       "lo2y": 117.4396
     },
-    "dxy_src": "FRED DTWEXBGS (broad trade-weighted USD) \u2014 the ICE DXY is licensed"
+    "dxy_src": "FRED DTWEXBGS (broad trade-weighted USD) — the ICE DXY is licensed"
   },
   "etf": {
     "d": "2026-08-18",

@@ -249,6 +249,27 @@ window slides past it, so it must never be regenerated from scratch or "cleaned"
   rather than forced, which weakens the leading second-catalyst candidate.
 - **Fed pricing kept deflating:** Sep hike odds ~38% → ~32%, hold ~68%. Still
   hold-not-cut with no easing priced. Recession odds 9% → 8% (Polymarket, Aug 19).
+- **Follow-up 2 (Aug 20, midday) — the confirmation trigger began converging for
+  real.** Price extended to $72,490 intraday (first $72K since early June, −43% from
+  ATH, the bounce now +24% off $57.8K) and the three pre-registered legs moved from
+  "not close" to "converging": **(1)** the in-progress weekly candle sits at ~$71.8K —
+  it would take a −2.5% drop by Sunday for the weekly close *not* to print above $70K;
+  **(2)** the Coinbase premium oscillates at −0.02%…−0.07% raw, positive USDT-adjusted —
+  the laggard leg; **(3)** spot ETFs took in **+$517M on Aug 19, the largest daily
+  inflow in ~3.5 months**, with Aug 20 running stronger (~$700M reported intraday) — the
+  4-week net goes from $0.49B toward ~$1.0–1.7B, so the $1.5B bar can be met within
+  days. Polymarket followed: P(tags $75K) 70% → 83.5%, P($80K) → 60.5%, P(<$55K)
+  37.5% → 35.5% (no-new-low ~64.5%). The market narrative for the move is "stealth QE".
+  **One calendar observation recorded before Sunday resolves it:** this is week ~7 off
+  the Jul 1 flush low at +24%; the 2018 bear rally topped at +48% in week ~4½ and the
+  2022 one at +43% in week ~8 — so the current move sits, by both price and calendar,
+  *inside* the envelope where both precedent rallies peaked and reversed. That is
+  precisely why nothing is deployed on price action alone: the three-leg trigger exists
+  to separate this from 2018/2022, where institutional premium and flows did **not**
+  confirm the rally tops. Decision: no threshold, weight or probability touched today —
+  the Sunday 00:15 UTC check (scheduled, with e-mail) adjudicates; only the two ETF
+  narrative tails in the UI were refreshed, since the "$0.49B, barely a third of the
+  bar" framing was overtaken by the $517M print.
 - **Follow-up (Aug 20), on what else the rally day held.** Three more same-day items
   were checked for whether they change the read. The **Jul 28–29 FOMC minutes** (2pm ET
   Aug 19) were *hawkish* — participants beyond the three dissenters said tightening

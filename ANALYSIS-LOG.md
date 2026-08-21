@@ -23,6 +23,163 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-08-21 — The first leg of the deploy trigger fired, and the checklist went almost fully dark
+
+Unscheduled pass, prompted by the size of the move. BTC ran to **$79,500** intraday and
+sits ~$77.5K, **−38.6%** from the ATH and **+34%** above the Jul 1 low of $57,800. Week
+~46 post-ATH; week ~7.3 off the flush. Two days ago this file recorded +21% and −45%.
+
+Almost all of this entry is about keeping two questions apart: *is the bottom thesis in
+trouble* (the checklist answers that, and it says less than ever) and *has the
+pre-registered escape hatch fired* (falsifier #6 answers that, and one leg has).
+
+### The checklist did not just fail to improve — it collapsed
+
+Rescoring the 8-rule `CORE` subset with the Aug 20 on-chain values at spot, using the
+same `RULE` object the calibration replays:
+
+| Rule | Aug 19–20 | Today | |
+|---|---|---|---|
+| MVRV-Z | 0.4146 | **0.5638** | PARTIAL → NOT YET |
+| SOPR | 1.0012 | **1.0125** | PARTIAL → NOT YET |
+| Price vs 200W MA | +8.1% | **+20.9%** | PARTIAL → NOT YET |
+| Price ÷ Realized Price | 1.33 | 1.48 | NOT YET |
+| NUPL | 0.245 | 0.285 | NOT YET |
+| STH-MVRV (spot ÷ cost basis) | 1.03 | 1.15 | NOT YET |
+| Drawdown | −45% | −38.6% | NOT YET |
+| Puell | 0.676 | 0.754 | PARTIAL (the only one left) |
+
+**Expert readiness 21% → 5%, equal 25% → 6%**, against 95% at the confirmed Nov 21, 2022
+bottom. One PARTIAL out of eight. Supporting reads move the same way: Fear & Greed
+**29 → 72 (Greed)** in eight days, weekly RSI 38.8 → 56.5, Mayer 1.124 (200D MA
+$69,009), perp funding back positive at +0.006%/8h (~+6.5% annualised).
+
+This is not a contradiction with the section below and it is worth saying why plainly:
+the checklist measures *proximity to a capitulation bottom*, falsifier #6 measures *the
+counter-scenario*. In a world where the Jul 1 low was the bottom, these two are supposed
+to move in opposite directions. They just did, hard. `BS_SPEED` exists because that is
+normally a fast-vs-slow artefact; this time it is not — the slow valuation rows moved
+too, and they moved *away*.
+
+### The three legs: one fired, one pending, one not
+
+| Leg | Bar | Reading |
+|---|---|---|
+| 1 — weekly close | > ~$70K | **pending.** The Aug 17–23 candle is at ~$77.5K against a $62,900 open; it needs ~−10% in two days to fail. Closes 00:00 UTC Mon Aug 24 |
+| 2 — Coinbase Premium | positive | **not fired.** Daily closes: −0.068% (Aug 18), −0.050% (Aug 19), **−0.018% (Aug 20)**. Intraday Aug 21 raw −0.038%…−0.048%, USDT-adjusted −0.011%…−0.022% — **negative on both conventions** |
+| 3 — ETF 4-week net | > +$1.5B | **fired: +$1.77B.** +$517M Aug 19 and **+$606M Aug 20**, the two largest days in ~3.5 months; 5d alone +$1.55B. 60d still −$3.35B |
+
+Leg 3 is the one that matters and it deserves separating from the price. The Aug 20
+entry set up the 2018/2022 bear-rally analogy as the reason not to react to +21%. Those
+rallies are the reason the trigger requires *institutional* confirmation and not just
+price — and this is the first time the flow leg has actually cleared its bar. That is a
+genuine divergence from the analogy, not another restatement of it.
+
+**Nothing is deployed.** Leg 2 is negative on both conventions and leg 1 cannot resolve
+before Monday, so the question of which premium convention governs is not even
+load-bearing today. +34% at week ~7.3 remains inside the precedent envelope (+48% at
+week ~4½ in 2018, +43% at week ~8 in 2022, both followed by lower lows 5–6 months on).
+
+### Recorded before the adjudication: the trigger is a weak discriminator
+
+This is the part that has to be written now rather than after Monday, following the
+Aug 19 precedent of recording the Fed-trigger gap instead of patching it mid-move.
+Falsifier #6 was designed to tell "the bottom is already in" apart from "this is a bear
+rally". Examined leg by leg, it is not well built for that:
+
+- **Leg 1 is price.** A bear rally is a price move. It cannot discriminate by construction.
+- **Leg 3 is a lagging confirmation.** The report's own ETF tooltip calls the row a
+  confirmation rather than a leading signal, one that mostly chases price — and it is
+  **untested against the precedent**, because spot ETFs did not exist in 2018 or 2022.
+  There is no way to check what this leg would have printed at the +48%/+43% rally highs.
+  It is also *rolling*, not latched: +$1.77B is barely over the bar and ~$1.12B of it
+  arrived in two days, so it can fall back under as those roll off.
+- **Leg 2 is the only genuinely independent one**, and the Aug 19 pass established that
+  it is measured within noise of a documented stablecoin artifact.
+
+So two of three legs are things a bear rally does, and the third is the one sitting in
+the noise. **The trigger is not being changed** — it was tightened once already, on
+Aug 6, and re-specifying it in the pass where it is about to adjudicate is exactly what
+the no-retro-edit rule forbids, in either direction. What is recorded is that if it
+fires, it fires on evidence weaker than its own framing implies, and a later pass should
+revisit its *design* prospectively rather than its thresholds reactively.
+
+### Leg-2 measurement pinned prospectively, while the outcome is unknown
+
+The scheduled Monday check compared instantaneous tickers. The gap oscillates ±5bp
+intraday and 00:15 UTC Monday is the thinnest liquidity of the week, so an instantaneous
+reading adjudicates 65% of the ladder on a coin flip. Fixed by writing the procedure
+down **before** anyone can see the answer (MAINTENANCE §2b): **daily-close figure, raw
+convention**, USDT-adjusted reported as context only.
+
+This is adjudication procedure, not a spec change: daily closes reproduce the figures the
+log has always quoted (−0.108% on Aug 12, and −0.018% for Aug 20 against the −0.016%
+published that day). Keeping the raw convention is likewise not merely discipline — the
+Aug 19 pass adjudicated **this exact configuration**, adjusted positive and raw negative,
+and left the row NOT YET on the standard convention. Switching now, when adjusted is the
+side closer to firing, would be that same retro-edit pointed the other way.
+
+### A doc-sync bug: the repo held two live specs for falsifier #6
+
+`MAINTENANCE.md` §3 still carried the **pre-Aug-6 draft** of the trigger — "price
+reclaims Realized Price and the 200-week MA, holds 30 days, 4-week ETF flows positive" —
+15 days after the Aug 6 entry retired that draft as near-vacuous and `index.html`
+replaced it. The file that instructs "falsifiers must be honoured, not reinterpreted"
+was the one holding the retired wording. Restated to the current spec, with a note; this
+is a restatement, not a re-derivation, and the direction is fixed and dated.
+
+**The retired wording does not read fired today**, which was checked rather than assumed:
+it requires a 30-day hold above the 200-week MA, and price closed **below** the 200W MA
+on six consecutive days, Aug 11–16 (low close $62,900 on Aug 16 against a $63,955 line),
+five days ago. The bug is real; the alarm is not. Process note for next time: when a
+falsifier is re-specified, grep the whole repo for the old wording in the same pass.
+
+### The probability moves Monday either way
+
+Deferring `th_p` to the scheduled check is right; treating "trigger not fired" as
+"evidence unchanged" would not be. Two of three pre-registered legs at or near their
+bars, price 10%+ above the $70K level, and Polymarket's no-new-low side around 65% is
+this report's own definition of counter-scenario evidence, and the Aug 19 pass moved the
+number 25% → 30% with *no* leg fired at all. The legs govern capital; the probability
+tracks evidence. **Nothing is moved today** — no threshold, no weight, and not the 30% —
+because the point of deferring to a scheduled adjudication is not to pre-empt it.
+
+Also noted: the trigger has no expiry. Leg 1 re-resolves every Monday. Monday is when
+this configuration is adjudicated, not the trigger's last chance.
+
+### Data-source notes
+
+- **The ETF row lags the leg it adjudicates.** The committed `data.json` read
+  `etf.d20 = +0.94` (through Aug 19) while the live SoSoValue series was already at
+  **+$1.77B** (through Aug 20) — i.e. the published arbiter showed leg 3 *under* its bar
+  after it had cleared it. The 06:00 UTC Action runs before SoSoValue publishes the prior
+  US session. Not a failure and not flagged stale, because the fetch succeeds; it is a
+  one-day phase offset that happens to land on the one row a pre-registered trigger reads.
+  Refreshed by hand this pass. Check `etf.d` before reading a sub-bar `d20` as real.
+- **`stale: ["onchain"]` was self-inflicted.** Five of eight bitcoin-data.com series
+  returned HTTP 429 on the manual re-run: this pass had already spent the anonymous
+  10-req/hour budget pulling the same endpoints directly to verify them. The merge kept
+  the correct Aug 20 values, so the flag was conservative rather than wrong; a retry once
+  the rolling window reset cleared it, and that second run also extended all eight series
+  in `history.json` (1461d → 1462–1463d) rather than the three the throttled run reached.
+  Setting `BGEOMETRICS_TOKEN` locally is the fix if a pass needs both hand-verification and
+  a run in the same hour.
+
+### Second opinion
+
+The pass was reviewed by a second model given the same data and the opposite brief
+(disagree where warranted). It confirmed the `CORE` rescore to 5%/6% by hand, measured
+the premium independently (raw −0.048%, adjusted −0.022% via a different USDT venue —
+negative both ways), and produced three of the corrections above: that leg 3 is rolling
+rather than latched, that leg-2 measurement needed pinning before the outcome was
+visible, and that the probability must move on evidence regardless of what the trigger
+does. It found the `MAINTENANCE.md` doc-sync bug. Its one claim that did not survive
+checking was that the retired wording would read fired today — the 30-day hold fails, as
+above. Recorded because a review that changed four things in the entry is part of how the
+entry got its numbers.
+
+---
+
 ## 2026-08-19 — The week the counter-scenario got its best evidence, and the checklist did not move
 
 Scheduled refresh (the cadence said late Aug). It landed on the most eventful day of

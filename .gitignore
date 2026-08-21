@@ -1,0 +1,5 @@
+# Byte-compiled Python. `scripts/build_data.py` was tracked together with its
+# __pycache__, so a stale .pyc — compiled from an older version of the script —
+# was being published to GitHub Pages alongside the report. Untracked Aug 21, 2026.
+__pycache__/
+*.py[cod]

@@ -215,6 +215,38 @@ EXPECT = {"onchain": [name for _, _, name in ONCHAIN],
           "macro": ["m2", "netliq", "real10y", "nom10y", "nom2y", "hy_oas", "dxy"],
           "etf": ["d20"]}
 
+# Freshness tolerance, in days behind today, for the sections whose cadence makes a
+# calendar check meaningful. A fetch that SUCCEEDS but hands back yesterday's data is
+# invisible to the completeness check above, because nothing is missing -- and on
+# Aug 21, 2026 that is exactly what happened: `etf` sat a day behind the source with
+# `stale: []`, so the published four-week figure read $0.94B, under the +$1.5B bar of a
+# pre-registered trigger leg, after the source had already cleared it. A section is now
+# stale if it is complete but old.
+#
+# `macro` is deliberately absent: M2 is monthly and the Fed balance-sheet series weekly,
+# so one calendar rule cannot tell "late" from "not published yet" across that section.
+# On-chain publishes daily and ETF flows per US trading session, hence 3 and 4 (Friday's
+# print read on Tuesday is 4 days old and still current).
+FRESH_DAYS = {"onchain": 3, "etf": 4}
+
+
+def oldest_reading(section, block):
+    """(date, age_in_days) of the OLDEST expected series in a section, or None.
+
+    Oldest rather than newest on purpose: the question is how current the whole section
+    is, and one lagging series is the failure mode worth catching.
+    """
+    if not block:
+        return None
+    dates = ([block.get("d")] if section == "etf"
+             else [v.get("d") for v in block.values() if isinstance(v, dict)])
+    dates = [d for d in dates if d]
+    if not dates:
+        return None
+    d = min(dates)
+    today = datetime.datetime.now(datetime.timezone.utc).date()
+    return d, (today - datetime.date.fromisoformat(d)).days
+
 
 def extend_series(stored, fresh, name):
     """Union a stored series with a freshly fetched one, keeping the older head.
@@ -289,6 +321,15 @@ def main():
     # and is flagged, so the page says "stale" rather than presenting them as new.
     fresh = {"onchain": onchain, "macro": macro, "etf": etf or {}}
     data["stale"] = [k for k in EXPECT if any(n not in fresh[k] for n in EXPECT[k])]
+    # ...and a section that came back complete but stale-dated is stale too.
+    for k, tol in FRESH_DAYS.items():
+        if k in data["stale"]:
+            continue
+        age = oldest_reading(k, data.get(k))
+        if age and age[1] > tol:
+            print(f"  ! {k}: oldest reading is {age[0]} ({age[1]}d old, tolerance "
+                  f"{tol}d) - complete but stale", file=sys.stderr)
+            data["stale"].append(k)
 
     with open(os.path.join(ROOT, "data.json"), "w") as fh:
         json.dump(data, fh, indent=2)

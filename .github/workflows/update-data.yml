@@ -2,9 +2,19 @@ name: Update on-chain data
 
 on:
   schedule:
-    # Runs daily at 06:00 UTC. FRED daily series post with a ~1 business-day lag,
-    # BGeometrics rolls over shortly after UTC midnight.
+    # 06:00 UTC: FRED daily series post with a ~1 business-day lag, BGeometrics rolls
+    # over shortly after UTC midnight, so this run is the one that keeps `updated`
+    # fresh through the European and US morning.
     - cron: '0 6 * * *'
+    # 19:00 UTC: SoSoValue does NOT have the previous US session's ETF flows by 06:00.
+    # Measured Aug 21, 2026: the 06:10 run got data through Aug 19, while a manual pull
+    # at 17:40 the same day already had Aug 20 (+$606M). The 06:00-only schedule was
+    # therefore structurally a day behind on ETF flows -- and `etf.d20` is the published
+    # arbiter for one leg of the pre-registered falsifier #6 trigger, so the page showed
+    # that leg at +$0.94B, under its +$1.5B bar, after the source had cleared it.
+    # Additive rather than a move: the on-chain and macro sections read identically at
+    # both hours, so this can only add freshness. Commits only when something changed.
+    - cron: '0 19 * * *'
   workflow_dispatch: # Allow manual trigger
 
 permissions:

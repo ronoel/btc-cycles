@@ -176,10 +176,14 @@ What is new since:
    still not the source of the liquidity impulse — both noted Aug 19, both unchanged.
 
 What holds it at 40% rather than at the market's 74% is one thing, and it is measured
-rather than argued: **the bounce is +34.5% at week ~7.7 off the low, against +48% at week
-~3.7 (Jun–Jul 2018) and +43% at week ~8.3 (Jun–Aug 2022)** — the two bear rallies that
-preceded lower lows five and six months later. We are inside that envelope and at almost
-exactly the point on the clock where the 2022 rally topped. The envelope has not broken.
+rather than argued, and it is measured **peak-to-peak**, which is the only apples-to-apples
+form: **this bounce peaked at +37.5% on Aug 21 (week ~7.3), against +45.7% by week ~3.9
+($5,827 on Jun 28 → $8,492 on Jul 25, 2018) and +43.1% by week ~8.3 ($17,622 on Jun 18 →
+$25,211 on Aug 15, 2022)** — the two bear rallies that preceded lower lows. We are inside
+that envelope and at almost exactly the point on the clock where the 2022 rally topped. The
+envelope has not broken — but note the peak-to-peak comparison is *tighter* than the
+spot-to-peak form used on Aug 21: +37.5% against +43.1% is much closer than +34% against
++43% made it look.
 
 Two things deliberately **not** counted in the derivation:
 
@@ -194,8 +198,9 @@ Two things deliberately **not** counted in the derivation:
   reason to ignore the legs.
 
 **The gap between 40% and the market's ~74% is now the thing to watch.** Its entire content
-is the precedent envelope. If this bounce clears **+48%** — roughly $85.5K — without a lower
-low, that argument is spent and the probability should go most of the way to the market's.
+is the precedent envelope. If this bounce clears **+45.7%** — roughly **$84.2K** — without a
+lower low, that argument is spent and the probability should go most of the way to the
+market's.
 Written down now, prospectively, so it is not re-derived later at whatever level price
 happens to be.
 
@@ -227,6 +232,43 @@ problem: `replace()` gives `$&`, `` $` `` and `$'` special meaning **in the repl
 value**, and several of the values passed here are prices like `$77,448`. Verified by
 rendering the page headless and confirming zero `{n}` tokens survive anywhere outside the
 inline script source.
+
+### Correction, same day: the +48% precedent figure is not reproducible
+
+The derivation above was first written against **+48% at week ~4½** for the 2018 bear rally,
+the figure this log and `index.html` have carried since before this pass. It was checked
+against the sources rather than inherited, because it had just been promoted from background
+colour into a **pre-registered prospective marker** ("if the bounce clears +48% (~$85.5K)…"),
+and a marker measured wrong is worse than no marker.
+
+Measured interim-low to rally-high, on one consistent index at a time:
+
+| | Binance `BTCUSDT` | Coinbase `BTC-USD` |
+|---|---|---|
+| 2018 | $5,827 (Jun 28) → $8,492 (Jul 25) = **+45.7%**, 3.9 wk | $5,777 (Jun 24) → $8,488 (Jul 24) = **+46.9%**, 4.3 wk |
+| 2022 | $17,622 (Jun 18) → $25,211 (Aug 15) = **+43.1%**, 8.3 wk | $17,567 (Jun 18) → $25,215 (Aug 15) = **+43.5%**, 8.3 wk |
+
+**No single index produces +48%.** The origin is visible in the report's own wording: the
+"precedent is exact" passage read *"the Jun 2018 flush to $5,750 rallied 48% to $8,492"*.
+$8,492 is Binance's high, but $5,750 is neither venue's low. A low from one source divided
+into a high from another gives +47.7%, rounded to 48%. 2022 was never wrong — all four of its
+figures reproduce on both venues.
+
+Two things changed as a result, and both cut **against** the report's own base case, which is
+the test of whether a correction is motivated:
+
+1. **The marker drops to +45.7% (~$84.2K)** from +48% (~$85.5K). The level at which the base
+   case's last argument is declared spent is now **$1.3K closer**, not further away.
+2. **The comparison is now peak-to-peak.** Setting cycle 4's *current* price against the
+   precedents' *peaks* flattered the base case: +34% against +43% reads like room left, while
+   +37.5% (the Aug 21 high) against +43.1% is most of the way there. Corrected in `th_p` and
+   in the bear-rally calibration note, both of which carried the spot-to-peak form.
+
+Older entries keep +48% on the record, unedited — they are the dated statement of what was
+concluded then. `index.html`, `MAINTENANCE.md` and this entry carry the measured figures.
+Process note, generalising the Aug 21 doc-sync finding: **a number repeated across passes is
+not thereby verified.** This one survived several passes as prose and was only checked when it
+was asked to carry weight.
 
 ### Other falsifiers, cross-checked
 

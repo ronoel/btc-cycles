@@ -2,7 +2,7 @@
 
 A self-updating, single-file report that combines all 4 Bitcoin halving cycles with a full **cycle-bottom analysis**: a cycle-phase timeline, timing & price convergence, a **15-signal bottom checklist grouped into four families**, a **retro-calibration that replays the same scoring rules over the confirmed November 2022 bottom**, a staged buy ladder, pre-registered falsifiers, and computed macro/flow context. Live BTC data via Binance, on-chain + macro + ETF-flow data via a daily GitHub Action.
 
-> The headline finding of the current build: the eight scoring rules with clean history in both eras read **95% at the confirmed Nov 21, 2022 bottom** and **21% today**. That is what makes the readiness number mean something rather than assert something — and the 95% is itself the point: when short-term-holder MVRV joined the subset in Aug 2026 it turned out to read PARTIAL at that bottom, so the calibration's first job after being extended was to fail one of the checklist's own thresholds rather than confirm it.
+> The headline finding of the current build: the eight scoring rules with clean history in both eras read **95% at the confirmed Nov 21, 2022 bottom** and **0% today** — zero, after a 34% rally took the last PARTIAL out on Aug 22, 2026. That is what makes the readiness number mean something rather than assert something, and the zero is worth reading twice: the same eight rules read the same at $77.7K and −38.5% in week 46 as they did three weeks after the ATH above $110K, because each is a function of price or of a realized-cap ratio that price moves. It is why the headline on the page is an ordinal stage and not this percentage — and the 95% is itself the point: when short-term-holder MVRV joined the subset in Aug 2026 it turned out to read PARTIAL at that bottom, so the calibration's first job after being extended was to fail one of the checklist's own thresholds rather than confirm it.
 
 ## Live demo
 
@@ -39,7 +39,7 @@ Every analysis card and table row carries a **`?` tooltip** explaining the metho
 - **Not claimed:** a "global M2" or "global liquidity index". Japan and China have no free, current, programmatic series, so the report publishes **USD** net liquidity and says so rather than implying global coverage
 - **Funding rate**: [Binance Futures public API](https://fapi.binance.com) (`fapi/v1/fundingRate`, CORS-enabled, no key) — 7-day average of the 8-hourly BTCUSDT perpetual funding, computed live on page load
 - **Sentiment**: [alternative.me](https://alternative.me/crypto/fear-and-greed-index/) Fear & Greed
-- **Research snapshot**: rows/cards tagged `research: Jul 24, 2026` come from a manual research pass (web + on-chain sources) and need periodic manual refresh — everything else recomputes live
+- **Research snapshot**: rows/cards tagged with a `research:` date (currently `Aug 24, 2026`) come from a manual research pass (web + on-chain sources) and need periodic manual refresh — everything else recomputes live
 - **ATH reference**: $126,296 on October 6, 2025 · next halving ~Apr 2028
 
 ## Setup (GitHub Pages)

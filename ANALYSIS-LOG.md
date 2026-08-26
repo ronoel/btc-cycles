@@ -23,6 +23,181 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-08-26 — Interim check: the two live legs moved in opposite directions, and nothing changed
+
+Not an adjudication. The pinned window for falsifier #6 is Monday 00:15 UTC (MAINTENANCE §2b);
+the next one is **Aug 31**. This is the between-Mondays read the Aug 24 entry's cadence implies
+now that the Sep–Nov bottom window is six days out, and it is written down mainly to record two
+things that moved and one thing that deliberately did not.
+
+BTC **~$78.4K**, **−37.9%** from the ATH, week 46 post-ATH, week ~7.9 off the Jul 1 low of
+$57,800.19 and **+35.6%** above it.
+
+**The recommendation is unchanged. Stage TOO EARLY, 0 of 4 families lit, ladder unfilled,
+nothing deployed.** The probe (20%, $52–57K) and core (45%, $44–50K) tranches remain empty.
+
+### Falsifier #6: still 2 of 3, but not the same 2-of-3
+
+| Leg | Bar | Aug 24 | Aug 26 | |
+|---|---|---|---|---|
+| 1 — weekly close | > ~$70K | $77,734.00 | $77,734.00 (Aug 17–23 still the last closed week) | **FIRED** |
+| 2 — Coinbase Premium | positive | −0.0060% (Aug 23) | **−0.0157%** (Aug 25 close) | **NOT FIRED** |
+| 3 — ETF 4-week net | > +$1.5B | +$2.32B | **+$3.03B** | **FIRED** |
+
+**Leg 3 extended and is no longer near its bar at all.** `etf.d20` is **+$3.03B**, twice the
++$1.5B threshold, with the 5-day at +$2.08B. The 60-day roughly halved its deficit in two days,
+−$2.31B → **−$1.30B**, and YTD −$2.91B → −$2.25B. The quarter is still negative; the month is
+emphatically not.
+
+**Leg 2 moved away, which is the finding.** Daily closes on the raw convention:
+
+| | Aug 21 | Aug 22 | Aug 23 | Aug 24 | Aug 25 | Aug 26* |
+|---|---|---|---|---|---|---|
+| raw | −0.0159 | −0.0266 | **−0.0060** | −0.0141 | **−0.0157** | −0.0113 |
+| USDT-adj | −0.0019 | +0.0034 | +0.0070 | +0.0109 | **−0.0077** | −0.0073 |
+
+\* Aug 26 is an incomplete candle and does not count for anything; shown so the direction is not
+read off one day.
+
+Aug 23 was the closest to a flip in ~96 days and it has not been beaten since. Note **Aug 25 is
+negative on *both* conventions** — only the second such day in this streak (Aug 21 was the
+first). Two days ago the interesting fact about this leg was that the two conventions disagreed
+by 1.3bp and the pinning decided the call; today they agree, in the direction of not firing.
+
+**Method validated before use, as on Aug 24.** The same measurement reproduces every figure this
+log has published: raw −0.0743 (Aug 17), −0.0681 (Aug 18), −0.0502 (Aug 19), −0.0182 (Aug 20),
+−0.0060 (Aug 23); adjusted +0.0198, +0.0089, +0.0108, +0.0068, +0.0070 on the same days.
+
+### A wording error found in the process: *divide* should be *multiply*
+
+MAINTENANCE §2b and the Aug 24 entry both describe the USDT-adjusted premium as "the Binance leg
+**divided** by Coinbase `USDT-USD`". Reproducing the table above shows that only **multiplying**
+gives the published numbers — which is also the economically correct conversion, since a
+`BTCUSDT` price times the USD value of a tether is a BTC price in dollars:
+
+> Aug 23: 77,734.00 × 0.99987 = 77,723.90 USD; 77,729.36 ÷ 77,723.90 − 1 = **+0.0070%** ✓
+> Dividing instead gives 77,744.10, and the premium reads **−0.0189%** — wrong sign.
+
+Nothing material turns on it: raw governs, adjusted is context, and adjusted has never
+adjudicated anything. But it is the same class of error as the +48% precedent corrected on Aug 24
+— *a number, or here a formula, repeated across passes is not thereby verified* — and the arithmetic
+was always being done correctly while the prose described something else. §2b is corrected
+prospectively; the Aug 24 entry is left unedited as the dated record of what was written then.
+
+### The checklist has not moved
+
+`CORE` rescored through the same `RULE` object the calibration replays, on-chain values as of
+**Aug 25** (the published date in `data.json`), at spot $78,399:
+
+| Rule | Aug 24 | Today | |
+|---|---|---|---|
+| Puell | 0.9562 | 0.9454 | NOT YET |
+| MVRV-Z | 0.8611 | 0.8757 | NOT YET |
+| SOPR | 1.0076 | 1.0103 | NOT YET |
+| Price ÷ 200W MA | +20.9% | +21.8% ($64,344) | NOT YET |
+| Price ÷ Realized Price | 1.48 | 1.49 ($52,548) | NOT YET |
+| NUPL | 0.3188 | 0.3302 | NOT YET |
+| STH-MVRV | 1.13 | 1.13 (basis $69,205) | NOT YET |
+| Drawdown | −38.5% | −37.9% | NOT YET |
+
+**Expert 0%, equal 0%** — zero ACTIVE, zero PARTIAL of eight, a fifth consecutive day, against 95%
+at the confirmed Nov 21, 2022 bottom. Six of the eight drifted *further* from their thresholds;
+only Puell moved toward one, and it is still above its PARTIAL bar. Across all 15 rows: **expert
+16%, equal 20%**, 1 ACTIVE (`etf`), 4 PARTIAL (`hash`, `lth`, `resv`, `fed`), **0 of 4 families lit
+→ TOO EARLY**. The expert/equal gap is still 4 points, still the small-numbers artefact diagnosed
+Aug 24; nothing was changed.
+
+The macro composite was re-derived rather than assumed: M2 y/y 5.41% against 4.53% (3m) and 4.06%
+(6m) — accelerating ✓; broad USD 118.06 vs a 119.63 200-day — below ✓; real 10-year 2.38% vs a
+2.03% 200-day — **above ✗**. Two of three, PARTIAL, unchanged.
+
+### The counter-scenario is held at 40%, and the reason is the marker
+
+The bounce peak rose from **+37.5%** (Aug 21 high, $79,500) to **+40.6%** ($81,272.62 on Aug 25,
+week ~7.9 off the low). Against the precedent envelope — +45.7% by week ~3.9 in 2018, +43.1% by
+week ~8.3 in 2022 — we are now level with the week the 2022 rally topped and **2.5 points below
+its magnitude**. That is the tightest this comparison has been, and the gap to the pre-registered
+marker has closed from **8.2 points to 5.1** in two days.
+
+**It still does not move the number, and that is the point.** The Aug 24 entry wrote the marker
+down "prospectively, so it is not re-derived later at whatever level price happens to be." A
+probability that ratchets up every time price makes a marginal new high *is* that re-derivation,
+performed two days at a time. The marker is +45.7% (~$84.2K) and it has not been cleared. When it
+is, the number goes most of the way to the market's; until then it is 40%.
+
+Three further reasons not to move it this pass, none of which is the checklist:
+
+1. **The market did not move either.** Polymarket, same-day snapshot Aug 26, Gamma API, open
+   contracts only: ↓$60K **29.5%** (was 30%) and ↓$55K **22.5%** (was 21.5%), which interpolates at
+   the $57,800 cycle low to ~26.4% — so the market prices the low already being in at **~74%**,
+   the same ~74% as Aug 24 after moving ~12 points in the five days before that. Price printed a
+   new rally high on Aug 25 and the read did not budge.
+2. **Underneath that flat headline the deep rungs moved *against* the counter-scenario.**
+   P(<$50K) went 11.5% → **16.5%** and P(<$45K) 8.5% → 9.5%. This report's $44–50K core zone is
+   priced slightly *more* likely than it was two days ago. Upside: ↑$80,000 settled YES on Aug 24
+   (so it leaves the card, like ↑$70K and ↑$75K before it); the nearest open rung ↑$85,000 is
+   68.5%, ↑$90,000 **48.5%**, ↑$95,000 37.5%.
+3. **The one leg of the trigger that measures institutional demand rather than price moved the
+   wrong way.** Leg 1 is price and leg 3 is a flow confirmation that chases price — the Aug 21
+   entry established both, before either fired. Leg 2 is the discriminating one, and it is
+   further from firing than it was on Monday.
+
+Symmetrically, the 0% checklist is again **not** counted as evidence for the base case, for the
+reason recorded Aug 24: every one of those eight rules is a function of price or of a realized-cap
+ratio that price moves, so a rally that argues for the counter-scenario also darkens the
+checklist. Counting both would be counting one price move twice.
+
+### Supporting reads
+
+- **Funding** 7-day average **+0.0090%/8h** (~+9.9% annualised), from +0.0079% on Aug 24 — still
+  pinned at or near the +0.0100% cap, and still on the wrong side of the row's −0.005% bar by
+  nearly three times the threshold's magnitude.
+- **Fear & Greed** 73 (Aug 24) → 74 (Aug 25) → **65** (Aug 26). Greed throughout; the pullback
+  from the high is the only supporting read that moved toward the base case.
+- **Puell** 0.9562 → **0.9454**, still above the 0.9 PARTIAL bar.
+- **Aggressive-buy triggers** unchanged at **1 fired · 1 partial · 2 not fired**; the two halves
+  moved in opposite directions (ETF extended, premium retreated) without changing the tally.
+
+### Other falsifiers, cross-checked
+
+**#1** (new ATH) — $126,296, far off. **#2** (above ~$90K for eight consecutive weeks with fewer
+than three families lit) — high $81,273, not in play, and still the one to watch if the rally
+extends, since families lit is 0 and Polymarket puts ↑$90K at 48.5%. **#3** (week 70 = Feb 2027) —
+not due. **#4** (low below $30K) and **#5** (bottom confirmed on fewer than 8 of 15 signals) — not
+in play.
+
+### What was deliberately not changed
+
+- **No threshold, no weight, no `BS_W`, no `CORE` membership, no ladder band, no probability.**
+- **The premium convention.** Raw governs; the two conventions now agree anyway.
+- **The trigger's design review** stays deferred, per Aug 21 and Aug 24. Two days after it missed
+  and then moved away is no better a moment to re-specify it than the day it missed.
+- **`sthmvrv`'s ≤0.80 threshold** stays under prospective review, unchanged.
+- **Not a full research refresh.** The narrative `mac` rows, `lth`, `resv` and `hash` carry their
+  Aug 19/24 snapshots; they are on a 2–4 week cadence and are not due. Refreshed here: `cbp`,
+  `fund`, `puell`, the ETF and premium trigger cards, `trig_n`, the Polymarket card, `th_p`, the
+  bear-rally calibration note in `ph_notes[2]` and the adjudication line in `fal[5]`.
+  `hash` was **not** re-measured — its Aug 24 reading (30d 910.3 EH/s vs 60d 916.1, −0.63%) stands
+  and the card says so.
+
+### A sweep the Aug 24 pass should have run, and this one did
+
+Two keys outside the ones being edited still carried the bounce peak as **+34% / +37.5% / $79,500
+intraday Aug 21** presented as the *current* reading: `ph_notes[2].tip` (the bear-rally calibration
+note, which the Aug 24 pass corrected for peak-to-peak form but left at the old level) and, less
+seriously, a prose "48% above Realized Price" that is now 49%. `fal[5]` told the reader the trigger
+stood where it did on Aug 24 while `th_p` said otherwise two paragraphs away. All three fixed.
+
+Generalising the Aug 21 doc-sync finding and the Aug 24 +48% correction into something runnable:
+**after editing the keys a pass is about, grep the file for the previous pass's headline numbers**
+— here `+34%`, `37.5%`, `79,500`, `2.32B` — and check each hit is a *dated* statement rather than a
+current one. Dated references ("peaked at +37.5% on Aug 21", "P(<$55K) was 37.5% on Aug 19") are
+correct and must stay; the same digits presented as today's reading are the bug. The four searches
+took a minute and found two real staleness bugs, one of them in the exact note the previous pass
+had touched.
+
+---
+
 ## 2026-08-24 — The adjudication: two legs fired, the third missed by 0.6 basis points
 
 The scheduled check the Aug 21 entry deferred to. Run at **00:15 UTC Monday Aug 24**, the

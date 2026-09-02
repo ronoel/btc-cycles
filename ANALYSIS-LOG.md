@@ -23,6 +23,286 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-01 — The Aug 31 adjudication, run two days late: 2 of 3 again, and the premium had already flipped on days the window does not look at
+
+The second scheduled adjudication of falsifier #6. The pinned window was **Monday Aug 31, 00:15 UTC**
+(MAINTENANCE §2b); this pass ran on the evening of Sep 1 in Brazil (≈02:30 UTC Sep 2), about 50
+hours late. It is still a clean adjudication, because every input the window uses was fixed before it
+opened and none of them can be affected by looking later: the Aug 24–30 weekly candle, the Aug 30
+daily closes, and the ETF figure that `data.json` carried at 00:15 UTC Monday (the Aug 30 19:08 UTC
+build, through Aug 28). Nothing here was measured on the incomplete Sep 2 candles.
+
+BTC **~$77.1K**, **−38.9%** from the ATH, day 330 of ~370 on the cycle clock (week 47 post-ATH),
+week ~8.9 off the Jul 1 low of $57,800.19 and **+33.5%** above it. The Sep–Nov bottom window opened
+today, which under MAINTENANCE §2 moves the research cadence to **weekly**.
+
+**The recommendation is unchanged. Stage TOO EARLY, 0 of 4 families lit, ladder unfilled, nothing
+deployed.** The probe (20%, $52–57K) and core (45%, $44–50K) tranches remain empty. Next
+adjudication: **Monday Sep 7, 00:15 UTC**.
+
+### Falsifier #6 at the Aug 31 window: 2 of 3, not fired
+
+| Leg | Bar | Reading at the window | |
+|---|---|---|---|
+| 1 — weekly close | > ~$70K | **$77,682.00** (Aug 24–30 candle: $77,734 open, $81,478.87 high, $76,670.01 low) | **FIRED**, by 11% |
+| 2 — Coinbase Premium | positive | **−0.0217%** raw, Aug 30 daily close (Coinbase $77,665.14 vs Binance $77,682.00); −0.0187% USDT-adjusted | **NOT FIRED** |
+| 3 — ETF 4-week net | > +$1.5B | **+$3.31B** (`etf.d20` through Aug 28, the figure live at 00:15 UTC) | **FIRED** |
+
+Same configuration as Aug 24, same leg missing, and this time the miss is not marginal: Aug 30 is
+negative on both conventions and by more than three times the Aug 23 gap.
+
+### Leg 2: the streak broke on Aug 26, and the window never saw it
+
+Daily closes, raw convention (Coinbase `BTC-USD` ÷ Binance `BTCUSDT` − 1), USDT-adjusted alongside:
+
+| | Aug 24 | Aug 25 | **Aug 26** | **Aug 27** | Aug 28 | **Aug 29** | Aug 30 | Aug 31 | Sep 1 |
+|---|---|---|---|---|---|---|---|---|---|
+| raw | −0.0141 | −0.0157 | **+0.0031** | **+0.0321** | −0.0086 | **+0.0050** | **−0.0217** | −0.0236 | −0.0521 |
+| USDT-adj | +0.0109 | −0.0077 | +0.0001 | +0.0181 | −0.0076 | +0.0010 | −0.0187 | +0.0134 | +0.0019 |
+
+**The ~99-day negative streak ended on Aug 26.** Three of the seven closes in the adjudicated week
+printed positive on the governing convention — Aug 26, Aug 27 (+0.032%, the widest positive print
+since May) and Aug 29 — and CoinDesk reported the flip on Aug 28 ("after nearly 100 consecutive days
+underwater"). None of the three fell on the one day the window reads, the completed UTC day before
+Monday. The leg therefore did not fire, and under the conventions pinned on Aug 21 that is the
+correct result: the threshold text is *sustained* > 0, the window is the Monday close, and a
+Wednesday–Thursday–Saturday scatter with negative prints between them is neither.
+
+It is, however, the concrete case the deferred design review was waiting for. On Aug 21 this log
+recorded that leg 1 is price, leg 3 chases price, and leg 2 is the only leg that measures a distinct
+cohort; on Aug 24 and Aug 26 it deferred re-specifying the trigger because those were maximally
+reactive moments. This pass is one too — re-specifying the leg to "any positive close in the week"
+would fire it retroactively — so the design review **stays deferred**, and the fact that the
+Monday-pinned form and a plausible weekly form now give different answers is recorded here as the
+first evidence for that review rather than acted on.
+
+Two further reads on the same table. Sep 1 printed **−0.052% raw**, the most negative close since
+Aug 18 (−0.0681%), and **+0.002% adjusted**, because Coinbase `USDT-USD` closed at 0.99946 — the whole gap fits
+inside the tether discount again, exactly the Aug 19 finding. And the adjusted column is positive on
+six of the nine days, so on the convention that does *not* govern, the US bid has been level or
+slightly ahead of the offshore one for most of a fortnight.
+
+### The checklist moved off zero, by four ten-thousandths of SOPR
+
+`CORE` rescored through the same `RULE` object the calibration replays, on-chain values as of
+**Aug 31** (`data.json`), spot $77,142:
+
+| Rule | Aug 26 | Today | |
+|---|---|---|---|
+| Puell | 0.9454 | **1.0045** | NOT YET (crossed back above 1.0) |
+| MVRV-Z | 0.8757 | 0.8514 | NOT YET |
+| SOPR | 1.0103 | **1.0046** | **PARTIAL** (bar < 1.005) |
+| Price ÷ 200W MA | +21.8% | +19% ($64,633) | NOT YET |
+| Price ÷ Realized Price | 1.49 | 1.46 ($52,672) | NOT YET |
+| NUPL | 0.3302 | 0.3295 | NOT YET |
+| STH-MVRV | 1.13 | 1.10 (basis $70,149) | NOT YET |
+| Drawdown | −37.9% | −38.9% | NOT YET |
+
+**Expert 4%, equal 6%** — one PARTIAL of eight after ten consecutive days at zero, against 95% at
+the confirmed Nov 21, 2022 bottom. Read it for what it is: SOPR sits 0.0004 under a bar it will
+recross on any up day, so this is the instrument twitching, not turning. It did break two pieces of
+prose that had hard-coded the zero — the thesis paragraph's "zero, not merely low" and the README's
+"0% today" — which is the drift MAINTENANCE §5 warns about; both fixed, the first by removing the
+word rather than by re-typing a number the page already computes.
+
+Across all 15 rows: **expert 18%, equal 23%**, 1 ACTIVE (`etf`), 5 PARTIAL (`hash`, `lth`, `resv`,
+`fed`, `sopr`), **0 of 4 families lit → TOO EARLY**. Families: Valuation 0 of 4; Capitulation 1.0 of 5
+(needs > 2.5); Supply & flows 2.0 of 5 (needs > 2.5); Macro 0.5 of 1. Rendered headless and read off
+the page, not recomputed by hand.
+
+**The expert/equal gap is now 5 points**, breaching the ~3-point note in §2b for the second pass
+running. Re-derived rather than copied: the six lit rows carry weights 5, 6, 5, 3, 7 and 5 against a
+mean of 6.67, so five of six sit below it and one (`fed`, 7) marginally above; their weighted mass is
+18 of 100 while their count is 3.5 of 15. The sentence written on Aug 24 ("every lit row at or below
+average") is no longer literally true, but the mechanism is the same: which rows happen to be lit,
+not the weights. **Recorded, not acted on.**
+
+### Hash Ribbons crossed on Aug 26 — and the row stays PARTIAL, with the reasons written down
+
+The BGeometrics `hashribbons` series (the source the Aug 18 and Aug 24 measurements used) reads:
+
+| | Aug 25 | **Aug 26** | Aug 27 | Aug 28 | Aug 29 | Aug 30 | **Aug 31** | **Sep 1** |
+|---|---|---|---|---|---|---|---|---|
+| 30d (EH/s) | 906.8 | 910.2 | 914.1 | 910.8 | 910.0 | 909.7 | 908.1 | 907.5 |
+| 60d (EH/s) | 909.4 | 907.2 | 907.9 | 907.2 | 905.8 | 907.0 | 909.0 | 907.2 |
+| gap | −0.29% | **+0.34%** | +0.68% | +0.40% | +0.46% | +0.29% | **−0.10%** | **+0.03%** |
+| state | Down | **Up** | Up | Up | Up | Up | **Down** | **Up** |
+
+So the 30-day average did cross above the 60-day on Aug 26, for the first time since Jun 3 — the row's
+threshold text, "30d > 60d after capitulation", is literally met on seven of the last eight days. Three
+things were checked on the full 1,461-day series before deciding what that is worth:
+
+1. **The state field carries no memory.** It equals `sign(sma_30 − sma_60)` on every one of 1,461
+   days, zero exceptions. "After capitulation" is the analyst's judgement, not the field's; a naive
+   rule on it would have read ACTIVE for 278 straight days through 2023–24.
+2. **The preceding Down stretch is the longest in the window.** Jun 3 – Aug 25 is **84 days**; the next
+   longest are 52 (Jan 5 – Feb 25, 2026) and 48 (Nov 27, 2022 – Jan 13, 2023, the one that bracketed
+   the last confirmed bottom). By duration this is a real capitulation. By depth it is not much of one:
+   the 60-day average fell from ~925 to ~907 EH/s, about 2%.
+3. **The 2022 parallel is close in timing and shape-different.** The Jan 14, 2023 cross came 54 days
+   after the Nov 21 low with price +33.6% above it ($20,872 vs $15,617). The Aug 26 cross came 56 days
+   after the Jul 1 low with price +36.7% above it ($79,024 vs $57,800). But 2022's Down began on Nov 27,
+   *after* the low, and this one began on Jun 3, four weeks *before* it — the ribbons capitulated into
+   the low in 2026 and out of it in 2022. The parallel belongs in the counter-scenario ledger below;
+   it does not settle the row.
+
+Persistence was tested as a candidate rule and **rejected**: the Feb 26 – Mar 25, 2026 Up held 28
+days and still preceded the July low by three months, while the Jan 3–4 Up (two days, +0.01%) is the
+known misfire. No run length in the series separates the crosses that held from the ones that did
+not, so no prospective rule is pinned this pass. The row stays **PARTIAL** on a reading the tooltip
+already anticipated — the state whipsawed on Aug 31 and sits +0.03% from flipping again — and the
+card now says the cross printed rather than "precondition converging". Note the stage would not move
+even at ACTIVE: Capitulation would read 1.5 of 5 against a strict 2.5. The decision is not
+load-bearing, which is the right kind of decision to leave on the conservative side.
+
+Difficulty: the next retarget is estimated for ~Sep 5 at **+1.10%** (mempool.space, read at the time
+of this pass), against −0.94% on CoinWarz. The card's last projection (+0.45% for Aug 23) printed
+−1.31%, so the figure is quoted with its source and not leaned on.
+
+### Strategy resumed buying, which reverses the Jul 24 finding
+
+Verified against the 8-Ks, not the coverage. **Aug 24 8-K:** no bitcoin bought or sold Aug 17–23,
+holdings 840,447 BTC. **Aug 31 8-K:** **4,603 BTC bought for $369.7M at $80,318** between Aug 24 and
+30, funded from the ATM (4,531,421 MSTR shares, ~$602.8M), taking holdings to **845,050 BTC** at an
+aggregate cost of $63.73B, average $75,412. Coverage adds that $151.8M of the same proceeds bought
+STRC back and $50.7M paid STRC dividends; a public tracker quotes mNAV ~1.02× on the EV definition
+(basic mNAV, which this report last measured at ~0.66× on Aug 19, was not re-measured).
+
+This is the first purchase since the selling began in late June, at a price above the treasury's own
+average, in a week when the equity traded at a premium again. The Jul 24 entry named Strategy "a
+structural seller" and armed the capitulation gate on it; the Aug 19 entry recorded the first paused
+week as "the first evidence the sales are discretionary rather than forced". A $370M purchase is the
+second piece of that evidence and the stronger one. Consequences:
+
+- The `mac` catalyst row moves from *headwind / emerging* to **mixed / de-armed for now**. The
+  dividend run-rate ($1.76B annualised) has not changed and the mechanism has not gone away, but a
+  forced seller does not buy at $80K.
+- The capitulation tranche's crypto-native gate steps back a second time: **partially armed → armed
+  in name only** until a forced sale reappears. It still requires funding z < −2, which is nowhere
+  near (see below).
+- Falsifier #4's named mechanism, leveraged corporate-treasury liquidation, is **less live** than at
+  any point since June.
+- This cuts toward the counter-scenario and is entered in its ledger as such.
+
+Also checked and rejected as catalysts: the ~$15B August contraction in stablecoin supply (USDT
+~$189B → $183.2B, USDC ~$80B → $72.1B, attributed to the GENIUS Act yield ban pushing balances into
+tokenised Treasuries). Both stayed within 12bp of par; that is redemption, not a depeg. No exchange
+failure, no exploit above the $500M bar, no Mt. Gox movement in the week.
+
+### Macro moved against liquidity, and the composite's dollar leg is the fragile one
+
+The composite still reads **2 of 3, PARTIAL**, re-derived from `data.json`: M2 y/y 5.41% against
+4.53% (3m) and 4.06% (6m), accelerating ✓; broad USD 118.75 vs a 119.55 200-day, below ✓; real 10-year
+2.42% vs a 2.04 200-day, above ✗. Two things about that reading:
+
+- **The dollar leg is 0.7% from flipping.** If `DTWEXBGS` closes above its 200-day the composite goes
+  to 1 of 3 and `fed` goes OFF — the Macro family's only row.
+- **The real 10-year is 5bp from its two-year high** (2.47%). The nominal 10-year hit 4.73% on Aug 28
+  in FRED and, per Bloomberg, **topped 4.75% on Aug 31 with a 4.80% high, the highest since January
+  2025**; the 2-year is 4.34% against a 3.82 200-day and a 4.40 two-year high.
+
+What moved it, dated: **July PCE on Aug 26** — headline 3.7% y/y, core 3.3%, income and spending both
+above forecast. **BLS preliminary benchmark on Aug 28: −79K** (−0.1%), private payrolls −178K — the
+revision flagged in advance as large turned out small. **Brent above $90 on Aug 31** after the first
+exchange of fire in the Strait of Hormuz in about a month (a US strike on an island; Iranian attacks
+on the UAE and Jordan). Sep 15–16 FOMC pricing is now **source-dependent**: Kalshi on Aug 31 prices a
+25bp hike at ~59% and a hold at ~38%; CME FedWatch on Aug 25 read a hold at ~58.6%. Those are
+different instruments six days apart across an oil-driven yield spike and are not spliced into the
+"~62% → ~38% → ~32%" series the Fed trigger card was carrying — that series is retired from the card
+and the card now says a hike is at least an even-money proposition in one market. Whatever the exact
+number, the direction is the opposite of the last three passes: the Fed trigger moved **further away**.
+
+Net liquidity: $5,779.5B on Aug 26, below its 4-week ($5,824.8B), 13-week ($5,872.2B) and 52-week
+($5,978.6B) averages, with the TGA at $950.7B ahead of the Sep 9 buyback enlargement. Credit: HY OAS
+2.63% against a 2.59% two-year low — still no stress, still a depth signal only.
+
+### ETF flows: the quarter turned positive
+
+At the window `etf.d20` was +$3.31B; it is **+$3.35B** now (through Aug 31), with the 5-day at +$0.80B.
+**The 60-day is +$0.58B, positive for the first time since the outflow regime began** — the "sharp
+reversal inside a still-negative quarter" caveat of Aug 24 and 26 no longer holds and is removed from
+the ETF trigger card. YTD −$1.77B, cumulative $54.8B, AUM $99.6B. The daily texture: Aug 25 +$314M,
+a nine-session inflow run ended by **−$202M on Aug 28** (the day of the intraday reversal), +$217M on
+Aug 31 with IBIT +$206M. Week of Aug 24–28: +$925M.
+
+### The bounce peaked at +41.0% in week 8.3 — the exact week the 2022 rally topped
+
+$81,478.87 on Aug 28, **+40.96%** off $57,800.19, 58 days (week 8.3) off the low. The 2022 bear rally
+topped at +43.1% in week 8.3; 2018's at +45.7% in week 3.9. The pre-registered marker is +45.7%
+(~$84.2K) and the gap to it is **4.7 points**, from 5.1 on Aug 26. Aug 28 was also an outside
+reversal: $80,250 open, $81,479 high, $76,888 low, $77,846 close (−3.0%), which coverage attributed to
+a short squeeze into Jackson Hole and profit-taking out of it. The Aug 24–30 week closed flat, −0.07%.
+
+**Not called a top.** Four sessions after a spike is not enough to say the rally has ended, and the
+Aug 24 entry's rule is that the marker governs in both directions: the number does not go up because
+price approaches it, and it does not go down because price backs away from it.
+
+### The counter-scenario is held at 40%, and this time the ledger is two-sided
+
+For the counter-scenario since Aug 26: Strategy back as a buyer (the strongest item); three positive
+premium closes; the ribbon cross with its 2022 timing parallel; the 3-month ETF figure turning
+positive; the trigger reading 2 of 3 for a second Monday. Against it: the rally peaked at the
+precedent week and reversed intraday; macro tightened on every axis the report tracks (nominal and
+real yields, oil, hike odds); the premium is back to its most negative raw close since Aug 18;
+Polymarket is flat at ~74% for the third read with the upside rungs repriced *down*; the checklist's
+only movement was toward the base case, and that by a rounding error.
+
+The market: Gamma API snapshot at the time of this pass, open contracts only — ↓$60K **28.5%** (29.5),
+↓$55K **23.5%** (22.5), ↓$50K 15.5% (16.5), ↓$45K 7.5% (9.5), ↓$40K 6.5% (7.5); interpolated at the
+$57,800 low, ~26%, so the low-is-in read is **~74%**, unchanged from Aug 24 and Aug 26. Upside: ↑$85K
+**61.5%** (68.5), ↑$90K **44.5%** (48.5), ↑$95K 31.5% (37.5), ↑$100K 22%. Two rungs not quoted before
+are worth having: ↓$70K **59%** and ↓$75K **86.5%** — the market's median path for the rest of 2026
+revisits $70K, which is the leg-1 bar.
+
+Held at **40%**. The arguments roughly cancel, the marker is uncrossed, and the market has not moved.
+Re-deriving the number on a mixed week would be the drift the Aug 24 entry was written to prevent.
+
+### Supporting reads
+
+- **Funding** 7-day average **+0.0081%/8h** (~+8.8% annualised), last +0.0080%; still at or near the
+  cap, still on the wrong side of the row's −0.005% bar by nearly three times its magnitude. Funding
+  z < −2, the capitulation tranche's second condition, is not in sight.
+- **Fear & Greed** 73 (Aug 24) → 74 → 65 → 71 → 73 (Aug 28) → 68 → 69 → 62 (Aug 31) → 69 (Sep 1).
+  Greed on every print.
+- **Aggressive-buy triggers**: still **1 fired · 1 partial · 2 not fired**. ETF fired and extended;
+  hash PARTIAL with the cross now printed; premium NOT FIRED but no longer a streak; Fed moved away.
+
+### Other falsifiers, cross-checked
+
+**#1** (new ATH) — $126,296, far off. **#2** (above ~$90K for eight consecutive weeks with fewer than
+three families lit) — high $81,479, not in play; Polymarket ↑$90K 44.5%. **#3** (week 70 = Feb 2027)
+— not due. **#4** (low below $30K) — not in play, and its named mechanism weakened this week (above).
+**#5** (bottom confirmed on fewer than 8 of 15) — not in play.
+
+### What was deliberately not changed
+
+- **No threshold, no weight, no `BS_W`, no `CORE` membership, no ladder band, no probability.**
+- **The premium convention and window.** Raw governs, Monday close adjudicates. The streak-break is
+  evidence for the deferred design review, not a reason to run it now.
+- **`hash` stays PARTIAL** and no persistence rule was pinned, for the reasons measured above.
+- **`sthmvrv`'s ≤0.80 threshold** stays under prospective review, unchanged.
+- **`lth` and `resv`** carry their Aug 19 readings; nothing dated to this week was found for either,
+  and they are SLOW rows on a 2–4 week cadence. `resv` is still blocked on the paywalled endpoint.
+- **The bottom window and ladder bands.** The one vector on the window still points later, not
+  earlier (Jul 25 entry); nothing this week touched it.
+
+### Stale-number sweep, per the Aug 26 procedure
+
+Searched the file for the previous pass's headline figures — `+40.6%`, `81,273`, `3.03B`, `−0.016%`,
+`Aug 25`, `next adjudication is Monday Aug 31`, `−1.30B`, `still negative`, `~32%`, `week to Aug 16`,
+`840,447`, `0% today`, `not merely low` — and checked each hit is a dated statement or a fix. The
+research tag moves to **Sep 1, 2026** in all three languages, because this pass refreshed narrative
+rows (Strategy, Fed pricing, rates, events) and not only the trigger cards.
+
+**Carry into the next pass (Sep 7 window):** whether the ribbon state holds Up through the week or
+whipsaws again; whether the premium prints positive on a *Sunday* close; the ~Sep 5 retarget against
+the +1.10% estimate; the Sep 9 buyback start and its effect on the TGA and net liquidity; whether
+`DTWEXBGS` crosses its 200-day (the composite's fragile leg); the Sep 15–16 FOMC as the first dated
+event inside the window, with a hike now a live outcome; and Strategy's Sep 8 8-K — a second week of
+buying makes the de-arming a pattern.
+
+---
+
 ## 2026-08-26 — Interim check: the two live legs moved in opposite directions, and nothing changed
 
 Not an adjudication. The pinned window for falsifier #6 is Monday 00:15 UTC (MAINTENANCE §2b);

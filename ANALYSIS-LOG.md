@@ -88,9 +88,20 @@ It stays **Sep 1, 2026**.
 
 **Verified by rendering**, per the standing rule: script block extracted and `node --check`ed,
 then `google-chrome --headless --dump-dom` against `localhost:8931` — 426KB of DOM, no
-`INFO:CONSOLE` lines, the new row present and the stage still reading TOO EARLY. The check was
-not ceremonial: the row is a single-quoted JS string literal and every apostrophe in the new
-text had to be a curly `’`, or all three languages would have gone dark at once.
+`INFO:CONSOLE` lines, the new row present. The check was not ceremonial: the row is a
+single-quoted JS string literal and every apostrophe in the new text had to be a curly `’`, or
+all three languages would have gone dark at once. **Rendered in EN only** — Portuguese and
+Spanish were checked by `node --check` and by the replacement being the same string-value
+substitution with no key added or removed, which is weaker and is stated as such.
+
+**And a self-correction on the same rule, caught after the commit.** The first version of this
+entry said the render confirmed "the stage still reading TOO EARLY". It did not: what had been
+grepped was a count of the four stage names in the DOM, which matches the ladder *legend* inside
+`th_stage_tip`, not the live headline. Re-rendered against the Sep 2 06:00 UTC `data.json`
+(on-chain through Sep 1: SOPR 1.0024, Puell 0.9361, STH basis $70,269.54; `etf.d20` 2.90) and
+read the headline element itself: **"Too early", 0 of 4 families lit, 1/15 active, 5 partial,
+expert 18% · equal 23%** — unchanged from the Sep 1 pass. The claim was true; the evidence
+offered for it was not the evidence. Exactly the failure this file exists to make expensive.
 
 ## 2026-09-01 — The Aug 31 adjudication, run two days late: 2 of 3 again, and the premium had already flipped on days the window does not look at
 

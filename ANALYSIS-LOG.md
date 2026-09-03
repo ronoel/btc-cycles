@@ -23,6 +23,75 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-02 — The window got a calendar: recurring macro prints added to the scheduled-events row
+
+**What changed and why now.** Until today the `Scheduled events in the window` row listed only
+structural, one-off items — the Treasury buybacks, the September FOMC, Mt. Gox, the midterms —
+and deliberately left out the recurring macro releases on the grounds that CPI-and-payroll
+noise is not cycle evidence. **That exclusion was correct while the Fed row read cut-versus-hold
+and stopped being correct when it flipped to hold-versus-hike.** With a September hike at least
+even money in one market (Kalshi ~59% on Aug 31 against CME ~58.6% *hold* on Aug 25), every
+inflation and labour print between now and Sep 16 is a direct input to the one dated event the
+report itself calls "a genuine shock to the window". The row now carries the full Sep→Dec
+calendar in all three languages.
+
+**Dates, and where each came from.** Not from memory — the BLS and BEA schedule pages were
+fetched on Sep 2, 2026:
+
+| Item | Date | Source |
+|---|---|---|
+| Employment Situation (Aug / Sep / Oct) | Sep 4 · Oct 2 · Nov 6 | `bls.gov/schedule/news_release/empsit.htm` |
+| CPI (Aug / Sep / Oct) | **Sep 11** · Oct 14 · Nov 10 | `bls.gov/schedule/2026/09_sched.htm`, `.../news_release/cpi.htm` |
+| PPI (Aug) | Sep 10 | `bls.gov/schedule/2026/09_sched.htm` |
+| Personal Income & Outlays (PCE) | Sep 30 · **Oct 29** · Nov 25 | `bea.gov/news/schedule` |
+| Q3 GDP advance | Oct 29 | `bea.gov/news/schedule` |
+
+Two of those placements matter more than their being on a calendar. **August CPI lands Sep 11,
+four days before the FOMC** — the last inflation print the committee sees. And **September PCE
+and Q3 GDP advance both land Oct 29, the morning after the Oct 27–28 FOMC**, so the October
+meeting is decided without them and repriced by them within a day.
+
+**Derived rather than sourced, and labelled as such on the page:** the quarterly options expiry
+(Sep 25 — last Friday of the quarter, stated that way in the row so the derivation is visible),
+the cycle clock crossing the ~370-day C2/C3 average around **Oct 11** (ATH 2025-10-06 + 370),
+and week 60 = **Nov 30**, which the report already uses as the window's close.
+
+**One date was deliberately *not* printed.** The Aug 19 SEC Regulation Crypto Assets proposal
+carries a 60-day comment period, and the obvious arithmetic gives Oct 18 — which is both a
+Sunday and, more importantly, wrong in kind: the clock runs from **Federal Register publication**,
+which lags a proposal by days to weeks. The row says "mid-to-late October" and states the
+reason. Pinning it to a day is a Sep 7 to-verify.
+
+**Recorded here, not on the page: $70K now does double duty.** Falsifier #6's leg 1 asks for a
+weekly close above ~$70K; short-term-holder cost basis is **$70,148.64** as of Aug 31. The two
+numbers arrived independently — leg 1 was set from the bear-rally structure, the STH basis is
+computed — and they have converged on the same level. A weekly close below it would un-fire the
+deploy trigger and put the STH cohort underwater in the same candle, which is the cleanest
+single level on the chart right now. Left out of the UI on purpose: it is an observation about
+two thresholds, not a new threshold, and inventing a rule out of a coincidence in the pass that
+notices it is the failure mode this log exists to prevent.
+
+**`an_asof` deliberately not bumped.** MAINTENANCE §Procedure bumps the snapshot badge for a
+research pass; this was one row plus a calendar lookup. Moving it to Sep 2 would assert that
+Fed policy, Strategy, tariffs and geopolitics were re-researched today, which they were not.
+It stays **Sep 1, 2026**.
+
+**Two pieces of drift found while in the file:**
+- **Fixed:** `MAINTENANCE.md`'s footer read "Last research snapshot: Aug 19, 2026" against
+  `an_asof`'s Sep 1 — two research passes stale, and unambiguous, so it moved to Sep 1.
+  Its `an_asof` row also said "(EN + PT)" when there have been three keys since the Spanish
+  translation shipped; now "(EN + PT + ES)", with the don't-bump-on-a-targeted-edit rule
+  written into the same cell so the next pass does not have to re-derive it from this log.
+- **Flagged for Sep 7, not fixed:** `mac_h` still reads "Reading (Aug 19, 2026)" in all three
+  languages while the rows underneath it were rewritten on Aug 31 and Sep 1. Fixing it honestly
+  requires knowing which rows each pass actually refreshed — a pass decision, not an edit.
+
+**Verified by rendering**, per the standing rule: script block extracted and `node --check`ed,
+then `google-chrome --headless --dump-dom` against `localhost:8931` — 426KB of DOM, no
+`INFO:CONSOLE` lines, the new row present and the stage still reading TOO EARLY. The check was
+not ceremonial: the row is a single-quoted JS string literal and every apostrophe in the new
+text had to be a curly `’`, or all three languages would have gone dark at once.
+
 ## 2026-09-01 — The Aug 31 adjudication, run two days late: 2 of 3 again, and the premium had already flipped on days the window does not look at
 
 The second scheduled adjudication of falsifier #6. The pinned window was **Monday Aug 31, 00:15 UTC**

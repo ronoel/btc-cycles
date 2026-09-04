@@ -17,14 +17,26 @@ then re-screenshot per MAINTENANCE.md:
 (Chromium/Opera tile the card; Firefox is the one that renders it faithfully. Snap
 browsers cannot write into the repo, hence the $HOME hop.)
 
-Only the C4 line, the `now` marker and the snapshot date are touched. Cycles 1-3 are
-finished history and are never regenerated -- they are as fixed as the tables in
-index.html, and this script deliberately has no code that could rewrite them.
+Cycles 1-3 are redrawn too, from `D1`/`D2`/`D3` in index.html rather than from the
+network -- the page is the single source of truth, so the card cannot disagree with
+it. Until Sep 4, 2026 this script deliberately had no code to reach them, on the
+grounds that they were finished history; that was right about the history and wrong
+about the drawing. Those arrays were hand-drawn and wrong by 5.9-7.1 p.p. on average
+across the post-ATH span this card shows (see ANALYSIS-LOG.md, Sep 3), so og.png was
+still publishing the fabricated curve after index.html had been corrected.
+
+The low markers and their labels are NOT regenerated: they are the true low day
+(weeks 59/52/54 at -85/-84/-78) and sit slightly below their own weekly-sampled
+lines on purpose. Same rule as PRIOR_LOWS in index.html.
 """
 import io, json, os, re, sys, datetime, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CARD = os.path.join(ROOT, "og-card.html")
+PAGE = os.path.join(ROOT, "index.html")
+
+# stroke colour -> the const in index.html that draws the same cycle on the page
+HIST = [("#378ADD", "D1"), ("#1D9E75", "D2"), ("#7F77DD", "D3")]
 
 # Must match index.html's ATH/ATHD consts. MAINTENANCE.md §4 lists these as never-touch.
 ATH, ATH_DATE = 126296.0, datetime.date(2025, 10, 6)
@@ -56,6 +68,23 @@ def daily_closes(start):
     return sorted(out.items())
 
 
+def hist_paths():
+    """{colour: svg path} for cycles 1-3, read off index.html's committed arrays."""
+    page = io.open(PAGE, encoding="utf-8").read()
+    out = {}
+    for colour, name in HIST:
+        m = re.search(r"^const %s=\[(.*?)\];$" % name, page, re.M)
+        assert m, "%s not found in index.html" % name
+        pts = {int(a): float(b)
+               for a, b in re.findall(r"\{x:(-?\d+),y:(-?[\d.]+)\}", m.group(1))}
+        # the card's x axis is weeks 0..65 after the ATH; the run-up is not shown
+        xy = [(X0 + w * PX_WEEK, Y0 - pts[w] * PX_PCT)
+              for w in range(0, 66) if w in pts]
+        assert len(xy) == 66, "%s is missing weeks in 0..65" % name
+        out[colour] = "M" + " L".join("%.1f,%.1f" % p for p in xy)
+    return out
+
+
 def main():
     series = daily_closes(ATH_DATE)
     if not series:
@@ -85,6 +114,12 @@ def main():
 
     s = io.open(CARD, encoding="utf-8").read()
     before = s
+
+    # 0. Cycles 1-3, from index.html. Each is identified by its stroke colour.
+    for colour, path_d in hist_paths().items():
+        s, n = re.subn(r'(<path d=")M[^"]+("[^>]*stroke="%s")' % colour,
+                       lambda m: m.group(1) + path_d + m.group(2), s, count=1)
+        assert n == 1, "historical path %s not found" % colour
 
     # 1. The C4 line: the ONLY path drawn at stroke-width 3.5. Cycles 1-3 use 2.
     s, n = re.subn(r'(<path d=")M[^"]+("[^>]*stroke-width="3\.5")',
@@ -121,7 +156,8 @@ def main():
         print("no change")
         return
     io.open(CARD, "w", encoding="utf-8").write(s)
-    print("og-card.html: C4 %d pts, %s -> %s, ends week %.1f at %.1f%% ($%.0f)"
+    print("og-card.html: cycles 1-3 redrawn from index.html (66 weekly pts each); "
+          "C4 %d pts, %s -> %s, ends week %.1f at %.1f%% ($%.0f)"
           % (len(pts), series[0][0], end_d, (end_d - ATH_DATE).days / 7, end_dd, end_px))
     print("now re-screenshot per MAINTENANCE.md (firefox headless, 1200x630)")
 

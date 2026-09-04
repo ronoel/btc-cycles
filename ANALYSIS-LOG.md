@@ -23,6 +23,95 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-03 — The overlaid-cycles chart was drawn by hand, and the run-up was wrong by up to 59 points
+
+**What prompted it.** A reader question — how does cycle 4's drawdown so far compare with the
+others at the same week — ran into the fact that the report answers it twice, from two different
+sources, and the answers disagree. The same-week table reads `D1`/`D2`/`D3`, three hardcoded
+arrays; the click-to-compare panel calls `calcAtWeek()`, which computes from Binance history.
+At week 47 the table read **C1 −67 / C2 −68 / C3 −71**. Measured closes say **−69.7 / −67.4 /
+−70.8**. Not a large gap, but it **inverted the C1/C2 ordering**, and the report cites that
+ordering when it argues successive bear markets are getting shallower.
+
+**What the arrays actually were.** Not low-resolution — wrong. Sampled every 2–6 weeks, rounded
+to whole percent, and read by `da()`, a step lookup that returns the last point at or before the
+week asked for, so a week-47 query was answered with a week-44 value. Diffed against exchange
+closes, week by week, on the weeks they had in common:
+
+| | mean abs. error, pre-ATH | mean abs. error, post-ATH | worst point |
+|---|---|---|---|
+| C1 | 17.0 p.p. | 5.9 p.p. | week −4: drawn −25%, real **−82.2%** |
+| C2 | 19.4 p.p. | 7.1 p.p. | week −5: drawn −12%, real **−70.6%** |
+| C3 | 13.8 p.p. | 6.6 p.p. | week −16: drawn −15%, real **−53.4%** |
+
+The pre-ATH half is where it is worst, and the failure is systematic rather than random: each
+array draws the run-up as a smooth ramp easing into the top, when every cycle actually spent the
+final weeks in a near-vertical leg. Cycle 1 was **70% below its own ATH three weeks before
+printing it**, and 82% below four weeks before. Two specific distortions matter because the report reasons about them:
+
+- **C3's April-2021 double top was erased.** Week −30 was drawn at −42%; the real reading is
+  **−8.8%**. The chart showed a deep mid-cycle trough where there was a local high 8% from the
+  eventual ATH — i.e. it drew away the single most-cited structural feature of cycle 3.
+- **C2's COVID crash was drawn at the wrong week and the wrong depth.** Week 114 was drawn at
+  −80%; real −49.8%. The real low, −72.9%, came three weeks later at week 117 (Mar 15, 2020).
+
+**Why this was worth fixing rather than annotating.** The chart is the report's opening exhibit
+and the run-up is half of it. `cvp_sum` argues cycle 4's amplitude was compressed "on the way up
+as much as on the way down" — an argument about exactly the segment that was fabricated. The
+numbers behind that claim come from the Pi Cycle, not from these arrays, so the conclusion
+stands; but the picture offered as its illustration was not evidence for it.
+
+**What replaced them.** `scripts/build_cycles.py`, in the pattern of `build_data.py`: it fetches
+daily closes and rewrites the three `const` lines in place, one point per week from −82 to +140,
+one decimal, using the **same definition the runtime uses** — `close / ATH_const − 1`, the close
+being the last one at or before `ATH_date + 7w`, which is what `calcAtWeek()` does and what
+`processKlines()` builds cycle 4 from. Three artefacts of the old arrays are gone with them: the
+step-lookup error (every week is now present, so `da()` lands exactly), the whole-percent
+rounding, and the disagreement between the chart and the click panel.
+
+**Sources, and why they are mixed.** Binance BTCUSDT wherever it reaches, Bitstamp BTC/USD to
+backfill what predates it — Binance's pair starts Aug 17, 2017, which is *after* cycle 2's
+window opens (week −82 = May 22, 2016). That is presumably why the arrays were hand-drawn in the
+first place: the report's own data source cannot draw C2's left half. So C1 is all Bitstamp, C3
+all Binance, C2 carries one seam at week −17. The seam is placed in the run-up deliberately: the
+feeds are not identical to the decimal — through the Oct–Nov 2018 Tether scare USDT traded at a
+discount and BTCUSDT ran ~1.5% above BTC/USD, so C2's week 47 reads −67.9% on Bitstamp against
+**−67.4%** on Binance. Half a point, but it is basis rather than noise, so it belongs on the side
+of the chart where nothing is quantified. The post-ATH half — the part every table and claim
+reads — is Binance throughout, matching the retro-calibration.
+
+**A trap worth recording, because it nearly shipped silently.** The first run of the generator
+produced C1 week 47 = −69.1% where a hand check said −69.7%. The cause was
+`datetime.date.fromtimestamp()`, which reads a candle's 00:00 UTC open in **local** time; at
+UTC−03 that labels every single day one early. Nothing errors, nothing looks wrong, and all three
+series shift by a day. It was caught only because one value had been computed independently
+beforehand. `--verify` exists for this class of failure: it refetches and exits 1 if the
+committed arrays drift more than 0.15 p.p. from the sources. It was run against the old arrays
+first, and failed at 58.6 p.p. — that number is the regression this change fixes.
+
+**Two things deliberately left alone.**
+
+- **The `PRIOR_LOWS` markers now sit 0.3–2.4 p.p. below their own lines** (C1 −85 marker vs a
+  −82.6 line at week 59). This is correct and must not be reconciled: the marker is the true low
+  day, the series samples one close every 7 days, and C1 bottomed on Jan 14, 2015 — three days
+  before week 59's sample, after which price had already bounced. Re-sampling the series to
+  weekly *minima* would close the gap and destroy comparability with cycle 4, which is built
+  from point-in-time closes at runtime. Noted in the code so a future pass does not "fix" it.
+- **Week 0 is pinned to y=0 in all three arrays.** No cycle closes at its own intraday ATH, so an
+  honest week 0 reads −4% to −6% for cycles 1–3 (C3 closed $64,995 against a $69,000 ATH
+  constant) against a hard 0 for cycle 4, whose series is seeded `{x:0,y:0}` by `processKlines()`.
+  The four lines would miss each other at the one point the chart exists to align them on. The
+  pin costs one week of fidelity per cycle and is documented rather than silent.
+
+**What did not change.** No threshold, no conclusion, no table. The bear-market table's
+−85/−84/−78 and the low dates are measured on the actual low day and were independently
+confirmed correct in passing (C1's Jan 14, 2015 close of $171 against a $1,150 ATH is −85.1%).
+The same-week comparison table will now print different numbers, but it prints them because they
+are the measured ones — the direction of the report's argument is unaffected, and cycle 4 is if
+anything *further* from precedent than the old arrays implied.
+
+---
+
 ## 2026-09-02 — The window got a calendar: recurring macro prints added to the scheduled-events row
 
 **What changed and why now.** Until today the `Scheduled events in the window` row listed only

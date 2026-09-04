@@ -31,7 +31,7 @@ Every analysis card and table row carries a **`?` tooltip** explaining the metho
 
 ## Data sources & freshness
 
-- **Cycles 1–3**: historical data hardcoded (fixed, won't change)
+- **Cycles 1–3**: historical data committed to `index.html` (fixed, won't change), but **generated rather than hand-written since Sep 3, 2026** — [`scripts/build_cycles.py`](scripts/build_cycles.py) rebuilds the `D1`/`D2`/`D3` weekly drawdown series from Binance and Bitstamp daily closes, one point per week from 82 weeks before each ATH to 140 after, and `--verify` fails if the committed arrays drift from the sources. The hand-drawn arrays they replaced were off by an average of 13.8–19.4 p.p. through the pre-ATH run-up and 5.9–7.1 p.p. after it
 - **Cycle 4**: daily via [Binance public API](https://api.binance.com) (no key needed), auto-refresh every 60s
 - **On-chain metrics** (Realized Price, MVRV ratio **and** MVRV Z-Score, NUPL, SOPR, Puell, **short-term-holder MVRV and its cost basis** — live since Aug 19, 2026): updated daily at 06:00 UTC by a GitHub Action running [`scripts/build_data.py`](scripts/build_data.py) → `data.json` (latest) + `history.json` (4y+ of daily series, used only by the retro-calibration — it **accumulates**, because the provider's free window is a rolling 1,461 days and the 2022 bottom would otherwise slide out of it in Nov 2026). Source: bitcoin-data.com / BGeometrics
 - **Macro** (US M2 + y/y, Fed assets, TGA, reverse repo, net liquidity, 10y & 2y nominal, 10y real, HY/IG OAS, broad trade-weighted USD): same daily Action, from FRED's keyless CSV endpoint. It has to go through the Action rather than the browser because **FRED sends no CORS header**. The dollar series is `DTWEXBGS`, not the licensed ICE DXY, and is labelled as such

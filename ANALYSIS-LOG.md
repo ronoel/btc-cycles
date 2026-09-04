@@ -23,6 +23,62 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-04 — A dated IPO calendar entered the window row, with the one price measurement that justifies it
+
+**Why an IPO is on a bottom-window calendar at all.** A reader asked whether BTC fell around the
+SpaceX IPO. It did, and the shape of the fall is specific enough to be worth writing down before
+the next one, because the next one is scheduled inside this report's own projected window.
+
+**What was measured, from Binance daily closes rather than from press accounts.** SpaceX priced
+after the close on Jun 11, 2026 and debuted Jun 12 on Nasdaq (SPCX, $135, ~$75B raised — the
+largest listing on record; sources put the valuation at $1.75–1.77T and disagree at that
+precision). Around it:
+
+| | | |
+|---|---|---|
+| May 31 | $73,674 | the day before |
+| Jun 1–6 | $73,674 → **$60,885** | **−17.4% in six sessions** |
+| Jun 11 | $63,626 | priced |
+| **Jun 12** | **$63,580** | **debut — −0.1% on the day** |
+| Jun 15 | $66,329 | **+4.3%** three sessions later |
+| Jul 10 | $64,162 | **+0.9%** four weeks later |
+
+**The finding is a timing correction, not a confirmation.** The entire drawdown happened *before*
+the listing, during book-building; the debut day itself was a non-event and BTC rose for three
+sessions after it. The cycle low ($57,800, Jul 1) came 19 days later but only −5.6% below the
+IPO-day price. That ordering is *more* consistent with the capital-rotation mechanism than the
+naive version — allocating into an offering requires selling first — which is exactly why it is
+worth recording: the naive version would have watched the wrong fortnight.
+
+**The confound is real and is published with the claim.** The Mt. Gox trustee moved 10,422 BTC on
+Jun 3 and ~$1.86B of leverage was liquidated inside the same 72 hours. Two candidate causes, one
+observation, N=1. Contemporaneous press had already reached the same place from the other
+direction: crypto.news ran the question on **Jun 8, four days before the debut**, and concluded
+the IPO did not trigger the fall — which is itself evidence the fall preceded the listing.
+
+**What went into the row, and what was deliberately kept out of it.** Company-confirmed and
+stated as such: Anthropic's confidential S-1 on Jun 1, the Morgan Stanley / Goldman Sachs /
+JPMorgan mandate on Jun 3, and the $65B round at a $965B valuation on May 28. *Not*
+company-confirmed, and labelled in the row as trade-press and aggregator reporting: a public
+filing targeted at end-August and a Nasdaq listing in late September or early October. There is
+no date, no ticker and no price range, so the entry is explicitly undated inside the month rather
+than pinned to a day — the same treatment the SEC comment-period deadline already gets in that
+row.
+
+**An attempted verification that failed, recorded so it is not repeated as fact.** An EDGAR
+company search for a public Anthropic S-1 returned an empty feed. It was **not** treated as
+evidence: the identical query returns an empty feed for SpaceX, which demonstrably completed an
+IPO, so the query is broken rather than the answer negative. Nothing in the row rests on it.
+
+**What this does not do.** It does not move the window, which is derived from cycle structure and
+not from a catalyst calendar — the row's own tooltip already says so and that is the reason the
+row exists. The value of the entry is pre-registration: if a bottom forms in the second half of
+September it will be attributed to whatever was in the news that week, and this is the record that
+the book-building fortnight was expected in advance, along with the honest note that one
+observation cannot tell it apart from a Mt. Gox distribution.
+
+---
+
 ## 2026-09-03 — The overlaid-cycles chart was drawn by hand, and the run-up was wrong by up to 59 points
 
 **What prompted it.** A reader question — how does cycle 4's drawdown so far compare with the

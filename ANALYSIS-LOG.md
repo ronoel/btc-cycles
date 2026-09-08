@@ -170,7 +170,8 @@ participation 61.6%, June–July revised up 55K, earnings +3.1% y/y. **Waller on
 willing to hold if progress toward 2% continues, would consider a hike if inflation comes in hot, the
 decision "heavily influenced" by the August inflation data — which makes **CPI on Sep 11** the print
 that decides the meeting, and it goes into the calendar as such. **Brent above $95** after two tankers
-were struck leaving the Strait of Hormuz, following the Aug 30–31 exchange of fire. ISM manufacturing
+were struck leaving the Strait of Hormuz, following the Aug 30–31 exchange of fire (the strikes are
+dated "early September" by the coverage collected, not to a day). ISM manufacturing
 54.6 on Sep 2 (from 55.6). The Sep 3 rally to $82,300 was attributed in coverage to Waller's remarks,
 the +$731M ETF day and ~$250M of short liquidations; the Sep 4 payrolls print reversed it.
 
@@ -192,8 +193,8 @@ The `mac` geopolitics row still read "De-escalating" with a tooltip about Hormuz
 $76, two passes after this log recorded the Aug 30–31 exchange of fire and one after Brent crossed
 $90. It contradicted the Fed and Rates rows on the same page. Refreshed to **re-escalating** and moved
 `e:` from `m` to `h` in all three languages (the `e:` field is logic, byte-identical across
-languages). Found by the advisor's read of the page rather than by the stale-number sweep — a row can
-be stale without containing a number, which the sweep cannot catch.
+languages). Found by a second opinion reading the rendered page rather than by the stale-number sweep — a row
+can be stale without containing a number, which the sweep cannot catch.
 
 ### ETF flows: third Monday over the bar, and the largest day since January
 
@@ -313,7 +314,11 @@ headline figures — `1.0046`, `ten days at zero`, `week 47`, `46% above Realize
 `81,479`, `~74%`, `3.35B`, `−0.022%`, `next adjudication is Mon Sep 7`, `Sep 1` tags — and checked
 each hit is a dated statement or a fix. Fixed: the thesis paragraph's SOPR figure, "week 47" and
 "1.10" (×3); `ph_notes[2].tip`'s "46% above Realized Price" (the DOM renders 50%) and its bounce
-sentence (×3) — the key MAINTENANCE names as a repeat offender, stale again; README line 5. The
+sentence (×3) — the key MAINTENANCE names as a repeat offender, stale again; the replacement is
+*dated* ("50% on Sep 7") rather than re-typed as a present-tense reading, because the page already
+computes the live ratio in the thesis paragraph; README line 5. Two figures were re-typed as
+present-tense and will need the weekly cadence to carry them: "week 48" in `th_p` (×3) and the
+"37% rally" gloss next to it. The
 `og-card.html` stat reads 4%, matching `cal_sum`'s "4% today", so the card is not regenerated. The
 research tag moves to **Sep 7, 2026** in all three languages, because narrative rows were refreshed
 and not only the trigger cards.

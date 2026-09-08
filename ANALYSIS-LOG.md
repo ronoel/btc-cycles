@@ -23,6 +23,314 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-07 — The Sep 7 adjudication: 2 of 3 a third time, the miss is now inside the noise, and the market finally moved
+
+The third scheduled adjudication of falsifier #6. The pinned window was **Monday Sep 7, 00:15 UTC**
+(MAINTENANCE §2b); this pass ran on the evening of Sep 7 in Brazil (≈03:00–05:00 UTC Sep 8), about
+27 hours late. As on Sep 1 it is still a clean adjudication, because every input the window uses was
+fixed before it opened: the Aug 31–Sep 6 weekly candle, the Sep 6 daily closes, and the ETF figure
+`data.json` carried at 00:15 UTC Monday — the Sep 6 19:08 UTC build, through Sep 4, which every
+build since has carried unchanged because Sep 7 was Labor Day and there was no US session.
+
+BTC **~$78.9K**, **−37.5%** from the ATH, day 337 of ~370 on the cycle clock (week 48.1), week ~9.9
+off the Jul 1 low of $57,800.19 and **+36.6%** above it. The window has been open a week; the cadence
+is weekly.
+
+**The recommendation is unchanged. Stage TOO EARLY, 0 of 4 families lit, ladder unfilled, nothing
+deployed.** The probe (20%, $52–57K) and core (45%, $44–50K) tranches remain empty. Next
+adjudication: **Monday Sep 14, 00:15 UTC**.
+
+### Falsifier #6 at the Sep 7 window: 2 of 3, not fired
+
+| Leg | Bar | Reading at the window | |
+|---|---|---|---|
+| 1 — weekly close | > ~$70K | **$80,341.83** (Aug 31–Sep 6 candle: $77,682 open, $82,300 high, $76,264 low) | **FIRED**, by 15% |
+| 2 — Coinbase Premium | positive | **−0.0034%** raw, Sep 6 daily close (Coinbase $80,339.13 vs Binance $80,341.83); **+0.0026%** USDT-adjusted (tether 0.99994) | **NOT FIRED** |
+| 3 — ETF 4-week net | > +$1.5B | **+$3.44B** (`etf.d20` through Sep 4, the figure live at 00:15 UTC) | **FIRED** |
+
+Same configuration for the third Monday running, same leg missing. Two things about leg 1 are worth
+having on the record without making anything of them: $80,342 is the **highest weekly close since the
+week of May 4** ($82,210), and the Sep 3 high of $82,300 came $550 under the May 8 high of $82,850 —
+the last lower high of the decline from January. A weekly close above ~$82.2K would be the first
+higher high on the weekly chart since the top. Noted as structure, not written as a marker: the report
+already has one marker for this rally and does not need a second one chosen while looking at the tape.
+
+### Leg 2: three Mondays inside the noise — the design review's input, measured rather than argued
+
+Daily closes for the adjudicated week and the two days after, raw convention (Coinbase `BTC-USD` ÷
+Binance `BTCUSDT` − 1) with USDT-adjusted alongside:
+
+| | Aug 31 | Sep 1 | Sep 2 | Sep 3 | **Sep 4** | Sep 5 | **Sep 6** | Sep 7 |
+|---|---|---|---|---|---|---|---|---|
+| raw | −0.0236 | −0.0521 | −0.0422 | −0.0079 | **+0.0180** | −0.0002 | **−0.0034** | −0.0253 |
+| USDT-adj | +0.0134 | +0.0019 | −0.0012 | −0.0049 | −0.0020 | −0.0052 | **+0.0026** | −0.0083 |
+
+One positive raw close in the week, on the Friday; the adjudicated Sunday missed by **0.34 basis
+points** and was positive on the adjusted convention — the Aug 23 configuration again. The Sep 1 entry
+said the streak-break was "the first evidence for the deferred design review" and deferred the review
+because that pass was a reactive moment. This one is too, so the review is still not run. What this
+pass does instead is measure every form of the leg that has been proposed, over all three windows, so
+that whoever runs the review has numbers rather than a narrative:
+
+| Window | Pinned: raw, Sunday close | USDT-adjusted, Sunday close | Any positive raw close in the week | Weekly mean, raw | Weekly mean, adjusted |
+|---|---|---|---|---|---|
+| Aug 24 (Aug 17–23) | **−0.0060** · no | +0.0070 · *yes* | 0 of 7 · no | −0.0370 · no | +0.0078 · *yes* |
+| Aug 31 (Aug 24–30) | **−0.0217** · no | −0.0187 · no | 3 of 7 · *yes* | −0.0028 · no | −0.0006 · no |
+| Sep 7 (Aug 31–Sep 6) | **−0.0034** · no | +0.0026 · *yes* | 1 of 7 · *yes* | −0.0159 · no | +0.0007 · *yes* |
+
+The Aug 17–23 row was measured from the candles for this table, not inferred from the streak; it
+reproduces the −0.0060% / +0.0070% the Aug 24 entry published. The dispersion of the raw daily
+closes is **σ = 0.021%** over Aug 24–Sep 7 (n = 15, mean −0.010%) and 0.026% over Aug 17–Sep 7
+(n = 22, mean −0.019%). The three Sunday readings — −0.60, −2.17 and −0.34 basis points — all sit
+inside one standard deviation of zero; the Sep 6 miss is a sixth of one.
+
+Read the table by column. The pinned form and its smoothed version (weekly mean, raw) agree on all
+three Mondays: 0 of 3. The forms that disagree are the ones that either change the *convention*
+(adjusted: 2 of 3, and the second of those a positive 0.07 basis points, which is noise on any
+reading) or take the *best day* (any positive close: 2 of 3). So the pinned form is not producing a
+different answer from a noise-robust version of itself; it is producing the same answer with no
+margin. That is the finding. Whether a leg that governs 65% of the ladder should be read at the
+resolution of ±2 basis points is the design question, and it is a decision, not a measurement:
+
+- **Keep as pinned.** Raw Sunday close. Has read not-fired three times by margins that a daily σ
+  covers three times over.
+- **Weekly mean of raw closes > 0.** The noise-robust form of the *same* convention. It would have
+  changed nothing so far — which is exactly why it is the one form that could be adopted prospectively
+  without being a retro-edit.
+- **USDT-adjusted convention.** The Aug 19 entry declined to switch to it when it flattered the
+  reading and §2b says why. Its measured cost, stated as the Aug 21 pinning asked for: on it, the
+  trigger would have fired on **two of three Mondays** and 65% of the ladder would be deployed.
+
+Any change applies from the window after the decision, never to a window already adjudicated. Nothing
+here is changed in this pass; the table is the standing input.
+
+### The checklist did not move
+
+`CORE` rescored through the same `RULE` object the calibration replays, on-chain values as of
+**Sep 7** (`data.json`, built locally at 03:00 UTC Sep 8), spot ~$78.9K:
+
+| Rule | Sep 1 | Today | |
+|---|---|---|---|
+| Puell | 1.0045 | **0.9389** | NOT YET (bar 0.9; it printed 1.1183 on Sep 6) |
+| MVRV-Z | 0.8514 | 0.9116 | NOT YET |
+| SOPR | 1.0046 | **1.0019** | **PARTIAL** (bar < 1.005) |
+| Price ÷ 200W MA | +19% | +21.7% ($64,888) | NOT YET |
+| Price ÷ Realized Price | 1.46 | 1.50 ($52,778) | NOT YET |
+| NUPL | 0.3295 | 0.3332 | NOT YET |
+| STH-MVRV | 1.10 | 1.11 (basis $70,967) | NOT YET |
+| Drawdown | −38.9% | −37.5% | NOT YET |
+
+**Expert 4%, equal 6%** — the same single PARTIAL as Sep 1, against 95% at the confirmed Nov 21,
+2022 bottom. Puell's path this week is worth one line because it will keep doing this: 1.0045 (Aug 31)
+→ 1.1183 (Sep 6) → 0.9389 (Sep 7). The denominator is a 365-day average and barely moves; the
+numerator is a day's issuance value plus fees, so the ratio swings ±15% day to day around its slow
+trend and now sits 4 basis points over the PARTIAL bar. When it flickers PARTIAL the `CORE` figure will
+read ~9% and it will mean nothing.
+
+Across all 15 rows: **expert 18%, equal 23%**, 1 ACTIVE (`etf`), 5 PARTIAL (`hash`, `sopr`, `lth`,
+`resv`, `fed`), **0 of 4 families lit → TOO EARLY**. Families: Valuation 0 of 4; Capitulation 0 active
+· 2 partial (1.0 of 5, needs > 2.5); Supply & flows 1 active · 2 partial (2.0 of 5, needs > 2.5);
+Macro 0 active · 1 partial (0.5 of 1). Identical to Sep 1 in every cell. Rendered headless (Chrome,
+`--dump-dom`) and read off the page, not recomputed by hand; stderr carried no console errors.
+
+### Hash Ribbons: seven days Up, the retarget went the right way, the row stays PARTIAL
+
+The BGeometrics `hashribbons` series since the Aug 31 whipsaw:
+
+| | Aug 31 | Sep 1 | Sep 2 | Sep 3 | Sep 4 | **Sep 5** | Sep 6 | **Sep 7** |
+|---|---|---|---|---|---|---|---|---|
+| 30d (EH/s) | 908.1 | 907.5 | 904.3 | 911.0 | 912.3 | 916.4 | 918.0 | 917.4 |
+| 60d (EH/s) | 909.0 | 907.2 | 903.9 | 907.5 | 909.5 | 909.6 | 911.9 | 913.1 |
+| gap | −0.10% | +0.03% | +0.04% | +0.39% | +0.31% | **+0.75%** | +0.68% | **+0.47%** |
+| state | Down | Up | Up | Up | Up | Up | Up | Up |
+
+Seven consecutive Up days, the gap widening rather than hovering. The **Sep 5 retarget printed
++1.31%** — mempool.space's `previousRetarget` field reads 1.3065%, and difficulty went 125.81T →
+127.45T at block 965,664 — against the +1.10% mempool.space estimated on Sep 1 and the −0.94%
+CoinWarz had. That is the first projection this log has quoted to land on the right side, by 0.2 of a
+point; the next retarget is due ~Sep 19 and mempool.space estimates **+3.8%** with 17% of the epoch
+elapsed. A second provider agrees in sign: mempool.space's own 3-month hashrate series reads 911.0 vs
+907.6 EH/s (+0.38%) on 30d/60d — a different measurement kept as a cross-check, not spliced.
+
+**The row stays PARTIAL.** The Sep 1 entry tested persistence as a rule and rejected it because a
+28-day Up in Feb–Mar 2026 still preceded the July low; seven days does not clear a test that 28
+failed, and the field is still a memoryless sign(30d − 60d). The cross is proving itself; it has not
+proven itself. The stage would not move at ACTIVE either (Capitulation would read 1.5 of 5).
+
+### Macro: a hike became the modal outcome, and the composite's dollar leg is still 0.7% away
+
+The Fed trigger card had been carrying a Kalshi/FedWatch mix from different dates. This pass replaces
+it with a **same-day Polymarket snapshot** (Gamma API, Sep 7 — the same method the BTC card uses):
+the Sep 15–16 meeting at **51.5% hike / 47.5% hold / 0.45% cut**, a hike by the October meeting at
+62%, at least one hike in 2026 at **70.5%**, no cut in 2026 at 92.7%, an emergency cut at 6.1%. It is
+the first snapshot in which a hike is the modal outcome rather than "even money in one market".
+
+What moved it, dated. **August payrolls on Sep 4: +162K against +53K expected**, unemployment 4.1%,
+participation 61.6%, June–July revised up 55K, earnings +3.1% y/y. **Waller on Sep 3**, the day before:
+willing to hold if progress toward 2% continues, would consider a hike if inflation comes in hot, the
+decision "heavily influenced" by the August inflation data — which makes **CPI on Sep 11** the print
+that decides the meeting, and it goes into the calendar as such. **Brent above $95** after two tankers
+were struck leaving the Strait of Hormuz, following the Aug 30–31 exchange of fire. ISM manufacturing
+54.6 on Sep 2 (from 55.6). The Sep 3 rally to $82,300 was attributed in coverage to Waller's remarks,
+the +$731M ETF day and ~$250M of short liquidations; the Sep 4 payrolls print reversed it.
+
+FRED, as carried in `data.json`: 10-year **4.77%** (Sep 3) against a 4.79% two-year high and a 4.36%
+200-day; 2-year 4.34%; real 10-year **2.42%** against a 2.05% 200-day and a 2.47% two-year high; HY
+OAS 2.65% against a 2.59% two-year low. Broad dollar 118.75 (Aug 28 — FRED's `DTWEXBGS` lags a week)
+against a 119.55 200-day: **0.67% below**, the composite's fragile leg, unchanged. M2 y/y 5.41%
+against 4.53% (3m) and 4.06% (6m). Composite **2 of 3, PARTIAL**, unchanged.
+
+Net liquidity **$5,768.7B** on Sep 2, below its 4-week ($5,839.6B), 13-week ($5,833.7B) and 52-week
+($5,986.6B) averages, and $11B lower than the Aug 26 reading; the TGA rose $17B to **$967.9B** ahead
+of the first enlarged buyback on Sep 9; RRP $0.7B. US recession odds on Polymarket 6.5% (from 8% on
+Aug 19). Every macro axis the report tracks moved against the liquidity turn again, except the dollar,
+which held.
+
+### Geopolitics row moved to headwind
+
+The `mac` geopolitics row still read "De-escalating" with a tooltip about Hormuz calm and Brent at
+$76, two passes after this log recorded the Aug 30–31 exchange of fire and one after Brent crossed
+$90. It contradicted the Fed and Rates rows on the same page. Refreshed to **re-escalating** and moved
+`e:` from `m` to `h` in all three languages (the `e:` field is logic, byte-identical across
+languages). Found by the advisor's read of the page rather than by the stale-number sweep — a row can
+be stale without containing a number, which the sweep cannot catch.
+
+### ETF flows: third Monday over the bar, and the largest day since January
+
+`etf.d20` **+$3.44B** through Sep 4 (SoSoValue), 5-day +$0.99B, **60-day +$2.06B** (from +$0.58B
+on Sep 1), YTD −$1.00B, cumulative $55.6B, AUM $101.3B. Daily, per Farside via coverage: Aug 31
++$217M, **Sep 1 −$236M** (the first outflow day since Aug 28; IBIT −$201M), Sep 2 +$101M, **Sep 3
++$731M — the largest single day since January** (IBIT +$454M), Sep 4 +$175M with only IBIT and FBTC
+positive going into the holiday. Week of Aug 31–Sep 4: ~+$987M. The Farside daily figures and the
+SoSoValue 20-day arbiter are different sources with different windows and are not spliced; the
+arbiter is the one that adjudicates.
+
+### The bounce outlasted both precedents in time, not in size
+
+**+42.4%** at $82,300 on Sep 3, **64 days (week 9.1)** off the low. The 2022 bear rally topped in week
+8.3 and the 2018 one in week 3.9, so this bounce has now run longer than either — a comparison the
+Sep 1 entry could not make, when the peak sat exactly on the 2022 week. In amplitude it is still under
+both (+43.1% and +45.7%), and the pre-registered marker is +45.7% (~$84.2K): the gap closed from 4.7
+to **3.3 points**, and price has since retraced to ~$78.9K, 4.1% under the high. The duration
+comparison is new evidence and goes into the ledger below. The marker is an amplitude marker and does
+not move: it was written on Aug 24 so that it would not be re-derived at whatever level price reached.
+
+### Strategy: the second week is unfiled, and a dated route back to selling appeared
+
+No 8-K covering Aug 31–Sep 6 has been filed — Sep 7 was Labor Day, so it is due once the US session
+returns. Checked on EDGAR: the filings in September so far are the Aug 31 8-K (filed Sep 1, the
+purchase) and a second Sep 1 8-K that only sets the preferred dividend rates (STRC 12.00%, paid
+semi-monthly; STRF/STRK/STRD/STRE quarterly). So whether the Aug 24–30 purchase was a one-off is still
+open, and the `mac` row says so. A public tracker quotes mNAV ~1.12× on the EV definition.
+
+**New and dated inside the window:** MSCI has reopened its consultation on excluding "non-operating"
+digital-asset treasury companies from its investable-market indexes — comments open to the end of
+September, a decision expected mid-October, effective at the November index review. Coverage estimates
+~$2.8B of passive outflow from MSTR; Strategy's public response called the proposal a pretext. This is
+the re-arming route the Strategy row had not named: forced index selling widens the discount, a wider
+discount makes the ATM dearer, and the dividend still has to be paid. Added to the scheduled-events
+row at all three dates and to the Strategy row's tooltip. It is not a catalyst yet; it is a calendar.
+
+### The second-catalyst bar was tested for the first time since July
+
+**The Liquid Network — a Bitcoin sidechain exchanges use to move coins — was exploited for ~$320M
+(~4,000 BTC) on Sep 7** (Bloomberg, CoinDesk). The attackers claim to be white-hat and to intend
+returning the funds for a fee; that is unverified and is labelled so in the row. It is the largest
+crypto-native event since the Coldcard exploit (~$120–140M) and about two-thirds of the $500M bar.
+Under the bar, and not a solvency event unless a custodian turns out to be uncovered; watch whether
+the funds come back. No stablecoin left 12bp of par in the week. Also dated: the FTX cash
+distribution starts Sep 30 (record date Aug 15); Mt. Gox holds ~34,504 BTC with the Oct 31 deadline
+and moved nothing in the week.
+
+Two calendar corrections from the research. The SEC's Regulation Crypto Assets was **published in
+the Federal Register on Aug 21**, so its 60-day comment period closes **Oct 20** — the row had
+deliberately left this "mid-to-late October" until the publication date was known, and it is pinned
+now. And the Anthropic listing is now reported for **October** rather than late September, with a
+raise above $60B; still trade-press, still not company-confirmed, and the row moves it to October and
+says so.
+
+### Polymarket: the first move in four reads, and it went toward the counter-scenario
+
+Gamma API snapshot at the time of this pass, open contracts only, Sep 1 in parentheses: ↓$60K
+**24.5%** (28.5), ↓$55K **20.5%** (23.5), ↓$50K 14% (15.5), ↓$45K 8.5% (7.5), ↓$40K 6.5% (6.5);
+interpolated at the $57,800 low, ~23%, so the low-is-in read is **~77%**, from ~74% on Aug 24, Aug
+26 and Sep 1. The revisit rungs eased — ↓$65K 33.5%, ↓$70K **52.5%** (59), ↓$75K 77.5% (86.5) — so
+the market's median path still touches $70K, leg 1's bar, but only just. Upside repriced *up*: ↑$85K
+**71.5%** (61.5), ↑$90K **49.5%** (44.5), ↑$95K 32% (31.5), ↑$100K 24.5% (22). The $90K rung —
+falsifier #2's level — is now a coin flip.
+
+### The counter-scenario is held at 40%, for a different reason than last week
+
+For it, since Sep 1: the market moved, +3 points, after three flat reads; the rally outlasted both
+precedents in duration; the highest weekly close since May; the ribbons Up seven days with a positive
+retarget; the ETF leg over its bar for a third Monday with the 60-day at +$2.06B; the adjusted premium
+positive on the adjudicated day. Against it: a September hike is now the modal outcome and payrolls
+beat by 109K; Brent above $95; a $320M exploit; the premium negative on seven of the last eight
+closes; the valuation rows did not move by a single state; price is 4% off the high; and the strongest
+possible "for" item — a second week of Strategy buying — is not in hand because the 8-K is not filed.
+
+Held at **40%**. Last week's reason was "the market has not moved", and that is no longer true, so the
+reason is stated differently: the ledger is two-sided in a different way, and the marker is uncrossed
+at 3.3 points. The market is at ~77% and the report at 40%; the gap is the report's stated
+disagreement, and it narrows when the marker is crossed or the valuation rows move, not when a week
+tilts.
+
+### Supporting reads
+
+- **Funding** 7-day average **+0.0047%/8h** (~+5.2% annualised), last +0.0045%; down from +0.0081%
+  on Sep 1, still positive against the row's −0.005% bar. Funding z < −2 is not in sight.
+- **Fear & Greed** 73 (Sep 5) → 71 → 69 (Sep 7). Greed on every print.
+- **Aggressive-buy triggers**: still **1 fired · 1 partial · 2 not fired**. ETF fired and extended;
+  hash PARTIAL with seven days Up; premium NOT FIRED by 0.3bp; Fed moved further away.
+
+### Other falsifiers, cross-checked
+
+**#1** (new ATH) — $126,296, far off. **#2** (above ~$90K for eight consecutive weeks with fewer than
+three families lit) — high $82,300, not in play; the market now prices ↑$90K at 49.5%. **#3** (week
+70 = Feb 2027) — not due. **#4** (low below $30K) — not in play; its named mechanism gained a dated
+route (MSCI) and no event. **#5** (bottom confirmed on fewer than 8 of 15) — not in play.
+
+### What was deliberately not changed
+
+- **No threshold, no weight, no `BS_W`, no `CORE` membership, no ladder band, no probability.**
+- **The premium convention and window.** Raw governs, Monday close adjudicates. The three-window
+  table above is the input to the design review; the review is a decision for the owner of the ladder
+  and was not run in the pass in which two of its candidate outcomes would fire the trigger.
+- **`hash` stays PARTIAL** and no persistence rule was pinned, for the reasons measured above.
+- **`sthmvrv`'s ≤0.80 threshold** stays under prospective review, unchanged.
+- **`lth` and `resv`** carry their Aug 19 readings; SLOW rows, nothing dated to this week found.
+- **The bottom window and ladder bands.** Nothing this week touched them.
+- **`mac_h` still reads "Reading (Aug 19, 2026)".** Refreshed this pass: Fed policy, Geopolitics,
+  US recession odds, 2nd catalyst, Strategy, Scheduled events. Carrying a live figure and refreshed
+  only in their narrative tail or not at all: Rates, Liquidity, US dollar, Credit spreads, Spot ETF
+  flows. **Not refreshed since Aug 19: Trade & tariffs, Equities divergence.** The header moves when
+  those two are re-checked, not before.
+
+### Stale-number sweep, per the Aug 26 procedure
+
+Searched `index.html`, `README.md`, `MAINTENANCE.md` and `og-card.html` for the previous pass's
+headline figures — `1.0046`, `ten days at zero`, `week 47`, `46% above Realized Price`, `+41.0%`,
+`81,479`, `~74%`, `3.35B`, `−0.022%`, `next adjudication is Mon Sep 7`, `Sep 1` tags — and checked
+each hit is a dated statement or a fix. Fixed: the thesis paragraph's SOPR figure, "week 47" and
+"1.10" (×3); `ph_notes[2].tip`'s "46% above Realized Price" (the DOM renders 50%) and its bounce
+sentence (×3) — the key MAINTENANCE names as a repeat offender, stale again; README line 5. The
+`og-card.html` stat reads 4%, matching `cal_sum`'s "4% today", so the card is not regenerated. The
+research tag moves to **Sep 7, 2026** in all three languages, because narrative rows were refreshed
+and not only the trigger cards.
+
+**Carry into the next pass (Sep 14 window):** Strategy's 8-K for Aug 31–Sep 6, due Sep 8 — a second
+buying week makes the de-arming a pattern, a sale re-arms the gate; **August CPI on Sep 11** and what
+the Sep 15–16 pricing does after it; the first enlarged buyback on Sep 9 against the TGA ($967.9B) and
+net liquidity; `DTWEXBGS` against its 200-day (0.67% away; FRED's latest print is Aug 28, so the
+Sep 14 pass will see the Sep 4 week at best); whether the premium prints positive on a *Sunday*
+close, or the owner decides the leg-2 form from the table above; ribbon persistence (14 days would
+still be under the rejected 28); the bounce against the +45.7% marker and against $82,210, the last
+higher weekly close; whether the Liquid Network funds come back; the MSCI comment close at end-Sep;
+an Anthropic public filing; and `mac_h`, which needs Trade & tariffs and Equities divergence
+re-checked before it can move.
+
+---
+
 ## 2026-09-04 — A dated IPO calendar entered the window row, with the one price measurement that justifies it
 
 **Why an IPO is on a bottom-window calendar at all.** A reader asked whether BTC fell around the

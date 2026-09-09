@@ -23,6 +23,112 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-09 — Tape quiet, inputs loud: oil through $100, and a stale checkout corrected
+
+Not an adjudication and not a research pass — a same-day check of what changed since the Sep 8
+entry, prompted by the question "what are the next events, and did anything move?". `an_asof` stays
+at Sep 7 and **no `index.html` row was edited**; what this entry carries is the delta set, four
+items that read against what the report currently says, and one conflict that dissolved on checking.
+
+**Same-source deltas, Sep 8 → Sep 9** (measured 12:32–12:40 UTC, the same sources the Sep 8 entry
+used): BTC $78,455.80 close → **$79,480.93** intraday (+1.31%), day range $78,455.79–$79,760,
+**−37.1% from the ATH**, +37.5% above the Jul 1 low, day 338 of ~370 on the cycle clock. The weekly
+candle in progress (Sep 7–13) opened $80,341.83 and sits at $79,507 — leg 1 of the deploy trigger
+(> ~$70K) would fire with room. Coinbase Premium
+raw daily closes: Sep 6 −0.0034%, Sep 7 −0.0253%, **Sep 8 −0.0111%** — the method reproduces the
+Sep 6 and Sep 7 figures the last two entries published, which is the check that it is the same
+measurement. Funding 7d +0.0049% → **+0.0048%/8h** (last print +0.009%). Fear & Greed 69 → **66**,
+still Greed. Polymarket ↓$70K 57 → **54.5**, ↓$60K flat at 25.5, ↓$55K 20.5 → **17.5**, ↑$85K
+67.5 → **69**, ↑$90K 45 → **49**; the low-is-in interpolation at $57.8K moves ~77% → **~78%**.
+September hike 54.5% → **53.5%** (hold 44.5%) on the same Gamma event; October hike 30.5%. Next
+difficulty retarget re-estimated **+3.7% → +2.07%** at 26.7% of the epoch, dated Sep 19 14:20 UTC.
+**Correction made during this pass:** it was first written up against a stale local checkout and
+said `data.json` was still the Sep 8 19:10 build with the checklist unchanged "by construction".
+It is not — the **06:14 UTC Action ran and did move the scoring inputs**, and the claim was wrong
+before it was corrected. The build carries every on-chain series forward to **Sep 8**: Realized
+Price $52,777.74 → **$52,760.15**, MVRV-Z 0.9116 → **0.8725**, MVRV 1.4997 → **1.4873**, NUPL
+0.3332 → **0.3276**, **SOPR 1.0019 → 1.0022** (the checklist's single PARTIAL, moving *away* from
+its 1.005 bar), Puell 0.9389 → **0.8901**, STH-MVRV 1.11 → **1.10**, STH cost basis $70,966.91 →
+**$70,955.89**. ETF advances from Sep 4 to **Sep 8** and absorbs the outflow day: `d5` 0.99 →
+**0.72**, `d60` 2.06 → **2.03**, YTD −1.0 → **−1.04**, AUM 101.3 → **99.5** (price, not
+redemptions) — but **`d20` rises 3.44 → 3.54**, because a larger outflow rolled out of the
+twenty-day window than the −$46.65M that rolled in. So **leg 3 of the deploy trigger reads +$3.54B
+against its +$1.5B bar**, firing by more than it did on Sep 7; with leg 1 clear on the weekly, the
+Sep 14 window is again a question about leg 2 alone. Macro advances from the Aug 28 prints to
+**Sep 4**: nominal 10-year **4.78** (1bp under `hi2y` 4.79, so the two-year high still stands in the
+report's own series), real 10-year **2.43** vs 2.47, 2-year **4.37**. **`DTWEXBGS` is 118.0732
+against a 119.48 200-day — 1.18% below it, not the 0.67% the carry list recorded**: the dollar
+moved *further* from a crossing, which strengthens the one macro condition working for the thesis.
+Net liquidity, M2 and HY OAS are unmoved. Stage TOO EARLY, 0 of 4 families lit, ladder unfilled.
+
+The lesson is the one this file already carries in another form: **`git fetch` before reading
+`data.json`, because the Action pushes and the working copy does not follow.** A same-day check that
+reads a stale checkout will report "nothing moved" with total confidence and be wrong about the only
+file that scores the page.
+
+**Macro of the day, dated Sep 8–9, and it is the whole story.** Brent **$98.61 → $102.05**
+(Sep 9 ~11 UTC), through $100 after Houthi strikes on Abha, Khamis Mushait, Jizan and Najran on
+Sep 8 — including the **Jizan refinery, ~400,000 bpd** — with ≥73 injured. The 10-year **closed
+4.786% with a 4.812% intraday high**, above the 4.80% Aug 31 high the `rates` row cites and above
+`nom10y.hi2y` (4.79) in `data.json`, so tonight's FRED print may set a new two-year high in the
+report's own series; the 2-year is 4.396%. US spot ETFs took their **first outflow day in five
+sessions, −$46.65M on Sep 8** (GBTC −$65.51M, FBTC −$17.05M, BTCO −$4.68M against BITB +$14.47M and
+IBIT +$10.66M; SoSoValue via an aggregator, Farside 403'd). Equities: S&P 7,673.52 (−0.58%), Nasdaq
+26,421.41 (−0.32%), with Sep 9 futures Dow −0.6% / S&P −0.2% / NDX +0.1%. **No Fed speakers on
+Sep 8 or Sep 9** — Waller on Sep 3 is still the last word, and his conditional rule makes the Sep 11
+CPI the input. Coverage attributed Sep 8 to oil, yields and long liquidations; the liquidation
+figures disagree ($264M total crypto with $79M in BTC, against $55M in BTC elsewhere) and neither
+was adopted.
+
+So the read the tape gives and the read the inputs give point opposite ways: a +1.3% bounce with
+sentiment cooling three points, against oil through $100 and the long end at a new high for the
+move. Oil is the route to the CPI-reacceleration scenario the capitulation tranche's macro gate was
+written for, which makes it the live variable rather than a headline.
+
+**Four items that read against what the report currently says.** None was written into `index.html`
+this pass; they are recorded here so the Sep 14 pass can act on them rather than rediscover them.
+
+1. **The Liquid Network row is less closed than the Sep 8 entry says.** That entry concluded "under
+   the bar, closed the way the 2nd-catalyst row expected". One source dated Sep 9 (Archyde, citing
+   TRM Labs) reports ~3,597 BTC in the identified reserve against ~4,200 L-BTC outstanding — an
+   **implied backing ratio of ~86%** — with L-BTC deposits and withdrawals **still halted,
+   including at centralised exchanges**, no post-mortem published, and no statement from the
+   federation on how the shortfall is covered. Single-sourced, so it is not written as fact and the
+   row is left alone; but "closed" was the optimistic reading and the Sep 14 pass should confirm or
+   drop this before the row stands.
+2. **Anthropic's $15B pre-IPO credit facility (Bloomberg, Sep 3) is in no file in this repo** —
+   verified by grep across `index.html`, `MAINTENANCE.md` and this log. It is a funding step, not a
+   filing, so it does not satisfy the "Anthropic public filing" carry item; it is corroboration for
+   the mid-October listing the scheduled-events row now reports (CNBC, Sep 5, which the report does
+   carry).
+3. **"Saudi retaliation" may be overstated in the Sep 8 entry.** Today's sources show the foreign
+   minister saying "the road to diplomacy is not closed" alongside a pledge to defend the kingdom,
+   and coalition language about deterrent measures — **no confirmed retaliatory strike**. Flagged
+   for checking, not corrected: the Sep 8 entry may have had a source this pass did not see.
+4. **The Treasury buyback: effective date, possibly not operation date.** The press release
+   (`home.treasury.gov/news/press-releases/sb0607`) says the ≥$4B size is *effective* Sep 9 through
+   Nov 4. Nothing found confirms an operation is *scheduled* for Sep 9, and no result was published
+   as of 12:40 UTC. The scheduled-events row and the carry list both say "the first enlarged
+   Treasury buyback on Sep 9", which may conflate the two. Worth pinning against the TreasuryDirect
+   operation calendar before it is restated.
+
+**One conflict, checked and dissolved.** The research pass surfaced an August CPI consensus of
+2.9% headline / 3.1% core against the 3.4% / 2.4% this report has carried since Sep 8, which would
+have been a material error going into the print. It came from a **2025** article: July **2026** CPI
+printed **3.4% headline / 2.5% core** on Aug 12, which is what the `Fed` row already states (BLS
+release; CNBC Aug 12, 2026). The contradiction is therefore not real. Note what this does and does
+not establish — it removes the challenge to the 3.4% / 2.4% August consensus; it does not
+independently re-verify it.
+
+**Not changed:** thresholds, weights, ladder, probabilities, the counter-scenario at 40%, every
+`mac` row including the 2nd-catalyst and Strategy rows, `an_asof`. **Not checked this pass:** Hash
+Ribbons, Sep 9 yield levels and closes, independent confirmation of a Saudi strike, and `Trade &
+tariffs` / `Equities divergence` — still untouched since Aug 19, though the S&P at 7,673.52 is now
+~1.1% under the 7,757.64 record that row quotes. No crypto-native loss event above the $500M bar
+occurred on Sep 8–9; Liquid (~$320M) remains the largest and is under it.
+
+---
+
 ## 2026-09-08 — Two carry items landed; nothing else moved, and only one row was edited
 
 Not an adjudication and not a research pass — a same-day check of what changed since the Sep 7

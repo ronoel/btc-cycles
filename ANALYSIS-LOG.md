@@ -23,6 +23,50 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-08 — Two carry items landed; nothing else moved, and only one row was edited
+
+Not an adjudication and not a research pass — a same-day check of what changed since the Sep 7
+entry, 16 hours after it. `an_asof` stays at Sep 7 because only one narrative row was refreshed.
+
+**Strategy's 8-K for Aug 31–Sep 7 was filed Sep 8** (EDGAR accession 0001193125-26-384402, read
+from the filing itself): **no bitcoin bought or sold**, no ATM shares sold, **$176.3M of STRC bought
+back** from USD Cash (1,810,885 shares), and the digital-credit repurchase authorisation doubled from
+$1B to $2B with $1.19B still available. Holdings 845,050 BTC at $75,412 average. USD Reserve $5.10B,
+USD Cash $1.44B (from $1.61B in the Aug 31 8-K, the STRC buyback). **The $5.10B reserve is not new**
+— checked against the Aug 31 8-K, which carried the same figure as of Aug 30 — but it had never
+entered the report, whose last recorded reserve was the $2.55B of July. Read: the Aug 24–30 purchase
+was a one-off, but the third consecutive filing shows no sale, and retiring 12% paper lowers the
+dividend run-rate the capitulation gate depends on. The gate's status (armed in name only) does not
+change; the `mac` Strategy row's "no 8-K filed yet" sentence was replaced in all three languages.
+
+**Liquid Network:** 3,400 of the ~4,000 BTC were returned on Sep 7; ~598 BTC (~$47M) outstanding as of
+Sep 8; the network stays paused for fixes; no exchange reported a solvency problem. Under the bar,
+closed the way the 2nd-catalyst row expected. Sources disagree on whether the exploit was Sep 6 or
+Sep 7; the row keeps Sep 7 (first reports) and is otherwise left as written.
+
+**Same-source deltas, Sep 7 → Sep 8:** BTC ~$78.9K → $78.35K (day low $77,620, 4.8% under the Sep 3
+high); Coinbase Premium raw −0.024% intraday at ~20:00 UTC (informational — the leg reads the Sunday
+close); funding 7d +0.0047% → +0.0049%/8h; Fear & Greed 69 → 69; Hash Ribbons no new day (Sep 7 still
++0.47% Up), next retarget estimated +3.7% at 22% of the epoch; Polymarket ↓$70K 52.5 → 57, ↓$60K
+24.5 → 25.5, ↓$55K flat 20.5, ↑$85K 71.5 → 67.5, ↑$90K 49.5 → 45, low-is-in interpolation ~77%
+unchanged; September hike 51.5% → 54.5% on the same Gamma event. `data.json`'s 19:10 UTC build
+brought only HY OAS 2.65 → 2.68 (Sep 7) and RRP 0.7 → 0.6; every on-chain series is still Sep 7, so
+the checklist state is the Sep 7 state by construction (not re-rendered for scoring today). Sep 8 ETF
+flows are not published anywhere yet; by the measured lag they reach `data.json` at the Sep 9 19:00
+UTC run. The bounce marker is unchanged (+42.4% peak vs +45.7%, gap 3.3), because it is measured at
+the peak.
+
+**Macro of the day, dated Sep 8:** Brent to $98 after Houthi strikes on Saudi energy facilities and
+Saudi retaliation; Iran announced a maritime "exclusion zone" outside Hormuz; 10-year ~4.77–4.79%;
+Treasury confirmed the enlarged buyback (≥$4B per operation) from Sep 9; August CPI consensus 3.4%
+headline / 2.4% core for Sep 11. Coverage attributed the day's decline to oil, hike odds and long
+liquidations. Nothing dated Sep 7–8 on the Anthropic filing or the MSCI consultation.
+
+**Not changed:** thresholds, weights, ladder, probabilities, the counter-scenario at 40%, the
+2nd-catalyst row, `an_asof`. The MAINTENANCE carry list was updated for the two landed items.
+
+---
+
 ## 2026-09-07 — The Sep 7 adjudication: 2 of 3 a third time, the miss is now inside the noise, and the market finally moved
 
 The third scheduled adjudication of falsifier #6. The pinned window was **Monday Sep 7, 00:15 UTC**

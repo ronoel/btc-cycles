@@ -23,6 +23,211 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-10 — The headline moved 3 points on a row whose threshold sits inside its own daily noise
+
+Not an adjudication and not a research pass — a same-day check of what changed since the Sep 9
+entry, prompted by "how did the BTC and ETH ETFs do today, update the data, and did anything happen
+that could move the price?". `an_asof` stays at Sep 7 and **no `index.html` row was edited**.
+
+**`data.json` rebuilt at 03:25 UTC, `stale` empty.** On-chain advances to **Sep 9**: Realized Price
+$52,760.15 → **$52,794.62**, MVRV-Z 0.8725 → **0.8495**, MVRV 1.4873 → **1.4808**, NUPL 0.3276 →
+**0.3247**, SOPR 1.0022 → **1.0034**, Puell 0.8901 → **1.0825**, STH-MVRV 1.10 flat, STH cost basis
+$70,955.89 → **$71,088.01**. Macro advances to **Sep 8**: the nominal 10-year prints **4.80**, and
+because `hi2y` stood at 4.79 the build **reset the two-year high in the report's own series** — the
+thing the Sep 9 carry list said tonight's FRED print might do, now done. The 2-year is 4.39, the
+real 10-year 2.43 against a 2.47 high, `DTWEXBGS` unchanged at 118.0732 and still 1.18% under its
+200-day. Net liquidity, M2 and HY OAS unmoved. **The ETF block did not advance: `etf.d` still reads
+2026-09-08**, `d20` +$3.54B — see the ETF section below. `history.json` grew by exactly one day on
+all eight series with the 2022-08-19 head intact.
+
+**The finding of this pass, and it is about the instrument rather than the market.** Rendering the
+page against three consecutive builds, holding today's price constant, gives **18% → 21% → 18%
+ready** for the Sep 7, Sep 8 and Sep 9 on-chain data. Every point of that swing is one row: **Puell
+0.9389 (NOT YET) → 0.8901 (PARTIAL) → 1.0825 (NOT YET)**, crossing its own 0.9 PARTIAL bar and
+crossing back. Nothing else changed status; families read 0 of 4 lit at all three builds and the
+stage stays TOO EARLY. Measured over the series itself, that is not an accident: over the last 30
+days Puell has **mean 0.8994** — sitting *on* the bar — with **σ 0.1188** and a **median absolute
+one-day move of 0.0647**, and it changed status **9 times in 30 days**; over 365 days, 52 times.
+**SOPR is in the same position from the other side**: at 1.0034 it is **0.0016** from its 1.005 bar
+while its median one-day move is **0.0036**, more than twice the remaining distance. So two of the
+fifteen rows currently sit inside a single day's noise of their own thresholds, and together they
+carry 11 of the 100 weight points.
+
+This is recorded, not acted on. **No threshold was changed and none should be changed on this
+evidence** — §2b's rule is that a threshold is never retro-edited because of the reading it just
+produced, and 0.9 was specified long before this week. What the measurement establishes is narrower:
+**a same-day reading of the headline percentage is not information when the marginal row is Puell.**
+The daily entries should quote the family count and the stage, which did not move, rather than the
+percentage, which moved 3 points on noise; that is now a bullet in `MAINTENANCE.md` §5. If the
+ladder owner ever wants the percentage to be day-to-day meaningful, the prospective fix is to score
+Puell on a smoothed value — its 7-day mean, say — rather than the daily print. That would be a spec
+change, decided in advance of a reading, with the derivation logged here and the calibration re-run;
+it was not made today.
+
+**Correction to the Sep 9 entry.** It called SOPR "the checklist's single PARTIAL" (the carry list in
+`MAINTENANCE.md` said "still the only PARTIAL"). On the Sep 8 build both were quoting, **Puell at
+0.8901 was also PARTIAL** — the entry listed the 0.9389 → 0.8901 move without noticing it had crossed
+the bar. That build carried **six** PARTIAL rows (SOPR, Puell, Hash Ribbons, LTH supply, exchange
+reserves, macro composite) against one ACTIVE (ETF), and its headline was 21%. Today's build carries
+five, Puell having dropped out.
+
+**ETF flows — and the reason this section is shorter than the question asked for.** The
+question was about "today", meaning the Sep 9 US session. **SoSoValue does not have it.** Queried
+directly at 03:5x UTC on the same undocumented endpoint `build_data.py` uses
+(`POST api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart`), the latest session in **both**
+`us-btc-spot` and `us-eth-spot` is **2026-09-08**. That is the structural lag the 19:00 UTC run was
+added for, seen from the other side of it: the Sep 9 session will land in the 06:00 or 19:00 run
+today. Web coverage does carry provisional Sep 9 figures — a BTC net **inflow of ~$23.05M** (IBIT
++$169M, ARKB −$72.29M) and an ETH net **inflow of ~$44.16M** (all of it ETHA), both attributed to
+the SoSoValue dashboard — but they are single-sourced, the API contradicts them by omission, and the
+BTC per-fund figures given do not reconcile to the stated total. **They are not written into
+anything and did not adjudicate anything.**
+
+What the source does support, as of the **Sep 8** session:
+
+| | US spot BTC | US spot ETH |
+|---|---|---|
+| Sep 8 net flow | **−$46.65M** | **−$24.29M** |
+| 5 sessions | +$0.72B | +$0.11B |
+| 20 sessions | **+$3.54B** | +$1.73B |
+| 60 sessions | +$2.03B | +$1.98B |
+| Cumulative net inflow | +$55.57B | +$13.17B |
+| Net assets | $99.5B | $15.72B |
+
+The BTC column is what `data.json` publishes. **The ETH column is computed here from the same
+endpoint and is not a project series** — ETH is not tracked in `data.json`, is not in `CORE`, and
+nothing in the checklist scores it; it is reported because it was asked for. Wiring it up would be
+the four-edit change §2b describes plus a `CORE` question nobody has asked, and was not started.
+
+**This resolves a disagreement the research surfaced.** Coverage of the Sep 8 ETH session carried
+three incompatible totals — −$24.29M in headlines, −$96.69M attributed to SoSoValue in body text,
+and a per-fund breakdown summing to ≈−$106.5M. The endpoint says **−$24.29M**, so the headline
+figure is the one on this source and the other two are not reproducible from it.
+
+Two notes on reading the table. **Sep 7 was Labor Day** — there is no session, which is why "the
+first outflow day in five sessions" on Sep 8 counts Sep 1, 2, 3, 4 and 8. And **`etf.d20` will move
+when Sep 9 lands**: the window is rolling, so the direction depends on which day rolls off (around
+Aug 11) as much as on Sep 9 itself. Leg 3 clears its +$1.5B bar by a wide enough margin that this is
+not in doubt for Sep 14, but the published figure will not stay 3.54.
+
+**Same-source deltas, Sep 9 → Sep 10** (measured 03:25–03:50 UTC, same sources as the Sep 9 entry).
+**The Sep 9 bounce did not hold.** Binance `BTCUSDT` closed Sep 9 at **$78,306.43**, −0.19% on the
+day, after trading $77,770–$79,760 — the Sep 9 entry caught it intraday at $79,480.93 and +1.31%,
+and it gave all of that back by the close. **−38.0% from the ATH**, **+35.5%** above the Jul 1
+intraday low ($57,800.19). The bounce's peak-to-peak measurement is **unchanged at +42.4%** (Jul 1
+low → Sep 3 high $82,300), so the gap to the +45.7% 2018 precedent stays **3.3 p.p.** — no new high
+printed, and per §5 that comparison, not the day's percentage, is the measurement that speaks to the
+bottom. The weekly candle in progress (Sep 7–13) opened $80,341.83 and sits at $78,306.61: leg 1 of
+the deploy trigger clears with room. Funding 7d +0.0048% → **+0.0047%/8h** (last print +0.0036%).
+Fear & Greed 66 → **69**, back to the Sep 8 level, still Greed. Next difficulty retarget re-estimated
++2.07% → **+2.80%** at 31.4% of the epoch, dated **Sep 19 11:55 UTC** — hashrate accelerating again,
+the direction the Hash Ribbons row already reads as PARTIAL.
+
+**Coinbase Premium, leg 2 of the deploy trigger: it went the wrong way.** Raw daily close **−0.0287%
+on Sep 9**, against −0.0111% on Sep 8 — **the widest negative raw close of the Sep 7–13 window so
+far**, wider than Sep 7's −0.0253%. USDT-adjusted **+0.0003%**, barely positive and not the
+adjudicating convention. The method reproduces the Sep 6 (−0.0034%), Sep 7 (−0.0253%) and Sep 8
+(−0.0111%) figures the last two entries published, which is the check that it is the same
+measurement. The Sep 10 day in progress is worse still at −0.0828% raw. **Four days to the Sep 14
+00:15 UTC adjudication: legs 1 and 3 clear, and leg 2 has moved away from its bar rather than
+toward it.**
+
+**Polymarket** (Gamma, `what-price-will-bitcoin-hit-before-2027`, `closed:false`, 03:40 UTC):
+↓$70K 54.5 → **55.5**, ↓$65K **38.5**, ↓$60K flat at **25.5**, ↓$55K flat at **17.5**, ↓$50K
+**14.5**, ↓$45K **8.5**; ↑$85K 69 → **64.5**, ↑$90K 49 → **45.5**, ↑$95K **28.5**. The downside rungs
+below $60K did not move at all while the upside rungs gave back 3.5–4.5 points — the market marked
+down the bounce without marking up the bottom.
+
+**Macro and events, Sep 9–10.** Sourcing note: the research pass that produced these was told to
+collect rather than conclude, and several items came back with the disagreements intact. They are
+carried that way.
+
+- **Oil stayed through $100.** Brent **$100.71** on Sep 9 (TradingEconomics, +2.85% on the day) and
+  above $101 in Asian trade Sep 10 (Bloomberg, Sep 10 dateline; CoinDesk Daybook Sep 9 has "above
+  $101, up 2% over 24 hours"). WTI is **not resolved** — $97.19 and $96.70 from two contexts, no
+  single settle corroborated twice.
+- **The driver has a second track the Sep 8–9 entries did not name.** CNBC's Sep 9 headline is
+  "Brent crude tops $100 as **U.S.-Iran tit-for-tat strikes** stoke oil supply worries"
+  (`cnbc.com/2026/09/09/oil-prices-today-wti-brent-us-iran-hormuz-attacks.html`); the body was not
+  fetched (CNBC 403s). The report already carries the Hormuz war in its narrative rows, so this is
+  background rather than a new mechanism — but the last two entries attributed the oil move to the
+  Sep 8 Houthi strikes alone, and at least one Sep 9 outlet attributes it to the Iran–US exchange.
+  **No row was edited on a headline.** For scale, and *not* as a Sep 9 delta: Al Jazeera's Aug 27
+  headline reports **Hormuz traffic down ~95%** from ~100 ships/day pre-war; search synthesis around
+  it adds Gulf crude exports ~9M bpd against ~17M in 2025 and **direct via-strait crude ~2.2M bpd**,
+  neither traced to a fetched article. Those last two are different measures, and a summary that runs
+  "9M → under 2M" conflates them.
+- **"Saudi retaliation" is not supportable and the Sep 8 entry's claim should be treated as
+  withdrawn.** Everything found traces to Houthi spokesmen — 32 strikes (Amer, via AP/KSAT, Sep 9),
+  54 and 121 in other Houthi-attributed accounts — plus a coalition statement that it "will take all
+  necessary operational measures to deter the terrorist Houthi militia" (Al Jazeera, Sep 8). AP:
+  "Saudi authorities didn't immediately respond to a request for comment." **No independent
+  confirmation of a Saudi retaliatory strike.** The Sep 9 entry flagged this; it now resolves
+  against the Sep 8 wording.
+- **The Treasury buyback conflation is resolved, and it went the other way from the carry note.**
+  `sb0607` is a **policy floor**: "This change is effective September 9, 2026 and will be in effect
+  for the remainder of this refunding quarter (through November 4, 2026)", doubling operations from
+  $2B to at least $4B, with no operation date given. Separately, **Treasury announced on Sep 9 a
+  buyback of up to $6B in 10–20y nominals to be conducted Sep 10** — announced Sep 9, not conducted
+  Sep 9. So "the first enlarged Treasury buyback on Sep 9" was indeed a conflation of an effective
+  date with an operation date, and the operation is **today**. Reporting ties the yield move to it:
+  TradingEconomics has the 10-year "around 4.85% on Thursday" citing "Treasury buyback announcements
+  ($6 billion, triple the usual amount)" among the drivers. The $6B figure is search-synthesis
+  sourced; **the TreasuryDirect results page was not published yet and was not read.**
+- **The 10-year kept climbing.** ~**4.83%** Sep 9 and ~**4.85%** Sep 10 on the tape, against the
+  4.786% close / 4.812% intraday high of Sep 8. `data.json` carries the FRED print at 4.80 with
+  `hi2y` reset to match; the tape is above the series. The 2-year could not be isolated for Sep 9
+  separately from Sep 8's 4.39.
+- **Equities fell again.** S&P **7,636.36** (−0.48%), Nasdaq **26,253.34** (−0.64%), Dow
+  **52,380.66** (−0.77%), two sources in agreement, "as rising Treasury yields and oil prices
+  continued to rattle investors". The S&P is now **~1.6% under the 7,757.64 record** the
+  `Equities divergence` row quotes — a row untouched since Aug 19, which widens the case for the
+  Sep 14 pass to reach it.
+- **Liquid Network: confirmed, and the date in the last two entries is wrong.** The exploit was
+  **Sep 6, 2026**, not Sep 7 or Sep 8 — `index.html` says Sep 7. TRM Labs puts the drain at ~**$319M**
+  and the return at 85%. The ~86% backing figure the Sep 9 entry single-sourced is now corroborated:
+  ~**3,597 BTC** in the identified reserve against ~**4,200 L-BTC** outstanding, ~**598.5 BTC
+  (~$47M) still outstanding**, the network **still paused** with deposits and withdrawals halted,
+  and **no full technical post-mortem published**. So the Sep 8 entry's "closed" was the optimistic
+  reading and the Sep 9 entry was right to reopen it. It stays **under the $500M 2nd-catalyst bar**
+  either way, so no gate moves.
+- **August CPI, Sep 11, 8:30 ET.** Release date and time confirmed twice. Headline consensus
+  **3.4% y/y / 0.4% m/m** confirmed on 2026 sources (Nowflation, which also carries its own 3.36%
+  call; Kiplinger). **The 2.4% core consensus this report carries was not verified** — no sourced
+  core figure was found this pass. It is not contradicted either; it is simply unconfirmed, and the
+  Sep 9 entry's dissolved 2025-article conflict does not cover it.
+- **Fed pricing is flat, and the two markets disagree.** Polymarket September hike **53.5%**
+  (unchanged from Sep 9), hold 44.5% → **45.5%**, read off `fed-decision-in-september-762`. CME
+  FedWatch was **58.7%** on Sep 7; one outlet frames the futures-implied figure as low as 32%. A
+  5–6 point prediction-market/futures divergence is itself the finding; nothing here moves the
+  `Fed` row. **No Fed speaker on Sep 9 or Sep 10** — Waller on Sep 3 is still the last word, so the
+  Sep 11 CPI remains the input his conditional rule points at.
+- **Strategy: nothing.** No 8-K, purchase, sale or dividend news dated Sep 9–10. Two stories that
+  surfaced are older and do not conflict with the Sep 8 8-K: the 4,603 BTC purchase is the Sep 2
+  report of an Aug 24–30 buy, and Phong Le's "minuscule" defence of a 7,000 BTC sale is a Sep 1
+  Bloomberg interview about a sale predating the Aug 31–Sep 7 window.
+- **No crypto-native loss event above the $500M bar on Sep 9–10.** Liquid (~$319M, Sep 6) remains
+  the largest and is under it. Liquidation totals disagree across sources again — $264M (Sep 8,
+  verified date), $196M, and a $231M rolling-24h snapshot near query time with BTC $60.3M / ETH
+  $36.9M. **None adopted**, as on Sep 8.
+- **ETH, for context.** Closed ~**$2,507** Sep 9 in a ~$2,486–$2,560 range. Bitwise amended its ETH
+  ETF S-1 for staking mechanics (Sep 7); BlackRock's staked-ETH ETHB held ~$851M in late August at a
+  ~1.72% 30-day rate. None of this touches the report, which does not track ETH.
+
+**Read.** The tape and the inputs point the same way today, which is the change from Sep 9, when they
+pointed opposite ways: the bounce gave back its gain into the close, sentiment is flat, the premium
+widened negative, upside prediction rungs came off 3.5–4.5 points, equities fell a second day, and
+oil and the long end both held their highs. Nothing crossed a threshold. Stage TOO EARLY, 0 of 4
+families lit, one ACTIVE row, ladder unfilled.
+
+**Not changed:** thresholds, weights, `BS_W`/`BS_FAM`/`BS_SPEED`, the ladder, probabilities, the
+counter-scenario at 40%, every `mac` row, `an_asof`, and every `index.html` string. **Not checked
+this pass:** Hash Ribbons state beyond the difficulty estimate, LTH supply, exchange reserves, the
+`Trade & tariffs` and `Equities divergence` narrative rows, the core-CPI consensus, and the
+TreasuryDirect result of today's $6B operation.
+
+---
+
 ## 2026-09-09 — Tape quiet, inputs loud: oil through $100, and a stale checkout corrected
 
 Not an adjudication and not a research pass — a same-day check of what changed since the Sep 8

@@ -274,10 +274,16 @@ def extend_series(stored, fresh, name):
         d0 = datetime.date.fromisoformat(entry["d0"])
         return {d0 + datetime.timedelta(days=i): v for i, v in enumerate(entry["v"])}
     old, new = spread(stored), spread(fresh)
-    lo, hi = min(old), max(new)
-    if min(new) > max(old) + datetime.timedelta(days=1):
+    # Both ends take the wider of the two series. On Sep 11, 2026 the provider served
+    # four series ending Sep 4 after having served them to Sep 9, and ending at
+    # max(new) deleted the five stored days; starting at min(old) would likewise drop
+    # an earlier head that a token-widened window returns.
+    lo, hi = min(min(old), min(new)), max(max(old), max(new))
+    one = datetime.timedelta(days=1)
+    if min(new) > max(old) + one or max(new) < min(old) - one:
         print(f"  ! {name}: stored and fresh ranges are disjoint "
-              f"({max(old)} -> {min(new)}); keeping fresh only", file=sys.stderr)
+              f"({min(old)}..{max(old)} vs {min(new)}..{max(new)}); keeping fresh only",
+              file=sys.stderr)
         return fresh
     old.update(new)  # fresh wins wherever the two overlap (restatements happen)
     out, cur, missing = [], lo, 0
@@ -297,6 +303,23 @@ def extend_series(stored, fresh, name):
     return {"d0": lo.isoformat(), "v": out}
 
 
+def merge_latest(prev, fresh):
+    """Merge fresh {name: {"d", "v"}} readings over prev without moving any backwards.
+
+    Returns (merged, regressed): a fresh reading dated before the stored one keeps the
+    stored reading, and its name is listed in `regressed` so the caller can flag the
+    section stale -- the provider went backwards, which is a failure, not an update.
+    """
+    merged, regressed = dict(prev), []
+    for name, cur in fresh.items():
+        old = prev.get(name)
+        if old and old.get("d") and cur.get("d") and cur["d"] < old["d"]:
+            regressed.append(name)
+        else:
+            merged[name] = cur
+    return merged, regressed
+
+
 def main():
     prev = {}
     try:
@@ -313,14 +336,20 @@ def main():
     etf = fetch_etf()
 
     now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    onchain_merged, regressed = merge_latest(prev.get("onchain", {}), onchain)
     data = {"updated": now,
-            "onchain": {**prev.get("onchain", {}), **onchain},
+            "onchain": onchain_merged,
             "macro": {**prev.get("macro", {}), **macro},
             "etf": etf or prev.get("etf")}
     # A section whose fresh batch is incomplete keeps the old values for the gaps
     # and is flagged, so the page says "stale" rather than presenting them as new.
     fresh = {"onchain": onchain, "macro": macro, "etf": etf or {}}
     data["stale"] = [k for k in EXPECT if any(n not in fresh[k] for n in EXPECT[k])]
+    # ...a section whose source went backwards kept its newer values and is stale...
+    if regressed and "onchain" not in data["stale"]:
+        print(f"  ! onchain: source older than stored for {regressed}; "
+              f"kept stored readings", file=sys.stderr)
+        data["stale"].append("onchain")
     # ...and a section that came back complete but stale-dated is stale too.
     for k, tol in FRESH_DAYS.items():
         if k in data["stale"]:

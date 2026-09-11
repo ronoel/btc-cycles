@@ -23,6 +23,74 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-11 — CPI day: a September hike went from coin-flip to priced, ETFs bled three sessions, and the provider went backwards
+
+Same-day check (~13:30–14:30 UTC), not a research pass. `an_asof` stays Sep 7; no `index.html`
+row edited; no threshold or trigger touched.
+
+**Pipeline defect, found first because it changes what the page shows.** The Sep 11 06:14 build
+published `realized_price`, `mvrv`, `nupl` and `sopr` dated **Sep 4**, after the Sep 10 builds had
+them at **Sep 9**, and `history.json` shrank 1,483 → 1,478 days on those four series. Cause is
+provider-side: bitcoin-data.com `/v1/sopr` fetched at ~14:00 UTC returns 1,455 rows, 2022-09-11 →
+**2026-09-04**, with Sep 2–4 identical to what we stored — the tail was withdrawn, not restated.
+Two builder bugs turned that into data loss: `extend_series` ended the merged series at
+`max(new)`, and `data.json` took each series' latest from the fresh fetch unconditionally. The
+page did say so (`feed stale — showing 2026-09-04`, via the 3-day freshness rule), so the reader
+was not misled about age; the five history days were simply deleted. Fixed in
+`scripts/build_data.py`: both ends of `extend_series` take the wider series (the start had the
+mirror bug — a token-widened window starting earlier than `history.json` would have lost its new
+head, and a fresh series wholly *before* the stored one came back **empty**, `v: []`); a new
+`merge_latest()` never moves a reading backwards and marks `onchain` stale when the source
+regresses, as the module docstring already promised. `scripts/test_build_data.py`: 3 tests, all
+pass on the fix, **all 3 fail on the old code** (checked with `git stash`). Restoring Sep 5–9 is a
+re-merge of `0df559b:history.json` with the current file through the fixed `extend_series` →
+1,483 days on all four, tails back to Sep 9 (dry run only; not applied in this entry).
+
+**Readings, verified by rendering** (Chrome headless, 06:14 data + live Binance): **TOO EARLY,
+0 of 4 families lit** — Valuation 0/4, Capitulation 0 + 3 PARTIAL, Supply & flows 1 + 2 PARTIAL,
+Macro 0 + 1 PARTIAL. The 21% headline is §5's noise case twice over: SOPR is the stale Sep 4 1.004
+and Puell 0.8894 sits 0.0106 under its bar.
+
+**Price.** Sep 10 closed **$76,568.72** (−2.22%). Sep 11: low **$76,047** in the 12:00 UTC hour (CPI
+at 12:30), then **$79,4xx** by 14:00 (3,531 and 2,452 BTC in those two hours against ~300–500
+typical). CoinDesk's live blog has the immediate reaction as a dip to $76.7K erased within minutes;
+the extension to $79K is not explained by any source retrieved — oil falling on Sep 11 is
+coincident, not established as the cause. Bounce peak unchanged at **+42.4%** ($82,300, Sep 3); gap
+to the +45.7%/~$84.2K marker still 3.3 points.
+
+**Falsifier #6, four days before the Sep 14 window.** Leg 1: Sep 7–13 candle in progress at ~$79.3K,
+far above ~$70K. Leg 2 moved **away**: raw premium **−0.0420%** on the Sep 10 close (adjusted
+−0.0020%), the widest of the window, after −0.0287% Sep 9; no positive raw close since Sep 4. Leg 3
+still fires but is weakening: SoSoValue has Sep 9 **−$120.24M** and Sep 10 **−$282.56M** — three
+straight outflow sessions, −$449.45M — and `etf.d20` fell **3.54 → 3.19**. The +$23.05M Sep 9 figure
+carried in news (Sep 10 entry) is contradicted by the source; so is a MEXC-attributed "+$757M" for
+Sep 10. `d5` +$0.46B is almost all Sep 3's +$730.87M, which rolls off with the next session. Base
+case for Sep 14: **2 of 3 a fourth time**, on leg 2.
+
+**Macro.** August CPI (CoinDesk): headline 0.4% m/m / 3.4% y/y, in line; **core 0.3% m/m vs 0.2%**,
+2.4% y/y in line — the Sep 10 "core consensus unverified" item is closed. Polymarket September FOMC:
+**+25bp 80.5% / hold 18.5%** (from 53.5% / 45.5% on Sep 10); CoinDesk puts futures at ~23bp, i.e.
+essentially fully priced. 2-year +6bp to 4.61% on the print. FRED 10-year **4.83 on Sep 9**, a new
+`hi2y` again; the tape was ~4.95% on Sep 10 (Bloomberg, "highest since 2023"). Brent ~$108 on Sep 10
+on Houthi–Saudi escalation (EnergyConnects), falling Sep 11 (CNBC headline; body not retrieved;
+aggregator levels inconsistent, $103.78–$106.74). Treasury's Sep 10 buyback took **$5.19B of the $6B
+max** on $10.5B offered — the carry item from Sep 10 is closed. Capitulation tranche's macro gate:
+hike-repricing leg now plainly met; dollar leg not (`DTWEXBGS` Sep 4 print still under its 200-day);
+200W MA not lost. 1 of 3.
+
+**Other.** Liquid: blocks resumed Sep 10 (Elements v23.3.4, Sep 9), peg-outs still disabled, 598.5 BTC
+outstanding, Blockstream refusing the ransom (The Block, Sep 11) — under the $500M bar, no gate moves.
+Strategy: preferred buyback raised to $2B (TechTimes, Sep 8), no BTC purchase found Sep 8–11. No
+Anthropic public S-1 found. Polymarket BTC (Gamma API, ~14:00 UTC): ↓$60K 27.5%, ↓$55K 18.5% →
+no-new-low **~76.5%** (flat vs ~77% Sep 7); ↑$85K 64.5%, ↑$90K **45.5%** (49.5% Sep 7). F&G 69 → 56.
+Funding 7d +0.0044%/8h. mempool.space hashrate 30d/60d +0.76%, next retarget est +3.03%.
+
+**Counter-scenario not re-scored** — that is the Sep 14 pass's call. The ledger this week leans
+against it (premium further from positive, ETF flows reversing, a hike becoming certain) while price
+and the prediction market held.
+
+---
+
 ## 2026-09-10 — The headline moved 3 points on a row whose threshold sits inside its own daily noise
 
 Not an adjudication and not a research pass — a same-day check of what changed since the Sep 9

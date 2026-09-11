@@ -44,7 +44,10 @@ head, and a fresh series wholly *before* the stored one came back **empty**, `v:
 regresses, as the module docstring already promised. `scripts/test_build_data.py`: 3 tests, all
 pass on the fix, **all 3 fail on the old code** (checked with `git stash`). Restoring Sep 5–9 is a
 re-merge of `0df559b:history.json` with the current file through the fixed `extend_series` →
-1,483 days on all four, tails back to Sep 9 (dry run only; not applied in this entry).
+1,483 days on all four, tails back to Sep 9. **Applied the same day, in the commit after the fix:**
+the four series are byte-identical to `0df559b`'s, the other four unchanged, and `data.json` holds
+the Sep 9 readings with `stale: ["onchain"]` kept (the provider still ends at Sep 4). Rendered:
+`feed stale — showing 2026-09-09`, no console errors, calibration still reads 95% at Nov 2022.
 
 **Readings, verified by rendering** (Chrome headless, 06:14 data + live Binance): **TOO EARLY,
 0 of 4 families lit** — Valuation 0/4, Capitulation 0 + 3 PARTIAL, Supply & flows 1 + 2 PARTIAL,

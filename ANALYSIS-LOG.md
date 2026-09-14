@@ -23,6 +23,139 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-14 — The Sep 14 adjudication: 2 of 3 a fourth time, and the first window where every form of leg 2 misses
+
+The adjudication, plus a premise check on the CLARITY Act triggered by a reader question that
+described the act as revised **and signed by the president**. `an_asof` stays Sep 7; no threshold,
+weight, trigger or falsifier touched; the counter-scenario was **not** re-scored — that is the
+Sep 17 pass's call, after the two binaries on Sep 15 and Sep 16 resolve.
+
+**Falsifier #6 — 2 of 3, fourth consecutive window. NOT FIRED. Nothing deployed.**
+
+| Leg | Reading | Bar |
+|---|---|---|
+| 1 — weekly close | **$76,842.01** (Binance `BTCUSDT` 1w, open Sep 7, closeTime Sep 13 23:59 UTC) | ~$70K → **fires** |
+| 2 — Coinbase Premium | **−0.0549% raw**, −0.0119% USDT-adjusted (Sep 13 close) | positive → **misses** |
+| 3 — ETF 4-week net | **+$3.31B** (`etf.d20`, `etf.d` = Sep 11) | +$1.5B → **fires** |
+
+Leg 2 arithmetic, per §2b: Coinbase `BTC-USD` Sep 13 close **76,799.85** against Binance `BTCUSDT`
+**76,842.01** → −0.0549%; adjusted multiplies the Binance leg by the Coinbase `USDT-USD` close
+(**0.99957**) → −0.0119%. Window texture, raw (adjusted where fetched): Sep 7 −0.0253, Sep 8 −0.0111,
+Sep 9 −0.0287, Sep 10 −0.0420 (−0.0020), Sep 11 −0.0222 (+0.0008), Sep 12 −0.0205 (−0.0015),
+Sep 13 **−0.0549** (−0.0119).
+
+**The finding that distinguishes this window from the first three: all four forms in the design-review
+table miss together.** Pinned raw-Sunday −0.0549%; weekly-mean raw **−0.0292%**; USDT-adjusted Sunday
+−0.0119%; any-positive-raw-close-in-week **zero of seven**. The three earlier windows split 0 / 0 / 2 / 2
+across those same forms, which is why the review existed — the answer depended on the convention. It no
+longer does: this window reads **0 / 0 / 0 / 0**. Against a daily σ of ~2.1bp the −5.5bp Sunday reading
+is ~2.6σ, the first adjudicated miss that sits outside the leg's own noise, where the prior three were
+0.6, 2.2 and 0.3bp. **The prospective review is not thereby resolved** — a form is still a form, and
+changing one in the window where it would not have changed the answer is as much a retro-edit as the
+reverse. What changed is that the review is no longer load-bearing for the current reading.
+
+**Readings, verified by rendering** (Chrome headless against `localhost:8931`, live Binance + the
+Sep 11 `data.json`): **Too early · 0 of 4 signal families lit · 1 of 15 active · 6 partial ·
+expert 21% / equal 27%.** Families: Valuation 0 of 4 + 0 partial, Capitulation 0 of 5 + 3 partial,
+Supply & flows 1 of 5 + 2 partial, Macro 0 of 1 + 1 partial. No console errors. Per §5 the percentage
+is quoted only with its marginal rows named: **Puell 0.8894 against its 0.9 bar** and **SOPR 1.0034
+against 1.005**, and four on-chain series still carry `stale`, dated Sep 9.
+
+**Price.** Weekly close **$76,842.01**, −4.4% on the week against the prior $80,341.83. Spot
+$77,676.59. The bounce peak is **unchanged at +42.4% peak-to-peak** ($82,300 on Sep 3 off $57,800) —
+the gap to the pre-registered +45.7% / ~$84,215 marker stays 3.3 points, now widening by retreat
+rather than closing by advance. Drawdown −38.5% from the ATH against a deepest low of −54.2% and a
+−65% target; day 343 of the ~370-day cycle clock. Spot sits **47.1% above Realized Price** ($52,794.62)
+and 9.1% above the short-term-holder cost basis ($71,216.61); every prior bottom printed below
+Realized Price.
+
+**The CLARITY Act: the premise was wrong in the part that would have mattered, and right in the part
+that does not move anything.** There is no enactment and there cannot yet be one — the Senate has not
+voted. What exists: a revised **630-page text released Sep 10** by Lummis carrying **114
+Democrat-requested provisions** and still no Democratic sponsor, and a **cloture vote on the motion to
+proceed on H.R. 3633, Tue Sep 15 at 2:15pm ET**, filed by Thune on Aug 8. Sixty votes needed against 53
+Republican seats, Paul and Hawley expected to defect, two Democrats (Gallego, Alsobrooks) conditionally
+supportive, the count reported **7–9 short**. The presidential element is **endorsement, not signature**:
+Trump pressed for "a fair version of the Clarity Act" at the Aug 19 White House summit and the
+administration has said it is "fully committed" to September. Polymarket prices *signed into law in
+2026* at **15.5–22%**.
+
+*Sourcing, stated because it is weaker than this log's norm:* **congress.gov, senate.gov and the
+Lummis press release all returned HTTP 403** to direct fetches. The Sep 15 date rests on The Block
+(Aug 8) plus multiple secondary outlets; the Sep 10 text and its page count on secondary reporting
+only (Blockhead, Crypto Times, DailyCoin, BeInCrypto); the vote-count arithmetic and Bernstein's
+**10–25% correction on failure** on a Yahoo Finance analysis piece dated Sep 11, which also carries
+Polymarket at 22%. Nothing from the White House dated Sep 12–14 was found, which is an absence in a
+search index, not established absence. **Re-verify against a primary source before any of this
+hardens into a stated fact.**
+
+**Why it does not move the recommendation, and what it does move.** Regulation is not an input: none of
+the 15 signals, neither ladder gate, none of the four aggressive-buy triggers and none of falsifiers
+#1–6 reads a regulatory variable. So the answer to "does the recommendation change" is settled by the
+adjudication above, not by the act. What the act does change is the **shape of the item**: it goes from
+a narrative tailwind in the catalyst row ("the Clarity Act push continues") to a **dated binary inside
+the window, 26 hours before an FOMC decision**, and it is added to the scheduled-events row on that
+basis in all three languages. The asymmetry is recorded in both directions deliberately: passage is the
+unpriced outcome, while Bernstein's 10–25% sits against a failure already ~78% priced, and a failed
+cloture does not end 2026 because the motion can be re-filed — so the year-end market, not the vote, is
+the number to track. Even enactment lands nothing inside Sep–Nov: the SEC gets **270 days
+post-enactment** for the joint rules, which is a 2027 flow story.
+
+**One point the act does touch, and it is about depth, not timing.** A structural policy tailwind
+belongs in the same category as tight credit spreads — an argument that this drawdown is
+crypto-idiosyncratic rather than embedded in a credit cycle, and therefore an argument for the damped
+−65% target over the historical −78%. It is **deliberately not put in the score**, for the same reason
+credit spreads are not: it would add a fourth collinear macro voice to a composite that exists to
+collapse them. Noted here so a future pass does not rediscover it and wire it in.
+
+**Macro, all of it against the counter-scenario.** August CPI (Sep 11) printed 0.4% m/m / 3.4% y/y
+headline in line, with **core 0.3% m/m against 0.2% expected** — that closes the Sep 10 "core
+consensus unverified" item **on the m/m leg only**; the 2.4% core y/y figure came back from
+aggregation, not from a consensus source, so the y/y half of that item stays open. August PPI
+(Sep 10) came in **+0.4% m/m and 5.4% y/y with diesel +24.1%**, which is the oil shock already
+arriving in the producer data. September hike pricing went **51.5% (Sep 7) → 78% Polymarket /
+85.5% CME FedWatch (Sep 12)**; an "at least one 2026 hike" reading of 86.5% is carried from the
+same aggregation and is **not** primary-sourced. Treat every figure in this paragraph that is not
+a BLS release or a `data.json` field as secondary until the Sep 17 pass re-pulls it. The 10-year closed **4.96% on Sep 11**, its highest
+since 2023, and in `data.json` `real10y` **2.55 equals its own `hi2y`** while `nom10y` **4.95 equals
+`hi2y`** — the binding constraint on the liquidity composite is at its tightest of the cycle. Brent
+~$99–105 after US strikes on five Iranian tankers and Iranian attacks on US Navy vessels. Fed blackout
+since Sep 5, so Waller (Sep 3) remains the last word. The capitulation tranche's macro gate stays
+**1 of 3**: hike repricing plainly met, the dollar still 1.18% below its 200-day (`DTWEXBGS` 118.0732
+vs 119.48) and moving away from a cross, the 200W MA not lost.
+
+**Other.** The Liquid Network event **shrank**: ~3,400 BTC (~$268M) returned within about 24 hours,
+~598.5 BTC (~$47M) outstanding, no custodian shortfall reported. Against the $500M 2nd-catalyst bar the
+net figure is now ~$47M, so that row's case is weaker than it was on Sep 7, not stronger. ETF flows are
+reversing: `etf.d20` 3.54 → **3.31**, `d5` **−$0.29B**. Strategy's 8-K for Sep 7–13 was not yet filed.
+A continuing resolution passed **Sep 1 funds the government through Dec 11**, which removes a shutdown
+from the window — not in `index.html` and carried to Sep 17. External bottom calls, as commentary and
+not evidence: Galaxy Research **$40–46K in Q4 2026** with a panic case near $28K, which overlaps the
+$44–50K core band from outside the framework; Cowen, Brandt and Martinez all name a late-September to
+October low.
+
+**Strings brought into line with the adjudication, because a page cannot carry two answers.** The
+events row edit alone would have left `trig[0]` saying "third Monday, narrowest miss" and "Next
+adjudication: Monday Sep 14", `trig[1]` "FIRED — for the third Monday running", `trig_n` "Status
+Sep 7", `fal[5]` ending on "the next adjudication is Mon Sep 14", and `th_p` the same date — five
+keys contradicting the events row on the same screen. All five updated in all three languages:
+the ordinals, the four-window tally (−0.006%, −0.022%, −0.003%, −0.055%), the retired
+"decided inside its own noise" claim, and the next date. **§2 names `fal[5]` as a key that has
+repeatedly gone stale this way, and it had — one edit later this would have been the fourth
+instance.** The narrative texture of the Sep 7 window inside those cards is dated prose and was
+left verbatim, per §2's rule that a dated statement stays. `th_p`'s 40% is unchanged; only the
+sentence stating the adjudication date and the reason for not re-scoring was touched. Verified by
+rendering plus the `node` parity snippet: 176/176 keys in PT and ES, `bs`/`mac` logic fields
+byte-identical, no console errors.
+
+**Not done, deliberately.** The catalyst row still reads "regulatory clarity still runs the other way …
+the Clarity Act push continues", which is now under-specified rather than wrong; the Brent/10-year
+staleness set and the Liquid exploit date (`index.html` says Sep 7, it was Sep 6) stay bundled as the
+single 4-keys × 3-languages edit the Sep 10 entry specified, because doing half of it is worse than
+doing none. `mac_h` still reads "Reading (Aug 19, 2026)". All three go to Sep 17.
+
+---
+
 ## 2026-09-11 — CPI day: a September hike went from coin-flip to priced, ETFs bled three sessions, and the provider went backwards
 
 Same-day check (~13:30–14:30 UTC), not a research pass. `an_asof` stays Sep 7; no `index.html`

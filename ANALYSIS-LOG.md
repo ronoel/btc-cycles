@@ -23,6 +23,60 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-16 — Pre-FOMC interim check: CLARITY failed as priced, leg 2 moved further away, nothing re-scored
+
+Same-day check at ~13:30 UTC, **before** the 18:00 UTC FOMC decision. No `index.html` edit, no
+threshold, weight, trigger or falsifier touched, `an_asof` stays Sep 7; the counter-scenario (40%)
+and all prose updates stay with the Sep 17 pass, per the MAINTENANCE footer.
+
+**Pipeline.** `scripts/build_data.py` run locally changed only the `updated` timestamps in
+`data.json`/`history.json` — reverted, not committed. The provider still ends most on-chain series at
+**Sep 9** (`stale: ['onchain']`, now 7 days). Puell's history tail reads 1.0825 (Sep 9) → 0.8894
+(Sep 10): the same day-to-day noise §5 documents, not a provider revision, so the PARTIAL stands and
+stays marginal.
+
+**Readings, verified by rendering** (Chrome headless, `localhost:8931`): **Too early · 0 of 4 families ·
+1 of 15 active · 6 partial** — unchanged from Sep 14.
+
+**Falsifier #6, current week (not an adjudication; window is Mon Sep 21 00:15 UTC).** Leg 1: last
+*closed* week is still $76,842.01; spot $75,774. Leg 2 raw daily closes: Sep 14 −0.0182%, **Sep 15
+−0.0797%**, Sep 16 partial −0.0818% — the widest negative in the adjudication record. Leg 3 (SoSoValue):
+daily Sep 8 −46.6M, Sep 9 −120.2M, Sep 10 −282.6M, Sep 11 −13.3M, Sep 14 +160.0M, **Sep 15 −450.3M**;
+`etf.d20` 3.31 → **2.78**, `d5` −0.71B — still clears +1.5B, shrinking. A research subagent returned
+"Sep 15 +$260M, sixth consecutive inflow day" from search snippets; the endpoint contradicts it and it
+was **discarded**.
+
+**Price.** Sep 15 −3.3% (Binance close 75,644.48); the 18:00 UTC hour — the cloture vote was 18:15 UTC —
+printed the day's low **$74,967.97**, the lowest daily low since Aug 21 ($73,027). Funding 7d +0.0054%.
+Fear & Greed 51 (69 the day before).
+
+**CLARITY Act.** Cloture on the motion to proceed failed, reported **49–50** (zero voting Democrats in
+favour, four Republicans against); CoinDesk: "essentially ends market structure legislative work in the
+Senate for 2026"; Polymarket *law in 2026* ~14%. **Secondary only** — CNBC 403'd and the senate.gov roll
+call was not fetched. It resolved the priced way (~78% failure priced on Sep 14); regulation is not a
+checklist input, so nothing moves. The catalyst row's "Clarity Act push continues" is now wrong, not
+just under-specified — Sep 17.
+
+**Macro.** FRED: 10y 4.97 and real 10y 2.60 on Sep 14, both at `hi2y`; `DTWEXBGS` 118.2126 vs 119.41
+200-day = **1.0% below** (from 1.18%) — the dollar leg of the macro gate closed in, gate still 1 of 3.
+Secondary, unverified: 10y ~5.0% and Brent ~$107 on Sep 15; pre-decision hike pricing ~84% CME (Sep 14).
+
+**Strategy.** Sep 14 8-K (secondary coverage; EDGAR filing exists, not opened): no BTC bought or sold,
+second consecutive flat week, 845,050 BTC, $139.3M STRC repurchased. Neither the buying pattern nor a
+re-arm.
+
+**Polymarket (Gamma API, Sep 16).** ↓$60K 31.5%, ↓$55K 19.5% → interpolated no-new-low **~74%** (from ~77%
+Sep 7); ↓$70K 67.5%; ↑$85K 56.5% (61.5%), ↑$90K **41%** (49.5%).
+
+**Calendar corrections for the events row (Sep 17):** MSCI results **Oct 16** (MSCI announcement title;
+consultation closes Sep 30), not "mid-October"; BLS verified against `10_sched.htm` / `11_sched.htm`:
+payrolls Oct 2 / Nov 6 / Dec 4, CPI Oct 14 / Nov 10, PPI Oct 15 / Nov 13; BEA: Aug PCE Sep 30, Q3 GDP
+advance + Sep PCE Oct 29, Oct PCE + GDP second Nov 25. Confirmed from primary pages: BitMEX shutdown
+Sep 23 04:00 UTC, SEC comment close Oct 20. Secondary: FTX $1.6B third distribution Sep 30, Deribit
+Sep 25 expiry ~$14.6B BTC notional with max pain $72–75K (below spot), retarget ~Sep 19 at ~+4.7%.
+
+---
+
 ## 2026-09-14 — The Sep 14 adjudication: 2 of 3 a fourth time, and the first window where every form of leg 2 misses
 
 The adjudication, plus a premise check on the CLARITY Act triggered by a reader question that

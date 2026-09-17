@@ -23,6 +23,124 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-17 — Research pass: the September hike landed, LTH supply broke its own trough, counter-scenario 40% → 35%
+
+Full research pass, the one the Sep 14 entry deferred until both binaries resolved. `an_asof` → Sep 17.
+No threshold, weight, trigger or falsifier changed. One **reading** changed (`lth` PARTIAL → NOT YET) and
+the counter-scenario was re-scored. Three calendar items the page carried were checked at the primary
+source; one of them was a year-off error.
+
+**The Fed — primary.** federalreserve.gov press release Sep 16 (fetched): target range raised 25bp to
+**3.75–4.00%, 12–0, no dissents**; "Inflation remains elevated. Today's policy action will support a
+timelier return to the Committee's 2 percent goal." SEP table (fetched): fed funds median **4.1% end-2026**
+(June 3.8%) — i.e. one more 25bp hike — 4.1% 2027 (3.6%), 3.9% 2028, longer run 3.2% (3.1%); 2026 dots
+**12 at 4.125%, 4 at 4.375%**; core PCE 3.4 / 2.5 / 2.2 (June 3.3 / 2.5 / 2.1); unemployment 4.1% flat
+(June 4.3 / 4.3 / 4.2). The Fed row's own tooltip had said "a hike at the September meeting would be a
+genuine shock to the window" — the pre-committed reading is honoured below. Pricing after (Polymarket Gamma,
+Sep 17 ~02:00 UTC): Oct 28 **hold 54.5% / hike 45.5%**; upper bound ≥4.25% before 2027 72.9%; no cut in 2026
+94.9%. CME FedWatch hold 59.5 / hike 40.1 is snippet-only and not used. Market reaction was two-sided: the
+18:00 UTC hour ranged $75,065–76,561 and closed $75,632; S&P 500 **7,551.81** (−0.45%, Yahoo chart API),
+2.7% under the 7,757.64 record.
+
+**Rates — FRED (primary, Sep 15 prints landed in the 01:56 UTC build):** 10y **5.00%**, real 10y **2.62%**,
+2y **4.67%** — all three equal their own two-year highs in `data.json`. HY OAS 2.76, still tight.
+
+**CLARITY Act — secondary only.** Cloture on the motion to proceed failed **49–50** (Sep 15; zero voting
+Democrats for, four Republicans against — HomeCryptoInvest, CoinDesk live blog, Bitcoin.com); CoinDesk:
+"essentially ends market structure legislative work in the Senate for 2026". Polymarket *law in 2026*
+**6.8%** (Gamma, Sep 17). CNBC 403'd, senate.gov roll call not fetched. Regulation is not an input; it
+resolved the priced way. The Sep 14 entry's "policy tailwind as a depth argument" no longer has an object
+for 2026 and is withdrawn rather than carried.
+
+**`lth` PARTIAL → NOT YET — a reading change, same series, same threshold.** BGeometrics
+`/v1/long-term-hodler-supply-btc` (the series the Aug 19 pass quoted; its Jul 24 peak 16,859,102 and Aug 11
+trough 16,609,303 reproduce byte-for-byte): **16,506,987 BTC on Sep 15**, −2.09% from the record,
+**102,316 BTC below the Aug 11 trough** that was attributed to the Coldcard migration, −135,509 over 30 days,
+−37,396 over 7, zero rising days at the tail. The Aug 19 PARTIAL rested on an eight-day recovery; it has
+reversed on every horizon. No non-economic event is identifiable this time — long-term holders distributing
+into a +42% rally is the economic reading — so the event-contamination convention does not apply. Threshold
+"LTH supply rising" → **not met**. Families and stage unaffected (Supply & flows goes 1 active + 2 partial
+→ 1 + 1 of 5; the family was not lit either way).
+
+**`resv` stays PARTIAL, on the paywalled reserve leg — but SSR is now sourced.** `/v1/ssr` is free:
+**5.95 on Sep 15**, 12th percentile of its 1,460-day window (min 4.58 Jun 30, 2026; **6.80 at the Nov 21,
+2022 bottom**). The "SSR low" half of the row reads low on this series; the "multi-month reserve decline"
+half still has no free measurement (`exchange-reserve-btc` 403), and `exchange-supply-ratio` — adjacent,
+quoted as context only per §2b — rose 14.04% (Aug 18) → **14.18%** (Sep 15). Not wired LIVE: a two-leg
+row with one leg sourced would be a spec change dressed as a data upgrade.
+
+**`hash` stays PARTIAL.** BGeometrics state Up **15 consecutive days** (Sep 1–15), 30d/60d gap **+0.73%**
+(931.85 vs 925.13 EH/s). Still under the 28 days a Feb–Mar 2026 run failed. Retarget **+4.67% est., Sep 19
+05:45 UTC** (mempool.space, fetched).
+
+**`cbp` NOT YET.** Raw daily closes Sep 13 −0.0549, Sep 14 −0.0182, **Sep 15 −0.0797, Sep 16 −0.0801** —
+the widest negative closes in the adjudication record; USDT-adjusted −0.0119 / −0.0042 / −0.0077 / −0.0021.
+
+**ETF.** SoSoValue daily: Sep 14 +160.0M, **Sep 15 −450.3M**; `d20` 3.31 → **2.78**, `d5` −0.71B. Sep 16
+not yet in the endpoint.
+
+**Polymarket card (Gamma, Sep 17 ~02:00 UTC).** ↓$60K 29.5%, ↓$55K 19.5% → interpolated to $57,800 ≈ 25%
+→ **no-new-low ~75%** (77% Sep 7). ↓$50K 15%, ↓$45K 7%, ↓$40K 6.5%. ↓$65K 44%, ↓$70K 66% (52.5%). Upside:
+↑$85K 58% (71.5%), **↑$90K 38.5% (49.5%)**, ↑$95K 25.5% (32%), ↑$100K 16.5% (24.5%). Recession by end-2026
+**11.5%** (6.5% Sep 7).
+
+**Calendar, checked at source.**
+- **MSCI — primary, and the Sep 16 entry's citation was wrong.** The two MSCI URLs the Sep 16 entry leaned on
+  are the **Oct 10, 2025 extension** and the **Jan 6, 2026 results** of the *first* consultation (withdrawn,
+  no exclusion). The dates themselves survive on the right document: MSCI, *Consultation on Eligibility of
+  Non-Operating Companies for the MSCI GIMI* (Aug 2026, PDF fetched) — "feedback … through September 30,
+  2026 … announce the consultation results on or before October 16, 2026 … implemented as part of the
+  November 2026 Index Review". Its simulation (as of May 2026) deletes **Strategy, Yellow Cake and
+  Metaplanet** from ACWI IMI. Strategy's Aug 31, 2026 response letter (PDF fetched) corroborates the
+  proposal. The Sep 16 entry is left unedited as the dated record; this is the correction.
+- **FTX "cash distribution Sep 30" — withdrawn, a year-off error.** The Sep 30 date is the **2025** third
+  distribution. In 2026 FTX paid the fourth on **Mar 31** and the fifth on **Jul 31** (record date Jun 16;
+  PR Newswire, FTX on X); no Sep 30, 2026 distribution was found. Removed from `EVENTS`, the events row and
+  the catalyst row. It had been carried in the page since at least Sep 2.
+- **Mt. Gox Oct 31, 2026** — corroborated (CoinDesk Oct 27, 2025: trustee extended by one year). Press.
+
+**Other.** Strategy's Sep 14 8-K (secondary coverage; filing exists on EDGAR): no BTC bought or sold,
+second flat week, 845,050 BTC, $139.3M STRC repurchased. Geopolitics (snippets, labelled as such in the
+page): Saudi East-West pipeline shut after an attack ~Sep 12–13, Brent reported ~$107 on Sep 15, Iran–Gulf
+talks in Oman postponed. Liquid: block production resumed Sep 10, peg-outs still frozen, ~598.5 BTC
+outstanding, Adam Back committed to cover the peg (secondary). Trade: no dated change found since the
+Federal Circuit's May stay of the Section 122 ruling (snippet-level; the Sep 16 search found nothing newer,
+which is an absence in an index, not established absence).
+
+**Counter-scenario 40% → 35%.** Written as a ledger, both sides, because holding would need its reason stated
+after a shock the page had named in advance.
+*Against "the low is in":* the hike landed and the median dot adds another; real 10y, nominal 10y and 2y
+all at two-year highs; the Coinbase Premium printed its widest negatives of the record on the two days after
+the adjudication; ETF `d20` fell 0.53B in two sessions with a −$450M day; LTH supply broke below its
+Coldcard trough; recession odds nearly doubled; the market's upside rungs fell 7–11 points; price is 7%
+under the Sep 3 peak and the bounce gap to the +45.7% marker widened by retreat.
+*For:* no lower low; the market's own no-new-low read moved only 77% → 75%; Hash Ribbons have held Up 15
+days; credit spreads are tight; CLARITY's failure was already priced; price holds 7% above the STH cost
+basis ($71,295).
+The net is one-directional in the evidence and nearly flat in the market, which is why the move is five
+points and not ten. **The report now sits ~40 points under the market's ~75%** and that disagreement is stated
+in `th_p` rather than argued away. The Aug 24 marker (+45.7% / ~$84.2K without a lower low) still governs
+upward.
+
+**Readings after the pass, verified by rendering** (Chrome headless, EN/PT/ES, no console errors):
+**Too early · 0 of 4 families · 1 of 15 active · 5 partial · expert 19% / equal 23%** (from 21% / 27% on
+Sep 14; the drop is `lth` alone). Families: Valuation 0 + 0 partial of 4, Capitulation 0 + 3 of 5, Supply &
+flows 1 + 1 of 5, Macro 0 + 1 of 1. `CORE` reads **9%** against 95% at Nov 21, 2022, on two marginal
+PARTIALs (SOPR 1.0034 vs 1.005, Puell 0.8894 vs 0.9) — per §5 that figure is noise-dominated; the README
+headline and the `og-card.html` stat moved 4% → 9% with it and `og.png` was regenerated.
+
+**S&P record corrected.** Yahoo chart API, six months of daily closes: the record close is **7,798.99 on Aug 13, 2026**; the 7,757.64 the Equities row carried since Aug 19 was the Aug 7 close, so the Sep 9 carry item's "~1.6% under the record" understated the gap (it was ~2.1%). Sep 16 close 7,551.81 is 3.2% under the true record; Sep 3 close 7,747.71.
+
+**Translation note.** PT/ES for the edited keys were produced by a delegated pass and checked mechanically
+(tags, placeholders, entities, amounts). Its brief wrongly said the house style keeps English numerals; it
+does not (`$80.342`, `$3,31B`, `0,08%`), and the dollar tokens were re-localised before insertion.
+
+**Staleness set closed**, as bundled since Sep 10: "Brent above $95", "10-year at 4.77% (Sep 3) against a
+4.79% two-year high", and the Liquid exploit date (Sep 7 → **Sep 6**). `mac_h` → Sep 17: Trade & tariffs and
+Equities divergence re-checked.
+
+---
+
 ## 2026-09-16 — Pre-FOMC interim check: CLARITY failed as priced, leg 2 moved further away, nothing re-scored
 
 Same-day check at ~13:30 UTC, **before** the 18:00 UTC FOMC decision. No `index.html` edit, no

@@ -80,7 +80,11 @@ dropped partial is in Capitulation (2 partial now, 3 on Sep 17), on on-chain dat
 (`stale: ['onchain']`); per §5 Puell/SOPR sit inside a day's noise of their bars, so this is not quoted as a
 move. README and `og-card.html` stat (9%) left for the Sep 24 pass with the rest of the on-chain refresh.
 
-**Other readings.** Hash Ribbons: BGeometrics Up Sep 1–20 (**20 days**), 30d/60d **+1.81%** (941.2 vs 924.4
+**Premium streak, measured Aug 24–Sep 21:** the last positive raw close was **Sep 4 (+0.0180%)**; Sep 5–20 is 16 consecutive negative closes. Across the five windows: pinned raw-Sunday 0 of 5, weekly-mean raw 0 of 5, adjusted-Sunday **3 of 5** (Aug 24, Sep 7, Sep 21), any-positive-raw-in-week 2 of 5 (Aug 31, Sep 7). Sep 21 raw was +0.084% at ~15:00 UTC, intraday.
+
+**Peak caveat.** $85,845.27 is the Sep 21 high as of ~14:30 UTC, the day still open; the Sep 24 pass re-reads the peak. The marker being cleared does not depend on it.
+
+**Other readings.** Hash Ribbons: BGeometrics series read Aug 28–Sep 20 (Down Aug 31, Up every day Sep 1–20: **20 days**), 30d/60d **+1.81%** (941.2 vs 924.4
 EH/s). Sep 19 retarget **+4.16%** (mempool.space; estimate was +4.67%); next +0.82% est. ~Oct 3. STH cost
 basis $71,806 (Sep 20).
 

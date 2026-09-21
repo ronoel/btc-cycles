@@ -23,6 +23,75 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-21 — The Sep 21 adjudication: 2 of 3 a fifth time, and the pre-registered marker cleared the same morning — counter-scenario 35% → 70%
+
+Adjudication plus the one re-scoring the Aug 24 entry wrote down in advance. Not a research pass: `an_asof`
+stays Sep 17, the narrative `mac` rows and the static `bs` rows (`hash`, `cbp`, `lth`, `resv`) are left
+for Thu Sep 24. No threshold, weight, trigger, falsifier or ladder band changed.
+
+**Falsifier #6, Sep 21 window (00:15 UTC): 2 of 3 — not fired, nothing deployed.**
+- Leg 1: Binance 1w candle Sep 14–20 closed **$81,178.00** → fired.
+- Leg 3: `etf.d20` **+$1.76B** as carried by the Sep 20 19:10 UTC build (`etf.d` = Sep 18, the last
+  session before the window, so no lag caveat) → fired, **$0.26B over the bar**, down from 3.31 at Sep 14 and
+  2.78 on Sep 16; `d5` +0.01, `d60` +2.41.
+- Leg 2: Sep 20 close, Coinbase 81,159.64 vs Binance 81,178.00 → **−0.0226% raw** → not fired.
+  USDT-adjusted **+0.0024%**.
+
+Daily raw / adjusted closes, Sep 14–20: −0.0182/−0.0042, −0.0797/−0.0077, −0.0801/−0.0021,
+−0.0893/−0.0033, −0.0109/+0.0161, −0.0198/+0.0152, −0.0226/+0.0024. Forms from the design review:
+pinned raw-Sunday **miss**, weekly-mean raw −0.046% **miss**, any-positive-raw-close 0 of 7 **miss**,
+adjusted-Sunday **fires**. So the Sep 14 statement "not load-bearing while every form misses" no longer holds:
+one form fires. Per the pinned convention the review stays prospective — any change applies from the Sep 28
+window, never this one — and it was not run here.
+
+**The marker.** Aug 24, written in advance: "If this bounce clears +45.7% — roughly $84.2K — without a lower
+low, that argument is spent and the probability should go most of the way to the market's." Measured on one
+index (Binance), peak-to-peak, intraday highs as the Sep 3 reading was (Sep 3 daily high 82,300.00 verified
+this pass): cycle low **$57,800.19 (Jul 1)** × 1.457 = $84,215. Sep 21 hourly highs crossed it in the 08:00
+UTC hour (84,174) and 09:00 (85,299); day high **$85,845.27 = +48.5%**, day 82 / week 11.7 off the low. No
+lower low. Larger than 2018 (+45.7%, week 3.9) and 2022 (+43.1%, week 8.3) in size, as it already was in
+time. Cause, secondary only (The Block, Cryptobriefing, Yahoo/Bloomberg, snippet-level): ~$648M of short
+liquidations, Brent back under ~$102, SEC tokenized-securities approval Thursday; Strategy's Sep 21 8-K
+reported as **950 BTC bought** (~$75.7M, 846,000 BTC, no ATM equity sold) — a return to buying, not a sale,
+so it does not re-arm the capitulation gate. EDGAR filing not opened.
+
+**Polymarket (Gamma API, Sep 21 ~14:30 UTC, open contracts only).** ↓$60K **13.5%**, ↓$55K **9.5%** →
+interpolated to $57,800 ≈ 11.7% → **no-new-low ~88%** (75% Sep 17). ↓$50K 7.5%, ↓$45K 4.55%, ↓$40K 5.5%
+(inverted against $45K; thin books, quoted as is). **↑$85K settled YES 11:40 UTC Sep 21**; next open rung
+↑$90K **79%** (38.5%), ↑$95K 56.5%, ↑$100K 39.5%. ↓$70K 30% (66%), ↓$65K 19.5% (44%). **↓$75K settled YES
+Sep 15** (Sep 15 low $74,968) — a re-listed downside contract, not a new-low read.
+
+**Counter-scenario 35% → 70%.** "Most of the way" from 35 to ~88 means past the midpoint (~62); 70 is two
+thirds of the distance. Rule-driven, not re-derived: the precedent envelope was the *only* content of the gap
+the Aug 24/26 entries named, and it is spent. What holds the residual ~18 points is the part of the Sep 17
+ledger that was never the envelope: the Sep 16 hike and a median dot with one more; real 10y 2.62% and
+nominal 5.00% at two-year highs; LTH supply below its Coldcard trough and falling (last read Sep 15); `d20`
+3.31 → 1.76 in five sessions; and not one positive raw premium close in the seven days before the window.
+Not counted: the squeeze itself (price is already the marker; counting it again is double-counting) and the
+positive intraday premium on Sep 21 (not a close). **Consequence stated in `th_p`: the counter-scenario is
+now the more likely path by the report's own rule, and the ladder is the minority case.** The thesis
+paragraph's base-case prose and the bands are not rewritten here — §3's "thesis invalidated" row is keyed to
+a *sustained* ~$90K+ (falsifier #2, eight weekly closes), not to this. The Sep 24 pass has to decide how the
+page frames a base case that is now the minority reading.
+
+**Readings, verified by rendering** (Chrome headless, en / pt-BR / es, 0 console errors): **Too early · 0 of
+4 families · 1 of 15 active · 4 partial · expert 16% / equal 20%** (from 5 partial, 19% / 23% on Sep 17). The
+dropped partial is in Capitulation (2 partial now, 3 on Sep 17), on on-chain data still ending Sep 14
+(`stale: ['onchain']`); per §5 Puell/SOPR sit inside a day's noise of their bars, so this is not quoted as a
+move. README and `og-card.html` stat (9%) left for the Sep 24 pass with the rest of the on-chain refresh.
+
+**Other readings.** Hash Ribbons: BGeometrics Up Sep 1–20 (**20 days**), 30d/60d **+1.81%** (941.2 vs 924.4
+EH/s). Sep 19 retarget **+4.16%** (mempool.space; estimate was +4.67%); next +0.82% est. ~Oct 3. STH cost
+basis $71,806 (Sep 20).
+
+**Edited (all three languages, parity snippet clean):** `th_p` (counter-scenario, trigger paragraph, why the
+number moved), `fal[1]` (probability), `fal[5]` (fifth adjudication), `ph_notes[2].tip` (marker cleared),
+`cvp[3]` `d`/`tip` (Sep 21 snapshot, ↑$90K as the rung), `trig_n`, `trig[0..2].d`. Staleness sweep on 35%,
+~75%, 38.5%, 2.78B, −0.080%, 42.4%, "Sep 21", "fifteen": remaining hits are dated statements. `bs` rows 8
+(`hash`) and 12 (`cbp`) still carry Sep 15/16 figures, dated — they are research-pass rows.
+
+---
+
 ## 2026-09-17 — Research pass: the September hike landed, LTH supply broke its own trough, counter-scenario 40% → 35%
 
 Full research pass, the one the Sep 14 entry deferred until both binaries resolved. `an_asof` → Sep 17.

@@ -23,6 +23,68 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-21 (later) — Two trading-signal tests: leverage data carry no edge; trend-following does not beat buy-and-hold significantly
+
+Reader questions after the adjudication: can leverage data (funding, OI, long/short ratios, liquidation
+maps) or trend-following drive trades now? Tested, not adopted. **Nothing in `index.html` changed**; no rule,
+threshold or trigger touched. Scripts were scratch and deleted; the rules below are enough to reproduce.
+
+**Snapshot, Sep 21 ~15:00 UTC (Binance/OKX/Bybit public futures APIs).** Binance OI 107.8k → 111.5k BTC
+intraday (+3.5%), Bybit −0.9% on its daily row — the venues disagree on the sign. Funding 0.004–0.010%/8h
+(baseline). Retail account long/short flipped from 1.45–1.82 (Sep 12–18) to **0.90–0.96** (Sep 19–21)
+on Binance; OKX 0.91, Bybit buy ratio 52%. Binance top-trader position ratio 2.19 (69% long), stable.
+Liquidation heatmaps (third-party, via X posts through Grok, not verified): long clusters ~$80.1K
+(24h/1W) and $75.8K (1M); a ~$314M band ~$86.6K (Hyblock, side unstated); the CoinGlass "short" levels at
+$82.2–83.2K were already below price when posted. Hyperliquid whale positions quoted without wallet
+addresses — unverifiable. Read: retail net short and baseline funding, so no crowded-long setup; the
+at-risk long leverage sits ~7–12% below.
+
+**Test 1 — leverage signals.** Binance BTCUSDT funding (8h, Sep 2019–), Binance USDT-M daily klines, Bybit
+linear daily OI (~2020–). Forward 7d/14d return and min-low drawdown, eras 2019–22 / 2023–26. Adversarial
+review (separate agent) ran circular-shift permutation (5,000), non-overlapping 14d trade sims with 0.13%
+round trip and realised funding carry, and timestamp checks:
+- Funding 7d top decile (>0.042%/8h), 2019–22: P(dd14 < −10%) 64% vs 39% baseline, **p=0.036 on 9
+  episodes**; return p=0.51. Did not recur 2023–26 (p=0.89); short rule 2023–26 **−2.32%** net.
+- Funding < 0 → long: 2019–22 +6.10%/14d (p=0.19); 2023–26 +2.36% vs buy-and-hold +2.00%, zero excess.
+- Spearman(funding 7d, ret14) **0.00** (p=0.999) in 2023–26.
+- OI/price combinations: p 0.15–0.45. The only p<0.05 cell used next-day OI (look-ahead), discarded.
+- 30 p-values, min valid 0.036; nothing survives 0.05/30. Regime shift: days with funding >0.03% fell
+  184 → 25 (3 episodes).
+Verdict: context only. Extreme funding is a **two-sided** volatility flag (P(dd14<−10%) 52–64% and
+P(up7>7%) 47–52%) — size down, don't pick a side. Long/short ratios and liquidations have ~30 days free
+history and were not tested. **`data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/` exists from
+2021-12 (verified)**: 5-min OI, top-trader and global long/short, taker ratio — the dataset that would test
+the retail-flip idea.
+
+**Test 2 — trend-following, rules fixed before running.** Binance spot BTCUSDT daily closes, evaluation
+Jun 13, 2018 → Sep 20, 2026 (8.3y). Signal at close t, applied to t+1; 0.1% per side; cash 0%.
+
+| Rule | CAGR | Vol | Sharpe | MaxDD | Trades |
+|---|---|---|---|---|---|
+| Buy & hold | 36.2% | 62% | 0.81 | −76.6% | 1 |
+| **SMA200** (pre-registered primary) | 34.5% | 43% | 0.90 | −64.0% | 65 |
+| SMA100 | 49.2% | 43% | 1.15 | −38.5% | 117 |
+| Momentum 90d > 0 | 31.3% | 45% | 0.84 | −66.5% | 119 |
+| SMA200 + vol target 50% | 30.4% | 35% | 0.93 | −53.7% | 59 |
+
+- SMA200 − B&H Sharpe **+0.09**, 60-day block bootstrap 95% CI [−0.41, +0.64], P(≤0) 0.38. At equal
+  risk (B&H at 0.69 weight, 43% vol): 29.2% CAGR, −61.7% MaxDD — the SMA200 gain is small.
+- SMA sweep 50–300 (step 25): CAGR 29–59%, no plateau. SMA125 best (Sharpe +0.48 vs B&H, p=0.01) but
+  best of 11 — fails Bonferroni (0.0045). SMA100 p=0.08.
+- Eras: 2021–22 SMA100 +19% vs B&H −24%; **2023–26 B&H +53% beat every trend rule (36–39%)**.
+- With cash at 4%: SMA200 37.1% CAGR.
+Verdict: on one asset over 8 years, trend-following lowers volatility and sometimes drawdown but its
+risk-adjusted gain is not distinguishable from noise; the literature's effect is multi-asset, century-long.
+**Do not switch windows to SMA100/125 on this sample.** Defensible use: SMA200 as an exit/protection rule on
+top of a position, not as a return engine.
+
+**State at the Sep 20 close.** $81,178 vs SMA200 $70,540 and SMA100 $68,331; 90-day momentum +26.8%; 30-day
+vol 37% → every rule reads long, full size (SMA200 long since Aug 19; last flips Oct 17–Nov 3, 2025).
+**Convergence, not designed:** the SMA200 exit (~$70.5K) sits on falsifier #6's leg-1 bar (~$70K); a weekly
+close under ~$70K would break both.
+
+---
+
 ## 2026-09-21 — The Sep 21 adjudication: 2 of 3 a fifth time, and the pre-registered marker cleared the same morning — counter-scenario 35% → 70%
 
 Adjudication plus the one re-scoring the Aug 24 entry wrote down in advance. Not a research pass: `an_asof`

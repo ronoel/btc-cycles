@@ -23,6 +23,57 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-23 — Interim check: peak corrected to $87,396 (+51.2%), Polymarket flat at ~88.5%, ETF flows reversed, macro composite PARTIAL → NOT YET
+
+Not a research pass and not an adjudication: `an_asof` stays Sep 17, the 70% is **not** re-scored, no rule,
+threshold, weight, trigger, falsifier or band changed. Four items carried from the Sep 21 entries.
+
+**Peak.** The Sep 21 entry quoted $85,845.27 (+48.5%) read at ~14:30 UTC with the day open. The full Sep 21
+Binance daily candle: high **$87,395.67**, close $86,620.00 → **+51.2%** off $57,800.19 (87,395.67 / 57,800.19 =
+1.5120), still week 11.7. Sep 22 high 86,717.60, close 86,208.56; Sep 23 high **87,278.54** (read ~15:40 UTC,
+day open, $117 under the peak), low 83,864.07. No lower low. The Sep 21 entry and MAINTENANCE row are left as
+the dated record; `th_p`, `ph_notes[2].tip`, `fal[5]` and `cvp[3].tip` now carry $87,396 / +51.2% in all three
+languages.
+
+**Polymarket (Gamma API, Sep 23 ~15:57 UTC, open contracts only).** ↓$60K 13.5% (open copy; a closed-empty and
+two settled copies also exist), ↓$55K 9% → interpolated to $57,800 = 9 + 0.56 × 4.5 ≈ 11.5% → **no-new-low
+~88.5%**, flat on Sep 21 (~88%). ↓$50K 6.5%, ↓$45K 4.2%, ↓$40K 3.75% — the $40K-over-$45K inversion quoted Sep
+21 is gone. Upside cooled: ↑$90K **72.5%** (79), ↑$95K 53.5% (56.5), ↑$100K 38% (39.5). Revisit: ↓$70K 33% (30),
+↓$65K 19.5% (flat). `cvp[3]` rewritten on this snapshot, three languages.
+
+**On-chain provider.** Tail still **Sep 16** (bitcoin-data.com `sopr` bare path, read Sep 23 ~15:55 UTC), after
+advancing Sep 14 → Sep 16 between the Sep 21 and Sep 23 builds: a ~7-day lag, not a stall. `stale: ['onchain']`
+stands. So every valuation row still predates the Sep 18–21 squeeze. Puell crossed 1.0054 → **0.8881** (< 0.9,
+PARTIAL) on Sep 16 data — the §5 noise case; not quoted as a move.
+
+**Moved since Sep 21 (not re-scored).**
+- ETF (`etf.d` Sep 22): `d20` 1.76 → **2.83**, `d5` 0.01 → **2.01**, `d60` 2.41 → 5.27, YTD −1.45 → +0.26, AUM
+  102.5 → 110.8. One of the five items the Sep 21 entry named as holding the residual ~18 points ("`d20` 3.31 →
+  1.76 in five sessions") has reversed; leg 3's risk of failing on Sep 28 is gone for now. `th_p` gained a dated
+  parenthetical saying so, three languages. `trig_n` / `trig[1]` still read "Status Sep 21" — left for the pass.
+- Leg 2: Sep 21 close **−0.0289%** raw (Coinbase 86,594.94 vs Binance 86,620.00) after +0.084% intraday; Sep 22
+  **−0.0122%** (86,198.05 vs 86,208.56). Streak: **18 negative raw closes, Sep 5–22**. Adjusted not computed.
+- Macro: 2y 4.67 → 4.76 (= its two-year high), 10y 4.94 → 4.96, real 10y 2.62, HY OAS 2.66, M2 y/y 5.66
+  (3m 5.39). **Broad dollar 118.21 → 119.51 vs 200d 119.36** (DTWEXBGS Sep 18 print): the dollar leg of the
+  composite flipped, so **`fed` PARTIAL → NOT YET (1 of 3)**. It sits 0.13% above its average, so this is a
+  marginal crossing; the rule reads it as is.
+- Funding 7d +0.0067%/8h; Fear & Greed 70–78.
+
+**Readings, verified by rendering** (Chrome headless, en / pt-BR / es-ES, 0 console lines): **Too early · 0 of
+4 families · 1 of 15 active · 4 partial · expert 15% / equal 20%** (Sep 21: 1 · 4 · 16% / 20%). Composition
+changed under an unchanged count: `puell` in (stale data), `fed` out (live FRED). STH-MVRV 1.15 on the page (live
+price over STH cost $72,763).
+
+**Framing question (item 4).** The thesis banner (`th_t` "projected bottom & buy plan", `th_win_v` Sep–Nov 2026,
+core $44–50K) states the base case unqualified while `th_p` puts ~70% on the counter-scenario. §3 keys a thesis
+rewrite only to falsifier #2 or a confirmed bottom, neither fired, so bands, window and ladder stay. The ladder
+owner chose a one-clause qualifier on `th_t` only: "(the minority case since Sep 21: ~70% that the low is already
+in at $57.8K)", three languages, rendered. Rejected: leaving it (the banner contradicted `th_p`) and a two-scenario
+banner (a restructure §3 does not key to anything that has fired). The 70% now lives in `th_t`, `th_p` and
+`fal[1]` — move all three together.
+
+---
+
 ## 2026-09-21 (later) — Two trading-signal tests: leverage data carry no edge; trend-following does not beat buy-and-hold significantly
 
 Reader questions after the adjudication: can leverage data (funding, OI, long/short ratios, liquidation

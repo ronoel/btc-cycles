@@ -23,6 +23,72 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-24 — Interim check: ETF flows +$2.86B four-week, premium twenty negative closes, `fed` card prose corrected; the research pass was not run
+
+Not the research pass scheduled for today and not an adjudication: `an_asof` stays Sep 17, the 70% is **not**
+re-scored, no rule, threshold, weight, trigger, falsifier or band changed. Owner asked whether news or the
+day's ETF flows change the recommendation; answer: no. All reads Sep 25 ~01:10–01:20 UTC, so the Sep 23 and
+Sep 24 daily candles are **closed** (the last two corrections here came from reading open candles).
+
+**Price (Binance daily, closed).** Sep 23 H 87,278.54 / L **83,500.01** / C 84,397.60 — the Sep 23 entry's low
+(83,864.07) was read intraday; no UI key carries it. Sep 24 H 84,942.45 / L 82,874.93 / C 84,410.24. Peak stays
+**$87,395.67** (Sep 21); no lower low. Spot ~$84.8K at the read.
+
+**ETF.** Farside (`farside.co.uk/btc/`, 200 with a browser UA; 403 to the research agent's fetcher) and SoSoValue
+agree on Sep 21–23: **+999.0 / +714.7 / +346.9M** (Sep 21 is the largest day of 2026 in the SoSoValue series).
+Sep 23 by issuer: IBIT +166.3, FBTC +143.2, MSBT +32.4, ARKB +5.0. **Sep 24 partial: +$28.1M with IBIT pending**
+(FBTC +12.9, MSBT +10.2, EZBC +4.9, BITB +4.1, BTCW −4.0). SoSoValue had no Sep 24 row; `data.json` carries it at
+the Sep 25 19:10 build, not 06:15. `d20` **+$2.86B**, `d5` +2.65, `d60` +5.85 through Sep 23. Leg 3 at the Sep 28
+window: Aug 26–27 (+0.232, +0.242) roll off, so it misses only if Sep 24 + Sep 25 net ≲ **−$0.89B**.
+Secondary-source slip, recorded because this file tracks them: a flash-news item quoted "IBIT +$166.3M" as Sep 24;
+that is the Sep 23 Farside cell.
+
+**Leg 2 (raw, Coinbase BTC-USD vs Binance BTCUSDT daily close).** Sep 23 84,378.31 vs 84,397.60 → **−0.0229%**;
+Sep 24 84,385.46 vs 84,410.24 → **−0.0294%**. Streak: **20 negative raw closes, Sep 5–24**. Adjusted not computed.
+
+**Polymarket (Gamma, event `what-price-will-bitcoin-hit-before-2027`, Sep 25 ~01:20 UTC).** ↓$60K 14.5, ↓$55K
+10.5 → 10.5 + 0.56 × 4 ≈ 12.7 → **no-new-low ~87.3%** (88.5 Sep 23). ↓$50K 8, ↓$45K 5.15, ↓$40K 3.5. ↑$90K
+**70.5** (72.5), ↑$95K 52.5 (53.5), ↑$100K 38 (38). ↓$70K 32.5, ↓$65K 19. Within a point or two; `cvp[3]` (dated
+Sep 23) left.
+
+**Other readings.** Hash Ribbons (bitcoin-data.com `hashribbons`): Up every day Sep 1–23 = **23 days**, 30d/60d
+**+2.09%** (946.5 vs 927.2 EH/s) on Sep 23; sma_30 ticked down Sep 22 → 23 (947.5 → 946.5), not read as a turn.
+The 28-day comparison lands ~Sep 28. On-chain tail advanced Sep 16 → **Sep 17**; `stale:['onchain']` stands.
+`puell` 0.888 → **0.943** crossed back over 0.9 (the §5 noise case), so the partial count drops by one — not a
+move. FRED: 10y 4.96 (Sep 22), 2y 4.71, real 10y 2.63, HY OAS 2.73; broad dollar still the Sep 18 print (119.51 vs
+200d 119.36). Funding 7d +0.0056%/8h; Fear & Greed 71.
+
+**News Sep 23–24 (research agent, snippet level unless stated).** Saxo headline Sep 24 "the ten-year hits a 2007
+high" — **not verified**: FRED ends Sep 22 at 4.96 against a two-year high of 5.01; the Sep 24 close arrives with
+the Sep 25 build. Equities flat, gold −0.85% to ~$4,251, miners −4 to −5%; Hormuz-reopening hopes cited as the
+offset. No Strategy 8-K since Sep 21 (950 BTC, 846,000 held); the next is due Mon Sep 28. CLARITY still stalled
+after the 49–50 cloture vote Sep 15, no new vote. SEC tokenized-securities relief (Sep 17) already counted.
+Glassnode Week 38: price above True Market Mean (~$77K) and STH cost basis; an LTH supply cluster at $84–85K,
+where spot sits. Not used: a "LTH >20% of supply" line (source undated, contradicts the `lth` row's own series)
+and the agent's snippet-parsed Polymarket figures (read direct instead). Not found: PCE date confirmation, CME
+FedWatch, Mt. Gox / government wallet moves, exchange incidents.
+
+**Assessment.** Nothing here is a §3 event or re-score input. The two live legs: leg 3 has room again, leg 2 has
+moved slightly further from positive. Deploy trigger unchanged at 2 of 3 going into Sep 28.
+
+**Edited (three languages, parity 187/187, no BS/EV mismatch):** `trig_n` (Status Sep 21 → Sep 24), `trig[0].d`
+(Sep 21–24 closes, twenty in a row), `trig[1].d` (recovery to +$2.86B, the −$0.89B miss condition), `trig[2].d`
+(23 days, +2.09%), **`trig[3].d`** — it still said "the dollar leg still holds … the macro composite stays 2 of 3",
+false since Sep 23 and contradicting the live `fed` row; now reads the marginal crossing and 1 of 3 — and the
+`th_p` ETF parenthetical (+$2.86B through Sep 23, 5-day +$2.65B). Remaining "+$1.76B" hits are all dated to the
+Sep 21 window.
+
+**Readings, verified by rendering** (Chrome headless; en by default, pt/es forced via `localStorage.btc_lang` from a
+scratch page on the same origin — `--lang` does not switch the page headless; 0 console lines each): **Too early ·
+0 of 4 families · 1 of 15 active · 3 partial · expert 12% / equal 17%** (Sep 23: 4 partial, 15% / 20%; the
+dropped partial is `puell`, above).
+
+**Not done — the Sep 24 research pass.** Everything under "Carry into the next research pass" in MAINTENANCE
+stays open: base-case framing re-score check, leg-2 form review for Sep 28, `lth`/`hash`/`cbp`/`resv` static rows,
+README / `og-card.html` stat, Oct 28 FOMC inputs.
+
+---
+
 ## 2026-09-23 — Interim check: peak corrected to $87,396 (+51.2%), Polymarket flat at ~88.5%, ETF flows reversed, macro composite PARTIAL → NOT YET
 
 Not a research pass and not an adjudication: `an_asof` stays Sep 17, the 70% is **not** re-scored, no rule,

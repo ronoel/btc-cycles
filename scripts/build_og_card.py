@@ -85,6 +85,67 @@ def hist_paths():
     return out
 
 
+# ---------------------------------------------------------------- `now` label placement
+# Until Sep 27, 2026 the label sat at a fixed (+14, +34) from the dot. From week ~49 that
+# put it on the projected-window captions and their leader line, and any fixed offset
+# fails again within a few weeks as the dot walks across the window. So the captions moved
+# to the top of the plot (the leader line went: it blocked the whole x=933 column from
+# -15% to -54%, leaving no clear spot at weeks 52-58), and the label tries candidate
+# positions and takes the first that clears the captions and the C4 line.
+# Widths are estimates (0.55 em per glyph for the proportional fonts, 0.6 for mono) --
+# generous enough for a collision check, not for typesetting.
+CANDIDATES = [("middle", 0, -16), ("end", -12, -10), ("start", 12, -10),
+              ("middle", 0, 32), ("start", 14, 6), ("end", -14, 6)]
+
+
+def text_box(x, y, anchor, text, size, em=0.55):
+    w = len(text) * size * em
+    x0 = {"middle": x - w / 2, "end": x - w, "start": x}[anchor]
+    return (x0, y - size * 0.8, x0 + w, y + size * 0.25)
+
+
+def overlaps(a, b, pad=2.0):
+    return not (a[2] + pad <= b[0] or b[2] + pad <= a[0] or
+                a[3] + pad <= b[1] or b[3] + pad <= a[1])
+
+
+def card_obstacles(svg):
+    """Boxes the label must not touch: the window captions (and a leader line, if any)."""
+    out = []
+    for m in re.finditer(r'<text x="([\d.]+)" y="([\d.]+)" text-anchor="middle" class="(win2?)">([^<]*)</text>', svg):
+        x, y, cls, txt = float(m.group(1)), float(m.group(2)), m.group(3), m.group(4)
+        out.append(text_box(x, y, "middle", txt, 17 if cls == "win" else 14,
+                            0.55 if cls == "win" else 0.6))
+    m = re.search(r'<line x1="([\d.]+)" y1="([\d.]+)" x2="\1" y2="([\d.]+)" stroke="#5f5e58"', svg)
+    if m:
+        x, y1, y2 = float(m.group(1)), float(m.group(2)), float(m.group(3))
+        out.append((x - 1, min(y1, y2), x + 1, max(y1, y2)))
+    return out
+
+
+def hits_line(box, pts, pad=3.0):
+    """True if the polyline `pts` passes through `box` (segments sampled every ~2px)."""
+    x0, y0, x1, y1 = box[0] - pad, box[1] - pad, box[2] + pad, box[3] + pad
+    for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+        n = max(1, int(max(abs(bx - ax), abs(by - ay)) / 2))
+        for i in range(n + 1):
+            px, py = ax + (bx - ax) * i / n, ay + (by - ay) * i / n
+            if x0 <= px <= x1 and y0 <= py <= y1:
+                return True
+    return False
+
+
+def place_now_label(ex, ey, text, obstacles, pts):
+    """(x, y, anchor) of the first candidate clear of `obstacles` and the C4 line."""
+    for anchor, dx, dy in CANDIDATES:
+        box = text_box(ex + dx, ey + dy, anchor, text, 18)
+        if not any(overlaps(box, o) for o in obstacles) and not hits_line(box, pts):
+            return ex + dx, ey + dy, anchor
+    anchor, dx, dy = CANDIDATES[0]
+    print("  ! no clear spot for the now label; using the default", file=sys.stderr)
+    return ex + dx, ey + dy, anchor
+
+
 def main():
     series = daily_closes(ATH_DATE)
     if not series:
@@ -135,11 +196,13 @@ def main():
     s = s.replace('<circle cx="%s" cy="%s" r="5"' % (ox, oy),
                   '<circle cx="%.1f" cy="%.1f" r="5"' % (ex, ey))
 
-    # 3. Its label, keeping the original's offset from the dot (+14, +34).
-    s, n = re.subn(r'<text x="[\d.]+" y="[\d.]+" class="lbl now" fill="#D85A30">now[^<]*</text>',
-                   '<text x="%.1f" y="%.1f" class="lbl now" fill="#D85A30">'
-                   'now · −%d%%</text>' % (ex + 14, ey + 34, round(-end_dd)),
-                   s, count=1)
+    # 3. Its label, at the first candidate position clear of captions, leader line and
+    # the C4 line itself (see place_now_label).
+    label = "now · −%d%%" % round(-end_dd)
+    lx, ly, anchor = place_now_label(ex, ey, label, card_obstacles(s), pts)
+    s, n = re.subn(r'<text x="[\d.]+" y="[\d.]+"( text-anchor="\w+")? class="lbl now" fill="#D85A30">now[^<]*</text>',
+                   '<text x="%.1f" y="%.1f" text-anchor="%s" class="lbl now" fill="#D85A30">%s</text>'
+                   % (lx, ly, anchor, label), s, count=1)
     assert n == 1, "now label not found"
 
     # 4. The provenance comment at the top of the file.

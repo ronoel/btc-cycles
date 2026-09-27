@@ -23,6 +23,168 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-27 — Research pass: 70% held on a two-sided ledger, the Trade row had carried an expired statute, leg 2 stays raw for Sep 28
+
+The pass due Sep 24, run three days late at the owner's request, with the interim check below as its first
+half. `an_asof` → Sep 27. No threshold, weight, band, window, falsifier or trigger changed; no `st` changed.
+Reads Sep 27 ~03:10–04:40 UTC; `data.json` is the Sep 26 19:09 build (on-chain through Sep 19, FRED through
+Sep 24, ETF through Sep 25) — the 06:00 build had not run when the page was rendered.
+
+**Counter-scenario: ~70%, left, on this ledger (written before the number).** The Sep 21 residual — why the
+report sits ~18 points under the market — named five items. Against the low-is-in path: **Fed** — an Oct 28
+hike 45.5% → **64.5%** (+0.85% for 50bp; Polymarket `fed-decision-in-october-20260617190323537`, vol $14.8M),
+two 2026 hikes in total 52% / three 39.8%, no 2026 cut 96.55%; **rates** — Treasury par curves (primary,
+fetched by the macro agent): 10y 4.96 (Sep 22) → 5.11 → **5.18 (Sep 24)** → 5.17 (Sep 25), 2y 4.71 → 4.87 →
+4.81, real 10y 2.63 → 2.76 → **2.85** → 2.83, 30y 5.49 (Sep 25); the Sep 21 ledger's 5.00 / 2.62 are both
+exceeded. For it: **ETF** `d20` 1.76 → **2.71**, seven inflow sessions Sep 17–25 (Farside: 159.5, 433.0,
+999.0, 714.7, 346.9, 190.7, 134.5); **LTH** off its Sep 22 low (below). Unchanged: **premium** — 22 negative
+raw closes, Sep 5–26. Beside the ledger: the market's no-new-low read ~88.4% (flat since Sep 21), price
+$83–85K through the yield spike and a 13% Binance OI flush. Two for, two against, one flat, market flat:
+no rule-driven move and no measured reason for a judgement one. `th_p` carries the dated re-check; `th_t` and
+`fal[1]` unchanged.
+
+**`lth` stays NOT YET — and the reading rule is written down now, before it binds.** BGeometrics
+`/v1/long-term-hodler-supply-btc` (free endpoint served through Sep 26, not the ~7-day lag of the scored
+series): new low **16,494,957 on Sep 22** (−2.16% from the record), then four rising days to **16,568,935 on
+Sep 26** — highest since Aug 31. 7d +53,144; 30d −21,035; 40,368 under the Aug 11 trough. The +73,979 four-day
+rise is the largest of 65 four-day windows since Jul 24, but those windows run mean −17,460 / σ 43,010, so it
+is ~1.7σ above zero and ~2.1σ above the mean — the Puell problem in slow motion. Two of the three facts the
+Sep 17 move rested on still hold (below the trough, 30d negative). **Rule from here: PARTIAL when the 30-day
+change turns positive or supply clears 16,609,303.** A reading convention, not a threshold change.
+
+**Leg 2 — owner's decision, Sep 27, before the window.** Asked, with the adjusted form positive on every
+close Sep 22–26 (+0.0008, +0.0011, +0.0056, +0.0098, +0.0015) and so almost certain to fire a switched
+trigger tomorrow: **keep the pinned raw Sunday close for Sep 28; any form change applies from Oct 5 at the
+earliest, decided separately.** Recorded in `trig[0]` and MAINTENANCE §2b. The sixth adjudication is Monday's
+entry; nothing here pre-reads it.
+
+**Two rows were false on the page, not merely stale.** (1) **Trade (`mac[7]`).** It said collection of the
+10% Section 122 surcharge "continues while the appeal pends" and that the Canada 338 tariff "was paused at
+its Aug 19 deadline". The surcharge **expired by statute on Jul 24** (150 days from Feb 24; Proclamation
+11012), replaced the same minute by **Section 301 forced-labour tariffs of 10% / 12.5% on 60 economies**
+(USTR press release and whitehouse.gov action, Jul 23 — primary pages listed by search, not opened; EY,
+Holland & Knight, C.H. Robinson agree). The Canada 50% duty **took effect Aug 22** after a three-day
+suspension; scope modified Sep 15; Sep 8 proclamations make some lines **import bans from Sep 29** (GHY,
+internationaltradeinsights.com — secondary). The Sep 17 entry's "re-check found no dated change" was wrong:
+the row carried an expired statute for ~9 weeks. Stay dates settled: Federal Circuit administrative stay
+**May 12**, stay pending appeal **Jun 11** — both dates the carry list had were right, for different orders.
+Not a scoring input; `e` unchanged. (2) **Dollar (`mac[3]`)** still said the index "holds below its 200-day",
+false since the Sep 18 print (119.51 vs 119.36) that the `fed` row had already acted on Sep 23. Also stale:
+`mac[5]` narrated September outflows after seven inflow sessions; `cvp[1].tip` said "Spot is 1.22× today"
+(Aug; 84.5K / 52.9K ≈ 1.60× now) — sentence removed, the multiple is interpolated in `th_p` already.
+
+**Brent: a price feed, and it disagrees with the press.** EIA `RBRTED` (spot FOB, release Sep 23): Sep 8–12
+106.12 / 109.51 / **120.98** / 118.06, Sep 14–18 121.25 / **130.80** / 127.84 / 121.18 / 119.66, Sep 21–22
+116.15 / 114.89. The page's "near $107 on Sep 15" was press futures; press put futures ~$104 on Sep 25. Both
+quoted, labelled; spot/front-month divergence is itself a stress sign. Saudi East-West pipeline: restart
+reported (Hydrocarbon Processing headline), date not pinned.
+
+**Strategy (EDGAR, primary).** Sep 21 8-K (Sep 14–20): **950 BTC for $75.7M at $79,670**, no ATM common,
+STRC buyback 1,771,238 sh / **$174.0M**, holdings **846,000**, cost $63.80B, avg **$75,416**, USD Reserve
+$5.04B. Sep 24 8-K: Item 8.01, special meeting Oct 28 on daily dividend record dates. mNAV 0.86× basic /
+1.12× EV (bitcointreasuries.net snippet, Sep 26). **MSCI:** the "delay"/"results" documents the agent surfaced
+are the Oct 10, 2025 extension and the Jan 6, 2026 results (both opened) — the Sep 30 / Oct 16 / November
+review dates rest on the Aug 2026 PDF read Sep 17 and stand.
+
+**Crypto items.** Liquid: 598.5 BTC outstanding, Blockstream refused a ransom (The Block, Sep 11); promised
+post-mortem not found. Bitget: $351.6M (Bloomberg, CoinDesk), $387.5M in one later report; withdrawals
+suspended; >$464M protection fund said to cover — under the bar on either figure. BitMEX shut Sep 23 04:00 UTC,
+withdrawals open. Deribit Sep 25: ~$15.9B, max pain $75K reported, no move. CLARITY 49–50 (senate.gov roll
+call still not fetched — secondary only); Polymarket law-in-2026 6.4%. Recession (Polymarket) 9%. S&P
+(Yahoo chart API): 7,551.81 (Sep 16) … 7,764.70 (Sep 21) … **7,743.41 (Sep 25)**; the 7,798.99 Aug 13 record
+confirmed. Hash: mempool.space next retarget **−2.84%**, ~Oct 3 17:15 UTC (previous +4.16%).
+
+**Rejected.** The macro agent's "Fed commentary" (Bowman and Waller arguing for cuts, Miran for 50bp, CME
+85.5% cut on Oct 28) is 2025 content under 2026 search dates — contradicts the Sep 16 hike and Polymarket;
+nothing from it is used. Its recession snippets (11–14%) replaced by the direct Gamma read.
+
+**Calendar at publishers (haiku agent).** Confirmed: BEA PCE Sep 30 / Nov 25, GDP Oct 29; BLS payrolls Oct 2 /
+Nov 6, CPI Oct 14 / Nov 10, PPI Oct 15 / Nov 13; Fed Oct 27–28 and Dec 8–9 (`fomc_oct`/`fomc_dec` → `'p'`);
+Mt. Gox Oct 31 (`'p'`); SEC Reg Crypto Assets comments close Oct 20 (Federal Register). Not re-verified:
+`refund` (treasury.gov 301), `cr` (congress.gov 403), MSCI (Sep 17 PDF), `nfp_nov` (agent's excerpt says
+"October data" — inconsistent). Added `retarget2` (Oct 3, `'s'`). `anthropic` text: possible slip to
+November (secondary). `ev_asof` → Sep 27 on that basis. Also on the BLS page, not added: JOLTS Sep 29.
+
+**Readings, verified by rendering** (Chrome headless; en, and pt/es via a localStorage setter served from a
+scratch copy — `--lang` does not reach `navigator.language` here; 0 console lines in all three; parity
+187/187, no BS/MAC/EV mismatch): **Too early · 0 of 4 families · 1 of 15 active · 3 partial · expert 13% /
+equal 17%** (Sep 21: 4 partial, 16/20). `CORE` **9% → 4%** (95% at the 2022 bottom unchanged): SOPR 1.0062 left its PARTIAL band on the Sep 19
+data; Puell 0.8926 is the marginal one (its Sep 16–20 series: 0.888, 0.943, 1.039, 0.893, 1.078). Per §5,
+the move is noise-dominated; the stage did not move. README headline and `og-card.html` stat 9% → 4%; the
+`th_p` "marginal PARTIALs — SOPR and Puell" sentence reworded so it survives either side of the bars.
+
+**`og.png`.** The carry-list label collision was worse than filed: any fixed offset collides again within a
+week as the dot crosses the window, and the leader line blocked the whole x=933 column from −15% to −54%.
+Captions moved to the top of the plot, leader line dropped, `now` label placed by `place_now_label()` (first
+candidate clear of captions and the C4 line). **Regression test** `scripts/test_build_og_card.py`: passes on
+the new card; against `git show HEAD:og-card.html` both tests fail (label box 859.6–958.6 × 179.4–198.3 on
+the leader line; grid walk hits the old captions at week 49, −33%). Regenerated (week 50.9, −33%), Firefox
+headless screenshot.
+
+## 2026-09-27 — Interim check: October hike now priced ~65%, 10y at 5.18%, Bitget $387.5M hack, OI flushed; nothing re-scored
+
+Owner asked for news/data that could move price, open interest and the calendar. Not the research pass (overdue
+since Sep 24; `an_asof` stays Sep 17) and not the Sep 28 adjudication. No rule, threshold, trigger, falsifier,
+band or UI key changed. Reads Sep 27 ~03:10 UTC, so Sep 25 and Sep 26 candles are closed.
+
+**Price (Binance daily, closed).** Sep 25 H 85,255.00 / L 83,183.00 / C 84,099.99; Sep 26 H 84,473.58 /
+L 83,798.00 / C 84,433.10. Peak stays **$87,395.67** (Sep 21); no lower low; range $82.9–85.3K since Sep 23.
+
+**ETF (Farside, 200 with a browser UA).** Sep 24 **+190.7M** (IBIT +162.6, FBTC +12.9, MSBT +10.2, EZBC +4.9,
+BITB +4.1, BTCW −4.0; the Sep 24 entry's +28.1M partial was IBIT-pending); Sep 25 **+134.5M** (IBIT +97.0,
+FBTC +49.3, BITB −11.8). Seven straight inflow sessions Sep 17–25, decelerating. `data.json` (Sep 26 19:09
+build, `etf.d` Sep 25): `d5` +2.39, **`d20` +2.71**, `d60` +6.69, AUM 108.4.
+
+**Sep 28 window preview, not adjudication.** Leg 1 needs a −17% day to miss; leg 3 is fixed at `d20` 2.71 (no
+session before 00:15 UTC Mon). Leg 2 rides on the Sep 27 close: raw Sep 25 **−0.0082%**, Sep 26 **−0.0195%**,
+Sep 27 −0.019% intraday → streak **22 negative raw closes, Sep 5–26**. USDT-adjusted positive every day
+Sep 22–27 (last negative Sep 21, −0.0079), so the form split recurs; the design-review call
+belongs to the adjudication entry.
+
+**Open interest (Binance `openInterestHist` 1d, 00:00 UTC snapshots, not closes).** 109,189 BTC / $9.45B
+(Sep 22) → **94,518 BTC / $7.98B** (Sep 27), **−13.4%** in coin terms, the drop concentrated Sep 23–24 with
+the $87.3K → $82.9K leg. Global long/short account ratio 0.89 (Sep 22) → 1.29 (Sep 26–27): fewer contracts,
+more accounts long. Funding 7d +0.0038%/8h, neutral. Deribit quarterly expiry Sep 25 (~$16B notional,
+call-heavy, reported as ~37% of Deribit BTC OI) rolled off with no move (Sep 25 range 2.5%). Context only —
+the Sep 21 (later) entry found leverage data carry no edge; no checklist row reads OI.
+
+**Fed / rates.** Polymarket `fed-decision-in-october-20260617190323537` (Gamma, vol $14.8M, liq $3.0M):
+**hike 25bp 64.5%**, hike 50+ 0.85%, hold 33.5% — from hold 54.5 / hike 45.5 on Sep 17. Settles the research
+agent's conflicting snippets (64/36 vs ~51/50). FRED unreachable from here (curl empty over HTTP/2 and 1.1), so
+yields are the Sep 26 build's: 10y **5.18%**, real 10y **2.85%**, 2y **4.87%** on Sep 24 — all three at their
+two-year highs (`hi2y` = value); the Sep 21 residual-weight ledger cited real 2.62 / nominal 5.00. Sep 25
+unknown here (Kitco Sep 25 speaks of "5.2% yields"). HY OAS 2.80 vs 2.83 average — credit calm.
+
+**Polymarket BTC (event `what-price-will-bitcoin-hit-before-2027`).** ↓$60K 14, ↓$55K 8.5 → 8.5 + 0.56 × 5.5 ≈
+11.6 → **no-new-low ~88.4%** (87.3 Sep 24). ↑$90K 71.5, ↑$95K 48.5 (52.5), ↑$100K **33.5** (38). ↓$70K 32.5,
+↓$65K 18.5.
+
+**Other readings.** Hash Ribbons Up every day Sep 1–26 = **26 days**, 30d/60d +1.88% on Sep 26; ratio has
+eased three days (2.20 Sep 24 → 1.91 → 1.88), not a turn; the 28-day comparison lands Sep 28. On-chain tail in
+`data.json` is Sep 19, `stale:['onchain']` stands. **Puell not quoted as a move:** `data.json` 0.8926 (Sep 19),
+the Sep 24 entry's 0.943 and bitcoin-data `/last` 1.078 (Sep 20) are the same series on three different days
+(Sep 17 / 19 / 20) — daily noise, not a provider mismatch *(corrected the same day by the pass above, which
+pulled the series)*.
+
+**News Sep 24–27 (research agent, WebSearch snippets only, secondary unless stated).** **Bitget hack**
+(CoinDesk Sep 25, parameter.io): $351.6M, with one later report at **$387.5M** *(the pass above found only
+$351.6M in Bloomberg/CoinDesk; "revised" overstated it)*; Circle + Tether froze ~$318K; attacker holds
+63K+ ETH. Below the §2 ">$500M exploit" tightening bar as reported; withdrawal/solvency status not found — the
+one item to re-check before the Sep 28 entry. Equities Sep 25 S&P +0.5% to 7,743.41; gold ~$4,290 capped a
+weekly loss; Brent ~$106 with US–Iran Hormuz talk (Sep 25, snippet). Strategy: nothing since the Sep 21 8-K;
+next Mon Sep 28. MSCI: feedback Sep 30, results by Oct 16 (secondary; matches the primary dates already in
+`EVENTS`). CR funds the government to Dec 11 (already `cr`). CLARITY: no new vote. Not found: exchange
+withdrawal halts, depegs, Mt. Gox / government wallet moves, Fed speeches dated Sep 24–27.
+
+**Calendar.** Next in `EVENTS`: Mon 00:15 UTC adjudication; Sep 30 PCE (Aug) + MSCI feedback close; Oct 2 NFP;
+Oct 14 CPI; Oct 16 MSCI results; Oct 28 FOMC. PCE/NFP/CPI publisher dates **not** re-verified this check, so
+`ev_asof` stays Sep 17. Nothing added; `bitmex` and `deribit` rows drop off by themselves.
+
+**Assessment.** The macro side moved against the counter-scenario the report now rates 70%: an
+October hike went from minority to ~65% priced and yields sit at cycle highs, yet price held $83–85K and ETF
+inflows continued. That tension is the research pass's input, not an interim re-score. Deploy trigger heads into
+Sep 28 at 2 of 3 unless the Sep 27 raw close prints positive.
+
 ## 2026-09-24 — Interim check: ETF flows +$2.86B four-week, premium twenty negative closes, `fed` card prose corrected; the research pass was not run
 
 Not the research pass scheduled for today and not an adjudication: `an_asof` stays Sep 17, the 70% is **not**

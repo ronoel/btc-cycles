@@ -23,6 +23,76 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-30 — Interim check: the October hike un-priced (64.5% → 34.5%) while yields made new highs; the Sep 28 adjudication is still owed
+
+Owner asked for news, what changed and the calendar. Not the research pass (next: Sun Oct 4) and **not the Sep 28
+adjudication, which has not been run** — no entry exists and git shows only bot data commits since Sep 27. It is
+owed as its own entry (leg 2 on the pinned raw Sunday close, per the owner's Sep 27 decision). `an_asof` stays
+Sep 27; 70% not re-scored; no threshold, weight, band, window, falsifier or trigger changed. Reads Sep 30
+~13:15 UTC; `data.json` is the Sep 30 06:15 build (FRED through Sep 28, ETF through Sep 29).
+
+**Fed — the biggest move since the pass, and it runs toward the low-is-in path.** Polymarket
+`fed-decision-in-october-20260617190323537` (Gamma, vol $14.8M → **$18.8M**): hold 33.5% (Sep 27–28) → 30.5
+(Sep 28 15:00) → **47.5 at Sep 29 18:10 UTC** → 55.5 overnight → 54.5 at 12:20 → **65.5 at 12:40 UTC Sep 30**;
+hike 25bp **34.5%**, 50+ 0.55%. Two steps, two catalysts: (1) Sep 29 ~14:10 ET, NY Fed's **Williams**: "no need
+for urgency", one more hike this year suffices (Investing.com, Sep 30, secondary), on a day with soft JOLTS
+(7.079M) and Conference Board confidence **81.9**, lowest since 2014, vs 89.2 consensus (US News/Reuters,
+secondary). CME FedWatch per Investing.com: hold 49.1% → **62.9%**. (2) **August PCE (BEA release, primary,
+opened):** headline +0.3% m/m / **3.4% y/y**, core +0.2% / **3.0% y/y**; income +0.2%, spending **+0.9%**.
+Consensus 3.7% / 3.3% is one secondary source (FXStreet) and it also reports July revised 3.7 → 3.4 — not
+checked against BEA tables; do not quote the "miss" size until it is. BTC 12:00–13:00 UTC candle 83,915 →
+85,290 (+1.6%), coincident with the release. Rejected: the macro agent's "CME 72.5% hike after PCE" (contradicts
+Investing.com's post-release update and Polymarket; likely a preview figure) and its Treasury table (2y 4.20 /
+10y 5.06 on Sep 25 contradicts the Sep 27 pass's primary 4.81 / 5.17 — column misread).
+
+**Rates and credit moved the other way.** FRED (`data.json`): 10y **5.24**, 2y **4.92**, real 10y **2.90** on
+Sep 28 — each its `hi2y`; Yahoo ^TNX 5.26 (Sep 29), 5.23 intraday Sep 30; Treasury real 10y 2.91 Sep 29 (agent,
+primary). **HY OAS 2.80 → 3.02** vs 2.83 average — first time above average in this stretch; the "credit calm"
+phrase of Sep 27 no longer holds. Broad dollar 120.33 (Sep 25) vs 200d 119.34, further above the line.
+S&P 7,743.41 (Sep 25) → 7,683.69 → **7,670.84** (Sep 29). Gold 4,321 → 4,168 (Sep 28) → ~4,242. Brent front-month
+105.28 (Sep 28) → 102.59 → **97.69** intraday Sep 30 (Yahoo BZ=F; first print under $100 since early Sep);
+Hormuz exports ~98% of pre-war per Bloomberg summary (secondary). EIA spot not re-pulled.
+
+**Ledger read, not a re-score.** Of the Sep 27 five: Fed flipped **for** the low-is-in path; rates moved further
+**against**; ETF still for but fading; LTH and premium not re-read. That is the Oct 4 pass's input.
+
+**Price / derivatives (Binance).** Closes Sep 27 84,472.00 · Sep 28 **83,500.01** (L 82,563) · Sep 29
+83,663.66; Sep 30 open, H 85,649.95. Peak stays $87,395.67; range $82.6–85.6K since Sep 23. OI (1d snapshots)
+94,518 BTC / $7.98B (Sep 27) → **92,474 / $7.73B** (Sep 30), still deleveraging. Funding 7d +0.0023%/8h.
+~$500M liquidations on the Sep 28–29 dip under $83K (Bitcoin.com, secondary).
+
+**ETF (Farside, opened).** Sep 28 **+31.0M** (IBIT +54.8, GBTC −23.2, FBTC −10.9, BTC +10.3); Sep 29 **+66.2M**
+(IBIT +51.1, ARKB +33.2, BITB −18.1). Nine inflow sessions Sep 17–29, decelerating hard. `d5` 0.77 reconciles
+(346.9+190.7+134.5+31.0+66.2); `d20` **2.80**.
+
+**Polymarket BTC (`what-price-will-bitcoin-hit-before-2027`, vol $71.7M).** ↓$60K 14.5, ↓$55K 9.5 → 9.5 +
+0.56 × 5.0 ≈ 12.3 → **no-new-low ~87.7%** (88.4 Sep 27). ↑$90K 74.5 (71.5), ↑$95K 52.5, ↑$100K **38.5** (33.5).
+
+**Crypto (crypto agent; primary where stated).** **Strategy 8-K Sep 28 (EDGAR, acc. 0001193125-26-403417,
+read through a summarizer):** 1,665 BTC for $142.7M at $85,681; holdings **847,666**, avg $75,437; STRC buyback
+1,534,530 sh / $151.7M; MSTR ATM net $246.2M; USD Reserve $5.02B. Second consecutive buying week — buyer, not
+seller. **Bitget:** loss revised to **$387.5M** (Cointelegraph, BleepingComputer); phased restart — BTC Sep 28
+08:00 UTC, ETH Sep 29, USDT Sep 30, rest Oct 2; >$464M protection fund said to cover. Under the §2 >$500M bar.
+Senate PSI report on Tether/sanctioned addresses, responses due Oct 9 (secondary). CFTC registered Coinbase
+Clearing as DCO Sep 28. MSCI: nothing new; feedback closed today. CLARITY: no movement since Sep 15. Not found:
+depegs, government/Mt. Gox wallet moves, miner selling.
+
+**Page prose that was false, now dated (en/pt/es).** `trig[3]` said Polymarket "prices a second hike on Oct 28
+at ~65%" and the Fed trigger was "moving further"; the events-narrative row said "now priced ~65%"; the `fed` card opened "The market has since moved to the
+dots", a present-state claim now false. All three now carry the Sep 27 → Sep 30 figures. The remaining ~65%
+mention (`th_p`) is explicitly dated Sep 27 and stays as the dated record until the pass. **Rendered** (Chrome headless, en + pt/es via
+`btc_lang` localStorage setter on scratch copies, 0 console lines each; new strings present in all three):
+**Too early · 1 of 15 active · 4 partial · expert 16% / equal 20%** (Sep 27: 3 partial, 13/17) — a fourth
+PARTIAL on noise rows per §5; not a move.
+
+**Calendar.** `pce_aug` and `msci_close` drop off today. Next: **Oct 2 NFP** (consensus ~90K, UR 4.1%;
+Bloomberg Sep 26, secondary) · Oct 2 Bitget full restart · Oct 3 retarget · **Oct 4 research pass** · **Oct 5
+window 00:15 UTC** · Oct 7 FOMC minutes (Sep meeting) · Oct 9 Tether/PSI deadline · **Oct 14 CPI** · Oct 15 PPI
+(not re-verified) · Oct 16 MSCI results · Oct 20 SEC comment close · **Oct 28 FOMC** (Fed calendar, primary) ·
+Oct 29 GDP Q3 (BEA schedule, secondary) + ECB · Oct 30 BoJ · Oct 31 Mt. Gox · Nov 3 midterms. Deribit Oct 30
+monthly: no dated source found, not added. `anthropic`: no new information. `ev_asof` stays Sep 27 (publisher
+pages not re-opened this check). Not added to `EVENTS`: FOMC minutes, ECB, BoJ — candidates for the pass.
+
 ## 2026-09-27 — Research pass: 70% held on a two-sided ledger, the Trade row had carried an expired statute, leg 2 stays raw for Sep 28
 
 The pass due Sep 24, run three days late at the owner's request, with the interim check below as its first

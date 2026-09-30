@@ -23,6 +23,57 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-09-30 (later) — The Sep 28 adjudication, run two days late: 2 of 3 a sixth time, the raw premium missed by 1.2bp
+
+Owner asked for it after the interim check below flagged it as owed. Run Sep 30 ~13:50–14:05 UTC on the values
+as they stood at the window (Mon Sep 28 00:15 UTC); nothing that landed after the window enters the verdict.
+Not a pass: `an_asof` stays Sep 27; no threshold, weight, band, window, falsifier or trigger changed.
+
+**Falsifier #6, Sep 28 window: 2 of 3 — not fired, nothing deployed.**
+- Leg 1: Binance 1w candle Sep 21–27 (closeTime Sep 28 00:00 UTC) closed **$84,472.00** → fired.
+- Leg 3: `etf.d20` **+$2.71B** in the Sep 27 19:09 UTC build (commit 8e7d3c6, the last before the window;
+  `etf.d` Sep 25, no US session between it and the window, so no lag caveat); `d5` +2.39, `d60` +6.69 → fired,
+  $1.21B over the bar.
+- Leg 2: Sep 27 close, Coinbase `BTC-USD` 84,462.14 vs Binance 84,472.00 → **−0.0117% raw** → not fired.
+  USDT-adjusted (× Coinbase `USDT-USD` 0.99972) **+0.0163%**. Read on the raw Sunday form, per the owner's
+  Sep 27 decision recorded before the window.
+
+Daily raw / adjusted closes (Coinbase Exchange candles, Binance klines), Sep 20–29: −0.0226/+0.0024,
+−0.0289/−0.0079, −0.0122/+0.0008, −0.0229/+0.0011, −0.0294/+0.0056, −0.0082/+0.0098, −0.0195/+0.0015,
+**−0.0117/+0.0163**, −0.0518/−0.0058, −0.0302/+0.0078. The Sep 20 pair reproduces the Sep 21 entry and the
+Sep 22–26 adjusted values reproduce the Sep 27 entry, so the pull is the same series. Forms for the window
+(week Sep 21–27): pinned raw-Sunday **miss**; weekly-mean raw **−0.0189%** miss; any-positive-raw-close
+**0 of 7** miss; adjusted-Sunday **fires**. Across the six windows: raw-Sunday 0 of 6, weekly-mean raw 0 of 6,
+any-positive-raw 2 of 6 (Aug 31, Sep 7), adjusted-Sunday **4 of 6** (Aug 24, Sep 7, Sep 21, Sep 28). The
+raw Sunday reading, −0.012%, is the third-smallest miss of the six (Sep 7 −0.003%, Aug 24 −0.006%). Streak: last positive
+raw close Sep 4 (+0.0180%); **25 consecutive negative closes, Sep 5–29**. Adjusted has been positive on 7 of
+the last 9 closes.
+
+**The Oct 5 form question is open and belongs to the owner.** The Sep 27 decision fixed Sep 28 only and said
+any change applies from Oct 5 at the earliest, decided separately. Nothing here pre-decides it; what the record
+now says for that decision is the 0/6 vs 4/6 split above, with the same caveat as always: the adjusted form is
+the one closer to firing, which is exactly why choosing it while looking at the answer is the retro-edit.
+
+**Counter-scenario held at ~70%.** An adjudication moves the number only through a pre-registered marker, and
+none was at stake. The Sep 27 pass's two-sided ledger was re-read in the interim check below (Fed flipped
+for, rates further against); that is the Oct 4 pass's input.
+
+**Hash Ribbons (BGeometrics `hashribbons`, read Sep 30):** Up every day Sep 1–29 = **29 days**, past the 28-day
+Feb–Mar run that failed. 30d/60d: +1.81 (Sep 20), +2.17 (Sep 22), +2.20 (Sep 24), 1.88 (Sep 26), 2.35 (Sep 27),
+**2.72 (Sep 28), 2.73 (Sep 29)** (960.8 vs 935.2 EH/s) — the narrowing the Sep 27 pass described reversed.
+mempool.space next retarget now **+0.11%** est. Oct 3 ~06:58 UTC (was −2.84% ~17:15 on Sep 27). The row stays
+PARTIAL: outlasting the failed run is not the reasoned call its card requires, and that call belongs to the
+Oct 4 pass, not an adjudication.
+
+**Edited (en/pt/es):** `th_p` (six windows, the Sep 28 readings, next Oct 5), `trig_n` (status Sep 30),
+`trig[0].d` (sixth window, forms, streak), `trig[1].d` (sixth Monday, +$2.71B at window, +$2.80B / d5 +0.77
+through Sep 29), `trig[2].d` (29 days, gap, retarget), `trig[3].d` header — it said "the market prices another"
+hike, false since Sep 29 (missed by the interim check below, which fixed the other three sentences), `fal[5]`
+(sixth adjudication), Strategy `mac` row ("Next 8-K: Mon Sep 28" → the Sep 28 figures), `ev.retarget2` text and
+`EVENTS` time. Left dated for the pass: `bs` `hash` (Sep 1–26) and `cbp` (Sep 26 close) rows. **Verified:**
+parity snippet 187/187, no BS/EV mismatch; Chrome headless en + pt/es (`btc_lang` setter on scratch copies),
+0 console lines ×3, new strings present; **Too early · 1 of 15 active · 4 partial · expert 16% / equal 20%**.
+
 ## 2026-09-30 — Interim check: the October hike un-priced (64.5% → 34.5%) while yields made new highs; the Sep 28 adjudication is still owed
 
 Owner asked for news, what changed and the calendar. Not the research pass (next: Sun Oct 4) and **not the Sep 28

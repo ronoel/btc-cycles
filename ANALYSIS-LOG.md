@@ -23,6 +23,98 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-01 — Interim check: ETF streak ended, LTH supply at a new low, 10-year 5.29%; leg 2 stays raw for Oct 5 (owner)
+
+Owner asked to close the carry list, refresh data, check news and the calendar. **Not the pass** (stays Sun Oct 4,
+after payrolls — owner's choice today) and not an adjudication: `an_asof` stays Sep 27, 70% not re-scored, no
+threshold, weight, band, window, falsifier, trigger or `st` changed. Reads Oct 1 ~13:05–14:30 UTC; `data.json` is
+the Oct 1 06:15 build (on-chain through Sep 24, FRED through Sep 29, ETF through Sep 30).
+
+**Leg 2 — owner's decision, Oct 1, four days before the window: the pinned raw Sunday close governs Oct 5.**
+Asked with the four-form tally (raw-Sunday 0/6, adjusted-Sunday 4/6, any-positive-raw 2/6, weekly-mean 0/6) and
+this week's closes, with no form near firing: raw −0.0518 / −0.0302 / **−0.0807** (Sep 28–30), adjusted −0.0058 /
++0.0078 / −0.0157. Streak: **26 negative raw closes, Sep 5–30**. Sep 30 is the second-widest of the record —
+**the page's "widest were −0.080% on Sep 15 and 16" was wrong**: Sep 17 closed −0.0893 (already in the Sep 21
+entry's series); `trig[0]` corrected. Oct 1 partial candle swung −0.055 → +0.050 within the hour: not a reading.
+
+**The Sep 27 ledger, read not re-scored — both "for" items turned.** (1) **ETF** (SoSoValue endpoint, direct):
+Sep 30 **−$148.7M**, ending nine inflow sessions (Sep 17–29); by issuer FBTC −125.6, BITB −13.6, IBIT −9.5
+(secondary — Farside 403). `d20` 2.80 → **2.88** only because Sep 1 (−236.5) rolled out; `d5` 0.77 → **0.27**.
+**Leg 3 forward read:** the 20-session window at Oct 5 starts Sep 4 (drops Sep 2 +101.1 and Sep 3 +730.9), so `d20` = **+$2.05B + (Oct 1 + Oct 2)**; it misses only if those two sessions net ≲ −$0.55B (cushion was $1.21B at Sep 28).
+(2) **LTH** (BGeometrics free endpoint, through Sep 30): Sep 26 16,568,935 → **16,483,418 on Sep 29, a new low**
+(−2.23% from the record), 16,487,197 Sep 30; 7d −16,768, **30d −93,728**, 122,106 under the Aug 11 trough. The
+Sep 27 rule (PARTIAL iff 30d > 0 or supply > 16,609,303) applied mechanically: **NOT YET**; the four-day rise the
+Sep 27 pass called ~1.7σ was noise. Row text rewritten (it opened "Off its low"). (3) **Fed** — for: Polymarket
+Oct 28 hold **63.5%** / hike 35.5% (vol $20.2M), flat on Sep 30; Kashkari Sep 30 "still too high" (CNBC headline,
+secondary); CME ~37–39% hike (press). (4) **Rates** — further against: Treasury par curve Sep 30 (agent, primary
+page): 10y **5.29**, 2y 4.88, 30y 5.64, real 10y **2.93**; Oct 1 intraday 5.28–5.34 (press). ICE DXY 101.37 Sep
+30, ~102 Oct 1, three-month high (press). (5) **Premium** — unchanged/worse, above. Net since Sep 27: one for,
+four against or flat. No pre-registered marker is at stake; the judgement belongs to Oct 4.
+
+**Price / derivatives (Binance).** Closes Sep 28 83,500.01 · Sep 29 83,663.66 · **Sep 30 83,623.60**; range
+$82.6–85.6K, peak unchanged $87,395.67. Week Sep 28–Oct 4 in progress at ~$83.6K: leg 1 fails only below ~$70K.
+OI 92,474 BTC (Sep 30) → 95,419 / $7.98B (Oct 1). Funding 7d +0.0029%/8h. F&G 74.
+
+**Polymarket BTC** (Gamma, ~13:10 UTC, vol $71.9M): ↓$60K 14.5, ↓$55K 8.5 → 8.5 + 0.56 × 6.0 ≈ 11.9 →
+**no-new-low ~88.1%** (87.7 Sep 30). ↑$90K **68.5** (74.5), ↑$95K 48.5 (52.5), ↑$100K 34.5 (38.5). `cvp[3]` left
+dated Sep 27 for the pass.
+
+**Hash Ribbons:** Up Sep 1–30 = **30 days**; gap +2.67% (958.0 vs 933.1 EH/s; +2.73 Sep 29). mempool.space
+retarget **+0.17%**, Oct 3 ~06:45 UTC. Row stays PARTIAL; the reasoned call is the pass's.
+
+**Data pipeline.** `stale: ["onchain"]` is the freshness rule (`FRESH_DAYS` onchain 3d), not a failure: Actions
+green (four runs checked), series advancing one day per build at a ~7-day provider lag (Sep 24);
+`sth_realized_price` alone is current (Sep 30). Rendered `CORE` 95% / **4%** (SOPR 1.0029 the marginal PARTIAL).
+
+**Macro (sonnet agent; tools returned summaries, so "primary" means the publisher's page was fetched, not that
+the text is verbatim).** No shutdown: CR through Dec 11, House 370–48 Sep 1, signed Sep 2 (Breaking Defense +
+others, secondary); BLS October schedule lists the jobs report Fri Oct 2 08:30 ET. ADP Sep **+90K** vs 68K (CNBC);
+Chicago PMI 58.8 vs 51.2 (Newsquawk; one headline says 55.8); JOLTS Aug 7.1M. NFP consensus 90K / 4.1% (Bloomberg
+Sep 26). **ISM manufacturing (Oct 1 10:00 ET): not confirmed** — one search summary gave 54.6 vs 54.8, identical
+to August's 54.6 and possibly the calendar's "previous"; do not quote. Jobless claims 197K: possibly a duplicate
+of the Sep 24 print, unverified. S&P 7,651.54 (Sep 30, secondary). Brent: expiring Nov contract 103.53, active
+~98, ~96.8 on Oct 1 (press; EIA spot not re-pulled). **Iran:** Trump rejected Tehran's proposal ~Sep 26 (CBS);
+Iran received a formal US response Sep 30 (Reuters via Benzinga); no deal. **Saudi East-West pipeline restarted
+Sep 22** (shut Sep 11; RTE, Quartz, Hydrocarbon Processing), full capacity 6–8 weeks — carry item closed on
+secondary sources. **Canada:** import bans in effect Sep 29 00:01 ET, 68 HTS lines, ~$967M of trade (Dorsey
+alert Sep 10, cbtnews) — secondary; no CBP/Federal Register page opened.
+
+**Crypto (sonnet agent).** **Bitget:** USDT withdrawals reopened Sep 30; remaining services Oct 2 08:00 UTC; loss
+$387.5M (CEO's revised figure); own proof of reserves 131%; protection fund "above $300M" (crypto.news,
+Cointelegraph — no Bitget page opened). Under the bar. **Strategy 8-K Oct 1** (EDGAR acc. 0001193125-26-409863,
+via summarizer): STRC rate held at 12.00%, dividends declared, special meeting Oct 28; no BTC line. **MSCI:**
+nothing after the Sep 30 close. **Anthropic:** no public S-1; press now says November Nasdaq listing, public S-1
+and roadshow in the first half of October, leaked draft prospectus Sep 28 (Reuters via CNBC, 403) — all
+secondary. **Liquid:** peg-outs still paused (Sep 28), no post-mortem; outstanding ~602 BTC in one report vs
+598.5 here. September hack losses ~$766M (PeckShield/CertiK via PANews). No new exchange failure, depeg or
+>$100M exploit Sep 29–Oct 1; no Mt. Gox or government wallet move found. Futures OI lowest since March, IV near
+a one-year low (Bitfinex, The Block). Glassnode via FXStreet: LTH share of realized profit 34% → 55% by Sep 29,
+sell wall at $85K — consistent with the LTH series above. Oct 30 Deribit max pain ~$76K (secondary).
+
+**Pinned to a primary — CLARITY cloture.** senate.gov (opened in a browser; curl gets 403): Vote **#234**, Sep
+15, 2026 02:19 PM, cloture on the motion to proceed to H.R. 3633, 3/5 required, **Yeas 49 / Nays 50 / Not voting
+1** (Coons); Republican nays Collins, Hawley, Moran, Tillis. **`nfp_nov`:** BLS December schedule, Employment
+Situation for November on Fri Dec 4 08:30. Still secondary: `refund` (Nov 4; treasury.gov 404), `cr` (congress.gov
+not reached), the Liquid post-mortem (unpublished).
+
+**Rejected.** The macro agent's "FOMC minutes (Released October 07, 2026)" as a quote from the Fed calendar: the
+page fetched directly shows release dates only for past meetings (latest "Released August 19, 2026"). Oct 7 is
+kept as **derived** (three weeks after the decision), `s:'d'`.
+
+**Calendar.** Added to `EVENTS`/`ev` (en/pt/es): `bitget` Oct 2 08:00 UTC (`s`), `opec` Oct 4 (`s`), `fomc_min`
+Oct 7 18:00 UTC (`d`), `ecb` Oct 29 13:15 UTC (`p` — ECB calendar opened: 28/10 day 1, 29/10 day 2 + press
+conference), `boj` Oct 30 (`p` — BoJ schedule opened: "Oct. 29 (Thurs.), 30 (Fri.)"), `deribit2` Oct 30 08:00
+UTC (`s`). Updated `retarget2` (time, +0.17%), `anthropic`, `fomc_oct` texts. `ev_asof` → Oct 1 (BLS, BEA, Fed,
+ECB, BoJ pages re-opened). Not added: Tether/PSI Oct 9 (a minority-report response date, no price mechanism),
+Strategy's Oct 28 meeting (dividend timing), SEC Nov 11 options rule, token unlocks.
+
+**Edited (en/pt/es):** `trig_n`, `trig[0..3].d`, `th_p` (owner's decision; dated Oct 1 ledger read), `fal[5]`
+(form for Oct 5), `bs` `lth` `r` (`st` unchanged), `mac` catalyst (Bitget), Strategy, Geopolitics (pipeline date),
+Trade (bans in effect), `ev`, `ev_asof`, `EVENTS`. Left dated for the pass: `bs` `hash`/`cbp`, `cvp[3]`, the Fed /
+Rates / ETF `mac` narratives, `mac_h`. **Verified:** parity 187/187, no BS/EV/MAC mismatch, 36 `EVENTS` all with
+text; Chrome headless en/pt/es, 0 console lines ×3: **Too early · 0 of 4 families · 1 of 15 active · 4 partial ·
+expert 16% / equal 20%** — unchanged from Sep 30.
+
 ## 2026-09-30 (later) — The Sep 28 adjudication, run two days late: 2 of 3 a sixth time, the raw premium missed by 1.2bp
 
 Owner asked for it after the interim check below flagged it as owed. Run Sep 30 ~13:50–14:05 UTC on the values

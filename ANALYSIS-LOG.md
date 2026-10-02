@@ -23,6 +23,66 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-02 — Interim check, before payrolls: Anthropic re-dated to Nov 9–26, October hike down to ~24%, premium 27 negative closes
+
+Owner asked what moves BTC next, how things stand and when Anthropic lists, then asked for it to be recorded.
+**Not the pass** (stays Sun Oct 4) and not an adjudication: `an_asof` stays Sep 27, 70% not re-scored, no threshold,
+weight, band, window, falsifier, trigger or `st` changed. Reads Oct 2 ~11:45–12:10 UTC — **before the 12:30 UTC
+jobs report, which is not in this entry**. `data.json` is the Oct 2 06:15 build (on-chain through Sep 25, FRED
+through Sep 30, ETF through Oct 1).
+
+**Anthropic.** EDGAR, direct (curl): full-text search `"Anthropic, PBC"` over S-1 / S-1/A / 424B4 since Jun 1
+returns two hits, both SpaceX S-1/As; the company browse for "anthropic" lists 34 names, all third-party SPV
+funds — **no public S-1**. Press, **search summaries and aggregator pages only, Bloomberg itself not opened**:
+Bloomberg Oct 1, "Anthropic Is Said to Plan Pre-IPO Investor Day as Listing Nears" — investor day **Oct 14** at
+the San Francisco headquarters, marketing "as early as the week of November 9", trading before Thanksgiving
+(Nov 26); a Bloomberg Oct 2 headline repeats "before Thanksgiving"; Yahoo/Seeking Alpha "as early as
+mid-November". Valuation $1.8–2T and proceeds "up to $100B" are aggregator figures — not used on the page.
+Reuters Sep 5 (via CNBC) had the listing around the Nov 3 midterms, and snippets disagree on before/after; the
+Oct 1 report supersedes it. **Derived, not reported:** a confidentially submitted S-1 must be public 15 days
+before the roadshow, so a Nov 9 start implies a public filing by ~Oct 25. The Nov 9–26 span overlaps `capend`
+(Nov 9–19).
+
+**Ledger, read not re-scored.** (1) **ETF** (SoSoValue, direct): Oct 1 **+$102.7M** (issuer split IBIT +195.6 /
+FBTC −60.7 / BITB −6.9 is secondary); `d20` **2.89**, `d5` 0.19. **Leg 3 at the Oct 5 window** = +$2.155B + the
+Oct 2 session (window drops Sep 3 +730.9): misses only if Oct 2 nets ≲ −$0.65B. (2) **Premium** (Coinbase
+BTC-USD − Binance BTCUSDT daily closes): Oct 1 **−0.0369% raw / −0.0019% adjusted** — **27 negative raw closes,
+Sep 5–Oct 1**; no form fires. (3) **Fed** (Polymarket Gamma, 12:05 UTC, vol $22.6M): hold **75.5%** / +25bp
+**23.5%** / +50bp 0.45% (63.5 / 35.5 on Oct 1) — cause not established. (4) **Rates** (Treasury par curve CSV,
+direct): Oct 1 10y **5.24**, 2y **4.78** (−10bp on the day), 30y 5.61, real 10y **2.88** — first step back from
+the Sep 30 highs (5.29 / 2.93). A WebFetch summary of the same page gave "2 Yr 4.10", which is the 1.5-month
+column; the CSV is the figure. (5) **LTH** (BGeometrics `long-term-hodler-supply-btc`): Oct 1 **16,488,727**
+(Sep 29 low 16,483,418; Sep 30 16,487,197) — still under 16,609,303; **30-day change not recomputed** (rate
+limit hit on the second call), so the row is not re-read. Net since Oct 1: Fed and rates for, ETF for (one
+session), premium unchanged.
+
+**Price (Binance).** Oct 1 close **84,880.05**; Oct 2 ~86.4K at 12:05 UTC, intraday high **86,912.75** — 0.55%
+under the Sep 21 peak of 87,395.67, not exceeded. Week Sep 28–Oct 4 in progress at ~86.4K (leg 1 fails only
+below ~$70K). F&G 72. **Polymarket BTC** (Gamma, vol $72.3M): ↓$60K 13.5, ↓$55K 8.5 → 8.5 + 0.56 × 5.0 ≈ 11.3 →
+**no-new-low ~88.7%** (88.1 Oct 1). ↑$90K **77.5** (68.5), ↑$95K 57 (48.5), ↑$100K 44 (34.5). `cvp[3]` left for
+the pass. Retarget (mempool.space): **+0.18%**, 112 blocks left.
+
+**Macro / crypto (sonnet agent + two direct searches; secondary unless said).** **ISM manufacturing Sep 54.5**
+vs 54.6 in August, prices paid **77.9** (+6.8) — ISM release on PRNewswire fetched by the agent; closes the Oct 1
+"not confirmed" item (the 54.6 seen then was August's). Payroll consensus 84K (CNBC Oct 1) or 90K (Bloomberg
+Sep 26) / 4.1%. **Bitget:** every page found on the Oct 2 08:00 UTC full restart is a pre-announcement; **no
+post-event confirmation found** — carried. Iran (Oct 1): Trump to decide "very soon" between a strike and talks;
+Iran confirms it received the US response via Qatar. **Brent Oct 1: sources disagree** ($97.3 / $100.2 / $102.3
+settle) — not quoted on the page. OPEC+ Oct 4: rollover expected. No Oct 1–2 MSCI announcement or Strategy
+purchase/sale found; exchange failures, depegs and Mt. Gox moves were **not searched specifically**.
+
+**Rejected.** Search hits "September US Jobs Report: 119,000 / 4.4%" are the delayed September **2025** report.
+
+**Calendar.** `EVENTS` 36 → **37**: added `anthropic_day` Oct 14 (`s`); `anthropic` span Oct 1–31 → **Nov 9–26**
+(`m:1`, `s`). `ev_asof` **stays Oct 1** — no publisher schedule was re-opened today.
+
+**Edited (en/pt/es):** `ev.anthropic`, `ev.anthropic_day` (new), `ev.fomc_oct` (23.5% Oct 2), the `mac` events
+row (FOMC pricing, Anthropic clause), `th_p` (one dated Oct 2 sentence). **Left dated Oct 1:** `trig_n`,
+`trig[0..3].d`, `fal[5]`, every `bs` row, the Fed / Rates / ETF `mac` narratives. **Verified:** parity 187/187,
+no BS/EV mismatch, 37 `EVENTS` all with text; Chrome headless en/pt/es from scratch copies, 0 console lines ×3,
+31 calendar rows each, both Anthropic rows and the `th_p` sentence present in each language; stage **Too early ·
+0 of 4 families** (the signal count and percentage were not read off this render).
+
 ## 2026-10-01 — Interim check: ETF streak ended, LTH supply at a new low, 10-year 5.29%; leg 2 stays raw for Oct 5 (owner)
 
 Owner asked to close the carry list, refresh data, check news and the calendar. **Not the pass** (stays Sun Oct 4,

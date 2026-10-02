@@ -23,6 +23,70 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-02 (later) — Payrolls +29K: the rates relief reversed inside four hours and price was rejected under the Sep 21 peak
+
+Owner asked for the jobs number, then for rates, the dollar and a short-term read, then to commit. Same status
+as the entry below: **not the pass, not an adjudication**, `an_asof` Sep 27, 70% not re-scored, nothing structural
+changed. Two reads: **12:32–12:35 UTC** (minutes after the release) and **16:34 UTC**.
+
+**The release (BLS Employment Situation, Oct 2 12:30 UTC).** Nonfarm **+29K** (consensus 84K CNBC / 90K
+Bloomberg), unemployment **4.2%** (4.1), average hourly earnings **+0.1%** (+5c to $37.81); July revised
++21K → **−10K**, August +162K → **+133K**. **Source quality:** bls.gov refuses curl (Access Denied / "website is
+busy"), so both pages were read through the WebFetch summarizer — the summary page (`empsit.nr0.htm`) and Table
+B-1 (`empsit.t17.htm`) agree on +29K; unemployment, earnings and revisions rest on the summary page alone. The
+same summarizer misread a Treasury column earlier today: re-read the release directly at the pass.
+
+**Reaction, two snapshots.**
+
+| | pre (≤12:29) | 12:35 UTC | 16:34 UTC |
+|---|---|---|---|
+| 10y (CNBC quote feed) | 5.216 (Yahoo `^TNX`, 12:20) | **5.172** | **5.268** (day range 5.157–5.271) |
+| 2y | — | 4.723 | **4.833** (4.693–4.833) |
+| DXY | 102.06 | 101.86 | 101.95 (101.67–102.13) |
+| Polymarket Oct 28: hold / +25bp | 75.5 / 23.5 (12:05) | **86.5 / 14.0** | **81.5 / 18.5** (vol $23.8M) |
+| BTC (Binance) | ~86.6K | 87,220 high, ~86.8K | **85,230** (day 84,520–87,220) |
+| Binance futures OI (BTC) | 99,532 (11:00) | 99,214 (12:00) | **96,446** (16:00; 99,721 at 14:00) |
+
+The first move was the textbook one (weak labour → yields and dollar down, hike odds down, BTC up); by 16:34
+the 10-year and 2-year were **above** the Oct 1 Treasury closes (5.24 / 4.78) and at the day's highs. **Cause of
+the reversal not established** — nothing was read between the two snapshots. S&P 7,721.55 (+0.72%), Nasdaq
++1.22%, VIX 15.68, Brent 101.34, gold −0.84% at 16:34.
+
+**Price.** The post-release high **$87,220 did not exceed the Sep 21 peak ($87,395.67)** — a second rejection
+there, 0.2% short. OI fell ~3.3K BTC between 14:00 and 16:00 as price lost $86K: a small long flush, not a
+liquidation event (no liquidation feed was read). Daily RSI(14, simple) 72.5 and funding 0.0100%/8h at the 08:00
+print, 0.0010% predicted at 16:34. MAs (Binance daily closes, read 12:35): 20d 82,187 · 50d 78,190 · 200d 71,420.
+Coinbase − Binance **intraday** −0.030% (12:35) and −0.019% (16:34) — tick snapshots, not readings (§2b).
+
+**Derivatives (Deribit public API, 12:35).** DVOL 36.4. Oct 30 expiry: 85,578 calls / 33,761 puts (P/C 0.39),
+largest strikes 95K C (23,398), 90K C (14,097), 100K C (13,203). All expiries P/C 0.55.
+
+**Polymarket BTC (Gamma).** 12:35 → 16:34: ↑$90K 80.5 → **70.5**, ↑$95K 57.5 → 53.5, ↑$100K 44.5 → 40.5;
+↓$60K 13.5 → 12.5, ↓$55K 8.5 → 9.0 → 9.0 + 0.56 × 3.5 ≈ 11.0 → **no-new-low ~89.0%**.
+
+**The short-term read given to the owner at 12:35 — and what happened to it.** "Bias up, test of $87.4–90K,
+fragile: led by leverage, Coinbase premium negative, RSI > 70; failure signal = rejection at $87.4K with high
+OI → $82–84K." Four hours later the failure branch is the one in play (rejection, OI down, yields reversed),
+with price still above $85K. Recorded as given; it was a positioning read, not a scored forecast, and no marker
+rests on it.
+
+**IPO supply (sonnet agent, mostly search snippets — nothing here reached the page).** **OpenAI:** confidential
+draft S-1 May 22, confirmed Jun 8; Altman to Fortune Sep 12 (page read by the agent): "I would say not 2026".
+No other $5B+ listing found with a date inside the window: xAI merged into SpaceX, Databricks conflicting
+(CEO "not this year" vs aggregators' Q4–Q1), Kraken Q2 2027, Jio ~$4B undated, Fannie/Freddie undated; Oura,
+Holtec and Bamboo postponed Sep 29–30. **SpaceX lock-up is staggered** (Investing.com Jun 22, read by the agent):
+employee tranches of 7% at 70/90/105/120/135 days (the last two ≈ Oct 10 and Oct 25 by day count), 28% after Q3
+earnings in November (date not found), everything else at 180 days = Dec 8; Musk and select holders Jun 13,
+2027. Aug 6 tranche ~911.5M shares / ~$116B (snippets). **Not added to `EVENTS`:** dates are secondary and the
+prospectus was not opened — a candidate row for the pass, since the November tranche, the Anthropic roadshow
+(Nov 9–26) and `capend` (Nov 9–19) share a month. Renaissance (Sep 9, read): US IPO proceeds $146B YTD, SpaceX
+~$75B of it.
+
+**Edited (en/pt/es):** `th_p` (payroll sentence appended to the Oct 2 one), `ev.fomc_oct` (18.5% after
+payrolls), the `mac` events row (payroll outcome, post-release pricing). `nfp_sep` left to drop off by itself.
+**Verified:** parity 187/187, 37 `EVENTS` with text; Chrome headless en/pt/es, 0 console lines ×3, payroll
+sentence present in each; stage **Too early · 0 of 4 families**.
+
 ## 2026-10-02 — Interim check, before payrolls: Anthropic re-dated to Nov 9–26, October hike down to ~24%, premium 27 negative closes
 
 Owner asked what moves BTC next, how things stand and when Anthropic lists, then asked for it to be recorded.

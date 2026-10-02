@@ -23,6 +23,51 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-02 (third read, 16:38–17:53 UTC) — The reversal timed to oil, not to a data print; the day's gain fully returned
+
+Owner asked for the cause of the reversal, then for a re-check. Log only: **nothing on the page changed**, no
+pass, no adjudication, 70% not re-scored.
+
+**Timing (Yahoo 5-minute closes for `^TNX`, `BZ=F`, `DX-Y.NYB`, `ES=F`, `GC=F`; Binance for BTC).**
+
+| UTC | Brent | 10y | BTC | |
+|---|---|---|---|---|
+| 12:30 | 99.52 | 5.168 | 86,829 | payrolls |
+| 13:30 | 99.27 | 5.209 | 86,908 | slow give-back, oil still falling |
+| 14:15 | **98.53** | 5.193 | 86,536 | oil low — stockpile-release headlines (investinglive 14:17) |
+| 14:50 | 100.29 | 5.237 | 85,530 | oil turned; BTC lost $86K at 14:25–14:30 |
+| 16:00 | 101.54 | **5.271** | 85,480 | |
+| 17:53 (CNBC feed) | **102.47** | **5.281** | **84,800** | Brent +0.2% on the day; 10y +4.7bp on the day |
+
+**Two legs.** 13:00–14:15: ~3bp of give-back with oil falling — ordinary fade of the first reaction. From 14:20:
+another 7–9bp in step with a ~$4 Brent recovery, gold down ($4,222 → $4,165), dollar up, S&P futures off their
+high — an inflation-shaped move, not a growth one. **The proximate cause is oil. The headline that turned oil
+was not found:** investinglive carries no oil item between 14:17 and 16:07, and Trading Economics' three Oct 2
+Brent notes describe only the morning fall (G7 to consider releasing up to 100M barrels; Pentagon weighing a
+further carrier; three tankers attacked in Hormuz this week; Trump reportedly planning to resume bombing after
+the midterms). A plain unwind of the morning sale is not excluded. **Ruled out:** factory orders (14:00, 0.1% vs
+0.1%); no Fed speaker between 12:30 and 17:09. All press items here are WebFetch summaries of headline pages.
+
+**New at 17:09 UTC — Goolsbee:** "Labor market is steady, inflation side of Fed's job is more important"
+(investinglive headline + one-line summary; speech not opened). First Fed remark after the print, and it leans
+against the relief. Polymarket Oct 28 unchanged at hold 81.5 / hike 18.5 (vol $23.9M).
+
+**Closes a carry item from this morning.** The pre-payroll fall in hike odds (35.5 → 23.5%): investinglive
+Oct 2 10:27 and 08:25, "key Fed members push back against October rate hike bets" / "dovish Fed comments signal
+low appetite for tightening" — headline-level, the members are not named there.
+
+**State at 17:53.** BTC day candle O 84,880.05 / H 87,220 / L 84,300 / last ~84,800 — **under the Oct 1 close**,
+the whole post-payroll gain returned. Coinbase − Binance on the partial day −0.019% raw (would be the 28th
+negative close). Binance OI 96,446 BTC (16:00); funding 0.0012%/8h at the 16:00 print (0.0100% at 08:00). 10y
+5.281 / 2y 4.837 / 30y 5.632; DXY 101.91; S&P +0.73%, Nasdaq +1.18% (investinglive: Nasdaq at an all-time high)
+— equities kept the gain BTC gave back. Polymarket BTC: ↑$90K **69** (80.5 at 12:35), ↑$100K 38.5; ↓$60K 13.5,
+↓$55K 9.5 → 9.5 + 0.56 × 4.0 ≈ 11.7 → no-new-low ~88.3%. Press (search summary): >$120M of shorts liquidated
+in 24h on the way to $87K — consistent with a derivatives-led push. Payroll figures corroborated by a second
+outlet (cryptopotato: 29,000 / 4.2%). ETF Oct 2 session unpublished; retarget est. +0.13%, 78 blocks; F&G 72.
+No new commits on `origin/main`.
+
+**Not on the calendar:** ISM services next week (investinglive "week ahead") — date not opened at ISM.
+
 ## 2026-10-02 (later) — Payrolls +29K: the rates relief reversed inside four hours and price was rejected under the Sep 21 peak
 
 Owner asked for the jobs number, then for rates, the dollar and a short-term read, then to commit. Same status

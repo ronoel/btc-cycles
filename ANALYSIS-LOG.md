@@ -23,6 +23,58 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-03 (early read, 02:45–04:50 UTC) — Oct 2 closed under Oct 1, a 28th negative premium close, IBIT's Oct 2 flow still unpublished
+
+Owner asked whether anything changed since the 17:53 UTC read, then for the ETF session. Log only: **nothing on
+the page changed**, no pass, no adjudication, 70% not re-scored. **The page was not rendered** — no stage, family
+count or percentage is quoted here.
+
+**Price (Binance).** Oct 2 candle O 84,880.05 / H 87,220 / **L 83,888** (18:00 UTC hour) / **C 84,518.01** — under
+the Oct 1 close; the low extended past the 84,300 logged at 17:53. Oct 3 ~84,670 at 02:45. Week Sep 28–Oct 4 in
+progress at ~84.7K (leg 1 fails only below ~$70K).
+
+**Premium — carry item closed.** Oct 2 daily close **−0.0155% raw / +0.0065% adjusted**: **28 negative raw
+closes, Sep 5–Oct 2**. The Oct 3 partial (−0.018%) is a tick, not a reading.
+
+**Derivatives.** Binance OI 95,639 → **98,937 BTC between the 20:00 and 21:00 UTC prints** with price flat at
+~84.5K; 97,895 at 02:00 — back near the pre-payroll level (99,532) without the price. Observed, not explained.
+Funding 0.0012% (16:00) → 0.0046%/8h (00:00). F&G 72 → **67**.
+
+**Rates and closes.** Treasury par curve CSV (direct), Oct 2: 10y **5.28**, 2y **4.83**, 30y 5.63, real 10y
+**2.92** — 1bp under the Sep 30 highs. Yahoo daily: S&P 7,722.72, Nasdaq Composite 27,190.86, DXY 101.92, gold
+4,172.1, Brent (`BZ=F`) **102.70** — Newsquawk's wrap gives a Brent settle of **102.25**: unreconciled.
+
+**Polymarket (Gamma, ~02:47 UTC).** Oct 28: hold **82.5** / +25bp **17.5** (vol $24.3M). BTC (vol $72.5M):
+↑$90K 69.5, ↑$95K 49.5, ↑$100K 39; ↓$60K 13, ↓$55K 9.5 → 9.5 + 0.56 × 3.5 ≈ 11.5 → **no-new-low ~88.5%**.
+
+**ETF — Oct 2 session incomplete.** Farside table (direct, curl with a browser UA; read 02:50, 04:39 and 04:50
+UTC): FBTC +29.3, MSBT +2.4, others 0.0, **IBIT "-"**, partial total **+$31.7M**. SoSoValue (the arbiter's
+source) still ends Oct 1. Leg 3 at the Oct 5 window stays **+$2.155B + the Oct 2 session**; on the partial it
+misses only if IBIT prints ≲ −$0.69B.
+
+**LTH — carry item closed** (BGeometrics `long-term-hodler-supply-btc`, one call): Oct 2 **16,512,328** (Oct 1
+16,488,727; low still Sep 29 16,483,418); 7d −26,493, **30d −46,712**; 96,975 under 16,609,303. Sep 27 rule
+applied mechanically: **NOT YET**. Row not edited.
+
+**Retarget estimate changed sign** (mempool.space, 02:45 UTC): **−0.33%**, 34 blocks, ~08:27 UTC Oct 3 — against
+the +0.17% in `ev.retarget2` and +0.13% at 17:53. Not edited: the row drops off at the end of UTC Oct 3 and the
+actual figure is the pass's input for the hash row. (A press digest says +0.86%; the estimate above is the one read.)
+
+**Build `5ebb4e9` (Oct 2 19:10 UTC).** HY OAS 3.12 → **3.24** (Oct 1), `sth_realized_price` 73,604.8 (Oct 1), RRP
+1.5; on-chain still Sep 25, `stale: ["onchain"]` unchanged.
+
+**News (sonnet agent — WebFetch summaries and search snippets, nothing verbatim).** **Oil:** still no headline for
+the afternoon turn — Newsquawk US wrap: the morning fall was France releasing diesel and crude stocks plus the G7
+"up to 100mln barrels", then prices "reversed course into the close on no clear headline catalyst". **Goolsbee**
+was a Fox Business interview: "will not rule out any decision at the next meeting" (investinglive 17:09, summary).
+**Logan** (Newsquawk wrap, summary; original and time not found): policy rate "needs to increase an additional
+50bps or more". **The morning pushback — carry item closed on secondary sources:** Williams ("no need for
+urgency") and Jefferson (investinglive 10:27; Yahoo/Reuters snippet). **Bitget:** one snippet says the remaining
+services reopened Oct 2 08:00 UTC; no explicit completion statement found (CNBC 403). **ISM services:** Mon Oct 5
+10:00 ET per a third-party calendar; ismworld.org required a login. **Nothing found:** Iran after 14:00 UTC Oct 2,
+a crypto-native shock Oct 2–3, Anthropic, a stated cause for BTC's 87.2K → 83.9K. MSCI / Strategy snippets were
+undated — not used. OPEC+ Oct 4: targets expected unchanged (tokenpost Sep 30, summary).
+
 ## 2026-10-02 (third read, 16:38–17:53 UTC) — The reversal timed to oil, not to a data print; the day's gain fully returned
 
 Owner asked for the cause of the reversal, then for a re-check. Log only: **nothing on the page changed**, no

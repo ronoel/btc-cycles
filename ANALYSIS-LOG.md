@@ -23,6 +23,56 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-03 (~05:00 UTC) — Funding claim check: "most negative since May" not reproduced; multi-venue read becomes standing
+
+Owner saw a headline that BTC funding is negative, the most negative since May. Checked against the exchanges'
+public APIs. Log only: **nothing on the page changed**, no pass, no adjudication, 70% not re-scored, no
+threshold touched. The `fund` row (Binance 7d, bar −0.005%) is unaffected and agrees with this read.
+
+**Funding, %/8h (Binance, Bybit, OKX funding-history endpoints; 2026-01-01 → Oct 3 00:00 UTC; OKX from Jun 29).**
+
+| Series | Last print (Oct 3 00:00) | 7d avg | 7d avg last this low | Print last this low |
+|---|---|---|---|---|
+| Binance USDT-M | +0.0046 | +0.0039 | Jun 30 | Sep 30 |
+| Binance COIN-M | −0.0035 | +0.0040 | Sep 10 | Sep 26 |
+| Bybit linear | −0.0046 | +0.0032 | Aug 12 | Jul 28 |
+| Bybit inverse | −0.0059 | +0.0041 | Sep 14 | Sep 26 |
+| OKX USDT | −0.0001 | +0.0030 | Jul 30 | Sep 28 |
+| OKX USD | −0.0052 | +0.0034 | Sep 11 | Sep 26 |
+
+Hyperliquid (hourly ×8) last-24h mean +0.0086; Deribit `interest_8h` last-24h mean +0.0057. Binance USDT-M 7d
+low of the week: +0.0020 (Sep 29). Negative prints by month, Binance USDT-M: Feb 45/84, Mar 52/93, Apr 58/90,
+**May 27/93 (min −0.0092)**, Jun 21/90, Jul 1/93, Aug 0/93, **Sep 5/90 (min −0.0026)**, Oct 0/7.
+
+**Verdict.** Funding is low, not negative: every 7d average is positive (+3.3% to +4.5% annualised). One
+shallow negative print on 4 of 6 series; only on Bybit linear is it the lowest since July. "Most negative since
+May" fails on prints and on 1d/3d/7d/30d averages alike.
+
+**The headline was not found** (research subagent, ~14 queries; fetched pages are tool summaries, not checked
+verbatim). Nearest: CoinDesk Sep 28 — funding "flipped negative… minus 0.3% across major exchanges" (unit
+unconfirmed), OI 652K BTC; CoinDesk Sep 30 — OI 625K BTC, lowest since Jan 1; CoinDesk Oct 2 — funding "risen
+from around 3% to 10%". The Sep 26–28 dip is in the data (1d avg: Bybit inverse −0.0025 Sep 26, OKX USDT
+−0.0013 Sep 27). Coinglass aggregate not read (page returns no numbers to a fetch).
+
+**Trap: the Binance premium index is not funding.** `premiumIndexKlines` daily mean sat at −0.042% to −0.049%
+Sep 20–Oct 3 — and −0.040% to −0.053% as a monthly mean in every month of 2026. Funding = P + clamp(0.01% − P,
+±0.05%), so P = −0.045% gives ≈ +0.005%; funding turns negative only with P under −0.05%. A perp discount of
+that size is the structural offset, not a signal.
+
+**Precedent (Binance spot daily closes).** May cluster: May 5 $80,906 → −21.0% at 30d; May 27 $74,449 → −13.8%
+at 7d; low close $58,624.71 Jun 30. Earlier: Feb 6 $70,580 → −6.5% at 30d (worst low −15.0%); Mar 2 → −1.0%;
+Apr 17 / Apr 24 → +0.5% / −0.5%. Mixed, as in the Sep 21 test (funding < 0 → long: zero excess 2023–26).
+
+**Positioning (Binance `futures/data`).** OI 109.2K (Sep 22) → 92.5K (Sep 30) → 98.2K BTC (Oct 3); global
+account long/short 0.89 → 1.04–1.38; top-trader position ratio 1.88–2.18; taker buy/sell 0.94–1.04.
+Deleveraging then a long rebuild in a flat tape — not crowded shorts.
+
+**Decided (owner): check funding on every read**, across venues, and check any funding headline against the
+APIs before repeating it. Procedure in `MAINTENANCE.md` §5. Context only — the Sep 21 verdict stands, no score
+or trigger reads it. Scripts were scratch and deleted; the endpoints in §5 reproduce the table.
+
+---
+
 ## 2026-10-03 (early read, 02:45–04:50 UTC) — Oct 2 closed under Oct 1, a 28th negative premium close, IBIT's Oct 2 flow still unpublished
 
 Owner asked whether anything changed since the 17:53 UTC read, then for the ETF session. Log only: **nothing on

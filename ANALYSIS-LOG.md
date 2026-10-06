@@ -23,6 +23,53 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-04 (23:30–23:45 UTC) — Short-term read: third test of $87.2–87.4K on a thin Sunday; levels tabled, no directional odds claimed
+
+Owner asked for the odds of another leg up in the short term and for support/resistance. Log only: **nothing on
+the page changed**, no pass (the Oct 4 pass is still owed), no adjudication (window Oct 5 00:15 UTC), 70% not
+re-scored. **The page was not rendered** — no stage, family count or percentage is quoted here.
+
+**Price (Binance, 23:33 UTC).** Spot **86,614**; Oct 4 candle open, H 86,800 on **7,676 BTC** (Oct 2: 26,498) —
+the whole push is the 20:00 UTC 4h bar. Third approach to **87,395.67** (Sep 21) / **87,220** (Oct 2). Oct 3
+C 84,753.56. Closed-day SMA20 82,467 · SMA50 78,578 · SMA100 71,043 · SMA200 71,462 (all rising); 20W 70,367 ·
+50W 78,211 · 200W 65,839. RSI14 daily 63.7, weekly 61.6. ATR14 2,290. Realised vol 10d **12.3%** vs 30d 36.8% /
+90d 37.8%; BB20 75,915 / 89,020. Compression, which says a larger move is due and nothing about its sign.
+
+**Resistance.** 87,220–87,396 · 89,020 (BB upper) · 90,000 · **92,048** (50% of 126,296 → 57,800.19) inside the
+87.5–92.5K shelf (10.9% of 365-day daily volume) · **94,589** (Dec 9, 2025 high) · **97,924** (Jan 14, 2026
+high) · 100,131 (61.8%). Volume thins above 92.5K (95–105K bins: 6.4% combined).
+
+**Support.** 84,000–84,700 (1h volume node, Oct 3 low 84,456, Oct 2 low 83,888, 38.2% at 83,966) · **82,563**
+(Sep 28 low) on SMA20 · 80,126–80,850 (Sep 20–21) · 76,264–79,000 (node 77–79K, SMA50, 50W) · **74,968** (Sep
+15 low) and STH realized price **73,897** (Oct 3) · 70,000–71,500 (SMA200/100 and falsifier #6 leg 1) · 65,839
+(200W) · 62.5–65K (heaviest volume of the year) · 57,800.19.
+
+**Funding, %/8h, last print (Oct 4 16:00) / 7d avg** — Binance USDT-M +0.0038 / +0.0038 · COIN-M −0.0021 /
++0.0029 · Bybit linear +0.0055 / +0.0028 · inverse +0.0041 / +0.0038 · OKX USDT +0.0048 / +0.0038 · USD +0.0033
+/ +0.0033. Low and positive on all six; not an extreme, so not even the two-sided flag of the Sep 21 test.
+**Positioning (Binance).** OI 92.5K (Sep 30) → **98,528 BTC** (Oct 4 20:00); global account L/S 1.22, top-trader
+position 1.85, taker 0.93 (Oct 3). F&G **65** (74 on Oct 1).
+
+**Premium.** Oct 3 daily close **−0.0134% raw: 29 negative raw closes, Sep 5–Oct 3.** The Oct 4 partial read
+positive on a non-simultaneous fetch (+0.008% and +0.19% minutes apart) — a tick, not a reading.
+**Added 00:02 UTC Oct 5, the Sunday close (the Oct 5 window's leg 2; adjudication not run here):** Oct 4 candle
+C **86,530.00** (H 86,800, vol 7,993), Coinbase 86,507.11 → **−0.0265% raw / −0.0105% adjusted: a 30th negative
+raw close, Sep 5–Oct 4**, negative on both forms. Week Sep 28–Oct 4 closed **86,530.00** (leg 1 input).
+
+**Polymarket, October "hit" market (Gamma, 23:34 UTC; vol $2.3M — touch, not close).** ↑87.5K 91 · ↑90K **67.5**
+· ↑92.5K 46.5 · ↑95K 32.5 · ↑97.5K 19.5 · ↑100K 11.5; ↓82.5K **59.5** · ↓80K 39.5 · ↓77.5K 24.5 · ↓75K 17.5 ·
+↓70K 7.5. (↓85K shows 81.75 although the Oct 1 low was 83,186 — unexplained, not used. The yearly market
+returned nothing.) A driftless walk at the 30d vol (reflection principle, 27 days) gives 70 / 36 up and 63 / 43
+down for 90K / 95K / 82.5K / 80K: **the market is pricing volatility, not direction.**
+
+**Verdict.** No indicator-derived probability is given: the Sep 21 test found no short-horizon edge in funding,
+OI or trend rules. What holds: the trend is up on every average, the bounce (+51.2% at the Sep 21 high) is past
+both bear-rally precedents, and a touch of ~90K and a revisit of ~82.5K are each better than even in October —
+they are not alternatives. Against: 10y 5.24 / real 2.88 (Oct 1) near two-year highs, HY OAS 3.24, `etf.d5`
++0.19. Scripts were scratch and deleted.
+
+---
+
 ## 2026-10-03 (~05:00 UTC) — Funding claim check: "most negative since May" not reproduced; multi-venue read becomes standing
 
 Owner saw a headline that BTC funding is negative, the most negative since May. Checked against the exchanges'

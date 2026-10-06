@@ -23,6 +23,134 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-06 — Research pass: 70% held a second time, the Hash Ribbons call made (stays PARTIAL), calendar extended to Jan 2027
+
+The pass due Oct 4, run two days late at the owner's request, after the adjudication below. `an_asof` → Oct 6.
+No threshold, weight, band, window, falsifier or trigger changed; no `st` changed. Reads Oct 6 ~15:00–16:30 UTC;
+`data.json` is the Oct 6 06:15 build (on-chain through **Sep 29**, `sth_realized_price` Oct 5, FRED through Oct 2,
+ETF through Oct 5; `stale: ["onchain"]`).
+
+**Counter-scenario: ~70%, left, on this ledger (written before the number).** The five residual items of Sep 21,
+against their Sep 27 readings. **Fed — for:** payrolls +29K / 4.2%, July −10K and August +133K after −60K of
+revisions (bls.gov, opened by the news agent); Oct 28 hike 64.5% → **16.5%**, hold 81.5% (Gamma, vol $27.0M).
+Deferred, not removed: two 2026 hikes in total 66.5%, three 9.65%, no cut 95.8%; ISM services 54.9, prices
+**74.0** (PRNewswire release, Oct 5). **Rates — against:** Treasury par curves (CSV, direct) 10y 5.29 (Sep 30) →
+5.24 → 5.28 → **5.31 (Oct 5)**, real 10y 2.93 → 2.88 → 2.92 → **2.95**, 30y 5.66 — past both Sep 27 figures (5.18
+/ 2.85); press has an intraday 5.33 ("24-year high", Trading Economics — secondary). **ETF — faded, not failed:**
+SoSoValue daily Sep 28–Oct 5: +31.1, +66.2, −148.7, +102.7, +189.8, **−89.9**; `d20` 2.71 → **2.08**, `d5` +0.12.
+Farside Oct 2 complete at +189.9 with **IBIT +158.2** (closes the carry item); Oct 5 IBIT +69.9, FBTC −74.5, ARKB
+−85.2. **LTH — flat:** low still Sep 29 (16,483,418); Oct 3–5 16,526,293 / 16,550,910 / **16,508,140**; 7d −5,528,
+**30d −15,267**, 101,163 under 16,609,303 → the Sep 27 rule reads NOT YET. **Premium — flat/against:** 31 negative
+raw closes, Sep 5–Oct 5 (Oct 5 −0.0209 raw / −0.0079 adjusted). Beside the ledger: oil back under $100 (Yahoo
+`BZ=F` 102.25 Oct 2 — which settles the Oct 3 102.70/102.25 item in Newsquawk's favour — 100.32 Oct 5, ~98.2 Oct
+6); market no-new-low 88.4% → **~91.4%** (↓$60K 9.5, ↓$55K 7.5 → 7.5 + 0.56 × 2); price 86.6K, range 82,563–87,220
+since Sep 28. Fed and oil for, rates and flows against, LTH and premium flat, no pre-registered marker at stake: no rule-driven move
+and no measured reason for a judgement one. The gap to the market is now ~21 points (was ~18); `th_p` says so.
+`th_t` and `fal[1]` unchanged.
+
+**Hash Ribbons — the reasoned call, owed since Sep 28: stays PARTIAL.** BGeometrics `hashribbons` (two calls, the
+second saved): Up Sep 1–Oct 5 = **35 days**; 30d/60d 964.4 / 940.4 EH/s = **+2.55%** (peak +3.09% Oct 2). Actual
+Oct 3 retarget **−0.03%** at height 969,696, 07:16 UTC (mempool.space API) — neither the +0.17% in `ev.retarget2`
+nor the −0.33% of the Oct 3 estimate; next est. **+3.6%**, ~Oct 16 20:50 UTC. Every Up run in the 1,461-day
+window was listed. The series opens on 2022-10-06 already Up and stays Up to 2022-11-26: the run **contained the
+Nov 21, 2022 low**, at least 47 days in. Bear-phase runs that preceded lower lows: 28 days (Feb 26–Mar 25, 2026),
+plus 2–7-day flickers in Jan and Apr–Jun 2026. (The classic buy cross of that bottom is the Jan 14, 2023 one, after the Nov 27–Jan 13 Down spell — the Oct–Nov run did not *mark* the low, it was merely in force through it.) So run length separates nothing — an Up run of ≥47 days was in
+force *at* a cycle low and a 28-day one preceded a lower low; 35 days sits between them. No persistence rule is
+written (unlike `lth` on Sep 27, there is no reading of this field that the window supports). The row's "after
+capitulation" is the same question as whether the low is in, and it stays PARTIAL until that is answered
+elsewhere. Not tested: what a run does once past 52 days in a bear phase — no instance in the window.
+
+**Polymarket (Gamma, ~15:05 UTC; `cvp[3]`).** Yearly market vol $73.1M: ↓$70K 25.5, ↓$65K 14.5, ↓$60K 9.5, ↓$55K
+7.5, ↓$50K 5 (book 4/6), ↓$45K 3.65, ↓$40K 2.95; ↑$90K **78.5**, ↑$95K 55.5, ↑$100K 36.5, ↑$110K 17.5. Recession
+by end-2026 7.5% (end-2027 33.5%). Market-structure law in 2026 2.95% / CLARITY signed 4.85% — two contracts,
+quoted as "3–5%"; the agent's "13%" snippet is not reproduced.
+
+**Tape (Binance).** Oct 5 O 86,530 / H 86,999.11 / L 84,972.01 / C 85,766.87; Oct 6 ~86,630 at 15:00 UTC. A
+fourth failure under 87,220–87,396. Closed-day SMA20 83,391 · SMA50 79,505 · SMA100 71,564 · SMA200 71,618; 200W
+66,186. RSI14 64.6. F&G 73. **Funding, %/8h, last print (Oct 6 08:00) / 7d avg** (standing rule, context only) —
+Binance USDT-M −0.0016 / +0.0033 · COIN-M +0.0053 / +0.0025 · Bybit linear +0.0001 / +0.0031 · inverse +0.0043 /
++0.0036 · OKX USDT +0.0044 / +0.0038 · USD +0.0047 / +0.0030: one negative print, every 7-day average positive.
+Binance OI 98,659 (Oct 4 16:00) → 94,734 BTC (Oct 6 12:00). Yahoo closes Oct 5: S&P 7,773.95, Nasdaq Composite
+27,477.31 (record, per press), DXY 102.17, gold 4,156.8; S&P ~7,834 intraday Oct 6, above the 7,798.99 record
+close — the Oct 6 close was not available at this pass.
+
+**Strategy (EDGAR, opened by the news agent through a summarising fetch — figures primary, wording not).** Oct 5
+8-K: **334 BTC for $28.7M at $85,838.80**, funded by $15.7M of MSTR stock and $13.0M cash; **848,000 BTC**, cost
+$63.97B, avg $75,440.70; STRC buyback 740,634 sh / $73.7M ($547.2M left); USD Reserve $4.88B. Period label
+unresolved (rendered "Oct 1–4"; a snippet says Sep 28–30) — the page says neither. Sep 28 8-K re-read: 1,665 BTC,
+**MSTR ATM 1,469,165 sh / $246.2M** — the Sep 30 edit recorded the purchase and missed that common-stock issuance
+had resumed; the row says so now. **MSCI:** nothing announced by Oct 6. The Block (Sep 1) gives implementation as
+"December 2026" against the November review in MSCI's own PDF (read Sep 17) — the page keeps the primary.
+
+**News, secondary unless marked (sonnet agent; WebFetch summaries, not verbatim).** Oil: G7 release of up to 100M
+barrels, **OPEC+ kept November targets** (Oct 4; CNBC/UPI headlines), Hormuz shipments "returning toward pre-war
+levels" (Trading Economics); an AFP report of a new East-West pipeline halt on Oct 5 was contradicted by Bloomberg
+sources the same day — unresolved, and a Houthi claim on Khurais (Oct 4) is snippet-only. **Logan:** FXStreet
+dates the "additional 50 bps or more" to **Oct 1 23:40 GMT**; original still not found. Goolsbee (BNN Bloomberg,
+Oct 2): "plenty of room for anything to be on the table". JPMorgan (Feroli, via press): a very strong CPI would
+be needed to make October live; expects December. Bitget: no completion statement, no failure report. No exploit
+>$100M dated Oct 3–6; September hacks $766M (PeckShield via Cointelegraph, snippet). Liquid post-mortem: still
+not found. Anthropic: nothing new; no public S-1 found. **SpaceX lock-up:** two secondary sources a day apart
+(Oct 9 / Oct 24 / Dec 8 attributed to the 424B4; Oct 10 / Oct 25 / Dec 9) — prospectus not opened, so narrative
+mention only, **no `EVENTS` row**. A 10-year auction Oct 7 ($39B) rests on one newsletter. Stated cause for the
+Oct 5 dip: none found. **Rejected:** a "+137K bpd" OPEC+ snippet (2025 meeting), a Brent $88.41 snippet (undated),
+Yahoo's ATH of $128,198 (its own Oct 2 and Oct 5 pages say $126,198).
+
+**Calendar at publishers (haiku agent).** Re-confirmed, no date moved: BLS payrolls Nov 6 / Dec 4, CPI Nov 10,
+PPI Nov 13; BEA Oct 29 (GDP advance + September PCE), Nov 25; Fed Oct 27–28, Dec 8–9 (SEP); ECB Oct 29; BoJ Oct
+29–30. **Added past Dec 11** (carry item): `cpi_nov` Dec 10, `ppi_nov` Dec 15, `ecb_dec` Dec 17, `boj_dec` Dec
+17–18, `pce_nov` Dec 23, `fomc_jan` Jan 26–27, 2027 (all `'p'`); `deribit3` Nov 27, `deribit4` Dec 25 (`'s'`,
+last-Friday rule, third-party); `ism_oct` Nov 4 (`'d'` — ISM's third-business-day rule, not a printed date);
+`retarget3` Oct 16 (`'s'`). **Not used from the agent:** "minutes released October 7" (the bracketed gloss shows
+it was inferred — `fomc_min` stays `'d'`), its "~Oct 9" retarget date (the timestamp it quotes is Oct 16), and
+Treasury "Nov 2" (the financing-estimates release; `refund` stays Nov 4, `'s'`). congress.gov blocked again: `cr`
+stays `'s'`. BEA has no January 2027 dates yet.
+
+**Edited (en/pt/es).** `an_asof`, `mac_h`, `ev_asof` → Oct 6; `th_p` (seven windows, the Oct 6 re-score replacing
+the Oct 1 / Oct 2 interim blocks, week 52); `cvp[3]`; `bs` `hash` / `lth` / `cbp` `r` and the `fund` fallback;
+`trig_n`, `trig[0..3].d`; `mac` Fed, Rates, Dollar, ETF, Recession, Geopolitics, 2nd catalyst, Strategy, Scheduled
+events, Equities; `fal[5]`; `ev.fomc_oct` plus ten new `ev` entries and `EVENTS` rows. EN written here; PT/ES
+mirrored by a sonnet agent against a digit-token checker (every changed EN line and its PT/ES counterparts must
+carry the same numbers). **Not edited:** Liquidity (one stale figure fixed by the sweep: "the 10-year reaching 5.18%" → 5.31%, Oct 5) and Trade rows (not re-researched — `mac_h` now dates them Oct
+6 on no new reading; say so at the next pass), Credit, `resv`, `puell` fallback, `ph_notes`.
+
+**Readings, verified by rendering** (Chrome headless; en, pt, es via a `btc_lang` setter on scratch copies; 0 console
+lines ×3; parity 187/187, no BS/MAC/EV mismatch, 47 `EVENTS` ids all with text; digit-token checker 37 changed EN
+lines, 0 mismatches): **Too early · 0 of 4 families · 1 of 15 active · 3 partial · expert 12% / equal 17%** (Sep
+27: 13 / 17). `CORE` **4%**, unchanged — the one PARTIAL is now SOPR (1.0033 on Sep 29 data), not Puell (1.16);
+README sentence updated, `og-card.html` stat unchanged, `og.png` not regenerated. Events table: 37 rows, first
+Oct 7, last Jan 27, 2027. Not verified: the PT/ES prose beyond its numbers was sampled (`th_p`, `hash`,
+`trig[0]`, two `ev` entries), not read in full.
+
+---
+
+## 2026-10-06 (earlier) — The Oct 5 adjudication, run ~39 hours late: 2 of 3 a seventh time, and every form of leg 2 misses
+
+Run Oct 6 ~15:00 UTC on the values as they stood at the window (Mon Oct 5 00:15 UTC); legs 1 and 2 were already
+recorded in the Oct 4 entry's 00:02 UTC addendum and are re-pulled here.
+
+**Falsifier #6, Oct 5 window: 2 of 3 — not fired, nothing deployed.**
+- Leg 1: Binance 1w candle Sep 28–Oct 4 closed **$86,530.00** → fired (the highest of the seven).
+- Leg 3: `etf.d20` **+$2.89B** in the Oct 4 20:00 UTC build (commit 2951a24, the last before the window; `etf.d`
+  **Oct 1** — the Oct 2 session was missing, the lag MAINTENANCE §2b warns about). With Oct 2 (+$189.8M) the Oct 5
+  06:24 build reads **+$2.34B**. Fired on both. (The "+$2.155B + Oct 2" carried since Oct 2 was the forward
+  estimate for the window; the arbiter's own figure is the one recorded.)
+- Leg 2: Oct 4 close, Coinbase `BTC-USD` 86,507.11 vs Binance 86,530.00 → **−0.0265% raw** → not fired.
+  USDT-adjusted **−0.0105%**. Read on the raw Sunday form, per the owner's Oct 1 decision.
+
+Daily raw / adjusted, Sep 28–Oct 5: −0.0518/−0.0058, −0.0302/+0.0078, −0.0807/−0.0157, −0.0369/−0.0019,
+−0.0155/+0.0065, −0.0134/+0.0046, **−0.0265/−0.0105**, −0.0209/−0.0079 — the Sep 28–29 and Oct 2–4 pairs reproduce
+earlier entries. Forms for the window: raw-Sunday **miss**; weekly-mean raw **−0.0364%** miss; any-positive-raw
+**0 of 7** miss; adjusted-Sunday **miss**. The second window, after Sep 14, in which every form misses — the
+form question decided nothing. Seven-window tally: raw-Sunday 0/7, weekly-mean 0/7, any-positive-raw 2/7,
+adjusted-Sunday 4/7. Streak: **31 negative raw closes, Sep 5–Oct 5**.
+
+**The Oct 12 form is the owner's to decide and is not decided here.** Into that window leg 3 loses Sep 8–11
+(−$463M together) and keeps Sep 21–23: from +$2.08B through Oct 5 it misses only if Oct 6–9 net ≲ −$1.0B. The
+Sep 21–23 sessions (+$2.06B) leave on Oct 19–21 — the Oct 26 window is where leg 3 is next exposed.
+
+---
+
 ## 2026-10-04 (23:30–23:45 UTC) — Short-term read: third test of $87.2–87.4K on a thin Sunday; levels tabled, no directional odds claimed
 
 Owner asked for the odds of another leg up in the short term and for support/resistance. Log only: **nothing on

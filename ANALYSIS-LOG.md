@@ -23,6 +23,32 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-07 (02:35–03:00 UTC) — Read: a 15-minute drop to $83,577 with no headline found; nothing changed
+
+Owner asked why BTC was falling and whether there was news. Log only: **nothing on the page changed**, no pass,
+no adjudication, 70% not re-scored, page not rendered.
+
+**Tape (Binance).** Oct 6 closed 85,549.93 (H 86,698.99). Oct 7: flat at ~85.5K until 01:45 UTC, then 85,311 →
+**83,577** between 01:50 and 02:05 — ~1,850 BTC in three 5-minute bars against 10–40 per bar before it; 83.9–84.1K
+by 02:35. The move started through 85,136 (Oct 6 low) and 84,972 (Oct 5 low) and stopped above 83,186 (Oct 1 low),
+82,563 (Sep 28 low) and the closed-day SMA20 (~83.5K). 24h: BTC −1.9%, ETH −3.2%, SOL −2.0%.
+**Derivatives.** Binance OI 96,142 (01:50) → 95,611 (02:05) → 95,964 BTC (02:20): about 0.5K BTC out and half
+back — a stop run, not a large deleveraging. Taker buy/sell 0.51 in the 01:00 hour. Funding prints Oct 6–7:
+−0.0025, −0.0016, +0.0022, −0.0007 %/8h (Binance USDT-M; other venues not re-read). Liquidation totals quoted in
+press ($330M–$600M) were undated or dated Oct 2 — not used.
+**Cross-asset at 02:25 UTC (Yahoo).** ES 7,876.5 (flat), NQ −0.1%, Nikkei −0.8%, Hang Seng −0.8%, gold −0.4%,
+DXY 102.05, Brent 101.40 (+0.8%; 100.58 settle Oct 6, so the Oct 6 afternoon "~$98" did not hold). S&P closed
+**7,818.93 on Oct 6 — a record close**, above 7,798.99 (closes that carry item; the Equities row says "traded
+above it on Oct 6"). 10y 5.27% (Oct 6, `^TNX`).
+**News (two searches, three fetches — summaries, not verbatim).** No headline timed to 01:50 UTC. investinglive's
+feed for the preceding hours: oil up in Asia on a storm threatening US Gulf output ("first Atlantic hurricane of
+2026", 01:19), Iran "expects US response today on Hormuz proposal", Goldman on the rates selloff, an RBI decision
+due 04:30 GMT; its 23:27 item had Bitcoin "holding firm near $86,000". TechFlow's wire carries only price alerts
+(<$85K at 01:55, <$84K at 02:01), German regulators rejecting Bitcoin.de's MiCA application (02:08) and a $4M
+wallet hack (02:03) — neither market-sized. **Cause: not established.** Farside Oct 6 (02:37 UTC): partial −$3.2M (MSBT +7.8, BTC −11.0, others 0.0), **IBIT "-"** — incomplete.
+
+---
+
 ## 2026-10-06 — Research pass: 70% held a second time, the Hash Ribbons call made (stays PARTIAL), calendar extended to Jan 2027
 
 The pass due Oct 4, run two days late at the owner's request, after the adjudication below. `an_asof` → Oct 6.

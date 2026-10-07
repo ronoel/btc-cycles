@@ -60,6 +60,28 @@ and smaller than an ordinary ETF flow day; a Coinbase Prime deposit is also not 
 custodian). A plausible contributor to sentiment, not an established cause; the "test transaction before sending
 the rest" reading (analyst quote) is the part to watch — the next wallet move, not this one.
 
+**Added ~03:10 UTC — the transactions, read on-chain (owner asked whether anything else moved).** Found by
+scanning the 42 blocks of Oct 6 12:00–18:00 UTC (blockchain.info `rawblock`) for the reported amounts, then
+mempool.space address APIs; tip 970,278. Labels were **not** verified (no Arkham access) — attribution rests on
+the press plus the amounts matching: 264.86266967 + 568.73428849 = **833.597 BTC**.
+- `bc1qny6adj3ah3j9nw8qv37jwelzhazlpl2f69n2et` (funded 264.863 on 2024-02-28): **15:28 UTC** test 0.00115539 →
+  `3GPnJfBN4A3zhaHAewQAfcnshf6kNKe2tw`, rest to a fresh `bc1q2khlx5…` (tx `6fffced1…`); **15:49** all 264.86266967
+  → `3GPnJf…` (tx `53db1a73…`).
+- `bc1qk2hd2uktr6dj4gppcrsu2cpx5el4mg3q83f9gd` (funded 568.735 on 2025-02-14): **17:45** test 0.0011684 → `3GPnJf…`,
+  rest to a fresh `bc1q8cwmp5…` (tx `4d74e411…`); **17:59** all 568.73428849 → `3GPnJf…` (tx `89b8b8b8…`).
+So the **whole 833.6 BTC reached one deposit address** — Bitcoin.com's "264.86 BTC to a new wallet" was the
+14–21-minute intermediate hop, and its "~11 a.m. Eastern" is early: the transfers ran **15:28–17:59 UTC**, i.e.
+*after* the 15:00–15:20 reversal from 86,699, so the timing coincidence noted above is withdrawn. The deposit
+address was swept within 15–35 minutes into pooled transactions (16:04, 18:34) paying `3MqUP6G1daVS5YTD8fz3QgwjZortWwxXFd`
+(118,638 txs — an exchange operational wallet) and two other addresses: ordinary exchange deposit handling, which
+shows neither a sale nor its absence. **Anything else:** both source addresses and both hops are at **0 BTC**, no
+mempool transactions; nothing after 17:59 UTC from them. The two large wallets read directly are untouched —
+`bc1qazcm76…wczt` 94,643.49 BTC and `bc1qa5wkga…9hz6` 69,370.18 BTC (dust-only since September). **Not checked:**
+the rest of the ~323.7K BTC the press attributes to the government (addresses not in hand), and the BNB leg.
+**One thing the press did not report:** the same deposit address took **95.69 BTC on Sep 16** (22:14 UTC; 60.64 +
+18.82 + 16.23 from three `bc1q` addresses), swept eight minutes later — if that address is the government's Prime
+deposit, "first movement since Aug 26" is wrong; whose deposits those were is not established.
+
 ---
 
 ## 2026-10-06 — Research pass: 70% held a second time, the Hash Ribbons call made (stays PARTIAL), calendar extended to Jan 2027

@@ -47,6 +47,19 @@ due 04:30 GMT; its 23:27 item had Bitcoin "holding firm near $86,000". TechFlow'
 (<$85K at 01:55, <$84K at 02:01), German regulators rejecting Bitcoin.de's MiCA application (02:08) and a $4M
 wallet hack (02:03) — neither market-sized. **Cause: not established.** Farside Oct 6 (02:37 UTC): partial −$3.2M (MSBT +7.8, BTC −11.0, others 0.0), **IBIT "-"** — incomplete.
 
+**Added ~03:15 UTC — the item the read above missed (raised by the owner).** Wallets labelled US government moved
+**833.6 BTC (~$71.6M)** and 40,285 BNB (~$31.6M) on Oct 6: news.bitcoin.com (published Oct 6 19:50 EDT = 23:50
+UTC) puts the BTC at "approximately 11 a.m. Eastern" (**~15:00 UTC**), the first movement since Aug 26 — 568 BTC
+from the Potapenko–Turogin (HashFlare) case to Coinbase Prime, and from the Bitfinex-hack wallet a 0.00115539 BTC
+test to Coinbase Prime plus 264.86 BTC to a new wallet; ~323,694 BTC left. Crypto Briefing has all 833.6 going to
+Coinbase Prime — sources disagree on the split; no tx hash opened, both read through a summarising fetch.
+**Timing against the tape:** the 15:00 UTC hour on Oct 6 is the candle that reversed 86,699 → 85,721 (1,185 BTC,
+the day's heaviest hour) — coincident with the transfer, cause not shown. The 01:50 UTC drop came ~11 hours after
+the move and ~2 hours after that article. **Size:** 833.6 BTC is ~7% of Binance spot volume on Oct 6 (12,614 BTC)
+and smaller than an ordinary ETF flow day; a Coinbase Prime deposit is also not a sale (Prime is the Marshals'
+custodian). A plausible contributor to sentiment, not an established cause; the "test transaction before sending
+the rest" reading (analyst quote) is the part to watch — the next wallet move, not this one.
+
 ---
 
 ## 2026-10-06 — Research pass: 70% held a second time, the Hash Ribbons call made (stays PARTIAL), calendar extended to Jan 2027

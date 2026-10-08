@@ -96,7 +96,7 @@ tariffs, miners: not searched. **Calendar:** BLS October schedule re-opened by t
 Thu Oct 15, both 08:30 ET, unchanged.
 
 **Edited (en/pt/es):** `th_p` (one dated Oct 8 block), `mac` Equities (record close), Geopolitics headline (oil),
-Scheduled events (landed tail), `bs` `lth` `r` (`st` unchanged). **Left dated Oct 5–6:** `trig_n`, `trig[0..3].d`,
+Scheduled events (landed tail), `bs` `lth` `r` (`st` unchanged). **Corrected, same day (staleness sweep):** the Oct 6 block of `th_p` ("oil, back under $100") and the Geopolitics body ("near $98 on Oct 6, a third session down") described an intraday read as a close — the front-month settled $100.32 / $100.58 / $100.20 on Oct 5–7; both now say so, dated Oct 8. **Left dated Oct 5–6:** `trig_n`, `trig[0..3].d`,
 `fal[5]`, `bs` `cbp` / `hash`, `cvp[3]`, the Fed / Rates / ETF `mac` narratives, the catalyst row, `ev`.
 **Verified:** parity 187/187, no BS mismatch (the EV / `EVENTS` half of the snippet was not run — neither was
 touched); digit tokens equal across languages on the five edited keys; Chrome headless en/pt/es from scratch

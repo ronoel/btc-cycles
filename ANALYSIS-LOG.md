@@ -23,6 +23,96 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-08 — Interim check: the deposit address behind the Oct 6 government transfer took another 8,427.6 BTC on Oct 7; price under $82,563; LTH supply at a new low
+
+Owner asked to refresh data, look for news, check the calendar, review the analyses and say whether the
+recommendation changed. **Not the pass** (ran Oct 6; next ~Oct 13) and not an adjudication (next Mon Oct 12):
+`an_asof`, `mac_h`, `ev_asof` stay Oct 6, **70% not re-scored**, no threshold, weight, band, window, falsifier,
+trigger or `st` changed. Reads Oct 8 ~04:45–06:00 UTC. `data.json` is the Oct 7 19:11 build (on-chain through
+**Sep 30**, `sth_realized_price` Oct 6, FRED through Oct 5–6, ETF through Oct 6; `stale: ["onchain"]` is the
+3-day freshness rule, not a failure). `build_data.py` was not run locally.
+
+**The new item — read on-chain, not found in the press.** mempool.space address API, tip not recorded. The
+deposit address of the Oct 7 entry, `3GPnJfBN4A3zhaHAewQAfcnshf6kNKe2tw`, received **8,427.6175 BTC on Oct 7,
+14:41–17:57 UTC** (~$0.70B at 83.2K), in the same test-then-full pattern as Oct 6, from eight wallets:
+`bc1qw8pd8q…` 2,818.20 (funded 2024-02-28 — the day the Oct 6 Bitfinex-labelled wallet was funded), `bc1q8aflgg…`
+2,456.03 (2022-11-17), `bc1qmgnv78…` 1,155.90 (2024-02-28), `bc1qd5p6jm…` 976.71 (2024-04-22), `bc1qhd5nns…`
+657.92 (Apr 2023), `bc1qqeq6au…` 199.99 (2025-08-07), `bc1qdqfl30…` 135.02 and `bc1q8u0g6w…` 27.84 (both
+2026-04-22). The eight sources show their full balance spent; the intermediate hops were not all read. The address swept each deposit within ~5–20 minutes
+into pooled transactions paying `3MqUP6G1…` (the exchange operational wallet) — it holds 0 BTC, no mempool
+transactions. Its inbound totals by day: Aug 28 dust, **Sep 16 210.70** (the Oct 7 entry found only 95.69 of
+it), Oct 6 833.60, **Oct 7 8,427.62**. The two large wallets are untouched (94,643.49 and 69,370.18 BTC).
+**What is and is not established:** the amounts, times and the shared deposit address are read directly; that
+the address is the government's Coinbase Prime deposit rests on the Oct 6 press plus the amounts matching, and
+**the Oct 7 wallets' labels were not verified** (no Arkham access; two searches found no report of an Oct 7
+move — the latest government-transfer coverage found is Jul 13–14, ~3,800 BTC). A deposit is not a sale. Timing:
+the Oct 7 low (82,787) printed in the 13:00 UTC hour, **before** the first test transaction at 14:41 and the bulk
+at 15:33–17:57; price was 83.0–83.5K through the deposits. Size: 8,428 BTC is ~40% of Binance spot volume that
+day (20,838 BTC) and ~6× the Oct 6 ETF net flow. Not a "2nd catalyst" by §2's definition; the catalyst row was
+not edited.
+
+**Tape (Binance).** Oct 6 C 85,549.93; **Oct 7 O 85,549.94 / H 85,598.22 / L 82,787.25 / C 83,321.81**
+(20,838 BTC); Oct 8 low **82,227.56** in the 04:00 UTC hour, ~82.5K at 05:00 — the lowest since Sep 21 (80,850) and the
+first trade under the Sep 28 low of 82,563 that `th_p` cites. Closed-day SMA20 84,203: price is under it. Week
+Oct 5–11 in progress (leg 1 fails only under ~$70K). F&G 64 (73 on Oct 6). Binance OI 96.1K BTC (Oct 7 20:00),
+flat through the drop. **Funding, %/8h, last print (Oct 8 00:00) / 7d avg** (context only): Binance USDT-M
+−0.0010 / +0.0021 · COIN-M +0.0100 / +0.0020 · Bybit linear +0.0011 / +0.0029 · inverse +0.0100 / +0.0033 · OKX
+USDT +0.0064 / +0.0035 · USD +0.0100 / +0.0027 — three of the last four Binance USDT-M prints negative, every
+7-day average positive.
+
+**Ledger, read not re-scored.** **Premium — against:** Oct 6 −0.0119% raw / +0.0041% adjusted, Oct 7
+**−0.0561% / −0.0041%** → **33 negative raw closes, Sep 5–Oct 7**. **LTH — against:** BGeometrics (one call,
+saved) Oct 5–7 16,508,140 / 16,499,934 / **16,480,393 — a new low**, under Sep 29's 16,483,418; 7d −6,805,
+**30d −37,908**, 128,910 under 16,609,303 → NOT YET by the Sep 27 rule (latest day may be revised). **ETF —
+flat:** SoSoValue Oct 6 **+$118.9M** (IBIT +122.0, secondary); `d20` 2.25, `d5` 0.17; Oct 7 not published.
+**Leg 3 into Oct 12** = +$2.66B (Sep 14–Oct 6) + Oct 7–9: misses only if those three net ≲ −$1.16B. **Fed —
+flat:** Polymarket Oct 28 hold 83.5 / +25bp **15.5** / +50bp 0.35 (vol $28.5M). **Rates — flat:** Treasury par
+curve 10y 5.27 (Oct 6) / **5.28 (Oct 7)**, 2y 4.79 / 4.77, 30y 5.64 / 5.67, real 10y 2.91 / 2.92 — under the Oct
+5 highs (5.31 / 2.95). Oil turned back: Yahoo `BZ=F` 100.58 (Oct 6), 100.20 (Oct 7), ~102.35 on Oct 8 — the
+"back under $100" of the Oct 6 pass was intraday only. Two against, three flat, oil reversed; no pre-registered
+marker at stake.
+
+**Polymarket BTC** (Gamma, vol $73.8M): ↓$70K **35.5** (25.5 on Oct 6), ↓$65K 18.5, ↓$60K 11.5, ↓$55K 7.5,
+↓$50K 5 → 7.5 + 0.56 × 4.0 ≈ 9.7 → **no-new-low ~90.3%** (91.4). ↑$90K **63.5** (78.5), ↑$95K 43.5, ↑$100K
+30.5. `cvp[3]` left dated Oct 6. **Hash Ribbons:** Up Sep 1–Oct 7 = 37 days, gap +2.67%; mempool.space retarget
+estimate **+5.7%**, Oct 16 ~13:40 UTC (`retarget3` text and time not edited).
+
+**Cross-asset (Yahoo).** S&P **7,818.93 Oct 6 (record close)**, 7,801.77 Oct 7; Nasdaq Composite 27,599.79 /
+27,538.69; ICE DXY 101.83 / 102.24; gold 4,187.1 / 4,140.7.
+
+**News (sonnet agent; search and fetch summaries, not verbatim; Reuters, CNBC, Bloomberg bodies not opened).**
+**FOMC minutes released Oct 7** (Fed calendar shows "Released October 07, 2026" — `fomc_min`'s derived date was
+right): "most participants" saw another increase as likely appropriate by year-end, no count, no 50bp discussion
+in the summary; headlines read it as another hike coming with no timing. Market reaction not found; the
+agent's core-PCE figures disagree (3.0 vs 3.4) and are not used. **Iran** (Iran International liveblog): Axios —
+CENTCOM told to finish preparing for possible resumed major operations, no strike date, no progress in talks,
+Qatar awaiting Iran's reply; CENTCOM says traffic including 20M barrels is moving through Hormuz. **Oct 7 drop:**
+Bitcoin.com has $412.6M liquidated in one hour, >97% longs, no single trigger; other totals $479–556M — sources
+disagree, none used on the page. **Not found:** the Oct 7 10-year auction result, Fed speakers Oct 6–8, any
+Strategy 8-K after Oct 5 (EDGAR list may lag), MSCI, Bitget status, Liquid post-mortem, a public Anthropic S-1,
+any exploit >$100M or depeg dated Oct 6–8. **SpaceX lock-up:** sources still conflict (Dec 8 for the main
+180-day lock-up; the October tranche undated) — prospectus not opened, no `EVENTS` row. Hurricane, CLARITY/SEC,
+tariffs, miners: not searched. **Calendar:** BLS October schedule re-opened by the agent — CPI Wed Oct 14, PPI
+Thu Oct 15, both 08:30 ET, unchanged.
+
+**Edited (en/pt/es):** `th_p` (one dated Oct 8 block), `mac` Equities (record close), Geopolitics headline (oil),
+Scheduled events (landed tail), `bs` `lth` `r` (`st` unchanged). **Left dated Oct 5–6:** `trig_n`, `trig[0..3].d`,
+`fal[5]`, `bs` `cbp` / `hash`, `cvp[3]`, the Fed / Rates / ETF `mac` narratives, the catalyst row, `ev`.
+**Verified:** parity 187/187, no BS mismatch (the EV / `EVENTS` half of the snippet was not run — neither was
+touched); digit tokens equal across languages on the five edited keys; Chrome headless en/pt/es from scratch
+copies, 0 console lines ×3, the new figures present in each: **Too early · 0 of 4 families · 1 of 15 active · 4
+partial · expert 16% / equal 20%** (Oct 6: 3 partial, 12 / 17). The fourth PARTIAL is the live `fund` row — its
+bar is a 7-day average ≤ +0.003%/8h and Binance reads +0.0021 (+0.0033 on Oct 6); a fast row, and by the Sep 21
+test not a signal. `CORE` 4%, SOPR (1.0012, Sep 30 data) the one PARTIAL. PT/ES prose was written with the EN,
+not reviewed by a second reader.
+
+**Owed before Mon Oct 12 00:15 UTC:** the leg-2 form is the owner's to decide (tally unchanged: raw-Sunday 0/7,
+adjusted-Sunday 4/7, any-positive-raw 2/7, weekly-mean 0/7; this week raw −0.021 / −0.012 / −0.056, adjusted
+−0.008 / +0.004 / −0.004). To watch: further deposits to `3GPnJf…`, the two large wallets, and any press
+attribution of the Oct 7 move.
+
+---
+
 ## 2026-10-07 (02:35–03:00 UTC) — Read: a 15-minute drop to $83,577 with no headline found; nothing changed
 
 Owner asked why BTC was falling and whether there was news. Log only: **nothing on the page changed**, no pass,

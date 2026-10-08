@@ -111,6 +111,25 @@ adjusted-Sunday 4/7, any-positive-raw 2/7, weekly-mean 0/7; this week raw −0.0
 −0.008 / +0.004 / −0.004). To watch: further deposits to `3GPnJf…`, the two large wallets, and any press
 attribution of the Oct 7 move.
 
+**Added ~12:50 UTC — the deposit address's full history, and a standing watch (owner asked whether this is a
+sale risk and to keep following it).** mempool.space `address/…/txs/chain`, paginated to the first transaction:
+`3GPnJfBN4A3zhaHAewQAfcnshf6kNKe2tw` has **204 transactions since 2025-12-23** and has received **11,566.66 BTC**
+in total; Oct 7 alone is 73% of it. Inbound by day (≥100 BTC): Apr 27 651.64 · May 28 142.94 · **Jul 13
+1,151.01** · Sep 16 210.70 · Oct 6 833.60 · **Oct 7 8,427.62**; fourteen smaller days Apr 10–Jul 10 (1.7–39.7
+BTC). **Attribution, stronger but not closed:** Jul 13 is the day The Block / Arkham reported ~3,800 BTC moved
+from US-government-labelled wallets to Coinbase Prime (found by search this morning; The Block post 408202) — the
+address took 1,151 of it, so the rest went through deposit addresses not in hand. The Oct 7 source wallets remain
+unlabelled here. No inbound since Oct 7 18:05 UTC, no mempool transactions (12:50 UTC, BTC ~82.4K). **Size:**
+~40% of Binance spot volume on Oct 7, ~a third of the four-week ETF net (+$2.25B), ~2.6% of the ~323.7K BTC the
+press attributes to the government. **Why a deposit is not a sale:** Prime is the Marshals' custodian; the
+address forwards to the exchange operational wallet within minutes and nothing after that is visible on-chain.
+The legal reading (the March 2025 reserve order bars sales of finally forfeited coins; coins from active cases
+may fall outside it) is press from the same search, **not read in the order itself**. **Precedent, N=1:** the
+Jul 13 deposit came 12 days after the $57.8K low and price rose afterwards — smaller, and one case. **What would
+show selling:** nothing on-chain; the Coinbase premium is the nearest proxy — Oct 7 closed −0.056%, wider than
+Oct 5–6 but inside September's range (to −0.089%): compatible with selling, not evidence of it. The watch is
+written into `MAINTENANCE.md` §5.
+
 ---
 
 ## 2026-10-07 (02:35–03:00 UTC) — Read: a 15-minute drop to $83,577 with no headline found; nothing changed

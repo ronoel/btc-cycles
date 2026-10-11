@@ -23,6 +23,133 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-11 — Research pass: 70% held a third time on a ledger that leaned against it; the ETF feed is dead since Oct 9; the cycle clock reached its 370-day average
+
+The weekly pass, on its scheduled day (owner asked to update, check whether any recommendation changed and list
+the calendar). `an_asof`, `mac_h`, `ev_asof` → Oct 11. No threshold, weight, band, window, falsifier or trigger
+changed; no `st` changed. Not an adjudication — the Oct 12 window is 00:15 UTC Monday and is owed. Reads Oct 11
+~16:40–17:00 UTC; `data.json` is the Oct 11 06:14 build (on-chain through **Oct 4**, `sth_realized_price` Oct 10,
+FRED through Oct 8, ETF through **Oct 8**; `stale: ["etf","onchain"]`). `build_data.py` was not run locally.
+
+**A pipeline failure, not a lag: the SoSoValue ETF endpoint is gone.** `POST
+api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart` returns `{"code":1,"msg":"接口不存在"}` ("interface does not
+exist") with both the Action's User-Agent and a browser one; `v1`/`v3`, GET and a sibling path return the same.
+`etf` entered `stale` at the Oct 9 19:10 build and `etf.d` has been Oct 8 for four builds. `openapi.sosovalue.com`
+answers the same path with "API Key is invalid or does not exist" — the endpoint appears to have moved behind a
+key. Farside returns a Cloudflare challenge to curl. **Not fixed in this pass**: a replacement source is a design
+choice (a keyed SoSoValue API, or another provider) and the row is the arbiter of falsifier #6's leg 3 — it is the
+owner's to decide. Until then `etf.d20` freezes at 1.92 and the page's live ETF figures are Oct 8 figures; the
+`mac` ETF row, `trig_n` and `trig[1]` now say so. This is the failure MAINTENANCE §1 predicted for an undocumented
+endpoint.
+
+**Counter-scenario: ~70%, left, on this ledger (written before the number).** The five residual items against
+their Oct 6 readings. **Rates — for, small:** Treasury par curves (CSV, direct) 10y 5.31 (Oct 5) → 5.27 → 5.28 →
+5.22 → **5.24 (Oct 9)**, real 10y 2.95 → 2.91 → 2.92 → 2.87 → **2.91**, 2y 4.80, 30y 5.60. The Oct 7 10-year
+auction: 5.300% high yield, bid-to-cover 2.77, indirect 80.34% (Walter Bloomberg via an aggregator — secondary;
+TreasuryDirect not read, tail not found). **Fed — flat:** Gamma, Oct 28: hold **83.5** / +25bp **16.5** / +50bp
+0.35 (vol $32.1M); December +25bp **74.5**, hold 22.5; two 2026 hikes in total **70.5**, three 7.55; no cut in
+2026 95.6. Waller, Oct 8 (Kitco wire, secondary): "I anticipate additional hikes…" / "The hikes do not need to
+come at consecutive meetings." A press summary of the minutes (FXStreet/UOB, Oct 8) and a Bloomberg WIRP 19.4% for
+October agree in direction. **ETF — against:** data.json through Oct 8: `d20` 2.08 → **1.92**, `d5` **−0.51**.
+Daily, tftc.io (Farside-derived, secondary; its Oct 2–6 figures match SoSoValue's to the decimal, and Oct 5–8 sum
+to the `d5` in `data.json`): Oct 7 **−487.1** (IBIT −207.7), Oct 8 **−244.1** (IBIT −5.5), Oct 9 **+21.1** (IBIT
++22.4). Oct 7 is larger than the −$450M of Sep 15. **LTH — against:** BGeometrics (one call, saved) Oct 7–10
+16,480,393 / 16,458,605 / **16,446,389 (new low, Oct 9)** / 16,465,208; 7d −61,085, **30d −50,218**, 144,095 under
+16,609,303 → NOT YET by the Sep 27 rule. **Premium — against on the governing form, flat on the adjusted one:**
+raw closes Oct 6–10 −0.0119 / −0.0561 / −0.0754 / **−0.1099** / −0.0935 → **36 negative raw closes, Sep 5–Oct
+10**; Oct 9 and Oct 10 are the widest of the record (Sep 17 was −0.089). USDT-adjusted +0.0041 / −0.0041 / +0.0026
+/ −0.0159 / +0.0015. The whole widening is the USDT leg: Coinbase USDT-USD closed 0.99984 (Oct 6) → 0.99948 →
+0.99922 → 0.99906 → 0.99905 (Oct 10), Kraken the same to the fourth decimal, Binance USDC/USDT 1.0008. **Checked
+before calling it anything:** USDT-USD at or under 0.9991 on Coinbase closed on most days of late May–June, in
+July and through Aug 17 — a 0.1% discount is ordinary for 2026, not a depeg signal; it was 0.9998 for the three
+weeks before Oct 7, so what is new is the move, not the level. **Beside the ledger:** Brent (Yahoo `BZ=F`) 100.20
+(Oct 7) → **104.28** → **104.72 (Oct 9)**; press ties it to Hurricane Isaias (62.89% of Gulf oil output shut in,
+BOE Report Oct 8 citing the US agency) and to Hormuz (USNI via an aggregator: nine ships struck off Oman Oct 1–6;
+"4 transits on Oct 4 against 85" — one site, not used on the page). Market no-new-low ~91.4% → **~88.1%** (↓$60K
+14.5, ↓$55K 8.5 → 8.5 + 0.56 × 6.0 = 11.9). One for, one flat, three against, oil against, the market down three
+points; **no pre-registered marker at stake**. The number has moved only on pre-registered markers (Aug 24, Sep
+17, Sep 21) and was held on two-sided ledgers on Sep 27 and Oct 6; holding it on a one-sided ledger is the same
+rule applied where it costs something, and the page says the ledger leaned against. Gap to the market ~18 points
+(was ~21). `th_t`, `fal[1]` unchanged. What would have moved it: a trade under the Sep 20 low is not a marker
+either — the only pre-registered downside event is a lower low under $57,800.
+
+**Tape (Binance).** Oct 7 C 83,321.81; **Oct 8 O 83,321.81 / H 83,521.15 / L 80,393.56 / C 81,754.45** (21,677
+BTC, the heaviest day of the week); Oct 9 C 82,635.55; Oct 10 C 82,988.36; Oct 11 ~83,894 at 16:42 UTC (H 84,000).
+The Oct 8 low is the lowest since Sep 20 (80,126.04) — under the Sep 21 low (80,850) the Oct 8 entry named. Week
+Oct 5–11 in progress: O 86,530, L 80,393.56, ~83.9K — leg 1 fires on anything above ~$70K. Closed-day SMA20
+84,406: price is under it. F&G 61 (64, 59, 64 on Oct 10–8). Binance OI 96.4K (Oct 8 12:00) → 92.5K BTC (Oct 11
+16:00). Days since the ATH: **370** — the `clock` row's date; price ~34% under the ATH against the −65% target,
+which is the report's base case being late, not a falsifier (the window runs to week 60, Nov 30; `capend` Nov
+9–19). **Funding, %/8h, last print (Oct 11 16:00) / 7d avg** (standing rule, context only): Binance USDT-M +0.0013
+/ +0.0008 · COIN-M +0.0047 / +0.0043 · Bybit linear +0.0016 / +0.0021 · inverse +0.0050 / +0.0058 · OKX USDT
+−0.0000 / +0.0026 · USD +0.0035 / +0.0054 — two of the last four Binance USDT-M prints negative, every 7-day
+average positive.
+
+**Deposit address (standing rule, context only; mempool.space, ~16:42 UTC).** `3GPnJf…`: 204 transactions,
+11,566.66 BTC received, balance 0, no mempool transactions — **nothing since Oct 7 17:57 UTC**. `bc1qazcm76…`
+94,643.49 and `bc1qa5wkga…` 69,370.18 BTC, unchanged. Press (news agent, two searches): no report of the Oct 7
+move and no Marshals/DOJ/Treasury statement found; the attribution stays where the Oct 8 entry left it.
+
+**Polymarket BTC (Gamma, ~16:40 UTC; `cvp[3]`).** Vol $74.7M: ↓$70K 34.5, ↓$65K 19.5, ↓$60K 14.5, ↓$55K 8.5,
+↓$50K 6.5, ↓$45K 3.9, ↓$40K 3.55; ↑$90K **63.5**, ↑$95K 43, ↑$100K 28.5, ↑$110K 11.5. **Hash Ribbons:** Up Sep
+1–Oct 10 = **40 days**, 30d/60d 970.6 / 947.0 EH/s = **+2.49%**; stays PARTIAL on the Oct 6 call (40 days is still
+between the 28-day and ≥47-day precedents). Retarget estimate **+4.4%**, Oct 16 ~17:20 UTC, height 971,712
+(mempool.space; `ev.retarget3` and its `tm` updated).
+
+**Cross-asset (Yahoo).** S&P 7,765.36 (Oct 8), **7,811.54 (Oct 9)** — the Oct 6 record close of 7,818.93 stands
+(AP wire agrees); Nasdaq Composite 27,193.34 / 27,366.17; ICE DXY 102.14 / 102.21; gold 4,157.0 / 4,216.3.
+
+**News (sonnet agent; search summaries, not verbatim; coverage of Oct 10–11 thin).** **Not found:** a stated cause
+for the Oct 8 drop (the equity wrap has a chip-led Nasdaq −1.25% that day — coincident, not attributed),
+liquidation totals, September CPI/PPI consensus, a 30-year auction result, a US response to Iran's Hormuz
+proposal, East-West pipeline status, post-landfall Isaias status, any Strategy 8-K after Oct 5 (EDGAR list read by
+the agent, possibly cached), an MSCI result, Bitget status, any exploit >$100M or depeg dated Oct 8–11, a public
+Anthropic S-1, Tesla/Coinbase/Strategy Q3 dates, Oct 30 expiry size. **Found, secondary:** a Halborn write-up of
+the Liquid hack exists (URL only, not read — closes nothing). **SpaceX lock-up:** a third secondary source
+describes staged tranches at 70/90/105/120/135 days and "180 days: Dec 8" — the sources now disagree on the
+schedule and agree only on Dec 8; prospectus still not opened, still no `EVENTS` row. **CR:** the agent found Dec
+4 and Dec 11 in different commentary; the page's Dec 11 (`cr`, `'s'`) is unresolved, not contradicted.
+
+**Calendar at publishers (haiku agent, raw pages saved; one mapping error caught).** Fed calendar: Oct 27–28, Dec
+8–9, September minutes "Released October 07, 2026". ECB Oct 28–29, Dec 16–17; BoJ Oct 29–30, Dec 17–18. **BEA —
+the agent paired each title with the date after it and reported September PCE on Nov 4; the page is date-then-title
+(re-read here from the saved HTML): GDP advance and September Personal Income and Outlays Oct 29, October PIO Nov
+25, November PIO Dec 23 — the `EVENTS` rows are right, nothing moved.** BLS: curl 403; the summarising fetch read
+CPI Oct 14 and PPI Oct 15 at 08:30 ET off the grid — consistent with `EVENTS`, **not a verbatim read**. Treasury
+refunding page shows no November date (`refund` stays `'s'`); TreasuryDirect's upcoming table is script-rendered
+and came back empty. The agent's "sandbox clock reads Oct 16" was a misreading of the retarget timestamp — `date
+-u` here read Oct 11 16:43.
+
+**Edited (en/pt/es).** `an_asof`, `mac_h`, `ev_asof`; `th_p` (the Oct 8 read block replaced by the Oct 11
+re-score; "$86K" → "$84K"); `cvp[3]` `d` and tip; `bs` `hash` / `lth` / `cbp` `r` and the `fund` fallback;
+`trig_n`, `trig[0..3].d`; `mac` Fed, Rates, ETF, Geopolitics, Scheduled events, Equities; `ev.retarget3`,
+`ev.fomc_oct`; `EVENTS` `retarget3.tm`. EN written here; PT/ES mirrored by a sonnet agent against the digit-token
+checker. **Not edited, and `mac_h` now dates the table Oct 11:** Liquidity, Dollar, Credit, Recession (Polymarket
+not re-read), Trade (a third pass without re-research), 2nd catalyst, Strategy (no filing found after Oct 5),
+`resv`, `puell` fallback, `fal[5]` (no adjudication ran), `ph_notes`.
+
+**Readings, verified by rendering** (Chrome headless from scratch copies; en, pt, es via a `btc_lang` setter; 0 console
+lines ×3; parity 187/187, no BS/MAC/EV mismatch, 47 `EVENTS` ids all with text; digit-token checker 22 changed EN
+lines against their PT/ES twins, 0 mismatches; staleness sweep on the Oct 6/8 lead figures — every remaining hit is a
+dated statement): **Too early · 0 of 4 families · 1 of 15 active · 3 partial · expert 13% / equal 17%** (Oct 8: 4
+partial, 16 / 20). ACTIVE: ETF flows — **on the frozen Oct 8 figure** (+$1.92B; by hand through Oct 9 ≈ +$1.95B, same
+status). PARTIAL: Hash Ribbons, exchange reserves/SSR, and the live `fund` row (Binance 7d +0.0008%/8h against its
++0.003 partial bar — a fast row, context by the Sep 21 test). **`CORE` 4% → 0%, 0 of 8**: SOPR printed 1.0098 (Oct 4
+data) against its 1.005 bar and left PARTIAL — the marginal row the §5 convention names, not information. README
+sentence and `og-card.html` stat updated to 0%; `og.png` regenerated (`build_og_card.py`, C4 to week 52.9 / −33.5%,
+Chrome headless screenshot, image opened and checked; `test_build_og_card.py` OK). Events table: Oct 11 `clock`
+shows as today, CPI Oct 14 12:30 UTC next. **Not verified:** PT/ES prose beyond its numbers was sampled (`th_p`
+re-score block in PT, `cbp` in ES), not read in full. **Left for the next pass:** `th_p` still says the `CORE`
+figure rests "on marginal readings only — SOPR and Puell sit within a day's noise of their bars"; with `CORE` at 0%
+and Puell at 1.07 that sentence is loose, not wrong enough to rewrite in three languages unreviewed.
+
+**Owed:** the Oct 12 adjudication (00:15 UTC Monday). Pre-staged: leg 1 fires (week Oct 5–11 trading ~$83.9K); leg
+3 fires on the carried `d20` +$1.92B and on the hand figure ≈ +$1.95B; leg 2 on the raw Oct 11 close, −0.127% raw /
+−0.023% adjusted in progress at 16:42 UTC — every form on course to miss. Leg-2 form: the pinned raw Sunday close
+stands unless the owner decides otherwise before the window (tally raw-Sunday 0/7, adjusted-Sunday 4/7).
+
+---
+
 ## 2026-10-08 — Interim check: the deposit address behind the Oct 6 government transfer took another 8,427.6 BTC on Oct 7; price under $82,563; LTH supply at a new low
 
 Owner asked to refresh data, look for news, check the calendar, review the analyses and say whether the

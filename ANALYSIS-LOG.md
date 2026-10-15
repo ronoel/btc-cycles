@@ -23,6 +23,179 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-15 — Interim check + the Oct 12 adjudication (run 3 days late): 2 of 3 an eighth time; CPI core hot, October hike 16.5% → 27.5%; CORE back to 4% on SOPR; event study: scheduled releases time volatility, not direction
+
+Owner asked to review the analysis, look for new information and the calendar, find when price starts moving
+ahead of scheduled events, and look for ways to identify the trend. **Not a pass** (the badge stays Oct 11: the
+narrative `mac` rows were not all re-checked) — interim check, the owed Oct 12 adjudication, and a
+pre-registered event study. **`index.html`: only the text the Oct 12 window made stale** — `th_p` (eight
+windows, next Oct 19), `trig_n` (Oct 12 clause), `trig` premium and ETF cards, `fal[5]` (eighth adjudication), `mac`
+Strategy row (Oct 12 8-K), and the `trig[3]` Fed header (see below) — EN here, PT/ES mirrored by a sonnet agent against the digit-token checker. No
+threshold, weight, band, window, falsifier, trigger or `st` changed; **70% not re-scored**. Reads Oct 15 ~11:50–13:30 UTC. `data.json` is the Oct 15 06:14
+build (on-chain through **Oct 8**, `sth_realized_price` Oct 14, FRED through Oct 13, ETF through **Oct 8** —
+`stale: ["etf","onchain"]`; ETF is the dead SoSoValue endpoint of the Oct 11 entry, unchanged).
+
+**Falsifier #6, Oct 12 window (00:15 UTC Monday; run Oct 15, ~3 days late): 2 of 3 — not fired, nothing
+deployed.** Leg 1: Binance 1w Oct 5–11 closed **$83,773.12** → fired. Leg 2: Oct 11 close, Coinbase 83,678.29
+vs Binance 83,773.12, USDT-USD 0.99888 → **−0.1132% raw / −0.0012% USDT-adjusted** → missed on the pinned raw
+Sunday form (no owner decision changed it before the window). Leg 3: `etf.d20` **+$1.92B** → fired **on the
+frozen Oct 8 figure** — the feed has been dead since Oct 9 (Oct 11 entry); by hand from tftc.io's Farside-style
+table (secondary) Oct 9 +21.1, Oct 12 −65.4, Oct 13 +175.6, Oct 14 −261.5 ($M), so the 20-session sum through
+Oct 9 is ≈ +$1.95B and the leg would also fire on it. Forms: pinned raw-Sunday **miss**, weekly-mean raw
+(Oct 5–11: −0.021 / −0.012 / −0.056 / −0.075 / −0.110 / −0.094 / −0.113) **−0.069% miss**, any-positive-raw
+**0 of 7 miss**, adjusted-Sunday **miss** — the third window (Sep 14, Oct 5, Oct 12) in which every form
+misses. Tally after eight windows: raw-Sunday 0/8, weekly-mean 0/8, any-positive-raw 2/8, adjusted-Sunday 4/8.
+**Next window Oct 19.** Week Oct 12–18 so far: O 83,773.12, H 84,352, L **80,226.35**, ~81.0K — leg 1 fails
+only under ~$70K; leg 2 raw closes Oct 12–14 −0.1313 / −0.0806 / **−0.1417%** (adjusted −0.0043 / +0.0114 /
+−0.0097); leg 3 needs a working feed to be adjudicated on anything but the Oct 8 number — the owner's call
+(Oct 11 entry), still open.
+
+**Tape (Binance).** Oct 12 C 81,850.00 (H 84,352, L 81,750; press: $488.6M liquidated in 24h, $406.5M
+longs — news.bitcoin.com citing CoinGlass, secondary); Oct 13 C 83,169.00; **Oct 14 C 81,682.01** (18,308 BTC);
+Oct 15 L **80,226.35** (00:00–04:00 UTC), ~81.0K at 12:00. The Oct 15 low is under the Oct 8 low (80,393.56) and
+$100 above the Sep 20 low (80,126.04). **Neither is a pre-registered marker**: the only downside marker is a
+lower low under $57,800. Closed-day SMA20 83,848 (falling, −468 over 5 days) · SMA50 81,193 · SMA100 73,497 ·
+SMA200 72,243 (the last three rising); 20W 71,156 · 50W 77,153 · 200W 66,520. RSI14 daily 46.8; realised vol
+10d 28.0% / 30d 38.8% / 90d 37.7%; 90-day momentum +28.0%. Price trades under SMA20 and at SMA50; every
+long-horizon trend rule of the Sep 21 test (SMA200, SMA100, 90d momentum) still reads long. F&G 53 (62, 57, 69
+on Oct 14–12). Binance OI 92.4–93.4K BTC Oct 12–15, flat through the drop; global account L/S 1.29 (Oct 14) →
+1.77 (Oct 15); taker 0.91–1.00. **Funding, %/8h, last print (Oct 15 08:00) / 7d avg** (context only): Binance
+USDT-M +0.0066 / +0.0018 (6 of 21 prints negative) · COIN-M +0.0100 / +0.0065 · Bybit linear +0.0057 / +0.0025 ·
+inverse +0.0095 / +0.0068 · OKX USDT +0.0053 / +0.0025 · USD +0.0100 / +0.0067 — all six 7-day averages
+positive, no extreme.
+
+**CPI, Oct 14 12:30 UTC (BLS via a fetch summary — re-read at the pass).** Headline +0.6% m/m, 3.7% y/y (energy
++5.2% m/m, +20.4% y/y; shelter +0.4% m/m); **core +0.3% m/m, 2.6% y/y against ~+0.2% / 2.4% expected**
+(investinglive preview, secondary). BTC, 15-minute bars: 83,466 → 83,860 into the print (12:00–12:30), then
+**−1.2% in the 12:30 bar on 1,512 BTC** (~9× the hour before), a second leg into the 13:30 cash-equity open,
+81,641 by 16:00. Nasdaq Composite −1.9% (27,204 → 26,693), S&P −1.1% (7,805 → 7,719); Treasury par: 2y 4.79 →
+**4.82**, 10y 5.21 → 5.19, 30y 5.56 → 5.52 — the front end rose, the long end did not. **Fed (Polymarket,
+Gamma ~12:00 UTC Oct 15):** Oct 28 hold **72.5** / +25bp **27.5** (16.5 on Oct 11); December +25bp **78.5**,
+hold 19.5; 2026 hikes in total: one 16.5 / two **67.0** / three 11.95; no cut in 2026 96.85. PPI (Oct 15 12:30
+UTC): not out at the time of these reads (system clock 12:17 UTC); not read.
+
+**Ledger, read not re-scored.** **Rates/Fed — against:** the October hike re-priced up 11 points on a core
+beat; 2y up. **ETF — against:** −65.4 / +175.6 / −261.5 ($M, Oct 12–14, secondary). **Premium — against on the
+raw form, flat adjusted:** **40 negative raw closes, Sep 5–Oct 14**; the raw widening is still the USDT leg
+(Coinbase USDT-USD 0.99868 on Oct 14, the lowest close of this run; adjusted −0.0097%). **LTH — not read**
+(bitcoin-data.com answered 404/unparseable on the endpoint tried; the hourly anonymous limit is the likely cause
+— not retried). **Hash Ribbons — unchanged, PARTIAL:** 30d/60d 972.3 / 947.9 EH/s = **+2.58%** (mempool.space
+3-month series), Up since Sep 1 by the Oct 11 entry; retarget estimate **+6.55%**, now **Oct 16 ~10:50 UTC**
+(146 blocks left). **Strategy — for, small:** 8-K Oct 12 (primary, SEC): **bought 250 BTC** ($21.5M, ~$86,194)
+Oct 5–11 on MSTR ATM, after 334 BTC Oct 1–4; holdings **848,250**, average cost $75,444; repurchased $192.4M of
+STRC. A buyer, small. **Oil — flat/against:** Brent (Yahoo `BZ=F`) 106.65 (Oct 12) → 105.69 → 106.06 →
+104.86 (Oct 15). Cross-asset: ICE DXY 102.0–102.6; gold 4,107.9 (Oct 14) → 4,172.6. Polymarket yearly BTC (vol
+$75.6M): ↓$70K **42.0** (34.5 Oct 11), ↓$65K 24.0, ↓$60K **16.5** (14.5), ↓$55K 9.5 (8.5), ↓$50K 7.5, ↓$45K 5.2,
+↓$40K 3.35; ↑$90K **54.5** (63.5), ↑$95K 34.5, ↑$100K 22.5. Market no-new-low ≈ 100 − (9.5 + 0.56 × 7.0) ≈
+**~86.6%** (88.1 on Oct 11), same interpolation as the Oct 11 entry. One small for, four against: 70% is not
+re-scored at an interim check, and the ledger is recorded for the next pass to weigh.
+
+**Government wallet — attribution now has a press source.** tftc.io (Oct 8, secondary, citing Arkham, CoinDesk
+first): **~9,261 BTC to Coinbase Prime on Oct 7–8**, Arkham label "US Government: Bitfinex Hacker Seized
+Funds", "no sale has been confirmed". The on-chain reads of the Oct 7/8 entries sum to **833.60 + 8,427.62 =
+9,261.22 BTC** into `3GPnJf…` — the same figure, so the address and the Oct 7 inbound are now attributed by a
+publisher naming the move (rule 2 of the §5 standing read is met, at secondary grade). The same source reports
+**12,267 BTC moved Oct 8 to new unlabeled addresses, not to an exchange** — not read on-chain here. Standing read
+(mempool.space, ~12:00 UTC): `3GPnJf…` 204 tx, 11,566.66 received, balance 0, last tx Oct 7 18:05 UTC, nothing
+since; `bc1qazcm76…` 94,643.49 and `bc1qa5wkga…` 69,370.18, unchanged.
+
+**CORE is back at 4% — the README's "0% today" was stale by the first build after it was written.** Rendered
+(Chrome headless, en, scratch copy of the repo at HEAD with the Oct 15 06:14 `data.json`): **Too early · 1 of 15
+active · 4 partial · expert 16% / equal 20%**; `CORE` **4%, 0 of 8 active** — SOPR printed **1.0001** (Oct 8
+data) against its 1.005 bar and is PARTIAL again (1.0098 on Oct 4 data took it out). This is the §5 marginal
+row doing exactly what §5 says it does; the README sentence already says it "crosses that bar in both
+directions" and is updated to the rendered figure. `og-card.html` / `og.png` carry the same figure: **left alone, deliberately.** Both say "0%" next to an explicit "(Oct 11, 2026, on-chain data through Oct 4)" in the
+README and "0% now" on the card; the README figure is a dated statement (the staleness sweep's rule keeps it), and a
+0 → 4 move on the row §5 names as noise is not the "moves materially" that MAINTENANCE §3 asks the card to be
+regenerated for. If SOPR holds over its bar a week, the next pass regenerates both.
+
+**Calendar (news agent, secondary unless stated).** Tesla Q3 results **Oct 21 after the close** (primary, 8-K)
+— not in `EVENTS`. Deribit Oct 30 expiry: ~$10.7–11.3B notional, ~35% of Deribit BTC OI, max pain ~$78–79K,
+largest strike the $95K call (cryptobriefing, undated, written with spot ~$86K — not verified at Deribit). Mt.
+Gox deadline Oct 31 (no extension news; last wallet move Jun 2). MSCI outcome date, the SEC Oct 20 item, the
+refunding date and the CR deadline: **not found**. Anthropic investor day Oct 14: no post-event coverage found.
+No exploit >$100M, exchange failure or stablecoin depeg found Oct 9–15.
+
+**Edited, and found by the staleness sweep.** Besides the Oct 12 keys listed at the top, the sweep on the Oct 11 lead
+figures (`84K`, `1.92`, thirty-six, forty days, `16.5%`, `0% now/today`, "Status Oct 11") found one undated
+present-tense figure: the `trig[3]` (Fed) card header said a second hike was "priced out of October (~16.5%)" —
+rewritten in all three languages to ~27.5% on Oct 15 / ~78.5% for December. Every other hit is dated and stays.
+**`trig_n` is knowingly mixed-date:** it is the Oct 11 status block ("Status Oct 11", thirty-six closes, −0.110%
+widest, ~16.5%) with only its Oct 12 window clause replaced; its counts refresh at the next pass rather than in
+three languages at an interim check. Same for `bs` `cbp` / `hash` (dated Oct 10).
+
+**Readings, verified by rendering** (Chrome headless from scratch copies; en, pt, es via a `btc_lang` setter; 0
+console lines ×3, twice — before and after the Fed-header fix; parity 187/187, no BS mismatch, every `EVENTS` id
+with text; digit-token checker on the six Oct 12 keys × PT/ES, 0 mismatches — the sonnet agent's run, the Fed
+header checked by eye in the three renders): **Too early · 1 of 15 active · 4 partial · expert 16% / equal 20%;
+`CORE` 4%, 0 of 8**; "next adjudication … Oct 19" in all three. **Not verified:** PT/ES prose beyond its numbers —
+checked by digits and sampled in the render, not read in full.
+
+### Event study: when does price move around scheduled releases? (pre-registered before running)
+
+**Design, written before any event-window return was computed** (scratch file, reproduced here verbatim in
+substance). Binance `BTCUSDT` 1h klines **2017-08-17 → 2026-10-15 (80,184 bars)**. Events: **FOMC statements (75,
+incl. the three unscheduled 2020 releases), CPI (110), Employment Situation (110)**, Aug 2017–Oct 14 2026, every
+timestamp from federalreserve.gov press-release pages or the BLS archived release itself (its embargo line,
+read through Wayback copies because bls.gov returns 403) — DST-correct UTC; October 2025 CPI and October 2025
+payrolls were never published (shutdown) and are absent, September 2025 CPI is Oct 24 2025; plus **Deribit
+monthly expiry** (last Friday 08:00 UTC, computed; 107). t0 = the hourly bar containing the release (for an
+08:30 ET print that bar opens 30 minutes before it). Windows: PRE72 [−72h,0), PRE24 [−24h,0), R1 [0,+1h), R4
+[0,+4h), R24 [0,+24h), POST [+24h,+120h). Test: event mean vs 10,000 placebo sets drawn from hours with the same
+weekday and UTC hour, excluding ±5 days of any event of the type, per era (2017–22 / 2023–26). Direction: 4 types
+× 6 windows × 2 eras = 48 cells, Bonferroni **p < 0.00104**; volatility (mean |return|) the same 48 cells,
+one-sided. **Decision rule fixed in advance: nothing reaches the page unless a cell survives in both eras with the
+same sign.** Mechanism: event-day change in FRED `DGS2` vs BTC R24 (Spearman, permutation; 6 cells, p < 0.0083).
+Predictive: PRE24 → R24 and R24 → POST (16 cells, p < 0.0031).
+
+**Volatility — the robust result.** Mean |return| in the first hour vs placebo: **FOMC 2.57× (2017–22) / 2.09×
+(2023–26), CPI 1.70× / 2.07×**, all p ≤ 0.0003 — both types, both eras. Payrolls only in 2023–26 (1.78×; 1.05× in
+2017–22). The excess fades fast: R4 FOMC 1.55× (p 0.012) / 2.15× (p < 0.0001), CPI 1.16× (p 0.14) / 1.51× (p
+0.001); R24 ≤ 1.33× and nothing survives. **Before** the release there is no excess, and in places a deficit — not
+pre-registered in that direction, so observation only: FOMC 2023–26 PRE24 0.72× and PRE72 0.76×; Deribit expiry
+PRE72 0.74× / 0.75× and PRE24 0.75× / 0.85× in both eras (the pre-expiry "pinning" story, consistent, untested).
+
+**Direction — nothing survives the rule.** Two cells pass Bonferroni in one era only, and neither is robust:
+FOMC R1 2017–22 **+86bp** (p < 0.0001) is the two unscheduled March 2020 releases (+1,295bp on Mar 15, +792bp on
+Mar 23) — median **+17bp**; 2023–26 −0.6bp (p 0.86). CPI R1 2023–26 **+43bp** (p < 0.0001, 61% up; median
++12bp, trimmed mean +33bp) is the 2023–24 disinflation run (largest +431bp Mar 14 2023); 2017–22 −6bp (p 0.51),
+and Oct 14 2026 itself was −87bp. Everything else p ≥ 0.012 — including the pre-event drift windows PRE24/PRE72
+for every type (largest: CPI 2023–26 PRE72 +153bp p 0.042, NFP 2023–26 PRE72 −106bp p 0.012 — opposite signs,
+unadjusted, noise at 48 cells).
+
+**Mechanism — the right sign at FOMC, not significant.** Event-day Δ2y vs BTC R24: FOMC ρ **−0.22** (p 0.15) /
+**−0.37** (p 0.045) — 2y up → BTC down 53% / 62% of the time, mean −22 / −143bp; CPI −0.12 / +0.11; NFP +0.04 /
+−0.05. Same-day and explanatory in any case: it describes what happens once the surprise is known, not before.
+
+**Predictive — no.** PRE24 does not predict R24 (|ρ| ≤ 0.16 for the macro releases); R24 does not predict the next
+4 days (|ρ| ≤ 0.19). The one near-miss is Deribit 2017–22: R24 → POST ρ −0.36, p 0.004 against the 0.0031 bar,
+and −0.18 (p 0.23) in 2023–26.
+
+**Verdict.** Scheduled US releases time **when** BTC moves — the first hour after an FOMC or CPI print is about
+twice an ordinary hour, and the hours before are, if anything, quieter — but on 2017–2026 data neither the pre-
+release drift nor the reaction says **which way**, and the reaction does not carry into the following days. The
+direction is set by the surprise, which is not knowable in advance; the 2y yield is the cleanest real-time read of
+it at FOMC. Consequence for the page: none (nothing passed the rule). Consequence for reading: an event day is a
+volatility day — for a buyer working the ladder, a reason to have limit orders resting at the bands rather than to
+anticipate a side.
+
+**Regime context, measured the same day (not part of the pre-registration).** Daily BTC (20:00 UTC) vs Nasdaq
+Composite and Δ10y, Yahoo/FRED: **last 30 sessions ρ 0.64, β 1.68 to Nasdaq, ρ −0.24 to Δ10y**; last 60 / 120
+sessions ρ 0.38 / 0.40, β 0.87 / 0.79; two years ρ 0.47, β 0.97, Δ10y +0.03. BTC is trading as a levered
+rate-sensitive equity this month — which is why the CPI print moved it with the Nasdaq. A 30-day β is unstable
+and not a forecast.
+
+**Trend identification — not re-tested.** The Sep 21 entry already tested trend rules (SMA sweep, 90d momentum,
+vol targeting; nothing distinguishable from buy-and-hold after correction) and leverage data (no edge); re-running
+those on three more weeks of data would be the window-shopping it warned against. On-chain trend filters (price vs
+STH cost basis) cannot be tested here: `history.json` starts 2022-08, one cycle. State today is in the tape block
+above: long-horizon rules long, short-horizon (SMA20) turned down.
+
+Scripts were scratch (`dl_klines.py`, `evstudy.py`, `mech.py`); the rules above reproduce them. The events CSV
+(295 rows, source URL per row) was kept in scratch only and deleted with it — rebuild from the two publishers.
+
+---
+
 ## 2026-10-11 — Research pass: 70% held a third time on a ledger that leaned against it; the ETF feed is dead since Oct 9; the cycle clock reached its 370-day average
 
 The weekly pass, on its scheduled day (owner asked to update, check whether any recommendation changed and list

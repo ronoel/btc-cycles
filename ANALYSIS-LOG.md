@@ -23,6 +23,19 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-20 — Calendar refresh: MSCI decided Oct 15, events extended to Mar 2027
+Events table only; no reading, trigger or probability touched.
+
+**Checked at the publisher (fetched):** federalreserve.gov FOMC calendar (Oct 27–28, Dec 8–9; 2027 Jan 26–27, Mar 16–17; Oct minutes not yet listed, Nov 18 derived from the three-week rule); bea.gov schedule (Q3 GDP advance and Sept PCE both Oct 29 8:30 ET; Nov 25, Dec 23 as recorded); bls.gov schedules (empsit/cpi/ppi through Mar 2027, all 8:30 ET); ecb.europa.eu (Oct 28–29, Dec 16–17, Feb 3–4, Mar 17–18); boj.or.jp (Oct 29–30, Dec 17–18, Jan 21–22, Mar 17–18); mempool.space `/api/v1/difficulty-adjustment` (Oct 16 retarget landed +5.92%, earlier than the ~17:20 estimate; next est. +7.35%, Oct 29 ~14:07 UTC, 31.2% through the epoch, read 14:1x UTC Oct 20). UTC times: US DST ends Nov 1 and starts Mar 14, 2027, so Jan–Mar 12 releases are 13:30 UTC and the Mar 17 FOMC 18:00 UTC; Europe stays on CET until Mar 28, so ECB 13:15 UTC.
+
+**Secondary only:** MSCI announced Oct 15 (The Block, Decrypt; MSCI page 404): methodology adopted, affected list Nov 11, effective at the Nov 30 close; Strategy/Metaplanet not yet excluded — the list decides; MSTR −~10% Oct 16. Anthropic: Bloomberg via Yahoo/CNBC Oct 19, marketing from the week of Nov 9, mid-November listing, up to $100B; confidential draft S-1 Jun 1, no public S-1 found. Coinbase Q3 Oct 29 after the close (BusinessWire repost). OPEC+ Nov 1 (opec.org press release via search). Deribit Oct 30: ~$10.7–11.3B, max pain $78–79K, largest strike $95K call (Crypto Briefing, Oct 8, BTC then ~$86K). Mt. Gox: Oct 31 deadline, no further extension or October wallet move found (trustee site not checked).
+
+**Disagreements, not resolved:** Oct 28 hike odds — CME FedWatch 51.5% (Oct 14, InvestmentNews) vs an undated Polymarket 17% vs CoinDesk Oct 20 "widely expected to hold, hike priced for December"; `fomc_oct` text left at its dated Polymarket figures. Strategy Q3 date Oct 29 (Earnings Whispers) vs Nov 4 (TipRanks) — not added. Deribit Nov 27 and Dec 25 expiries unverified at Deribit (last-Friday rule only).
+
+**Not verified:** CLARITY Act status after Sep 15, SEC ETF deadlines Nov–Mar, FTX distributions, debt ceiling, BEA 2027 dates, Nvidia earnings date.
+
+---
+
 ## 2026-10-15 — Interim check + the Oct 12 adjudication (run 3 days late): 2 of 3 an eighth time; CPI core hot, October hike 16.5% → 27.5%; CORE back to 4% on SOPR; event study: scheduled releases time volatility, not direction
 
 Owner asked to review the analysis, look for new information and the calendar, find when price starts moving

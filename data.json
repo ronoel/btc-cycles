@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21T06:14:25Z",
+  "updated": "2026-10-21T19:10:25Z",
   "onchain": {
     "realized_price": {
       "d": "2026-10-14",
@@ -36,56 +36,56 @@
   },
   "macro": {
     "m2": {
-      "d": "2026-08-01",
-      "level": 23342.8,
-      "yoy": 5.66,
-      "yoy_3m": 5.39,
-      "yoy_6m": 4.59
+      "d": "    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300",
+      "level": 400.0,
+      "yoy": null,
+      "yoy_3m": null,
+      "yoy_6m": null
     },
     "netliq": {
-      "d": "2026-10-14",
-      "v": 5872.1,
-      "w4": 5864.1,
-      "w13": 5986.7,
-      "w52": 5781.4,
-      "assets": 6755.6,
-      "tga": 883.4,
-      "rrp": 0.2
+      "d": "    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300",
+      "v": -400.0,
+      "w4": null,
+      "w13": null,
+      "w52": null,
+      "assets": 0.4,
+      "tga": 0.4,
+      "rrp": 400.0
     },
     "real10y": {
-      "d": "2026-10-19",
-      "v": 2.8,
-      "ma": 2.18,
-      "hi2y": 2.95,
-      "lo2y": 1.67
+      "d": "    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300",
+      "v": 400.0,
+      "ma": 400.0,
+      "hi2y": 400.0,
+      "lo2y": 400.0
     },
     "nom10y": {
-      "d": "2026-10-19",
-      "v": 5.15,
-      "ma": 4.51,
-      "hi2y": 5.31,
-      "lo2y": 3.97
+      "d": "    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300",
+      "v": 400.0,
+      "ma": 400.0,
+      "hi2y": 400.0,
+      "lo2y": 400.0
     },
     "nom2y": {
-      "d": "2026-10-19",
-      "v": 4.77,
-      "ma": 4.02,
-      "hi2y": 4.92,
-      "lo2y": 3.38
+      "d": "    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300",
+      "v": 400.0,
+      "ma": 400.0,
+      "hi2y": 400.0,
+      "lo2y": 400.0
     },
     "hy_oas": {
-      "d": "2026-10-19",
-      "v": 3.29,
-      "ma": 2.86,
-      "hi2y": 4.61,
-      "lo2y": 2.59
+      "d": "    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300",
+      "v": 400.0,
+      "ma": 400.0,
+      "hi2y": 400.0,
+      "lo2y": 400.0
     },
     "dxy": {
-      "d": "2026-10-16",
-      "v": 121.4048,
-      "ma": 119.44,
-      "hi2y": 130.0413,
-      "lo2y": 117.4396
+      "d": "    <link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300",
+      "v": 400.0,
+      "ma": 400.0,
+      "hi2y": 400.0,
+      "lo2y": 400.0
     },
     "dxy_src": "FRED DTWEXBGS (broad trade-weighted USD) \u2014 the ICE DXY is licensed"
   },

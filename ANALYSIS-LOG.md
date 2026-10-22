@@ -23,6 +23,136 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-22 — Interim check + the Oct 19 adjudication (run ~3 days late): 2 of 3 a ninth time; the flow leg rolls under its bar; FRED's maintenance page published as data
+
+Owner asked to analyse the data, update, search the news and check whether any fact changes the recommendation.
+**Not a pass** (`an_asof` stays Oct 11: trade, recession odds and geopolitics `mac` rows were not re-checked) —
+the owed Oct 19 adjudication, an interim ledger, and a pipeline fix. **No threshold, weight, band, window,
+falsifier, trigger or `st` changed; 70% not re-scored.** Reads Oct 22 ~01:50–02:30 UTC (Oct 21 evening, Brazil).
+`data.json` is a local build at 01:54 UTC with the fixed parser: on-chain through **Oct 15**
+(`sth_realized_price` Oct 20), macro the 06:14 Oct 21 values (FRED through Oct 19) kept and flagged,
+ETF Oct 8 frozen; `stale: ["macro","etf","onchain"]`.
+
+**Pipeline: the Oct 21 19:10 build published FRED's maintenance page as data (commit 9462e60).**
+`fredgraph.csv` answered HTTP 200 `text/html` ("Site Maintenance | St. Louis Fed") for every series, with
+both the Action's User-Agent and curl's default. `csv.reader` split its
+`<link href="…Open+Sans:300,400,700" …>` line into `("<link…:300", "400", …)`, so every macro series got
+one observation of 400.0 dated with that fragment: `m2.level` 400, `netliq` −400 (`assets` 0.4 = 400/1000),
+rates/OAS/dollar 400 with `yoy`/`w4` null — and `stale` stayed clean because no series was *missing*. Live
+for ~7 hours. Fix (`0a61e9c`, pushed before the rest of this entry): `parse_fred_csv` requires `rows[0][1]
+== sid` and every date to parse as ISO; otherwise the series is skipped, the stored block is kept and `macro`
+is flagged. `data.json` was restored from `5ba30da` and rebuilt live: nine "not a FRED CSV" lines,
+`stale` includes `macro`. Regression test `FredMaintenancePage` (fixture = the real page head) fails on the old
+parser (1 error, 1 failure) and passes on the new. **Not verified:** the header check against a live CSV —
+confirm the next run after FRED returns prints all nine series.
+
+**Falsifier #6, Oct 19 window (00:15 UTC Monday; run Oct 22): 2 of 3 — not fired, nothing deployed.**
+Leg 1: Binance 1w Oct 12–18 closed **$82,116.00** → fired. Leg 2: Oct 18 close, Coinbase 82,006.85 vs Binance
+82,116.00, USDT-USD 0.99875 → **−0.1329% raw / −0.0079% adjusted** → missed. Daily raw closes Oct 12–18:
+−0.1313 / −0.0806 / −0.1417 / −0.1392 / −0.1416 / −0.1385 / −0.1329 → weekly mean **−0.129%**; any-positive-raw
+**0 of 7**; adjusted-Sunday miss. Fourth window (Sep 14, Oct 5, Oct 12, Oct 19) in which every form misses;
+tally after nine windows raw-Sunday 0/9, weekly-mean 0/9, any-positive-raw 2/9, adjusted-Sunday 4/9. The
+script reproduces this log's earlier figures to the fourth decimal (Oct 11 −0.1132, Oct 12–14). Leg 3:
+`etf.d20` **+$1.92B frozen** (Oct 8) → fired. By hand, tftc.io Farside-style tables (secondary), September and
+October pages: the 20 sessions Sep 11–Oct 8 sum to **+$1,917.6M** — the frozen SoSoValue figure — so the
+hand basis matches the arbiter's. 20 sessions Sep 21–Oct 16: Sep 21–30 +2,334.4, Oct 1–16 −617.2 →
+**+$1,717.2M** → fired on either figure.
+
+**The flow leg rolls under its bar now.** Oct 19 +526.6 (IBIT +665.2), Oct 20 +23.2; Sep 21 (+999.0) and
+Sep 22 (+714.7) left the window → **≈ +$553M through Oct 20**. The Oct 26 window is the 20 sessions Sep 28–
+Oct 23; Sep 28–Oct 20 sum to **−$118.8M**, so Oct 21–23 must net **≳ +$1.62B** for leg 3 to fire. Absent that,
+Oct 26 reads at most 1 of 3 on the hand basis (2 of 3 only on the frozen figure — the page's live ETF row
+still shows +$1.92B ACTIVE, which overstates the checklist by one ACTIVE → PARTIAL on any working feed).
+The source decision stays the owner's (open since Oct 11); this entry does not pick one.
+
+**Tape (Binance).** Week Oct 12–18: O 83,773.12 H 84,352 **L 79,800.00 (Oct 15)** C 82,116.00 — the Oct 15 low is
+under the Sep 20 low (80,126) and is not a marker (the only downside marker is a lower low under $57,800).
+Closes Oct 15–21: 82,245.93 / 81,615.64 / 81,491.04 / 82,116.00 / 81,938.40 / 83,028.15 / **84,093.42**; Oct 22
+~83.5K. Closed-day SMA20 83,241 (83,615 five days earlier — falling) · SMA50 81,743 · SMA100 74,832 · SMA200
+72,774; 20W 71,578 · 50W 76,584 · 200W 66,847. RSI14 (Wilder) 56.8; 90-day momentum +29.2%. Realised vol
+(daily log closes, √365) 10d 24.4% / 30d 22.8% / 90d 37.4% — not the method of the Oct 15 figures, not
+comparable to them. F&G 53 → **68** (Oct 15 → Oct 22). Binance OI 93.1K → 98.0K BTC (Oct 15 → 22); account
+L/S 1.77 → 1.02. **Funding %/8h, last / 7d avg:** Binance USDT-M +0.0005 / **+0.0061** (0 of 21 negative) ·
+COIN-M +0.0045 / +0.0087 · Bybit linear +0.0019 / +0.0057 · inverse +0.0009 / +0.0072 · OKX USDT −0.0047 /
++0.0057 · USD +0.0034 / +0.0077 — leverage rebuilt into the bounce; the live funding row left PARTIAL (rule:
+PARTIAL at 7d ≤ +0.003%).
+
+**Readings, rendered** (Chrome headless, scratch copy, en, 01:55 `data.json`): **Too early · 0 of 4 families ·
+1 of 15 active · 3 partial · expert 12% / equal 17%** (Oct 15: 4 partial, 16% / 20%); `CORE` **4%, 0 of 8**
+(SOPR 0.9992 PARTIAL). The partial that left is funding — rendered with the Oct 15 `data.json` too, and that
+render also reads 3 partial, because funding is fetched live at render time. SOPR, Hash Ribbons and
+reserves/SSR are the three partials; ETF (frozen) the one active.
+
+**Ledger, read not re-scored (written before re-reading `th_p`).** **Fed — for:** Polymarket Gamma Oct 22
+~02:00 UTC: Oct 28 hold **87.5** / +25bp **12.5** (27.5 Oct 15); December +25bp 78.5, hold 18.5; 2026 hikes
+one 20.5 / two **69.0** / three 8.6. Press: Polymarket 86/15 Oct 20, FedWatch ~80% hold Oct 19 (rg.org,
+secondary); speakers in blackout. **Rates — for:** Treasury par 10y 5.19 (Oct 14) → 5.10 → 5.09 → 5.15 → 5.12 →
+**5.13 (Oct 21)**; real 10y 2.84 → **2.76**; 2y 4.82 → 4.81; 30y 5.52 → 5.42. **Data — against, secondary:**
+September PPI 6.3% y/y vs 5.3% expected (investinglive, phemex; phemex alone gives +1.3% m/m and core +0.7% m/m /
+5.0% y/y — BLS not read); retail sales +0.8% vs +0.3%; housing starts −5.2%/−5.9% to 1.221M, pending home
+sales 66.0. The market priced the hike *down* through that data. **ETF — against on the window, for on the
+day:** Oct 12–16 −$228.6M (tftc; 247wallst agrees; primexbt says −$409.2M — different basis, not used), Oct 19
++$526.6M; four-week ≈ +$0.55B. **LTH — against:** BGeometrics `long-term-hodler-supply-btc` (one call): new low
+**16,392,320 on Oct 16**, 16,394,622 Oct 20; 7d −22,770, **30d −118,516** (−50,218 on Oct 10); 214,681 under the
+Aug 11 trough → NOT YET by the Sep 27 rule. **Premium — against on raw, flat adjusted:** 47 negative raw closes
+Sep 5–Oct 21; the widest is still Oct 14 (−0.1417), narrowing since Oct 16 to −0.0818 on Oct 21 as USDT-USD
+recovered 0.99859 → 0.99919; adjusted range Oct 12–21 −0.018 / +0.011. **Hash Ribbons — unchanged, PARTIAL:**
+mempool.space 3-month daily, 30d/60d 999.0 / 964.5 = **+3.57%** (Oct 22; +2.37% Oct 12, +3.01% Oct 17); Oct 16
+retarget +5.92%, next est. **+5.24%, Oct 29 ~20:16 UTC** (41.7% through the epoch) — `retarget4` text and `tm`
+updated from +7.35% / ~14:05. **Strategy — for, small (primary, EDGAR 8-K Oct 19):** 267 BTC for $22.1M at
+$82,900 (Oct 12–18), funded by $22.0M of MSTR ATM; holdings **848,517** (avg $75,446, aggregate $64.02B); $193.1M
+of STRC repurchased; repurchase authorization $2.0B → $3.0B. Q3 results Oct 29 after the close
+(strategy.com release via search summary — page 403; TipRanks' Nov 4 was an estimate). **MSCI (primary,
+app2.msci.com announcement Oct 15 20:48 GMT):** "MSCI will implement the proposal to define and classify
+non-operating companies as ineligible"; final list Nov 11; effective at the close of Nov 30; interim measures
+discontinued. Whether Strategy is on the list: not published — the potentially-impacted spreadsheet was not
+opened. A JPMorgan $2.8B forced-selling figure appeared in a search summary only. **Polymarket yearly (vol
+$77.2M):** ↓$70K **28.5** (42.0 Oct 15), ↓$65K 19.5 (24.0), ↓$60K **11.5** (16.5), ↓$55K 9.5 (9.5), ↓$50K 7.5,
+↓$45K 4.1, ↓$40K 2.9; ↑$90K **64.5** (54.5), ↑$95K 42.5, ↑$100K 25.5. No-new-low ≈ 100 − (9.5 + 0.56 × 2.0) ≈
+**~89.4%** (86.6 Oct 15) — the gap to ~70% is ~19 points. **Cross-asset (secondary, cappnotes Oct 20):** Dec Brent
+108.79 after a 111.99 high on Hormuz mine strikes (IRGC: two tankers ablaze; Kpler: ≥18 ships attacked in two
+weeks), reversing on Iran-deal hopes; gold ~4,143; S&P 7,712.57, Nasdaq 26,424.82 (Oct 20); Dow ~52,800 Oct 21.
+Glassnode (Oct 21, own site): price "swept to about $80K on October 15, just under the cost basis of the US
+spot ETFs and corporate treasuries", bids "refilled within days", asks and liquidation clusters ~$85–87.5K.
+
+Four for (Fed odds, rates, Strategy, market no-new-low up ~3 points), three against (LTH, the four-week flow
+window, hot PPI) and the premium flat on its adjusted form. No pre-registered marker was at stake. Against
+the Oct 11 ledger the rates/Fed items have turned *for* the low-is-in path and the LTH/flow items have
+worsened — a mixed ledger that, if a pass re-scored it today, gives no clear reason to move the 70% in
+either direction. **Recommendation unchanged:** stage TOO EARLY, nothing deployed, ladder bands unchanged
+($52–57K probe, $44–50K core, $38–44K capitulation tranche).
+
+**Facts that could change it, dated.** (1) **Oct 26 window** — leg 3 likely misses (see above); leg 2 needs the
+Oct 25 raw close > 0. (2) **FOMC Oct 28** — a hike at 12.5% priced is the surprise case; the Oct 15 event study
+says first-hour volatility ~2×, no direction. (3) Oct 29: Q3 GDP advance + September PCE, Strategy and
+Coinbase Q3; Oct 30 Deribit expiry (~$12.2B, max pain $79K — cryptoticker, Oct 17, spot $81.4K); Oct 31 Mt.
+Gox deadline (no extension or wallet move found). (4) **MSCI list Nov 11** — Strategy's inclusion re-arms the
+forced-selling route the Strategy row names. (5) A lower low under $57,800 — the only downside marker; price
+is ~44% above it.
+
+**Calendar/other (news agent, secondary unless stated).** Tesla Q3 (Oct 21, primary exhibit): digital assets
+$962M on Sep 30 vs $674M Jun 30, Q3 unrealized gain $288M; no sale per a KuCoin repost; no unit count.
+Anthropic: no public S-1 found (EDGAR not checked directly); marketing mid-November, listing before Nov 26
+(Bloomberg via itiger). CR funds the government through Dec 11. CLARITY Act: no status after the Sep 15
+cloture failure. No exchange failure, stablecoin depeg or exploit > $100M found Oct 15–22 (DefiLlama 2026
+largest still Bitget, $387M, September). BlackRock filed for another bitcoin ETF (Yahoo, Oct 21, no detail).
+
+**Government wallets (mempool.space, ~02:00 UTC).** `3GPnJf…` 204 tx, 11,566.66 received, balance 0, nothing
+new; `bc1qazcm76…` 94,643.49 and `bc1qa5wkga…` 69,370.18, unchanged. No sale of the Oct 7–8 9,261 BTC found
+(Cointelegraph Oct 8: "an additional 2,456 BTC originated from previously unknown holdings"; a sale "would
+conflict with a March 2025 executive order").
+
+**Edited.** EN by script, PT/ES mirrored by a sonnet agent against a digit-token checker: `th_p` (nine windows,
+Oct 19 clause, flow-leg roll-off, next Oct 26), `trig_n` (Oct 19 clause only — the rest stays the Oct 11 block,
+as on Oct 15), `trig[0]` (premium, ninth window), `trig[1]` (ETF: hand sums, roll-off), `trig[3]` header
+(~12.5% Oct 22), `fal[5]` (ninth adjudication), `cvp[3]` (Oct 22 snapshot), `mac` Fed / Rates / ETF / Strategy
+(MSCI decided, Oct 19 8-K) / events (the "MSCI on or before Oct 16" and Oct 1 Anthropic dating flagged stale
+on Oct 20), `bs` `lth` / `cbp` / `hash`, `ev.retarget4` + its `tm`; after the staleness sweep (on `27.5%`, `86.6%`, forty, `Oct 19`, eighth, `1.95B`, `16.5%`, "on or before Oct 16" — every other hit is dated and stays), the events row and `ev.fomc_oct` gained the Oct 15 / Oct 22 hike odds in all three languages. **Verified:** parity 187/187, no BS/EV mismatch, every `EVENTS` id with text; digit-token checker (working tree vs HEAD, added/removed numeric tokens per key, EN vs PT vs ES) PASS on all 17 keys; EN block byte-identical before and after the PT/ES edit; rendered en/pt/es from a scratch copy (language set through a hash shim injected into the copy only) — 0 console lines ×3, with capture proven by a probe page that logs, and the Oct 26 / ~89.4% text present in each. **Not verified:** PT/ES prose beyond its numbers — sampled, not read in full. **Left:** `bs` `resv` (Sep 26 SSR, dated),
+`mac` trade / recession / geopolitics / equities / credit / dollar / liquidity rows, README and og-card ("0%"
+dated Oct 11; `CORE` 4% is the §5 marginal row, not a material move).
+
+---
+
 ## 2026-10-20 — Calendar refresh: MSCI decided Oct 15, events extended to Mar 2027
 Events table only; no reading, trigger or probability touched.
 

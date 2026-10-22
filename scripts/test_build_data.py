@@ -67,5 +67,48 @@ class ProviderRegression(unittest.TestCase):
         self.assertEqual(series["sopr"]["v"][-2], 0.5)  # fresh still wins on overlap
 
 
+# Head of the page FRED served, with HTTP 200, during its Oct 21, 2026 maintenance.
+FRED_MAINTENANCE = b"""<!doctype html>
+<html lang="en">
+<head>
+    <title>Site Maintenance | St. Louis Fed<</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+</head>
+"""
+
+
+class FredMaintenancePage(unittest.TestCase):
+    """Oct 21, 2026: the maintenance page parsed as one observation of 400.0 per series,
+    so every macro row published 400.0 dated with an HTML fragment, and `stale` was
+    clean because no series was missing."""
+
+    def test_parse_rejects_html_and_accepts_csv(self):
+        self.assertEqual(bd.parse_fred_csv(FRED_MAINTENANCE, "DGS10"), [])
+        csv_body = b"observation_date,DGS10\n2026-10-16,5.10\n2026-10-17,.\n2026-10-19,5.15\n"
+        self.assertEqual(bd.parse_fred_csv(csv_body, "DGS10"),
+                         [("2026-10-16", 5.10), ("2026-10-19", 5.15)])
+
+    def test_main_keeps_stored_macro_and_flags_stale(self):
+        stored = {"d": "2026-10-19", "v": 5.15, "ma": 4.51, "hi2y": 5.31, "lo2y": 3.97}
+        prev = {"updated": "x", "onchain": {}, "etf": None, "stale": [],
+                "macro": {"nom10y": stored}}
+        with tempfile.TemporaryDirectory() as root:
+            with open(os.path.join(root, "data.json"), "w") as fh:
+                json.dump(prev, fh)
+            saved = (bd.ROOT, bd.fetch_onchain, bd.fetch_etf, bd.get)
+            bd.ROOT = root
+            bd.fetch_onchain = lambda: ({}, {})
+            bd.fetch_etf = lambda: None
+            bd.get = lambda url, *a, **k: FRED_MAINTENANCE
+            try:
+                bd.main()
+            finally:
+                bd.ROOT, bd.fetch_onchain, bd.fetch_etf, bd.get = saved
+            data = json.load(open(os.path.join(root, "data.json")))
+        self.assertEqual(data["macro"]["nom10y"], stored)
+        self.assertNotIn("m2", data["macro"])
+        self.assertIn("macro", data["stale"])
+
+
 if __name__ == "__main__":
     unittest.main()

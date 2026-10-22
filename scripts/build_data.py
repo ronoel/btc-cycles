@@ -115,14 +115,38 @@ FRED = ["M2SL", "WALCL", "WTREGEN", "RRPONTSYD", "DFII10", "DGS10", "DGS2",
         "BAMLH0A0HYM2", "DTWEXBGS"]
 
 
+def parse_fred_csv(raw, sid):
+    """[(iso_date, value)] from a fredgraph.csv body, or [] if the body is not that CSV.
+
+    Oct 21, 2026: FRED's maintenance page came back as HTTP 200 text/html, and its
+    `<link ...Open+Sans:300,400,700>` line splits on commas into ("<link...:300", "400").
+    The old parser took that as an observation, so every macro row published 400.0
+    with an HTML fragment as its date -- and nothing was missing, so `stale` stayed
+    clean. The header must name the series and every date must parse.
+    """
+    rows = list(csv.reader(io.StringIO(raw.decode(errors="replace"))))
+    if not rows or len(rows[0]) < 2 or rows[0][1].strip() != sid:
+        print(f"  ! {sid}: not a FRED CSV (starts {raw[:60]!r}); skipped", file=sys.stderr)
+        return []
+    pts = []
+    for r in rows[1:]:
+        if len(r) < 2 or r[1] in (".", ""):
+            continue
+        try:
+            pts.append((datetime.date.fromisoformat(r[0]).isoformat(), float(r[1])))
+        except ValueError:
+            print(f"  ! {sid}: unparseable row {r[:2]!r}; series skipped", file=sys.stderr)
+            return []
+    return pts
+
+
 def fetch_fred():
     out = {}
     for sid in FRED:
         raw = get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}")
         if not raw:
             continue
-        rows = list(csv.reader(io.StringIO(raw.decode())))[1:]
-        pts = [(r[0], float(r[1])) for r in rows if len(r) > 1 and r[1] not in (".", "")]
+        pts = parse_fred_csv(raw, sid)
         if pts:
             out[sid] = pts
             print(f"  {sid:14} {pts[-1][1]:>12}  ({pts[-1][0]}, {len(pts)} obs)")

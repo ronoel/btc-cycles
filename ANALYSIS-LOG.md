@@ -23,6 +23,125 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-29 — IPO event study (seven mega-IPOs): no consistent BTC effect; Anthropic roadshow and Nasdaq-100 fast entry added to `EVENTS`; an IPO-drain test pre-registered for Nov 10–25
+
+Owner asked how the Anthropic IPO could hit BTC, how it compares with SpaceX, when an IPO-driven fall would
+come and when this period's low would print. **No reading, threshold, band, trigger, falsifier or the ~70%
+changed.** Calendar edits only, plus a test written down before the event. Disclosure given to the owner: the
+assistant is built by Anthropic, so the answer rests on measured data and cited sources.
+
+**Event study (measured, daily closes; Bitstamp before Binance's history, Binance after).** Day 0 = first
+trading day. Each window's return is ranked against every same-length window within ±365 days of the IPO
+(percentile; 50 = an ordinary window of that year).
+
+| IPO (day 0) | $B | pre-14 % (pct) | pre-6 % (pct) | day 0 % | post-7 % (pct) | post-30 % (pct) | low in [−30, +30] |
+|---|---|---|---|---|---|---|---|
+| Facebook 2012-05-18 | 16 | −1.0 (33) | +1.4 (43) | +1.0 | +1.2 (40) | +23.3 (64) | day −8 (−3.0%) |
+| Alibaba 2014-09-19 | 25 | −11.0 (21) | −10.5 (11) | −6.9 | −5.0 (31) | −8.8 (39) | day +16 (−23.9%) |
+| Uber 2019-05-10 | 8.1 | +16.8 (88) | +7.6 (81) | +2.6 | +18.5 (94) | +22.9 (80) | day −29 (−19.2%) |
+| Aramco 2019-12-11 | 25.6 | −3.8 (24) | +0.4 (47) | −0.2 | +0.7 (46) | +13.5 (58) | day +6 (−8.3%) |
+| Rivian 2021-11-10 | 13.7 | +14.6 (83) | +6.4 (77) | −3.1 | −9.9 (15) | −29.6 (6) | day +30 (−29.6%) |
+| Arm 2023-09-14 | 4.9 | +1.1 (52) | −0.1 (45) | +1.1 | +1.3 (56) | +2.4 (47) | day −3 (−4.0%) |
+| SpaceX 2026-06-12 | 75 | −13.4 (6) | +4.2 (84) | −0.1 | −0.1 (51) | +0.2 (50) | day +18 (−7.9%) |
+
+Pre-14 ranks average ~44 (null 50 ± ~11 for n = 7): −0.55 sd, nothing. Post-30 ranks average ~49. The local
+low lands anywhere from day −29 to day +30. **Finding: no consistent IPO effect on BTC, before or after.** The
+one large pre-listing fall is SpaceX, which carries its own confounds (below). The study script and price cache
+were scratch files, deleted after use; the study can be rebuilt from public Bitstamp/Binance daily closes. No
+academic BTC–IPO study was found (research subagent).
+
+**SpaceX path, Binance closes:** public S-1 May 20 $77,552 → May 31 $73,674 → Jun 3 $64,143 → Jun 6 **$60,885**
+(−21.5% from the S-1, nearly all Jun 1–6) → pricing Jun 11 $63,626 → debut Jun 12 $63,580 → Jun 15 $66,329 →
+Nasdaq-100 add announced Jun 26 $60,097 → lowest close Jun 30 **$58,625** (intraday cycle low $57,800 Jul 1) →
+index buy at the Jul 6 close $64,042. Two legs: one into the roadshow, then one ~18 days after listing, before
+the index buy. Confounds in the first leg: Mt. Gox moved 10,422 BTC Jun 3, ~$1.86B liquidated in 72 hours,
+spot ETFs −$2.4B in May and −$4.5B in June. SpaceX retail allocation was 20–30%, the most direct crypto
+channel. BNP Paribas (Fortune, Jun 7), before the IPO: "Selling flows in recent winners and levered products
+from retail to invest in SpaceX could be very large."
+
+**Anthropic, as known Oct 29.**
+- Read at EDGAR by the research subagent, not re-opened in the main context: public S-1 Oct 26; Nasdaq "ANT";
+  22 underwriters led by Goldman Sachs and Morgan Stanley; size, range and valuation blank; primary and
+  secondary shares; 180-day lock-up with staggered early releases from the first trading day; Class F holds a
+  fixed 50.1% of votes; a European retail offering, no US retail allocation announced.
+- Press only, and the sources disagree:
+  - marketing from the week of Nov 9 (Bloomberg Oct 19, via secondary coverage);
+  - pricing or first trade Nov 19–20, Nov 24, or "before Thanksgiving" (Nov 26);
+  - size ~$100B ("match or beat SpaceX"), valuation $1.5–2T.
+- Derived: the public S-1 has to be out 15 days before the roadshow, so Nov 10 is the earliest start.
+  - Nasdaq-100 fast entry (rule effective May 1, 2026; secondary coverage, rule text not opened): a top-40 new
+    listing joins after 15 trading days.
+  - Counted with the debut as day 1 and Thanksgiving closed, a debut Nov 19 → index buy at the Dec 10 close;
+    a debut Nov 25 → Dec 16.
+  - The SpaceX count checks: Jun 12 → the Jul 6 close is 15 trading days, with Jun 19 and Jul 3 closed.
+- S&P 500 kept its 12-month seasoning and positive-earnings rules, so it cannot add Anthropic before ~Nov 2027.
+
+**Commentary, Oct 27–28 (press).** On the drain side, K33 (Lunde) says "the uncertainty itself may be enough
+to soften BTC performance". On the skeptical side:
+- Stormrake: "So far, we are not seeing the same drain on Bitcoin"; ETFs +$301M in the week to Oct 23, +$110M
+  on filing day.
+- Moon Pursuit: the IPO is either a "redistribution of existing capital or an expansion of overall risk
+  appetite".
+
+No source reports actual BTC selling to fund Anthropic allocations. BTC went from $80,151 (Oct 26 close) to
+~$81.2K at this read.
+
+**Why the channel is judged weaker than in June (judgment, not measurement).** Institutional allocations get
+funded by selling other equities. The route into crypto runs through retail and risk appetite. SpaceX had a
+large US retail tranche; Anthropic has announced none. The weakness already present has its own named causes:
+four-week ETF flows ≈ −$0.36B, LTH distribution, a hawkish Fed, Brent ~$115. A November fall will therefore be
+as hard to attribute as June's was.
+
+**Analog calendar, scenario only (N = 1, not a forecast).** Mapping the SpaceX path onto Anthropic's dates:
+- pressure ~Nov 7–12 (overlaps payrolls Nov 6, CPI Nov 10, MSCI list Nov 11);
+- rebound into pricing ~Nov 12–20;
+- second leg ~Dec 8–15 (overlaps SpaceX's reported main lock-up expiry Dec 8 and FOMC Dec 9);
+- depth: SpaceX's −21.5% to −24% from the S-1, applied to ~$80K, gives ~$61–64K. That is a mechanical
+  extrapolation and not a level to plan on. It stays above the $52–57K probe band, so the ladder is untouched.
+
+For comparison, Polymarket on Oct 29 priced a 2026 close under $70K at 34.5%, under $65K at 20.5% and under
+$60K at 15.5%.
+
+**Pre-registered test (written Oct 29, before the roadshow).** Over **Nov 10–25** (roadshow start → last
+reported listing day), an IPO drain on BTC is logged as **evidenced** only if all three hold:
+1. Spot BTC ETF net flows over the window are ≤ −$1.0B, by hand from the Farside-style table while the feed
+   stays frozen.
+2. BTC underperforms the Nasdaq-100 by ≥ 10 points over the window, close to close.
+3. No other named shock of comparable size lands in the same window: an exploit > $500M, a Mt. Gox or
+   government wallet move > 5,000 BTC, a liquidation cascade > $1.5B in 72 hours, or a hike surprise at a
+   scheduled release.
+
+Partial combinations get logged as **not evidenced**, with the legs listed. If the listing date moves, the
+window moves with it, from roadshow start to listing day. A US retail tranche, if one is announced, gets
+recorded as a fact with its date and **does not change the test**. The result does not feed the checklist,
+the trigger, the bands or the ~70%. It only decides whether IPO dates belong on the calendar as risk rows
+or as context.
+
+**`EVENTS` (all three languages):**
+- `anthropic` re-dated from Nov 23–27 to **Nov 19–25**, undated inside the span (press disagreement made
+  explicit); its text now carries the study result next to the SpaceX precedent.
+- Added **`anthropic_rs`**, Nov 10–13, undated, `s:'s'`.
+- Added **`ndx_ant`**, Dec 10–16, undated, `s:'d'`.
+- The `mac` scheduled-events sentence updated to match.
+- `ev_asof` left at Oct 29: no other date was re-checked.
+
+**Deliberately not added:** a SpaceX lock-up row. Dec 8 (~798M shares) is still secondary, and the Oct 6
+rule stands: open the 424B4 before adding a row.
+
+**Checked:**
+- parity 187/187 and `EVENTS` 68/68, via the MAINTENANCE parity snippet;
+- digit tokens EN = PT = ES on the three `ev` entries and the `mac` events row;
+- headless Chrome render en/pt/es: 0 console lines; the three rows present and sorted (~12 d, ~21 d, ~42 d
+  from Oct 29).
+
+**Not verified:**
+- Nasdaq's fast-entry rule text;
+- any Anthropic date or size (all press);
+- SpaceX's roadshow dates (single source);
+- the BNP quote beyond the Fortune report.
+
+---
+
 ## 2026-10-29 — Research pass + the Oct 26 adjudication (run ~3 days late): the flow leg stops firing on any working measure; 70% held a fourth time on the most one-sided ledger since Sep 17
 
 Owner asked to update, review, search for new information and give the new recommendation. **A research pass**

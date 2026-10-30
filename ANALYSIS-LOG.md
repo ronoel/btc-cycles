@@ -23,6 +23,167 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-10-30 — Research pass after the Binance theft: the second crypto-native catalyst fired on the exploit leg, the capitulation gate opened, bands unchanged, 70% held a fifth time, failure-path test written down
+
+Owner asked to update, search for new information, redo the analysis and the calendar, and give the new
+recommendation. **A research pass** (`an_asof`, `ev_asof`, `mac_h` → Oct 30). **No threshold, weight, band, window,
+falsifier, trigger or `st` changed.** Reads Oct 30, 18:00–18:30 UTC. Not an adjudication: the next is Nov 2.
+`data.json` = the Oct 30 06:11 build: on-chain through Oct 23 (`sth_realized_price` Oct 29), macro fresh, ETF frozen
+at Oct 8, `stale: ["etf","onchain"]`. Rendered before the edits (scratch copy, en): Too early · 0 of 4 families · 1
+of 15 active · 3 partial · expert 12% / equal 17%, with the third partial SOPR on a week-old 1.0026 and the one
+ACTIVE the frozen ETF figure; 0 of 15 · 3 partial · expert 7 / equal 10% on the hand ETF figure, from `BS_W`.
+
+**The event.** Oct 29 from ~20:20 UTC: unauthorized withdrawals from Binance. Size: Chainalysis $5.912B, Binance
+~$6.3B, TRM $6.36B. TraderTraitor (TRM, Chainalysis, via press). Compromised engineer's laptop, EIP-7702 delegation
+"did not pass through our normal approval controls" (Teng, via Cointelegraph live blog). Binance: >$6.34B of company
+funds reserved, ~$5B already held in matching tokens, ~$3B frozen at issuers (Tether, Circle), every loss covered
+from SAFU plus company funds, no private-key leak, withdrawals paused (restart estimate 48h → 45h → **40h at 14:34
+UTC Oct 30 ≈ Nov 1 06:30 UTC**), full proof of reserves by Monday. Deposits: suspended 00:07 UTC, reported normal
+later. Liquidations $1.49–1.57B across crypto (CoinGlass via press; BTC $468–502M). All Binance statements read
+through press, none at a Binance primary. **CNBC's "Why bitcoin held up better" returned 403, not read.** The CoinDesk
+"Polymarket suspended international trading" item came through the research subagent and two searches did not
+confirm it; not used.
+
+**Read on-chain (mempool.space, 18:19 UTC), not from press:** root `bc1q0mtc2f5agpkvlq6hhahmfr3hlr55kyfjhl2mnm`
+received 18,270.20 BTC and spent it through 10 intermediates into **19 wallets (17 × 1,000, 832.5, 437.7), sum
+18,270.20, none spent, nothing in the mempool.** A first trace found 16 wallets because its transaction de-duplication skipped
+spends seen before their sender was known; the second walked every spend and closes the sum. Stolen, not swapped, so nothing here is frozen. Attribution
+of the root to the hack rests on CoinDesk. Binance has not said it will buy or sell BTC; it is buying altcoins to
+match stolen quantities (Yi He, press).
+
+**Tape (Binance).** Oct 29 hourly: 20:00 O 80,848 L 78,297, 4,134 BTC, the largest hour of the two days; low 77,910 at
+23:00; close **77,991.89**, lowest close since Sep 17 ($76,417). Oct 30: low **76,500.11** ~02:00, 77,112 at 18:03 UTC.
+Sep 15 low 74,968 and Sep 7–13 weekly close 76,842 not breached. −11.8% from the Sep 21 peak; 36.8% of the
+57,800 → 87,396 rally retraced at the low; +33.4% over the cycle low; −38.9% from the ATH, week 55.6. F&G 51 → **30**.
+SMA 20/50/100/200: 81,702 / 81,937 / 76,083 / 73,147. Realized Price 53,704 (Oct 23), 200W MA 67,301, STH cost basis
+75,903 (Oct 29), spot STH MVRV 1.02.
+
+**Funding, per the standing multi-venue read (last / 7d, %/8h):** Binance USDT +0.0100 / +0.0067 (0 of 21 negative),
+COIN-M +0.0100 / +0.0092; Bybit linear +0.0100 / +0.0063, inverse +0.0100 / +0.0091; OKX USDT +0.0100 / +0.0080, USD
++0.0100 / +0.0098. **No capitulation in funding on any venue.** Binance OI 98.2K → 95.4K BTC over ~3 days: a small
+reduction. Hyperliquid and Deribit not read.
+
+**Standing address read.** `3GPnJf…` 204 txs, 11,566.66 received, balance 0, last Oct 7: nothing new.
+`bc1qazcm…` 94,643.49, `bc1qa5wkga…` 69,370.18: balances unchanged, only dust-sized txs Oct 25–26.
+
+**Premium.** Oct 29 raw **−0.2713%** (Coinbase 77,780.33 / Binance 77,991.89), the widest in the Coinbase candles read
+(from Nov 15, 2025; prior −0.2294% Feb 4, 2026); USDT 0.99776, the lowest close of that span. Adjusted **−0.0474%**,
+the widest of the same span (prior −0.0354% Mar 23); Oct 30 in progress −0.1959% / −0.0740% at 18:03 UTC. 55 negative
+raw closes Sep 5–Oct 29. **Binance's withdrawals being paused contaminates this measure**, since Binance is its second
+leg. Bitstamp's Oct 29 close (77,792.67) sits with Coinbase, so the gap is Binance against USD venues, mostly but not
+entirely USDT. The row stays NOT YET: the event-contamination convention (§2b) scores PARTIAL when an event moved the
+series, but this row was already NOT YET for 54 closes before it, and lifting it to PARTIAL on a widening would be
+backwards. **For Nov 2:** the Nov 1 close sits ~17.5 hours after the target restart.
+
+**ETF, by hand (tftc.io Farside-style table, data through Oct 29; farside.co.uk 403):** Oct 26 +110.3, Oct 27 +176.0,
+Oct 28 +137.3, Oct 29 **+17.1** (IBIT 12.8). Sessions Oct 5–29 (19) = **−$164.2M**. Leg 3 at the Nov 2 window would need
+**+$1,664M on Oct 30**, the largest day of 2026 being +$999M. Oct 30 unpublished. The published `etf.d20` is +$1.92B,
+22 sessions old, and is the page's only ACTIVE.
+
+**Catalyst: fired, on the exploit leg; not a solvency event as of Oct 30.** MAINTENANCE §2 and §3 and the `mac` row
+define it as exchange failure, stablecoin depeg or >$500M exploit. ~$6B clears that by an order of magnitude. Binance's
+coverage does not un-fire it: softening the bar after seeing the case is the retro-edit §2b forbids. Bitget (Sep 24)
+stated two findings under its bar, and this entry keeps the same two.
+
+**Gate: open, and a doc-sync finding.** §3 says the $38–44K tranche "becomes actionable". `lad[2].c` had said since
+July that the gate "still needs an accelerating, forced sale plus funding z < −2", the Strategy-specific arming of Jul
+24, while `th_p`, the `mac` row and §3 use the plain catalyst bar: two live specs for one gate, as with falsifier #6 on
+Aug 21. **The published bar was applied**; choosing the stricter one in the pass where it would keep the gate shut
+would be the motivated edit. The stricter wording's non-met state is stated in `lad[2].c`. **Practical effect today:
+none.** The tranche is ~45–50% under spot, and the bands did not move.
+
+**Event study (run Oct 30, daily Bitstamp closes on every event, for one index; base = close before day 0; the Oct 28
+base is Bitstamp 81,250, against Binance's 81,343.50).** z = 90-day low ÷ (trailing 90-day daily σ × √90). pct = rank
+of that low (or d30) among same-length windows within ±365 days.
+
+| Event | day 0 | d30 % (pct) | 90-day low % (day) | pct | z |
+|---|---|---|---|---|---|
+| Mt. Gox halt | 2014-02-07 | −16.2 (28) | −55.5 (63) | 19 | −0.64 |
+| Mt. Gox bankruptcy | 2014-02-24 | −4.7 (49) | −44.3 (46) | 43 | −0.60 |
+| Bitstamp 19K BTC | 2015-01-05 | −14.0 (29) | −42.3 (9) | 30 | −1.32 |
+| Bitfinex 120K BTC | 2016-08-02 | −5.8 (16) | −23.3 (0) | 19 | −0.75 |
+| Coincheck $530M | 2018-01-26 | −14.0 (23) | −46.9 (11) | 18 | −0.78 |
+| Binance 7K BTC | 2019-05-07 | +37.3 (93) | −0.5 (1) | 98 | −0.02 |
+| Ronin $620M | 2022-03-23 | −6.3 (42) | −58.5 (87) | 3 | −1.74 |
+| Luna/UST | 2022-05-09 | −11.3 (30) | −48.3 (40) | 9 | −1.52 |
+| FTX halt | 2022-11-08 | −16.3 (17) | −24.8 (13) | 29 | −0.96 |
+| Bybit $1.46B | 2025-02-21 | −12.5 (14) | −24.3 (45) | 32 | −1.16 |
+
+Today: trailing σ 1.99%/day, σ₉₀ 18.8%. **A new low needs −28.9% from the base = z −1.53.** Median z −0.78 / −0.96 →
+**$69,385 / $66,547**. Ronin is the only event past −1.53, and its low (day 87) is Luna's; Luna itself sits on the line.
+About 10.9% of all 90-day windows in the sample reach z −1.53 with no event selected. **What the study supports:** a
+downward tilt, not a new low. d30 is negative in 9 of 10, median about −12%; mean ranks 34 (d30) and 30 (low) against a
+null of 50 with se ~9, so ~−1.8 sd, weak. **What it does not support:** the failure-path claim on its own terms. The
+failures (Mt. Gox ×2, Luna, FTX) are not visibly deeper in z than the thefts: N = 4 and 6, with very different
+volatility regimes. The failure path is treated as worse on mechanism (loss of custody and a cascade of forced sellers),
+not on this table. Mechanical, not levels to plan on. The script and price cache were scratch files, deleted; the
+study rebuilds from public Bitstamp closes.
+
+**The 70%: held, a fifth time, and this is the hardest of the five.** Against, new since Oct 29: the theft itself; the
+widest raw and adjusted premium; LTH new low **16,338,734 (Oct 29)**, 7d −29,657, 30d −144,684 (−183,244 Oct 27, the
+base rolled, not an improvement); hot GDP; Brent ~$117 (press); Alphabet −13%, Nasdaq −1.4% (FRED 26,184.72), Intel −26%
+premarket (press); F&G 30. For: 10y 5.05 → **4.98**, 2y 4.67 → 4.61, real 2.67 → **2.63** (Oct 29, Treasury); four ETF
+inflow sessions, +$440.7M; S&P only −0.3% (7,720.39, FRED); funding positive everywhere; stolen BTC unspent. Why not cut:
+(1) the shock is the kind the catalyst tip named as cascading, and it has not cascaded; (2) the study puts a covered
+theft well short of the 30% this report already gives a new low; (3) the deciding facts land within about three days, and a
+same-day move is not evidence (§5). Why this could be wrong: the study is N = 10 across regimes, the tilt is downward,
+and five holds on worsening ledgers is itself a pattern to distrust. **No market read:** Polymarket's host does not
+resolve here, and the `--resolve` route in MAINTENANCE §2 was denied by the session's permission classifier; it was
+not worked around. `cvp[3]` is labelled stale, and the ~17-point gap is dated Oct 29.
+
+**Failure-path test, written Oct 30 before either date.** Re-score the 70% at the next read, with no automatic number
+and no capital effect, if any one holds:
+1. BTC or USDT withdrawals not open by **Nov 3 00:00 UTC**, ~41 hours past the target;
+2. no proof of reserves published by **Nov 4 00:00 UTC**, or one showing a shortfall;
+3. Binance net outflows over **$10B in the 7 days after the restart** on a public tracker. The bar is judged: Binance
+   took ~$6B net in 72 hours in Dec 2022 and did not fail (from memory, not opened).
+
+Absent all three by Nov 10 the event is logged as a covered exploit. A sale from the 19 wallets is logged by amount
+and date but does not re-score: stolen coins moving is expected laundering (Bybit's unit took ~10 days to swap, CoinDesk).
+
+**Open for the owner, in the order they expire (defaults stand if nothing is said).**
+1. **Downside marker before Mon Nov 2 00:00 UTC.** The Oct 29 entry named one and did not adopt it. **Assistant's
+   recommendation: adopt a weekly close under the STH cost basis (~$75.9K) → cut to ~60%.** $76,842 is 0.3% away and
+   would fire on noise. Written on Oct 30 with the weekly close two days out, it is prospective but close to the
+   answer, and that is disclosed here. **Default: not adopted, no marker at stake on Nov 2.**
+2. Leg-2 form for Nov 2. **Default: the pinned raw Sunday close.**
+3. ETF source, open since Oct 11. **Default: by hand, and the page keeps showing the frozen ACTIVE.**
+
+**Strategy.** Q3 8-K (EDGAR, read directly): 848,517 BTC (Oct 25), average $75,446; net income $19.53B; USD Reserve
+$4.83B, ~3.4 years; **Q3 sold 5,552 BTC at an average $62,780**, $239.9M to dividends and $108.6M to STRC; Q2 sold 1,395
+at $59,663; YTD ~$431.8M, which equals the two carrying values. The $62,780 average fits the Jul–Aug prices already
+logged; the weekly 8-Ks were **not** summed to 5,552. Spot is ~2% over average cost. Call (Motley Fool transcript, 100K
+of 116K characters read by the subagent): Le "a fraction of the Bitcoin we hold"; Saylor "entering a bull market". MSCI
+list Nov 11: still unpublished; the $2.8B estimate still dates from 2025 and an exclusion does not force BTC sales
+(DL News via TechFlow, Oct 29). Coinbase Q3 (8-K deck): revenue $1,215.6M, flat q/q, −35% y/y; net income $718.7M.
+
+**Macro (press unless stated).** Q3 GDP advance 3.4% vs 3.1% (Yahoo) or 3.2% (FXStreet); September PCE 3.6% / core 3.1% y/y,
+core +0.3% m/m, in line; bea.gov 404. ECB hold 2.50%, hike discussed; BoJ hold 1.25%, 8–1. December Fed ~21bp priced
+(FXStreet, Oct 28). Claims for the week of Oct 24 not found. Brent $115.32 Oct 28, $114.88 Oct 29, ~$117.19, high $117.84
+Oct 30 (headlines). S&P 7,743.98 → 7,720.39, Nasdaq 26,549.85 → 26,184.72 (FRED, Oct 28 → 29); a conflicting quote
+board of 7,558 in a Yahoo live blog was not used. Oct 30 closes not in. Deribit Oct 30: ~$10.9B, max pain $78,000, settled
+$78,119.01 (secondary). Next: Nov 27 $3.55B, Dec 25 $10.54B, max pain $75K (secondary).
+
+**IPO test (Oct 29 entry) unchanged.** The theft lands before the Nov 10–25 window, so condition 3 does not catch it,
+and any November fall will carry a second confound. Anthropic retail tranche 15–20% "under consideration" (Bloomberg via
+The Next Web, Oct 28): recorded as reported, not announced, and per the test it changes nothing.
+
+**Recommendation.** Stage TOO EARLY; nothing deployed; bands unchanged ($52–57K probe 20%, $44–50K core 45%, $38–44K
+capitulation 35%, the last now un-gated on the catalyst). The deploy trigger is expected to miss on Nov 2: leg 1 fires,
+leg 3 needs +$1.66B in one session, leg 2 needs a positive raw close from −0.2%.
+
+**Edited.** EN by script (47 exact-substring replacements, each asserted unique in the EN block), PT/ES mirrored by a
+sonnet agent against a digit-run checker: `an_asof`, `ev_asof`, `mac_h`, `th_p`, `trig_n`, `trig[0..3]`, `cvp[3]`, `bs`
+hash / lth / cbp, `lad[2]`, `mac` Fed / Rates / ETF / Recession / Trade / Geopolitics / Catalyst / Strategy / Events /
+Equities, `ev.anthropic`. `EVENTS` 68 → 73: `binance_wd` (Nov 1 ~06:30 UTC), `binance_por` (Nov 2), `ism_mfg` (Nov 2,
+`'d'`), `retarget5` (Nov 13, est −4.43% at 6.3%), `nvda_q3` (Nov 17, via search). Dates re-checked at publisher through
+the subagent: BLS, BEA, FOMC. **Corrected from the Oct 29 text:** the Oct 29 retarget landed +5.54%, not the +5.86%
+estimate; "credit spreads near two-year lows" was stale (HY 3.14 against a 2.59–4.61 range). **Left:** README and og-card
+(dated; bands unchanged); `mac` liquidity, dollar and credit tails; the Recession row's odds, dated Oct 29; `resv`
+(Sep 26, dated). SpaceX lock-up row still withheld.
+
+---
+
 ## 2026-10-29 — IPO event study (seven mega-IPOs): no consistent BTC effect; Anthropic roadshow and Nasdaq-100 fast entry added to `EVENTS`; an IPO-drain test pre-registered for Nov 10–25
 
 Owner asked how the Anthropic IPO could hit BTC, how it compares with SpaceX, when an IPO-driven fall would

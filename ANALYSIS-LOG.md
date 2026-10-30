@@ -127,9 +127,13 @@ inflow sessions, +$440.7M; S&P only −0.3% (7,720.39, FRED); funding positive e
 (1) the shock is the kind the catalyst tip named as cascading, and it has not cascaded; (2) the study puts a covered
 theft well short of the 30% this report already gives a new low; (3) the deciding facts land within about three days, and a
 same-day move is not evidence (§5). Why this could be wrong: the study is N = 10 across regimes, the tilt is downward,
-and five holds on worsening ledgers is itself a pattern to distrust. **No market read:** Polymarket's host does not
-resolve here, and the `--resolve` route in MAINTENANCE §2 was denied by the session's permission classifier; it was
-not worked around. `cvp[3]` is labelled stale, and the ~17-point gap is dated Oct 29.
+and five holds on worsening ledgers is itself a pattern to distrust. **Market read:** Polymarket's host does not
+resolve here and the `--resolve` route in MAINTENANCE §2 was denied by the session's permission classifier, so it was
+not worked around in the session. **The owner ran the read at ~19:00 UTC** (Gamma, open contracts, mid `outcomePrices`):
+↓$70K **50.5** (34.5 Oct 29), ↓$65K 30.5 (20.5), ↓$60K **18.5** (15.5), ↓$55K **10.5** (9.5), ↓$50K 7.5, ↓$45K 4.55, ↓$40K 2.75;
+↑$90K **31.5** (45.5), ↑$95K 17.5 (26.5), ↑$100K 11.5 (17.5). No-new-low ≈ 100 − (10.5 + 0.56 × 8.0) ≈ **~85.0%** (87.1 Oct 29), gap
+~15 points. It fits the study: about even on a dip to $70K, little move at the cycle low. Volume not read; the first
+commit of this pass labelled the card stale, and a second replaced that with this read.
 
 **Failure-path test, written Oct 30 before either date.** Re-score the 70% at the next read, with no automatic number
 and no capital effect, if any one holds:

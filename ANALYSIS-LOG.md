@@ -23,6 +23,136 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-04 — Research pass + the Nov 2 adjudication (run two days late): Binance restart and proof of reserves landed, the outflow check stays open to Nov 8; flows −$1.16B in three sessions; 70% held a sixth time
+
+Owner asked to update, search for new information, analyse and give the recommendation. **A research pass**
+(`an_asof`, `ev_asof`, `mac_h` → Nov 4) **plus the eleventh adjudication. No threshold, weight, band, window,
+falsifier, trigger or `st` changed.** Reads Nov 4, 16:45–17:05 UTC. `data.json` = the Nov 4 06:09 build: on-chain
+through Nov 1 (`realized_price`/`puell` Oct 28, `sth_realized_price` Nov 3), macro fresh, ETF frozen at Oct 8,
+`stale: ["etf","onchain"]`. Rendered before the edits (en): Too early · 0 of 4 families · 1 of 15 active · 3 partial
+(SOPR, hash, resv) · expert 12% / equal 17% · `CORE` 4%, 0 of 8 active — the one ACTIVE is still the frozen ETF figure.
+Web research through three sonnet subagents (Binance; macro; flows/calendar); everything marked press below came that way.
+
+**Eleventh adjudication, Nov 2 window: not fired — 2 of 3 as published, 1 of 3 on any working measure.**
+- Leg 1: Binance 1w Oct 26–Nov 1 closed **$78,354.00** — fired.
+- Leg 2: Nov 1 daily close Coinbase 78,230.55 / Binance 78,354.00 = **−0.1576% raw**; USDT-USD 0.99870 →
+  **−0.0276% adjusted**. Weekly mean raw (Oct 26–Nov 1) −0.186%; positive raw closes in the week 0 of 7. **Every form
+  misses**, the fifth such window (Sep 14, Oct 5, Oct 12, Oct 19, Nov 2). Tally raw-Sunday 0/11, weekly-mean 0/11,
+  any-positive-raw 2/11, adjusted-Sunday 5/11. No owner decision before the window: the pinned raw form stood.
+- Leg 3: tftc.io Farside-style table (secondary; farside.co.uk and sosovalue 403): Oct 30 **−643.3** (IBIT −233.7,
+  FBTC −201.0, ARKB −129.5, GBTC −53.3, BITB −25.7), Nov 2 **−398.6** (IBIT −405.3), Nov 3 **−115.6**; Oct 26–29
+  confirmed (+110.3 / +176.0 / +137.3 / +17.1). The table starts Oct 6; Oct 5 (−90) is from the earlier entries.
+  Window Oct 5–30 = −164.2 − 643.3 = **≈ −$0.81B**. Published `etf.d20` still +$1.92B frozen at Oct 8, so the page
+  reads it fired. Trailing 20 sessions Oct 7–Nov 3 ≈ **−$1.35B**. **Nov 9 window** (Oct 12–Nov 6) ≈ −$0.64B through
+  Nov 3, needs ≈ +$2.14B over Nov 4–6.
+
+**Premium closes since (raw / adjusted):** Oct 30 −0.2434 / **−0.1106** (the widest adjusted close since at least Nov
+2025, past Oct 29's −0.047), Oct 31 −0.2037 / −0.0818, Nov 1 −0.1576 / −0.0276, Nov 2 −0.1847 / −0.0227, Nov 3
+−0.1512 / −0.0222. **60 negative raw closes Sep 5–Nov 3.** The adjusted gap narrowed once Binance reopened. `cbp`
+stays NOT YET, per the Oct 30 ruling: contamination does not lift a row already NOT YET.
+
+**Binance failure-path test (written Oct 30): two of three checks passed, the third open — not closed.**
+1. Withdrawals: phased restart from **06:00 UTC Nov 1**, BTC first, USDT on eight networks, all first-phase routes by
+   12:36 UTC (bitcoin.com, Bitcoin Magazine). Before the Nov 3 00:00 UTC bar. **Passed.**
+2. Proof of reserves: snapshot dated Oct 31 00:00 UTC, zk proof completed **Nov 2**, ten assets incl. BTC and USDT
+   "at least 1:1" (Bitcoin Magazine, hngn). Before the Nov 4 00:00 UTC bar, no shortfall reported. **Passed — on press
+   only:** binance.com's PoR page rendered blank fields to the fetcher, so no per-asset ratio, attestor or exact hour.
+   A second snapshot (more tokens) was scheduled for Nov 4; not found published.
+3. Net outflows > $10B in 7 days after the restart: Binance's own figure ≈ **$5.3B net** (withdrawals ~$10.97B,
+   deposits ~$5.7B) from early Nov 1 to early Nov 3, hourly deposits above withdrawals by early Nov 3 (hngn);
+   DefiLlama $5.8B over one 24h window (Cointelegraph); Bloomberg $4.7B (headline). **Open until ~Nov 8 06:00 UTC.**
+   Note the bar is net, not gross — gross withdrawals alone already passed $10B.
+Also: replacement of stolen assets 90 / 95 / 98% in successive Binance statements, gap unexplained; SAFU ~15,000 →
+~7,500 BTC, pledged back to $1B; ~$2.8B frozen (Chainalysis, Nov 3); FBI attribution to North Korea Oct 31. No other
+exchange halt, depeg or >$500M exploit found (searched, not exhaustive).
+
+**Read on-chain (mempool.space, Nov 4 ~17:00 UTC).** Walked every spend from root `bc1q0mtc…2mnm`: 30 addresses,
+**19 leaves, 18,270.20 BTC, none spent, nothing in the mempool** — unchanged since Oct 30. Standing reads: `3GPnJf…`
+204 txs, balance 0, last Oct 7; `bc1qazcm76…` 94,643.49 and `bc1qa5wkga…` 69,370.18, unchanged.
+
+**Tape (Binance).** Daily closes Oct 30–Nov 3: 77,368.77 / 77,582.02 / 78,354.00 / 76,816.00 / 77,453.86. Nov 4:
+low **75,736.38** at 03:00 UTC — under the Oct 30 low (76,325.98) and level with the STH cost basis (75,757, Nov 3),
+above the Sep 15 low (74,968); then **81,196.01** in the 15:00 UTC hour (3,942 BTC, the largest hour read), ~80,670 at
+16:45. The move started in the 14:00 hour, before ISM services (15:00 UTC); it coincided with a US equity rally after
+the midterms (Dow +2.9% midday, press) and an ~8% intraday fall in Brent. **No BTC-specific headline found; the
+coincidence is recorded, not a cause.** Liquidations ~$378M of shorts in one hour (CoinGlass via crypto.news).
+F&G (alternative.me, direct): Nov 4 34, Nov 3 26, Nov 2 37, Nov 1 34, Oct 30–31 30.
+
+**Funding (last / 7d, %/8h; 0 negative prints of 21 on every series):** Binance USDT +0.0100 / +0.0089, COIN-M
++0.0100 / +0.0095; Bybit linear +0.0100 / +0.0077, inverse +0.0014 / +0.0088; OKX USDT +0.0100 / +0.0091, USD
++0.0100 / +0.0098. **No capitulation in funding on any venue**, through the theft and the restart. Binance OI
+94.8–99.0K BTC over 8 days, no flush. Context only (§5).
+
+**`lth` — new low, faster.** BGeometrics 16,254,878.58 (Nov 3): 7d −106,886, **30d −296,031**, −3.58% from the
+Jul 24 record, 354,424 under the Aug 11 trough. Nov 1 → Nov 3 −71,906 in two days. **Not a record:** the free window's
+most negative 30-day change is −1,086,391 (Nov 25, 2025) and its largest one-day drop −535,874 (Nov 21, 2025).
+**Hypothesis, not measured:** part of Nov 2–3 is coin-age reset from Binance moving its own long-held reserves during
+the restart (the 18,270 stolen BTC already left on Oct 29–30). It would make the row event-contaminated, but the
+convention would lift it to PARTIAL and the row was NOT YET for weeks before the event — the same reasoning that kept
+`cbp` NOT YET on Oct 30. Stays NOT YET. Testing the hypothesis needs Binance-labelled outputs by coin age; not done.
+
+**`hash`:** 30d/60d 1,043.6 / 994.2 EH/s = **+4.97%** (Nov 4), Up since Sep 1 (~65 days). Stays PARTIAL (Oct 6 call).
+Next retarget ~Nov 13 ~06:30 UTC, est **−3.12%** at 40.8% of the epoch (was −4.43% at 6.3%); `EVENTS.retarget5`
+time and text updated.
+
+**On-chain (data.json):** SOPR **0.9938** (Nov 1) — PARTIAL, 0.004 above the 0.99 ACTIVE bar, the marginal row per
+§5; Puell 1.05 (Oct 28), no longer marginal; STH MVRV 1.031 (Nov 1), spot ~1.06; MVRV-Z 0.79; NUPL 0.31.
+
+**Strategy (EDGAR, read by the subagent from data.sec.gov):** Oct 26 8-K — nothing bought or sold, $204.9M STRC
+bought back, 848,517 BTC. **Nov 2 8-K — 811 BTC for $65.5M at $80,846**, funded by $164.0M of MSTR ATM; $208.2M STRC
+bought back; **849,327 BTC**, average $75,451; USD Reserve $4.79B. STRC daily dividends from Nov 1. Buying, not
+selling: the gate's Strategy-specific mechanism stays de-armed.
+
+**Macro (primary where marked).** Rates (FRED / Treasury par curve): 10y 4.94 / 4.91 / 4.95 (Oct 30, Nov 2, Nov 3),
+2y 4.56 / 4.59 / 4.61, real 10y 2.60 / 2.62 (Nov 3 n/a). Refunding Nov 4 (treasury.gov): $125B, sizes unchanged and
+guided unchanged "for the next several quarters"; **liquidity-support buybacks up to $70B** this quarter (prior up to
+$38B, secondary) plus $25B cash management. ISM manufacturing 55.5 (Sep 54.5), prices 75.2 (press; ISM pages 403/404);
+ISM services 54.5 vs 54.9 (press, title only). December hike ~75–81% on CME (Nov 3, press; 71–73% ~Oct 30); Musalem
+Oct 30 "a rate hike is needed soon" (headline). No post-midterm odds found. Claims 194K (Oct 24, FRED). Payrolls Nov 6
+13:30 UTC, consensus ~59–100K (press); CPI Nov 10 (bls.gov). Midterms: Democrats projected to win House and Senate
+(CBS live blog, press); NYDIG before the vote: a Democratic Senate makes CLARITY unlikely next Congress — regulation is
+not a checklist input. Brent 111.20 (Nov 2) and 103.60 (Nov 3), sources not reconciling on daily changes; Oct 30
+settle not found; >8% down intraday Nov 4 (CNBC). Equities (FRED): S&P 7,580.07 / 7,541.40 / 7,568.92, Nasdaq
+25,437.00 / 25,164.36 / 25,372.01 (Oct 30, Nov 2, Nov 3). Broad dollar 121.67 (Oct 30, FRED); DXY −0.39% Nov 4 (press).
+
+**Polymarket — read directly this time.** The Gamma host resolved natively today (it did not on Oct 30), so no
+`--resolve` override was needed. Event `what-price-will-bitcoin-hit-before-2027`, open contracts, `outcomePrices`
+mid, ~17:00 UTC Nov 4, **after** the 15:00 squeeze: ↓$70K **31.5** (50.5 Oct 30), ↓$65K 19.5, ↓$60K **13.5** (18.5),
+↓$55K **7.5** (10.5), ↓$50K 6.5, ↓$45K 2.75, ↓$40K 2.65; ↑$90K **42.5** (31.5), ↑$95K 22.5, ↑$100K 14.5. No-new-low ≈
+100 − (7.5 + 0.56 × 6.0) ≈ **~89.1%** (85.0 Oct 30); gap ~19 points. A same-day read straight after a 6% move: the
+read is dated to the hour for that reason.
+
+**The 70%: held, a sixth time.** No pre-registered marker at stake: the owner did not adopt the Oct 30 downside
+marker (default: none), and the week closed $78,354, above the ~$75.9K it would have used. For, since Oct 30: no
+failure at the restart (checks 1–2), stolen BTC unspent, Strategy buying, funding positive on six venues, Brent
+~$117 → $103.60, 10y 4.98 → 4.91–4.95 / real 2.63 → 2.62, refunding buybacks roughly doubled, market no-new-low 85 →
+~89%. Against: ETF −$1.16B in three sessions and the trailing four weeks ≈ −$1.35B; LTH −296K on 30 days; 60 negative
+premium closes with the adjusted form at its widest on Oct 30; December hike ~75–81%; the Nov 4 low at $75,736, the
+lowest print since Sep 15. **Two-sided, and the number does not move on a ledger alone** (same rule as Oct 22, Oct 29,
+Oct 30). Why this could be wrong: six consecutive holds is the pattern of a number that is no longer being tested;
+the flow and holder legs — the two that the Sep 21 raise leaned on least — are the ones deteriorating; and the only
+downside marker is a lower low under $57,800, which makes the probability structurally slow to fall. A prospective
+downside marker remains the owner's to adopt; none was written in this pass, because writing one on the day price
+printed its lowest since Sep 15 and then rallied 7% would be choosing it while looking at the answer.
+
+**Recommendation.** Stage TOO EARLY; nothing deployed; bands unchanged ($52–57K probe 20%, $44–50K core 45%, $38–44K
+capitulation 35%, un-gated on the catalyst). Deploy trigger not fired at Nov 2; at Nov 9 the flow leg needs ~+$2.1B in
+three sessions and the premium a positive raw close from −0.15%. Failure-path check 3 closes ~Nov 8.
+
+**Edited.** EN by script (39 exact-substring replacements, each asserted unique in the EN block) + `ev.retarget5`
+and `EVENTS.retarget5.tm`; PT/ES mirrored by a sonnet agent against a digit-run checker: `an_asof`, `ev_asof`,
+`mac_h`, `th_p` (new Nov 4 paragraph; adjudication sentences; "marginal readings only" → SOPR only; week 55 → 56),
+`trig_n`, `trig[0..3]`, `fal[5]`, `cvp[3]`, `bs` hash / lth / cbp, `mac` Fed / Rates / Liquidity / ETF / Geopolitics /
+Catalyst / Strategy / Events / Equities, `ev.anthropic` (S-1/A No. 1 filed Nov 2, retail brokers named, still no
+range or date), `ev.retarget5`. **Not re-read:** `mac` Dollar, Credit, Recession (odds dated Oct 29), Trade; `resv`
+(Sep 26, dated). README / og-card left dated (stage and bands unchanged). SpaceX lock-up row still withheld.
+**Verified after the edits:** PT/ES 40 replacements each; digit-run checker clean on every edited key; parity 187/187,
+events ids match, no `EVENTS` row without text; rendered en/pt/es with headless Chrome (`--lang`), **0 console lines
+×3**: Too early · 0 of 4 families · 1 of 15 active · 3 partial · expert 12% / equal 17% — unchanged from before the
+edits, as expected for a pass that moved no `st`.
+
+---
+
 ## 2026-10-30 — Research pass after the Binance theft: the second crypto-native catalyst fired on the exploit leg, the capitulation gate opened, bands unchanged, 70% held a fifth time, failure-path test written down
 
 Owner asked to update, search for new information, redo the analysis and the calendar, and give the new

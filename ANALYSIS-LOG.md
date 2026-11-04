@@ -23,6 +23,62 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-04 (late) — ETF feed restored from Farside: the page's only ACTIVE row was the frozen figure; readiness 12% → 7%; pending re-reads closed; 70% unchanged
+
+Owner asked to update and do what was pending for a more precise recommendation. **No threshold, weight, band,
+window, falsifier, trigger or `st` changed; the 70% was not re-scored** (no marker at stake; same day as the pass).
+
+**ETF source (owner item open since Oct 11) — fixed.** `farside.co.uk/bitcoin-etf-flow-all-data/` answered 200 on
+Nov 4 (403 in October from this machine; 403 still to the default Python-urllib UA, 200 to the Action's UA).
+`fetch_etf` now parses that table (`parse_farside`); SoSoValue code removed; `etf.aum` and `ytd_partial` dropped
+(no Farside source / no reader). Completeness rule: a session counts once IBIT prints — the first rule tried ("any
+fund `-` that printed before") dropped 20 real sessions (single-fund gaps such as BTCO Jul 27, EZBC Aug 7, 2026);
+IBIT's 17 `-` rows are all holidays with Total 0.0, plus the half-filled Nov 4 row. Checks: column sums = Farside's
+Total row ($56,533.9M); d20 **−1.35** (Oct 7–Nov 3) = the hand figure from the tftc.io table; Nov 2 window Oct 5–30
+= −0.808 (hand: ≈ −0.81); Nov 9 window Oct 12–Nov 3 = −0.644, needs **+$2.144B over Nov 4–6**. Tests
+`FarsideEtfFeed` (3) fail against the old code (2 errors, 1 failure) and the partial-row test fails when the IBIT
+rule is removed (mutation run). **Runner check:** the Action dispatched on a throwaway branch read
+`etf 20d -1.35B 60d +4.44B ytd -0.06B (2026-11-03)`, `STALE: ['onchain']` (run 41931533613); branch deleted.
+
+**Rendered after the change (en/pt/es, local copy with the Farside block, no console messages):** Too early ·
+0 of 4 families · **0 of 15 active** (was 1 — the frozen ETF row) · 3 partial · **expert 7% / equal 10%** (was
+12% / 17%) · `CORE` 4%, 0 of 8 (ETF is not in `CORE`). The stage did not move: the one ACTIVE never lit a family.
+
+**Re-reads (sonnet subagent; P = primary read by it):**
+- Binance, P: Recovery Update #5 (Nov 2) — zk proof for the **Oct 31 00:00 UTC** snapshot, ten tokens "fully backed
+  at 100%" as a group, no per-asset ratio, no named auditor (links a Feb 2023 Hacken audit of the verifier). Update
+  #7 (Nov 4) — 98% of stolen assets replenished; new snapshot Nov 4 00:00 UTC, 44 tokens, proof in "50 to 60
+  hours" (#5 had said 40–50). PoR page still blank to the fetcher. Check 2 stays passed, now on primary.
+- Outflow (check 3, open to ~Nov 8 06:00 UTC): $5.28B net at 03:00 UTC Nov 3 (CEO figures via CoinDesk: $10.97B
+  out / $5.69B in over 46h); first 9.5h $3.64B (CNBC relay). One report (gokhshtein.com) cites DefiLlama $12.16B
+  7-day net outflow — the window includes the theft itself, so not comparable with the bar; not used. Nothing
+  found from Nansen/CryptoQuant after the restart.
+- Stolen BTC: Elliptic (Nov 4 09:15 UTC) — 18,270 BTC unmoved in 19 addresses (agrees with the on-chain read);
+  ~215 BTC (Nov 3) and ~470 BTC (Nov 4) converted from other stolen assets moved to new addresses; ~33 BTC coinjoined.
+- Fed: CME December hike ~82% Nov 4 (FXStreet; spread 73–85% across press by timestamp). No Fed speaker Nov 3–4.
+- ISM services Oct: 54.5, prices 73.0 (74.0), employment 51.4 — Trading Economics, ismworld.org blocked.
+- Brent: Nov 2 **104.77** (−8.66, Reuters/Globe and Mail) — the Nov 4 pass's ~$111.20 was wrong and is replaced;
+  Nov 3 103.60; Nov 4 ~94.66 intraday, no settle at this read; Oct 30 ≈ 113.43 derived (not found directly).
+- Dollar: ICE DXY ~101.49 Nov 4, lowest since Sep 30 (press); broad index 121.67 vs 200d 119.52 (Oct 30, FRED) —
+  still above. Credit: HY OAS **3.40%** Nov 3 (3.14 Oct 28, 3.26 Oct 29; FRED), above its 200d 2.89 — the old
+  "richest decile" phrase was dropped as no longer checked. Recession odds: nothing newer than Oct 29 found; row
+  unchanged. Trade: nothing since Oct 29; a Section 301 shipbuilding suspension lapsing Nov 10 is one snippet,
+  not added.
+- Refunding (P, treasury.gov sb0678): $125B, sizes kept "for the next several quarters", buybacks up to $70B
+  liquidity + $25B cash management — as the pass had it.
+- BTC bounce: Bitfinex "mainly short covering, with fresh spot buyers absent"; ~$307M BTC shorts liquidated
+  (CoinGlass via press). Nov 3 ETF −$115.56M (SoSoValue site via press) = Farside −115.6.
+
+**What this does to the recommendation.** Nothing deployable changed; it got cleaner. The trigger now reads 1 of 3
+on the published arbiter itself, not only by hand. The counter-scenario ledger gained two small items against
+(spreads +26bp in a week, December hike ~82%) and one qualifier on the for side (the bounce was a squeeze). Not
+enough to move a number that moves only on a marker. Remaining owner items: downside marker, leg-2 form.
+
+**Edited:** `scripts/build_data.py`, `scripts/test_build_data.py`, `index.html` (`aum` dropped from the macro
+string; EN `th_p`, `bs_n`, `bs` etf tip, `trig_n`, `trig[1].d`, `trig[3].d`, `mac` Fed / US dollar / Credit / ETF /
+Geopolitics / Catalyst / Events / Equities; PT/ES mirrored by a sonnet agent, numbers checked line-by-line by a
+digit-multiset script, 0 mismatches; `node --check` on the page script), `MAINTENANCE.md`.
+
 ## 2026-11-04 — Research pass + the Nov 2 adjudication (run two days late): Binance restart and proof of reserves landed, the outflow check stays open to Nov 8; flows −$1.16B in three sessions; 70% held a sixth time
 
 Owner asked to update, search for new information, analyse and give the recommendation. **A research pass**

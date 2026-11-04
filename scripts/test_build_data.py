@@ -110,5 +110,57 @@ class FredMaintenancePage(unittest.TestCase):
         self.assertIn("macro", data["stale"])
 
 
+class FarsideEtfFeed(unittest.TestCase):
+    """Oct 9 - Nov 4, 2026: the SoSoValue endpoint answered "interface does not exist",
+    `etf` stayed frozen at the Oct 8 session (d20 +1.92, ACTIVE) for four weeks while the
+    trailing 20 sessions were about -1.35. Farside's table replaced it; these pin its
+    parsing rules: parentheses are negative, holiday rows and the day's half-filled row
+    are not sessions, and a small fund's one-day gap does not drop a real session."""
+
+    @staticmethod
+    def page():
+        def tr(cells, tag="td"):
+            return "<tr>" + "".join(f"<{tag}><span>{c}</span></{tag}>" for c in cells) + "</tr>"
+        head = ["Date", "IBIT", "FBTC", "MSBT", "GBTC", "Total"]
+        day = datetime.date(2026, 7, 1)
+        body = []
+        for i in range(70):  # 70 sessions of +100 except a -1,250.5 one
+            day += datetime.timedelta(days=1)
+            v = "(1,250.5)" if i == 60 else "100.0"
+            gap = "-" if i == 65 else "0.0"   # FBTC blank inside a complete row
+            body.append(tr([day.strftime("%d %b %Y"), v, gap, "0.0", "0.0", v]))
+        body.insert(30, tr(["01 Jul 2026"] + ["-"] * 4 + ["0.0"]))       # holiday
+        day += datetime.timedelta(days=1)
+        body.append(tr([day.strftime("%d %b %Y"), "-", "-", "0.0", "-", "0.0"]))  # partial
+        body.append(tr(["Total", "x", "x", "x", "x", "5,649.5"]))
+        small = "<table><tr><td>Fee</td></tr></table>"
+        return small + "<table>" + tr(head, "th") + "".join(body) + "</table>"
+
+    def test_parse_rules(self):
+        rows = bd.parse_farside(self.page())
+        self.assertEqual(len(rows), 70)
+        self.assertNotIn("2026-07-01", [d for d, _ in rows])
+        self.assertEqual(rows[60][1], -1250.5)
+        self.assertEqual(rows[-1][0], "2026-09-09")
+
+    def test_fetch_etf_reads_farside(self):
+        saved = bd.get
+        bd.get = lambda url, *a, **k: self.page().encode()
+        try:
+            out = bd.fetch_etf()
+        finally:
+            bd.get = saved
+        self.assertIsNotNone(out)
+        self.assertEqual(out["d"], "2026-09-09")
+        self.assertEqual(out["d5"], 0.5)
+        self.assertEqual(out["d20"], round((19 * 100 - 1250.5) / 1e3, 2))
+        self.assertEqual(out["cum"], round((69 * 100 - 1250.5) / 1e3, 1))
+        self.assertEqual(set(out), {"d", "d5", "d20", "d60", "ytd", "cum"})
+
+    def test_changed_layout_is_rejected(self):
+        self.assertEqual(bd.parse_farside("<table><tr><th>Date</th><th>Total</th></tr></table>"), [])
+        self.assertEqual(bd.parse_farside("<html>blocked</html>"), [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -9,8 +9,8 @@ Sources
   on-chain  bitcoin-data.com/v1/*          (BGeometrics)
   macro     fred.stlouisfed.org/graph/fredgraph.csv?id=*   (keyless CSV; no CORS,
             which is why it has to come through this Action rather than the page)
-  ETF flow  api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart  (undocumented;
-            see MAINTENANCE.md — treated as best-effort, never fatal)
+  ETF flow  farside.co.uk/bitcoin-etf-flow-all-data/  (HTML table, US$m; see
+            MAINTENANCE.md — treated as best-effort, never fatal)
 
 Nothing here is allowed to fail the build. A source that errors keeps its previous
 value in data.json and is marked stale, because a report that silently drops a row
@@ -203,28 +203,62 @@ def build_macro(f):
 
 
 # --------------------------------------------------------------- ETF flows
+# Farside's all-data table (US$m per fund per US session; negatives in parentheses).
+# Replaced SoSoValue on Nov 4, 2026: its undocumented endpoint has answered
+# "interface does not exist" since Oct 9, and `etf` sat frozen at the Oct 8 session
+# (d20 +1.92) for four weeks while the real trailing figure went negative.
+# Farside answers 403 to the default Python-urllib User-Agent; `get` sends UA.
+FARSIDE = "https://farside.co.uk/bitcoin-etf-flow-all-data/"
+
+
+def parse_farside(page):
+    """[(iso_date, total_usd_m)] for every COMPLETE session, oldest first.
+
+    A session counts once IBIT has printed. Farside publishes the day's row before the
+    funds report (Nov 4, 2026, 19:00 UTC: MSBT 0.0, every other fund "-", Total 0.0);
+    counting it would put a fake 0.0 session into the 20-session window and push a real
+    one out. IBIT is the test because it has printed every session since launch and its
+    only "-" rows are market holidays (Total 0.0). Not "any fund blank": smaller funds
+    have permanent one-day gaps (BTCO Jul 27, EZBC Aug 7, 2026) inside complete rows,
+    and that rule dropped 20 real sessions.
+    """
+    import html as H, re
+    tabs = re.findall(r"<table.*?</table>", page, re.S)
+    if not tabs:
+        return []
+    cell = lambda c: H.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+    num = lambda c: -float(c[1:-1].replace(",", "")) if c.startswith("(") \
+        else float(c.replace(",", ""))
+    rows = [[cell(x) for x in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", tr, re.S)]
+            for tr in re.findall(r"<tr.*?</tr>", max(tabs, key=len), re.S)]
+    head = next((r for r in rows if r and r[0] == "Date"), None)
+    if not head or "IBIT" not in head or head[-1] != "Total":
+        return []
+    ib = head.index("IBIT")
+    out = []
+    for c in rows:
+        try:
+            d = datetime.datetime.strptime(c[0], "%d %b %Y").date().isoformat()
+            if len(c) == len(head) and c[ib] != "-":
+                out.append((d, num(c[-1])))
+        except (ValueError, IndexError):
+            continue  # header, Total row, or an unparseable cell
+    out.sort()
+    return out
+
+
 def fetch_etf():
-    raw = get("https://api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart",
-              data={"type": "us-btc-spot"})
-    if not raw:
+    raw = get(FARSIDE)
+    rows = parse_farside(raw.decode("utf-8", "replace")) if raw else []
+    if len(rows) < 60:
+        print("  ! ETF: Farside table missing or unexpected shape", file=sys.stderr)
         return None
-    try:
-        rows = json.loads(raw)["data"]
-    except Exception:
-        print("  ! ETF: unexpected response shape", file=sys.stderr)
-        return None
-    if not isinstance(rows, list) or not rows:
-        return None
-    rows.sort(key=lambda r: r["date"])
-    B = 1e9
-    s = lambda n: round(sum(r["totalNetInflow"] for r in rows[-n:]) / B, 2)
-    yr = datetime.date.today().year
-    ytd = round(sum(r["totalNetInflow"] for r in rows
-                    if r["date"] >= f"{yr}-01-01") / B, 2)
-    out = {"d": rows[-1]["date"], "d5": s(5), "d20": s(20), "d60": s(60),
-           "ytd": ytd, "ytd_partial": rows[0]["date"] > f"{yr}-01-01",
-           "cum": round(rows[-1]["cumNetInflow"] / B, 1),
-           "aum": round(rows[-1]["totalNetAssets"] / B, 1)}
+    B = 1e3  # US$m -> US$bn
+    s = lambda n: round(sum(v for _, v in rows[-n:]) / B, 2)
+    yr = str(datetime.date.today().year)
+    out = {"d": rows[-1][0], "d5": s(5), "d20": s(20), "d60": s(60),
+           "ytd": round(sum(v for d, v in rows if d[:4] == yr) / B, 2),
+           "cum": round(sum(v for _, v in rows) / B, 1)}
     print(f"  etf 20d {out['d20']:+.2f}B  60d {out['d60']:+.2f}B  ytd {out['ytd']:+.2f}B  ({out['d']})")
     return out
 

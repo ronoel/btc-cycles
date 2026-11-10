@@ -23,6 +23,21 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-10 (IPO calendar) — Anthropic IPO phases and the SpaceX analog put on the calendar for tracking
+
+Owner asked to register the dates. **No reading, threshold, band, trigger or probability changed.** `EVENTS`:
+roadshow Nov 10–18 (launch primary at anthropic.com; end = reported pricing); `anthropic_px` pricing Nov 18 (press);
+`anthropic` first trade Nov 19 (CNBC citing sources, Nov 10; not company-confirmed); `anthropic_st` settlement Nov 20
+(T+1, derived); `ipo_test` Nov 25, the close of the Oct 29 pre-registered test (baselines Nov 9: BTC 75,368.41, NDX
+27,907.63); `ant_leg2` ~Dec 7 — the SpaceX analog's second leg (SpaceX's lowest cycle close came 18 days after its Jun
+12 debut), N = 1, labelled a scenario; `spx_lock` Dec 8, SpaceX's last 180-day release (press, prospectus not read —
+the row withheld since Oct 11 is added at the owner's request, sourced as press); `ndx_ant` re-derived to the Dec 10
+close (15 trading days from Nov 19, Thanksgiving closed — the Oct 29 count). Analog depth for reference only: −21.5% /
+−24% from the S-1 close ($80,151, Oct 26) ≈ $63K / $61K, above the probe band; a weekly close under $70K on that path
+would fire the downside marker adopted today. The Oct 29 judgment that Anthropic's crypto channel was weaker than
+SpaceX's rested on "no US retail tranche"; press now reports ~20% retail (SpaceX 20–30%), so that judgment no longer
+holds as written.
+
 ## 2026-11-10 (marker) — Downside marker adopted: a weekly close under $70K cuts the ~70% to ~50%, from the Nov 16 window
 
 Owner adopted a prospective downside marker after the Nov 10 pass put it to them. **Rule:** Binance `BTCUSDT` weekly

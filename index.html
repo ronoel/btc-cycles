@@ -26,10 +26,10 @@
    only warm colour is bitcoin orange, reserved for "now". */
 :root{--paper:#F1F5F8;--sheet:#FFFFFF;--ink:#10243A;--ink2:#46596C;--ink3:#7D90A3;--rule:#D6DFE7;
   --sea1:#DDEBF3;--sea2:#BBD4E4;--sea3:#8FB2CA;--btc:#E8830C;--on:#0B7A69;--part:#A86A12;--off:#8A9BAC;
-  --c1:#5B7FA6;--c2:#2F9C83;--c3:#8C79C9;--c4:#E8830C;color-scheme:light}
+  --c1:#5B7FA6;--c2:#2F9C83;--c3:#8C79C9;--c4:#E8830C;--bad:#C2413A;color-scheme:light}
 @media (prefers-color-scheme:dark){:root{--paper:#0C1A28;--sheet:#11233A;--ink:#E6EEF5;--ink2:#A9BACA;--ink3:#6F849A;--rule:#22384F;
   --sea1:#14304A;--sea2:#1B4262;--sea3:#26587E;--btc:#F7931A;--on:#3CC2A8;--part:#E2A84B;--off:#6F849A;
-  --c1:#7FA3CB;--c2:#4CC3A5;--c3:#A897E3;--c4:#F7931A;color-scheme:dark}}
+  --c1:#7FA3CB;--c2:#4CC3A5;--c3:#A897E3;--c4:#F7931A;--bad:#F0837C;color-scheme:dark}}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Archivo',system-ui,sans-serif;font-variation-settings:'wdth' 100;background:var(--paper);color:var(--ink);
   line-height:1.55;font-size:16px;font-variant-numeric:tabular-nums}
@@ -47,7 +47,7 @@ a:focus-visible,button:focus-visible,.tip:focus-visible{outline:2px solid var(--
 .lbtn.on{color:var(--ink);background:var(--sea1)}.lbtn:hover{color:var(--ink)}
 .sbar{display:flex;align-items:center;gap:8px;margin:14px 0 28px;font-size:.85rem;color:var(--ink2);flex-wrap:wrap}
 .sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--ink3)}
-.sdot.ok{background:var(--on)}.sdot.err{background:#C2413A}.sdot.ld{background:var(--btc);animation:pls 1s infinite}
+.sdot.ok{background:var(--on)}.sdot.err{background:var(--bad)}.sdot.ld{background:var(--btc);animation:pls 1s infinite}
 @keyframes pls{50%{opacity:.3}}
 @media (prefers-reduced-motion:reduce){.sdot.ld{animation:none}}
 .stxt b{color:var(--ink);font-weight:600}
@@ -72,6 +72,11 @@ a:focus-visible,button:focus-visible,.tip:focus-visible{outline:2px solid var(--
 .v-next li span:first-child{color:var(--ink3);min-width:9.5em;flex-shrink:0}
 .pmap{width:100%;height:auto;display:block}
 .pmap text{font-family:'Archivo',sans-serif;font-variant-numeric:tabular-nums}
+.pm-b0{fill:var(--sea1)}.pm-b1{fill:var(--sea2)}.pm-b2{fill:var(--sea3)}
+.pm-bt{fill:var(--ink);font-size:15px;font-weight:700;font-stretch:110%}.pm-br{fill:var(--ink2);font-size:13px}
+.pm-lv{stroke:var(--ink3);stroke-dasharray:3 4}.pm-lead{stroke:var(--ink3)}.pm-axis{stroke:var(--ink);stroke-width:1.5}
+.pm-p{fill:var(--ink);font-size:14px;font-weight:600;font-stretch:112%}.pm-n{fill:var(--ink2);font-size:11.5px}.pm-ath{fill:var(--ink3);font-size:12px}
+.pm-now{stroke:var(--btc);stroke-width:3}.pm-dot{fill:var(--btc);stroke:var(--paper);stroke-width:3}.pm-nt{fill:var(--btc);font-size:20px;font-weight:800;font-stretch:115%}
 .pm-cap{color:var(--ink3);font-size:.8rem;margin-top:6px}
 
 /* sections */
@@ -84,7 +89,11 @@ a:focus-visible,button:focus-visible,.tip:focus-visible{outline:2px solid var(--
 .nt{color:var(--ink3);font-size:.85rem;max-width:72ch;margin-top:14px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 @media (max-width:860px){.two{grid-template-columns:1fr;gap:28px}}
-.two h3{font-size:1.05rem;font-weight:700;font-stretch:108%;margin-bottom:10px}
+.subsec{margin-top:32px;max-width:760px}
+.subsec h3{font-size:1.05rem;font-weight:700;font-stretch:108%}
+.subsec .nt{margin:2px 0 10px}
+.sec h2.next{margin-top:36px}
+.cinn.tall{height:440px}.cinn.mid{height:360px}
 
 /* status marks */
 .st{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;white-space:nowrap}
@@ -111,8 +120,7 @@ td{padding:10px 12px 10px 0;border-bottom:1px solid var(--rule);vertical-align:t
 td.num{white-space:nowrap}
 tr.hit td{background:var(--sea1)}
 .live{font-size:.72rem;font-weight:600;color:var(--on);margin-left:6px;letter-spacing:.02em}
-.rd{color:#C2413A}
-@media (prefers-color-scheme:dark){.rd{color:#F0837C}}
+.rd{color:var(--bad)}
 
 /* families */
 .fams{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:22px;border-top:2px solid var(--ink)}
@@ -131,14 +139,10 @@ td .rr{color:var(--ink2)}
 .ev-tbl td b{font-weight:600;display:block}
 .ev-tbl td span.w{color:var(--ink2);font-size:.88rem}
 .ev-cd{display:block;color:var(--ink3);font-size:.8rem;font-weight:400}
-.ev-src{color:var(--ink3);font-size:.8rem;white-space:nowrap}
-.ev-ty{font-size:.8rem;color:var(--ink2);white-space:nowrap}
-@media (max-width:640px){.ev-tbl .ev-hide{display:none}}
 
 /* macro */
 .eff{font-size:.82rem;white-space:nowrap}
-.eff.h{color:#C2413A}.eff.t{color:var(--on)}.eff.m{color:var(--ink3)}
-@media (prefers-color-scheme:dark){.eff.h{color:#F0837C}}
+.eff.h{color:var(--bad)}.eff.t{color:var(--on)}.eff.m{color:var(--ink3)}
 
 /* estimates */
 .est{list-style:none}
@@ -149,8 +153,8 @@ td .rr{color:var(--ink2)}
 .est-sum{margin-top:12px;font-size:.92rem;color:var(--ink2)}
 
 /* falsifiers */
-.fal{counter-reset:f;list-style:none;max-width:76ch}
-.fal li{padding:9px 0 9px 0;border-top:1px solid var(--rule)}
+.fal{list-style:none;max-width:76ch}
+.fal li{padding:9px 0;border-top:1px solid var(--rule)}
 
 /* charts */
 .cwrap{position:relative}
@@ -169,7 +173,7 @@ td .rr{color:var(--ink2)}
 .cp-hdr,.cp-cell{padding:6px 8px 6px 0;border-bottom:1px solid var(--rule)}
 .cp-hdr{font-weight:600}
 .cp-na{color:var(--ink3)}
-.cp-buy{color:var(--on)}.cp-sell{color:#C2413A}.cp-neut{color:var(--ink2)}
+.cp-buy{color:var(--on)}.cp-sell{color:var(--bad)}.cp-neut{color:var(--ink2)}
 .cp-hint{color:var(--ink3);font-size:.85rem;margin-top:8px}
 
 /* tooltips */
@@ -186,7 +190,9 @@ td .rr{color:var(--ink2)}
 .cmp-type{color:var(--ink3);font-size:.85rem;margin-bottom:8px}
 .cmp-row{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;padding:3px 0}
 .cmp-k{color:var(--ink3)}
-.cmp-lnk{display:inline-block;margin-top:10px;font-weight:600;color:var(--ink)}
+.cmp-link{display:inline-flex;gap:6px;align-items:center;margin-top:12px;font-weight:600;color:var(--ink);font-size:.9rem}
+.cmp-link svg{width:14px;height:14px}
+.cmp-note{border-top:1px solid var(--rule);padding-top:10px}
 .cmp-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:20px;font-size:.88rem;color:var(--ink2)}
 .cmp-note b{color:var(--ink)}
 
@@ -199,8 +205,6 @@ td .rr{color:var(--ink2)}
 .don-cp{background:none;border:1px solid var(--rule);color:var(--ink2);font:inherit;font-size:.8rem;padding:2px 8px;border-radius:4px;cursor:pointer}
 .ev-more{display:block;margin:4px 0 14px;background:none;border:1px solid var(--ink3);color:var(--ink);font:inherit;font-size:.88rem;padding:6px 12px;border-radius:4px;cursor:pointer}
 .ev-more:hover{background:var(--sea1)}
-.cmp-link{display:inline-flex;gap:6px;align-items:center;font-weight:600;color:var(--ink);font-size:.9rem}
-.cmp-link svg{width:14px;height:14px}
 </style>
 </head>
 <body>
@@ -218,14 +222,14 @@ td .rr{color:var(--ink2)}
   <section class="sec"><h2 id="ladT"></h2><div class="tw"><table><thead id="ladTH"></thead><tbody id="ladTB"></tbody></table></div></section>
 
   <section class="sec"><h2 id="bsT"></h2><p class="lead" id="bsN"></p><div class="fams" id="bsFam"></div><div class="tw"><table><thead id="bsTH"></thead><tbody id="bsTB"></tbody></table></div>
-    <div style="margin-top:32px;max-width:760px"><h3 id="trigT" style="font-size:1.05rem;font-weight:700;font-stretch:108%"></h3><p class="nt" id="trigN" style="margin:2px 0 10px"></p><ul class="est" id="trigGrid"></ul></div></section>
+    <div class="subsec"><h3 id="trigT"></h3><p class="nt" id="trigN"></p><ul class="est" id="trigGrid"></ul></div></section>
 
   <section class="sec" id="evSec"><h2 id="evT"></h2><div class="tw"><table class="ev-tbl"><thead id="evTH"></thead><tbody id="evTB"></tbody></table></div><p class="nt" id="evN"></p></section>
 
-  <section class="sec"><h2 data-t="s1t"></h2><div class="cwrap"><div class="legend" id="lg1"></div><div class="cinn" style="height:440px"><canvas id="ch1"></canvas></div>
+  <section class="sec"><h2 data-t="s1t"></h2><div class="cwrap"><div class="legend" id="lg1"></div><div class="cinn tall"><canvas id="ch1"></canvas></div>
     <div class="cp" id="cpPanel"><div class="cp-head"><span class="cp-title" id="cpTitle"></span><button class="cp-close" aria-label="Close" onclick="document.getElementById('cpPanel').classList.remove('show')">&times;</button></div><div class="cp-grid" id="cpGrid"></div><div class="cp-hint" data-t="cp_hint"></div></div></div>
     <p class="nt" data-t="s1n"></p>
-    <h2 data-t="s2t" style="margin-top:36px"></h2><div class="cwrap"><div class="legend" id="lg2"></div><div class="cinn" style="height:360px"><canvas id="ch2"></canvas></div></div><p class="nt" data-t="s2n"></p></section>
+    <h2 class="next" data-t="s2t"></h2><div class="cwrap"><div class="legend" id="lg2"></div><div class="cinn mid"><canvas id="ch2"></canvas></div></div><p class="nt" data-t="s2n"></p></section>
 
   <section class="sec"><h2 id="macT"></h2><div class="tw"><table><thead id="macTH"></thead><tbody id="macTB"></tbody></table></div></section>
 
@@ -302,7 +306,7 @@ lad:[{"t":"Probe","b":"$52K–57K","dd":"−55…−59%","a":"20%","c":"A sustai
 lad_now:"◀ current price",
 trig_t:"Confirmation signals",
 trig_n:"When all four fired together, past bottoms were already in. Now: none fired, one partial.",
-trig:[{"b":"Coinbase premium turns positive","d":"Negative on every close since Sep 4; −0.130% on Nov 8."},{"b":"ETF inflows above $1.5B over four weeks","d":"{ETF4W} now (Farside), with outflows on four of the last five sessions."},{"b":"Hash Ribbons buy cross","d":"Up since Sep 1 but narrowing; a cross down and back up is the classic signal."},{"b":"Fed pivots and the dollar rolls over","d":"A December hike is priced above 80% after payrolls of +165K. October CPI ran hot: +0.4% headline and +0.3% core m/m, against ~0.24% expected. The dollar is above its 200-day."}],
+trig:[{"k":"prem","b":"Coinbase premium turns positive","d":"Negative on every close since Sep 4; −0.130% on Nov 8."},{"k":"etf","b":"ETF inflows above $1.5B over four weeks","d":"{ETF4W} now (Farside), with outflows on four of the last five sessions."},{"k":"hash","b":"Hash Ribbons buy cross","d":"Up since Sep 1 but narrowing; a cross down and back up is the classic signal."},{"k":"fed","b":"Fed pivots and the dollar rolls over","d":"A December hike is priced above 80% after payrolls of +165K. October CPI ran hot: +0.4% headline and +0.3% core m/m, against ~0.24% expected. The dollar is above its 200-day."}],
 mac_t:"Macro backdrop",
 mac_h:["Factor","Reading (Nov 10, 2026)","Effect on bottom"],
 mac_head:"Headwind",
@@ -312,7 +316,6 @@ mac:[{"f":"Fed policy","e":"h","r":"3.75–4.00% after the Sep 16 hike. A Dec 9 
 ev_t:"Upcoming events that can move BTC",
 ev_asof:"dates checked Nov 10, 2026",
 ev_h:["Date","Event · why it matters","Type","Date source"],
-ev_c:{"mac":"Macro","cry":"Crypto","pol":"Policy","rep":"This report"},
 ev_s:{"p":"Primary","s":"Press","d":"Derived"},
 ev_today:"today",
 ev_now:"in progress",
@@ -434,7 +437,7 @@ lad:[{"t":"Sondagem","b":"$52K\u201357K","dd":"\u221255\u2026\u221259%","a":"20%
 lad_now:"\u25c0 pre\u00e7o atual",
 trig_t:"Sinais de confirma\u00e7\u00e3o",
 trig_n:"Quando os quatro dispararam juntos, os fundos passados j\u00e1 tinham passado. Agora: nenhum disparou, um parcial.",
-trig:[{"b":"Pr\u00eamio da Coinbase fica positivo","d":"Negativo em todos os fechamentos desde 4 set; \u22120,130% em 8 nov."},{"b":"Entradas nos ETFs acima de $1,5B em quatro semanas","d":"{ETF4W} agora (Farside), com sa\u00eddas em quatro das \u00faltimas cinco sess\u00f5es."},{"b":"Cruzamento de compra do Hash Ribbons","d":"Para cima desde 1 set, mas estreitando; um cruzamento para baixo e de volta para cima \u00e9 o sinal cl\u00e1ssico."},{"b":"O Fed muda de rumo e o d\u00f3lar vira","d":"Uma alta em dezembro est\u00e1 precificada acima de 80% ap\u00f3s payroll de +165K. O CPI de outubro veio quente: +0,4% no \u00edndice cheio e +0,3% no n\u00facleo no m\u00eas, contra ~0,24% esperado. O d\u00f3lar est\u00e1 acima da m\u00e9dia de 200 dias."}],
+trig:[{"k":"prem","b":"Pr\u00eamio da Coinbase fica positivo","d":"Negativo em todos os fechamentos desde 4 set; \u22120,130% em 8 nov."},{"k":"etf","b":"Entradas nos ETFs acima de $1,5B em quatro semanas","d":"{ETF4W} agora (Farside), com sa\u00eddas em quatro das \u00faltimas cinco sess\u00f5es."},{"k":"hash","b":"Cruzamento de compra do Hash Ribbons","d":"Para cima desde 1 set, mas estreitando; um cruzamento para baixo e de volta para cima \u00e9 o sinal cl\u00e1ssico."},{"k":"fed","b":"O Fed muda de rumo e o d\u00f3lar vira","d":"Uma alta em dezembro est\u00e1 precificada acima de 80% ap\u00f3s payroll de +165K. O CPI de outubro veio quente: +0,4% no \u00edndice cheio e +0,3% no n\u00facleo no m\u00eas, contra ~0,24% esperado. O d\u00f3lar est\u00e1 acima da m\u00e9dia de 200 dias."}],
 mac_t:"Cen\u00e1rio macro",
 mac_h:["Fator","Leitura (10 nov 2026)","Efeito no fundo"],
 mac_head:"Vento contra",
@@ -444,7 +447,6 @@ mac:[{"f":"Pol\u00edtica do Fed","e":"h","r":"3,75\u20134,00% ap\u00f3s a alta d
 ev_t:"Pr\u00f3ximos eventos que podem mexer no BTC",
 ev_asof:"datas conferidas em 10 nov 2026",
 ev_h:["Data","Evento \u00b7 por que importa","Tipo","Fonte da data"],
-ev_c:{"mac":"Macro","cry":"Cripto","pol":"Pol\u00edtica","rep":"Este relat\u00f3rio"},
 ev_s:{"p":"Prim\u00e1ria","s":"Imprensa","d":"Derivada"},
 ev_today:"hoje",
 ev_now:"em curso",
@@ -566,7 +568,7 @@ lad:[{"t":"Sondeo","b":"$52K\u201357K","dd":"\u221255\u2026\u221259%","a":"20%",
 lad_now:"\u25c0 precio actual",
 trig_t:"Se\u00f1ales de confirmaci\u00f3n",
 trig_n:"Cuando las cuatro se dispararon juntas, los pisos pasados ya hab\u00edan ocurrido. Ahora: ninguna disparada, una parcial.",
-trig:[{"b":"La prima de Coinbase se vuelve positiva","d":"Negativa en todos los cierres desde el 4 sep; \u22120,130% el 8 nov."},{"b":"Entradas a ETF por encima de $1,5B en cuatro semanas","d":"{ETF4W} ahora (Farside), con salidas en cuatro de las \u00faltimas cinco sesiones."},{"b":"Cruce de compra de Hash Ribbons","d":"Al alza desde el 1 sep pero estrech\u00e1ndose; un cruce a la baja y de vuelta al alza es la se\u00f1al cl\u00e1sica."},{"b":"La Fed gira y el d\u00f3lar se da vuelta","d":"Una subida en diciembre est\u00e1 descontada por encima del 80% tras n\u00f3minas de +165K. El IPC de octubre sali\u00f3 caliente: +0,4% general y +0,3% subyacente en el mes, frente a ~0,24% esperado. El d\u00f3lar est\u00e1 por encima de su media de 200 d\u00edas."}],
+trig:[{"k":"prem","b":"La prima de Coinbase se vuelve positiva","d":"Negativa en todos los cierres desde el 4 sep; \u22120,130% el 8 nov."},{"k":"etf","b":"Entradas a ETF por encima de $1,5B en cuatro semanas","d":"{ETF4W} ahora (Farside), con salidas en cuatro de las \u00faltimas cinco sesiones."},{"k":"hash","b":"Cruce de compra de Hash Ribbons","d":"Al alza desde el 1 sep pero estrech\u00e1ndose; un cruce a la baja y de vuelta al alza es la se\u00f1al cl\u00e1sica."},{"k":"fed","b":"La Fed gira y el d\u00f3lar se da vuelta","d":"Una subida en diciembre est\u00e1 descontada por encima del 80% tras n\u00f3minas de +165K. El IPC de octubre sali\u00f3 caliente: +0,4% general y +0,3% subyacente en el mes, frente a ~0,24% esperado. El d\u00f3lar est\u00e1 por encima de su media de 200 d\u00edas."}],
 mac_t:"Contexto macro",
 mac_h:["Factor","Lectura (10 nov 2026)","Efecto en el piso"],
 mac_head:"Viento en contra",
@@ -576,7 +578,6 @@ mac:[{"f":"Pol\u00edtica de la Fed","e":"h","r":"3,75\u20134,00% tras la subida 
 ev_t:"Pr\u00f3ximos eventos que pueden mover el BTC",
 ev_asof:"fechas verificadas el 10 nov 2026",
 ev_h:["Fecha","Evento \u00b7 por qu\u00e9 importa","Tipo","Fuente de la fecha"],
-ev_c:{"mac":"Macro","cry":"Cripto","pol":"Pol\u00edtica","rep":"Este informe"},
 ev_s:{"p":"Primaria","s":"Prensa","d":"Derivada"},
 ev_today:"hoy",
 ev_now:"en curso",
@@ -643,14 +644,13 @@ function t(k){return L[lang]?.[k]||L.en[k]||k}
 // gives no special meaning to $ sequences in the value \u2014 which matters here because
 // several of these values are prices like $77,448.
 function tf(k,...a){let s=t(k);a.forEach((v,i)=>{s=s.split('{'+i+'}').join(v)});return s}
+const LOC={en:'en-US',pt:'pt-BR',es:'es-ES'};
+function locOf(){return LOC[lang]||'en-US'}
 function detectLang(){const s=localStorage.getItem('btc_lang');if(s&&L[s])return s;const b=(navigator.language||'en').toLowerCase();return b.startsWith('pt')?'pt':b.startsWith('es')?'es':'en'}
 
 // ============ CONSTANTS ============
 const ATH=126296,ATHD=new Date('2025-10-06'),H5=new Date('2028-04-15'),SK='btc_c4_v8';
 let COL=['#5B7FA6','#2F9C83','#8C79C9','#E8830C']; // re-read from the CSS tokens in rebuild()
-// Bottom-signal weights (sum=100). Structural/valuation signals weighted above sentiment/flow
-// weights sum to 100. sthmvrv added Jul 24, 2026: it is the only valuation signal not diluted by
-// permanently-held supply, so it takes 7 points from the aggregate trio it partly supersedes.
 // ---- Bottom-checklist scoring -------------------------------------------------
 // Weights are expert judgement over N=3 bear markets, which is too small to fit 15
 // parameters against. They are kept because the alternative (equal weights) is also
@@ -683,11 +683,8 @@ function scoreRows(rows){
     const r=rows.filter(b=>BS_FAM[b.k]===f);
     if(!r.length)return;
     const v=r.reduce((s,b)=>s+sv(b.st),0);
-    // Share of the expert-weighted score this family carries. Derived from BS_W rather
-    // than written down anywhere, so it cannot drift out of sync if a weight changes.
-    fam[f]={n:r.length,v,on:r.filter(b=>b.st==='on').length,
-      prt:r.filter(b=>b.st==='part').length,lit:v>r.length/2,
-      w:Math.round(r.reduce((s,b)=>s+(BS_W[b.k]||0),0)/tw*100)};
+    fam[f]={n:r.length,on:r.filter(b=>b.st==='on').length,
+      prt:r.filter(b=>b.st==='part').length,lit:v>r.length/2};
   });
   const lit=Object.values(fam).filter(f=>f.lit).length;
   return {expert,equal,fam,lit,
@@ -719,6 +716,10 @@ const RULE={
 function wk(d){return Math.floor((d-ATHD)/(7*864e5))}
 function fwk(d){return(d-ATHD)/(7*864e5)}
 function $(n){return'$'+Math.round(n).toLocaleString('en-US')}
+// signed US$ billions, e.g. +$1.50B / −$0.97B
+function sgB(v){return(v>=0?'+':'−')+'$'+Math.abs(v).toFixed(2)+'B'}
+function isoD(ms){return new Date(ms).toISOString().slice(0,10)}
+function thr(h){return '<tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'}
 function ss(c,h){document.getElementById('sDot').className='sdot '+c;document.getElementById('sTxt').innerHTML=h}
 
 // ============ HISTORICAL CYCLES (weekly, x=weeks from ATH) ============
@@ -932,7 +933,7 @@ const PRIOR_LOWS=[{w:59,c:0,dd:-85},{w:52,c:1,dd:-84},{w:54,c:2,dd:-78}];
 // Live numbers for the macro & flow table. Kept separate from the checklist
 // composite: these inform the narrative and the depth read, they are not scored.
 function liveMacro(){
-  const m=macroData,o={},sg=v=>(v>=0?'+':'−')+'$'+Math.abs(v).toFixed(2)+'B';
+  const m=macroData,o={},sg=sgB;
   if(m?.dxy)o.dxy=m.dxy.v.toFixed(1)+' ('+(m.dxy.v<m.dxy.ma?'below':'above')+' 200d '+m.dxy.ma.toFixed(1)+')';
   if(m?.real10y&&m?.nom10y)o.rates='10y '+m.nom10y.v.toFixed(2)+'% · real 10y '+m.real10y.v.toFixed(2)+'% (200d '+m.real10y.ma.toFixed(2)+'%, 2y high '+m.real10y.hi2y.toFixed(2)+'%)';
   if(m?.netliq){const n=m.netliq,d=n.w52!=null?n.v-n.w52:null;
@@ -1048,37 +1049,36 @@ const CYCLE_LOW=57800.19,RALLY_PEAK=87395.67;
 // (MAINTENANCE.md §2b): Coinbase BTC-USD close vs Binance BTCUSDT close, completed UTC day.
 const CBP_LAST={pct:-0.1301,d:'2026-11-08',streak:66};
 const TRIG_BAR={wk:70000,etf:1.5};
-// Status of the four confirmation cards (`trig`), set in each research pass: premium, ETF, hash ribbons, Fed.
-const TRIG_ST=['off','off','part','off'];
+// Status of the four confirmation cards, by the `k` of each `trig` entry; set in each research pass.
+const TRIG_ST={prem:'off',etf:'off',hash:'part',fed:'off'};
 let dailyK=[];
 function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
-function fD(iso,o){const loc=lang==='pt'?'pt-BR':lang==='es'?'es-ES':'en-US';
-  return new Date(iso+'T00:00:00Z').toLocaleDateString(loc,Object.assign({timeZone:'UTC',month:'short',day:'numeric'},o||{}))}
+// UTC day label; `x` is an ISO day or epoch ms, `o` the toLocaleDateString fields (default: short month + day)
+function fD(x,o){return new Date(typeof x==='number'?x:x+'T00:00:00Z').toLocaleDateString(locOf(),Object.assign({timeZone:'UTC'},o||{month:'short',day:'numeric'}))}
 // Last completed weekly close: the Sunday daily close equals the Binance 1w close (Monday-open convention).
 function lastWeeklyClose(){
   for(let i=dailyK.length-1;i>=0;i--){const k=dailyK[i],d=new Date(k.ts);
-    if(d.getUTCDay()===0&&k.ts+864e5<=Date.now())return {d:new Date(k.ts).toISOString().slice(0,10),c:k.close}}
+    if(d.getUTCDay()===0&&k.ts+864e5<=Date.now())return {d:isoD(k.ts),c:k.close}}
   return null}
 function upcomingEvents(now=new Date()){
   const day=864e5,t0=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate());
-  const P=x=>Date.parse(x+'T00:00:00Z'),iso=ms=>new Date(ms).toISOString().slice(0,10);
+  const P=x=>Date.parse(x+'T00:00:00Z');
   return {t0,rows:EVENTS.map(e=>{
     if(!e.w)return Object.assign({},e,{a:P(e.d),b:P(e.d2||e.d)});
     let n=(8-now.getUTCDay())%7;if(n===0&&now.getTime()>t0+15*6e4)n=7;
-    return Object.assign({},e,{a:t0+n*day,b:t0+n*day,d:iso(t0+n*day)})
+    return Object.assign({},e,{a:t0+n*day,b:t0+n*day,d:isoD(t0+n*day)})
   }).filter(e=>e.b>=t0).sort((x,y)=>x.a-y.a)}}
 function evText(id){return (L[lang]?.ev||{})[id]||L.en.ev[id]||[id,'']}
-function evDate(e,long){const loc=lang==='pt'?'pt-BR':lang==='es'?'es-ES':'en-US';
-  const f=(ms,o)=>new Date(ms).toLocaleDateString(loc,Object.assign({timeZone:'UTC'},o));
-  return (e.m&&long)?f(e.a,{month:'long'})+' · '+t('ev_undated')
-    :e.d2?f(e.a,{month:'short',day:'numeric'})+' – '+f(e.b,{month:'short',day:'numeric'})
-    :f(e.a,long?{weekday:'short',month:'short',day:'numeric'}:{month:'short',day:'numeric'})}
+function evDate(e,long){
+  return (e.m&&long)?fD(e.a,{month:'long'})+' · '+t('ev_undated')
+    :e.d2?fD(e.a)+' – '+fD(e.b)
+    :fD(e.a,long?{weekday:'short',month:'short',day:'numeric'}:null)}
 let evAll=false;
-function renderEvents(now=new Date()){
-  const {t0,rows:all}=upcomingEvents(now),day=864e5,rows=evAll?all:all.filter(e=>e.a<=t0+45*day);
+function renderEvents(up=upcomingEvents()){
+  const {t0,rows:all}=up,day=864e5,rows=evAll?all:all.filter(e=>e.a<=t0+45*day);
   document.getElementById('evT').innerHTML=t('ev_t')+'<span class="asof">'+t('ev_asof')+'</span>';
   const h=t('ev_h');
-  document.getElementById('evTH').innerHTML='<tr><th>'+h[0]+'</th><th>'+h[1]+'</th></tr>';
+  document.getElementById('evTH').innerHTML=thr(h.slice(0,2));
   document.getElementById('evTB').innerHTML=rows.map(e=>{
     const [nm,why]=evText(e.id),n=Math.round((e.a-t0)/day);
     const cd=e.a<=t0?(e.b>t0?t('ev_now'):t('ev_today')):(e.m?'~':'')+t('ev_in').replace('{0}',n);
@@ -1109,52 +1109,53 @@ function checklist(){
   // Macro liquidity regime: ONE composite row (M2, dollar, real rates are one collinear factor).
   const mc=macroComposite();
   if(mc)live.fed={v:mc.n+' of '+mc.tot,st:mc.n>=3?'on':mc.n>=2?'part':'off'};
-  if(etfData?.d20!=null){const f=v=>(v>=0?'+':'−')+'$'+Math.abs(v).toFixed(2)+'B';
-    live.etf={v:f(etfData.d20)+' (4w)',st:etfData.d20>=1.5?'on':etfData.d20>0?'part':'off'}}
+  if(etfData?.d20!=null){
+    live.etf={v:sgB(etfData.d20)+' (4w)',st:etfData.d20>=1.5?'on':etfData.d20>0?'part':'off'}}
   const txt=t('bs'),base=L.en.bs;
   const rows=base.map((b,i)=>{const x=txt[i]||b;return {...x,k:b.k,live:live[b.k]||null,st:(live[b.k]?.st)||b.st||'off'}});
   return {rows,S:scoreRows(rows),rp,m2,srp,dd};
 }
-function stMark(s,txt){return '<span class="st '+(s==='on'?'on':s==='part'?'part':'off')+'">'+txt+'</span>'}
+function stMark(s,txt){return '<span class="st '+s+'">'+txt+'</span>'}
+// Price-map layout (SVG user units). Narrow screens get a narrower drawing, so labels keep their size.
+const PM={H:560,top:46,bot:536,pmax:92000,pmin:34000,wide:520,narrow:380,narrowPx:480,gap:30};
 function renderPriceMap(c){
   const svg=document.getElementById('pmap');if(!svg)return;
-  // narrow screens get a narrower drawing, so the labels keep their size instead of scaling down
-  const W=(svg.clientWidth&&svg.clientWidth<480)?380:520,top=46,bot=536,pmax=92000,pmin=34000,L0=Math.log(pmax),Lr=L0-Math.log(pmin);
-  svg.setAttribute('viewBox','0 0 '+W+' 560');
+  const W=(svg.clientWidth&&svg.clientWidth<PM.narrowPx)?PM.narrow:PM.wide,L0=Math.log(PM.pmax),Lr=L0-Math.log(PM.pmin);
+  svg.setAttribute('viewBox','0 0 '+W+' '+PM.H);
   // label column sized to the longest level name in the current language
   const nm=[t('pm_peak'),t('pm_sth'),t('pm_200w'),t('pm_low'),t('pm_rp')],mx=Math.max(...nm.map(x=>x.length));
-  const y=p=>top+(L0-Math.log(p))/Lr*(bot-top),xs=Math.round(Math.min(W*0.46,Math.max(W<500?150:176,24+mx*6.1))),lad=t('lad');
-  const esc=s=>String(s).replace(/&(?!lt;|gt;|amp;)/g,'&amp;');
+  const y=p=>PM.top+(L0-Math.log(p))/Lr*(PM.bot-PM.top),xs=Math.round(Math.min(W*0.46,Math.max(W<500?150:176,24+mx*6.1))),lad=t('lad');
+  const esc=s=>String(s).replace(/&(?!lt;|gt;|amp;)/g,'&amp;'),f=n=>n.toFixed(1);
   let g='<title id="pmT">'+t('pm_t')+'</title>';
   // depth bands = the buy plan's three tranches
-  const sea=['--sea1','--sea2','--sea3'];
-  LAD_BANDS.slice(0,3).forEach(([lo,hi],i)=>{const y0=y(hi),y1=y(lo),hit=lastPr>=lo&&lastPr<hi;
-    g+='<rect x="'+xs+'" y="'+y0.toFixed(1)+'" width="'+(W-xs)+'" height="'+(y1-y0).toFixed(1)+'" style="fill:var('+sea[i]+')"/>';
-    g+='<text x="'+(xs+12)+'" y="'+((y0+y1)/2+5).toFixed(1)+'" style="fill:var(--ink);font-size:15px;font-weight:700;font-stretch:110%">'+esc(lad[i].t)+' '+lad[i].a+'</text>';
-    g+='<text x="'+(W-8)+'" y="'+((y0+y1)/2+5).toFixed(1)+'" text-anchor="end" style="fill:var(--ink2);font-size:13px">'+esc(lad[i].b)+(hit?' ◀':'')+'</text>'});
-  // reference levels
+  LAD_BANDS.slice(0,3).forEach(([lo,hi],i)=>{const y0=y(hi),y1=y(lo),ym=f((y0+y1)/2+5),hit=lastPr>=lo&&lastPr<hi;
+    g+='<rect class="pm-b'+i+'" x="'+xs+'" y="'+f(y0)+'" width="'+(W-xs)+'" height="'+f(y1-y0)+'"/>'
+      +'<text class="pm-bt" x="'+(xs+12)+'" y="'+ym+'">'+esc(lad[i].t)+' '+lad[i].a+'</text>'
+      +'<text class="pm-br" x="'+(W-8)+'" y="'+ym+'" text-anchor="end">'+esc(lad[i].b)+(hit?' ◀':'')+'</text>'});
+  // reference levels, labels pushed down so they never overlap
   const lv=[{p:RALLY_PEAK,n:t('pm_peak')},{p:c.srp,n:t('pm_sth')},{p:c.m2,n:t('pm_200w')},
     {p:CYCLE_LOW,n:t('pm_low')},{p:c.rp,n:t('pm_rp')}]
-    .filter(l=>l.p&&l.p>pmin&&l.p<pmax).sort((a,b)=>b.p-a.p);
-  let prev=-1e9;lv.forEach(l=>{l.y=y(l.p);l.ly=Math.max(l.y,prev+30);prev=l.ly});
+    .filter(l=>l.p&&l.p>PM.pmin&&l.p<PM.pmax).sort((a,b)=>b.p-a.p);
+  let prev=-1e9;lv.forEach(l=>{l.y=y(l.p);l.ly=Math.max(l.y,prev+PM.gap);prev=l.ly});
   lv.forEach(l=>{
-    g+='<line x1="'+(xs-6)+'" x2="'+W+'" y1="'+l.y.toFixed(1)+'" y2="'+l.y.toFixed(1)+'" style="stroke:var(--ink3);stroke-dasharray:3 4"/>';
-    if(Math.abs(l.ly-l.y)>1)g+='<line x1="'+(xs-12)+'" x2="'+(xs-6)+'" y1="'+(l.ly-4).toFixed(1)+'" y2="'+l.y.toFixed(1)+'" style="stroke:var(--ink3)"/>';
-    g+='<text x="'+(xs-14)+'" y="'+(l.ly+1).toFixed(1)+'" text-anchor="end" style="fill:var(--ink);font-size:14px;font-weight:600;font-stretch:112%">'+$(l.p)+'</text>';
-    g+='<text x="'+(xs-14)+'" y="'+(l.ly+15).toFixed(1)+'" text-anchor="end" style="fill:var(--ink2);font-size:11.5px">'+esc(l.n)+'</text>'});
+    g+='<line class="pm-lv" x1="'+(xs-6)+'" x2="'+W+'" y1="'+f(l.y)+'" y2="'+f(l.y)+'"/>';
+    if(Math.abs(l.ly-l.y)>1)g+='<line class="pm-lead" x1="'+(xs-12)+'" x2="'+(xs-6)+'" y1="'+f(l.ly-4)+'" y2="'+f(l.y)+'"/>';
+    g+='<text class="pm-p" x="'+(xs-14)+'" y="'+f(l.ly+1)+'" text-anchor="end">'+$(l.p)+'</text>'
+      +'<text class="pm-n" x="'+(xs-14)+'" y="'+f(l.ly+15)+'" text-anchor="end">'+esc(l.n)+'</text>'});
   // now: the one warm mark on the page, labelled on the right so it never fights the reference levels
-  const yn=y(lastPr);
-  g+='<line x1="'+(xs-6)+'" x2="'+W+'" y1="'+yn.toFixed(1)+'" y2="'+yn.toFixed(1)+'" style="stroke:var(--btc);stroke-width:3"/>';
-  g+='<circle cx="'+xs+'" cy="'+yn.toFixed(1)+'" r="7" style="fill:var(--btc);stroke:var(--paper);stroke-width:3"/>';
-  g+='<text x="'+W+'" y="'+(yn-10).toFixed(1)+'" text-anchor="end" style="fill:var(--btc);font-size:20px;font-weight:800;font-stretch:115%">'+esc(t('pm_now'))+' '+$(lastPr)+'</text>';
-  g+='<line x1="'+xs+'" x2="'+xs+'" y1="'+top+'" y2="'+bot+'" style="stroke:var(--ink);stroke-width:1.5"/>';
-  g+='<text x="'+xs+'" y="22" style="fill:var(--ink3);font-size:12px">↑ '+esc(t('pm_ath'))+'</text>';
+  const yn=f(y(lastPr));
+  g+='<line class="pm-now" x1="'+(xs-6)+'" x2="'+W+'" y1="'+yn+'" y2="'+yn+'"/>'
+    +'<circle class="pm-dot" cx="'+xs+'" cy="'+yn+'" r="7"/>'
+    +'<text class="pm-nt" x="'+W+'" y="'+f(+yn-10)+'" text-anchor="end">'+esc(t('pm_now'))+' '+$(lastPr)+'</text>'
+    +'<line class="pm-axis" x1="'+xs+'" x2="'+xs+'" y1="'+PM.top+'" y2="'+PM.bot+'"/>'
+    +'<text class="pm-ath" x="'+xs+'" y="22">↑ '+esc(t('pm_ath'))+'</text>';
   svg.innerHTML=g;
   document.getElementById('pmCap').textContent=t('pm_res');
 }
+let lastC=null;
 function renderAnalysis(){
   if(!document.getElementById('verdict'))return;
-  const c=checklist(),S=c.S,rows=c.rows;
+  const c=lastC=checklist(),S=c.S,rows=c.rows;
   const asof='<span class="asof">'+t('an_asof')+'</span>';
   const sdate={onchain:onChainData?.d,macro:macroData?.hy_oas?.d||macroData?.dxy?.d,etf:etfData?.d};
   const stale=k=>dataStale.includes(k)?'<span class="stale">'+tf('stale_w',sdate[k]||'—')+'</span>':'';
@@ -1162,13 +1163,13 @@ function renderAnalysis(){
   const wkc=lastWeeklyClose();
   const legs=[{ok:wkc?wkc.c>TRIG_BAR.wk:null,r:wkc?tf('tg_wk',$(wkc.c),fD(wkc.d)):'—'},
     {ok:CBP_LAST.pct>0,r:tf('tg_cbp',(CBP_LAST.pct>0?'+':'−')+Math.abs(CBP_LAST.pct).toFixed(3)+'%',fD(CBP_LAST.d),CBP_LAST.streak)},
-    {ok:etfData?.d20!=null?etfData.d20>=TRIG_BAR.etf:null,r:etfData?.d20!=null?tf('tg_etf',(etfData.d20>=0?'+':'−')+'$'+Math.abs(etfData.d20).toFixed(2)+'B'):'—'}];
+    {ok:etfData?.d20!=null?etfData.d20>=TRIG_BAR.etf:null,r:etfData?.d20!=null?tf('tg_etf',sgB(etfData.d20)):'—'}];
   const met=legs.filter(l=>l.ok).length;
   // verdict
   const band=LAD_BANDS.slice(0,3).findIndex(([lo,hi])=>lastPr>=lo&&lastPr<hi),lad=t('lad');
   const act=band>=0?tf('hv_in',lad[band].t):tf('hv_above',$(LAD_BANDS[0][1]),Math.round((1-LAD_BANDS[0][1]/lastPr)*100));
-  const w=wk(new Date()),{rows:up}=upcomingEvents();
-  const next=up.filter(e=>e.c!=='rep').slice(0,4).map(e=>'<li><span>'+evDate(e)+'</span><span>'+evText(e.id)[0]+'</span></li>').join('');
+  const w=wk(new Date()),up=upcomingEvents();
+  const next=up.rows.filter(e=>e.c!=='rep').slice(0,4).map(e=>'<li><span>'+evDate(e)+'</span><span>'+evText(e.id)[0]+'</span></li>').join('');
   document.getElementById('verdict').innerHTML='<div class="v-l">'+t('hv_l')+asof+'</div>'
     +'<div class="v-stage">'+t('stg')[S.stage]+'</div>'
     +'<div class="v-fam">'+tf('hv_fam',S.lit,S.act,S.prt)+'</div>'
@@ -1187,7 +1188,7 @@ function renderAnalysis(){
   document.getElementById('tgLast').innerHTML=t('tg_last');
   // buy plan
   document.getElementById('ladT').innerHTML=t('lad_t')+asof;
-  document.getElementById('ladTH').innerHTML='<tr>'+t('lad_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  document.getElementById('ladTH').innerHTML=thr(t('lad_h'));
   document.getElementById('ladTB').innerHTML=lad.map((r,i)=>{const hit=lastPr>=LAD_BANDS[i][0]&&lastPr<LAD_BANDS[i][1];
     return '<tr'+(hit?' class="hit"':'')+'><td><b>'+r.t+'</b>'+(hit?' '+t('lad_now'):'')+'</td><td class="num">'+r.b+'</td><td class="num rd">'+r.dd+'</td><td class="num">'+r.a+'</td><td>'+r.c+'</td></tr>'}).join('');
   // checklist
@@ -1196,21 +1197,21 @@ function renderAnalysis(){
   const fnm=t('fam_n');
   document.getElementById('bsFam').innerHTML=FAM_ORDER.filter(f=>S.fam[f]).map(f=>{const x=S.fam[f];
     return '<div class="fam'+(x.lit?' lit':'')+'"><div class="fn">'+fnm[f]+'</div><div class="fv">'+tf('fam_v',x.on,x.n,x.prt)+' · '+t(x.lit?'fam_lit':'fam_unlit')+'</div></div>'}).join('');
-  document.getElementById('bsTH').innerHTML='<tr>'+t('bs_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
+  document.getElementById('bsTH').innerHTML=thr(t('bs_h'));
   const lbl=s=>t(s==='on'?'bs_on':s==='part'?'bs_part':'bs_off');
   let fprev=null;
   document.getElementById('bsTB').innerHTML=rows.slice().sort((a,b)=>FAM_ORDER.indexOf(BS_FAM[a.k])-FAM_ORDER.indexOf(BS_FAM[b.k])).map(b=>{
     const f=BS_FAM[b.k],hd=f!==fprev?'<tr><td colspan="4" class="fam-g">'+fnm[f]+'</td></tr>':'';fprev=f;
     return hd+'<tr><td>'+b.n+tip(b.tip)+(b.live?'<span class="live">LIVE</span>':'')+'</td><td class="rr">'+(b.live?b.live.v:b.r)+'</td><td>'+b.th+'</td><td>'+stMark(b.st,lbl(b.st))+'</td></tr>'}).join('');
   // confirmation signals
-  const fB=v=>(v>=0?'+':'−')+'$'+Math.abs(v).toFixed(2)+'B',e4=etfData?fB(etfData.d20):'—';
+  const e4=etfData?sgB(etfData.d20):'—';
   document.getElementById('trigT').textContent=t('trig_t');
   document.getElementById('trigN').innerHTML=t('trig_n');
-  document.getElementById('trigGrid').innerHTML=t('trig').map((g,i)=>'<li><span class="m"><b>'+g.b+'</b></span><span class="v">'+stMark(TRIG_ST[i],lbl(TRIG_ST[i]))+'</span><span class="d">'+g.d.replace('{ETF4W}',e4)+'</span></li>').join('');
+  document.getElementById('trigGrid').innerHTML=t('trig').map(g=>'<li><span class="m"><b>'+g.b+'</b></span><span class="v">'+stMark(TRIG_ST[g.k],lbl(TRIG_ST[g.k]))+'</span><span class="d">'+g.d.replace('{ETF4W}',e4)+'</span></li>').join('');
   // macro
   document.getElementById('macT').innerHTML=t('mac_t')+asof+stale('macro')+stale('etf');
-  document.getElementById('macTH').innerHTML='<tr>'+t('mac_h').map(h=>'<th>'+h+'</th>').join('')+'</tr>';
-  const eff=e=>'<span class="eff '+(e==='h'?'h':e==='t'?'t':'m')+'">'+t(e==='h'?'mac_head':e==='t'?'mac_tail':'mac_mix')+'</span>';
+  document.getElementById('macTH').innerHTML=thr(t('mac_h'));
+  const EFF={h:'mac_head',t:'mac_tail',m:'mac_mix'},eff=e=>'<span class="eff '+e+'">'+t(EFF[e])+'</span>';
   const lm=liveMacro(),mtx=t('mac');
   document.getElementById('macTB').innerHTML=L.en.mac.map((m,i)=>{const x=mtx[i]||m,l=m.k&&lm[m.k];
     return '<tr><td><b>'+x.f+'</b>'+(l?'<span class="live">LIVE</span>':'')+'</td><td>'+(l?l+'<br><span class="rr">'+x.r+'</span>':x.r)+'</td><td>'+eff(m.e)+'</td></tr>'}).join('');
@@ -1227,9 +1228,9 @@ function renderAnalysis(){
   document.getElementById('falT').innerHTML=t('fal_t');
   document.getElementById('falLead').innerHTML=t('fal_lead');
   document.getElementById('falBox').innerHTML=t('fal').map(f=>'<li>'+f+'</li>').join('');
-  renderEvents();
+  renderEvents(up);
 }
-let _rz=null;window.addEventListener('resize',()=>{clearTimeout(_rz);_rz=setTimeout(()=>{if(lastPr)renderPriceMap(checklist())},200)});
+let _rz=null;window.addEventListener('resize',()=>{clearTimeout(_rz);_rz=setTimeout(()=>{if(lastC)renderPriceMap(lastC)},200)});
 
 // ============ PROCESS BINANCE DATA ============
 function processKlines(klines){
@@ -1250,14 +1251,15 @@ function processKlines(klines){
 }
 
 // ============ COMPARISON ============
-function buildCmp(){const cards=t('cmp_cards'),feats=t('cmp_features'),fk=t('cmp_feat_keys'),notes=t('cmp_notes');const grid=document.getElementById('cmpGrid');grid.innerHTML='';const ck=['custody','kyc','fees','pix_speed','privacy'];cards.forEach(c=>{let rows='';ck.forEach(k=>{const li=fk.indexOf(k);rows+='<div class="cmp-row"><span class="cmp-k">'+(li>=0?feats[li]:k)+'</span><span class="cmp-v">'+c.rows[k]+'</span></div>'});grid.innerHTML+='<div class="cmp-card"><div class="cmp-name">'+c.name+'</div><div class="cmp-type">'+c.type+'</div>'+rows+'<div style="height:12px"></div><a href="'+c.url+'" target="_blank" rel="noopener" class="cmp-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'+t('cmp_visit')+' '+c.name+'</a></div>'});
-
-  const nd=document.getElementById('cmpNotes');nd.innerHTML='';const cls=['var(--blue)','var(--green)','var(--orange)'];notes.forEach((n,i)=>{nd.innerHTML+='<div class="cmp-note" style="border-top-color:'+cls[i]+'"><b>'+n.name+'</b><br>'+n.text+'</div>'})}
+function buildCmp(){const cards=t('cmp_cards'),feats=t('cmp_features'),fk=t('cmp_feat_keys'),ck=['custody','kyc','fees','pix_speed','privacy'];
+  document.getElementById('cmpGrid').innerHTML=cards.map(c=>'<div class="cmp-card"><div class="cmp-name">'+c.name+'</div><div class="cmp-type">'+c.type+'</div>'
+    +ck.map(k=>{const li=fk.indexOf(k);return '<div class="cmp-row"><span class="cmp-k">'+(li>=0?feats[li]:k)+'</span><span>'+c.rows[k]+'</span></div>'}).join('')
+    +'<a href="'+c.url+'" target="_blank" rel="noopener" class="cmp-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>'+t('cmp_visit')+' '+c.name+'</a></div>').join('');
+  document.getElementById('cmpNotes').innerHTML=t('cmp_notes').map(n=>'<div class="cmp-note"><b>'+n.name+'</b><br>'+n.text+'</div>').join('')}
 
 function applyI18n(){document.querySelectorAll('[data-t]').forEach(el=>{const k=el.getAttribute('data-t');const v=L[lang]?.[k]||L.en[k];
   // Strings with markup (e.g. s2n) must go through innerHTML or the tags render literally — see MAINTENANCE.md §2
   if(v!==undefined){if(/<\/?[bi]>/.test(v))el.innerHTML=v;else el.textContent=v}});
-  const mk=h=>h.map(x=>'<th>'+x+'</th>').join('');
   document.getElementById('langSel').innerHTML=['en','pt','es'].map(l=>'<button class="lbtn'+(l===lang?' on':'')+'" onclick="setLang(\''+l+'\')">'+({en:'EN',pt:'PT-BR',es:'ES'}[l])+'</button>').join('');
   document.getElementById('rTxt').textContent=t('rr');document.title=t('h1t');document.documentElement.lang=lang==='pt'?'pt-BR':lang;buildCmp()}
 function setLang(l){lang=l;localStorage.setItem('btc_lang',l);applyI18n();updateUI();rebuild()}
@@ -1268,39 +1270,40 @@ let lastPr=71000,c4Pre=[],c4PostW=[],c4PostD=[];
 function da(c,w){let b=c[0];for(const p of c){if(p.x<=w)b=p;else break}return b?b.y:null}
 function updateUI(){
   renderAnalysis();
-  const loc=lang==='pt'?'pt-BR':lang==='es'?'es-ES':'en-US';
-  document.getElementById('ftrD').textContent=new Date().toLocaleDateString(loc,{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  document.getElementById('ftrD').textContent=new Date().toLocaleDateString(locOf(),{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
 }
 
 // ============ CHARTS ============
-let ch1=null,ch2=null;
+let ch1=null,ch2=null,TH={};
+// Theme tokens read once per rebuild (not per draw): chart plugins run on every hover redraw.
+function theme(){const o={};['btc','c1','c2','c3','c4','ink','ink2','ink3','paper','rule','sea1','sea3'].forEach(k=>o[k]=cv('--'+k));return o}
 function ds(d,i){return{label:(t('cn')||[])[i]||'',data:d,borderColor:COL[i],backgroundColor:'transparent',borderWidth:i===3?2.5:1.5,pointRadius:0,pointHoverRadius:4,pointHoverBackgroundColor:COL[i],tension:.3,fill:false}}
 function bl(id,ch){const el=document.getElementById(id);el.innerHTML='';(t('cn')||[]).forEach((n,i)=>{const s=document.createElement('span');s.className='legi';s.setAttribute('role','button');s.tabIndex=0;s.innerHTML='<span class="legsq" style="background:'+COL[i]+'"></span>'+n;s.onclick=()=>{const v=ch.isDatasetVisible(i);ch.setDatasetVisibility(i,!v);ch.update();s.classList.toggle('off',v)};el.appendChild(s)})}
-function ttO(){return{backgroundColor:cv('--ink'),titleColor:cv('--paper'),bodyColor:cv('--paper'),borderWidth:0,padding:10,displayColors:true,boxWidth:10,boxHeight:3,boxPadding:4,titleFont:{family:'Archivo'},bodyFont:{family:'Archivo'}}}
+function ttO(){return{backgroundColor:TH.ink,titleColor:TH.paper,bodyColor:TH.paper,borderWidth:0,padding:10,displayColors:true,boxWidth:10,boxHeight:3,boxPadding:4,titleFont:{family:'Archivo'},bodyFont:{family:'Archivo'}}}
 function rebuild(){
-  COL=[cv('--c1'),cv('--c2'),cv('--c3'),cv('--c4')];
+  TH=theme();COL=[TH.c1,TH.c2,TH.c3,TH.c4];
   if(ch1){ch1.destroy();ch1=null}if(ch2){ch2.destroy();ch2=null}
   const c4Full=[...c4Pre,...c4PostW];
   ch1=new Chart(document.getElementById('ch1'),{type:'line',data:{datasets:[ds(D1,0),ds(D2,1),ds(D3,2),ds(c4Full,3)]},
     options:{layout:{padding:{top:20}},responsive:true,maintainAspectRatio:false,onClick:(ev,el,chart)=>{if(allDailyCloses.length===0)return;const w=Math.round(chart.scales.x.getValueForPixel(ev.x));if(w>=-82&&w<=140)renderClickPanel(w)},interaction:{mode:'nearest',intersect:false,axis:'x'},
-      scales:{x:{type:'linear',min:-82,max:140,title:{display:true,text:t('ax1'),color:cv('--ink3'),font:{size:12,family:'Archivo'}},grid:{color:cv('--rule')},ticks:{color:cv('--ink3'),font:{size:11},stepSize:10,callback:v=>v===0?t('la'):v>0?'+'+v:''+v}},y:{min:-100,max:5,title:{display:true,text:t('ay1'),color:cv('--ink3'),font:{size:12,family:'Archivo'}},grid:{color:cv('--rule')},ticks:{color:cv('--ink3'),font:{size:11},stepSize:10,callback:v=>v+'%'}}},
+      scales:{x:{type:'linear',min:-82,max:140,title:{display:true,text:t('ax1'),color:TH.ink3,font:{size:12,family:'Archivo'}},grid:{color:TH.rule},ticks:{color:TH.ink3,font:{size:11},stepSize:10,callback:v=>v===0?t('la'):v>0?'+'+v:''+v}},y:{min:-100,max:5,title:{display:true,text:t('ay1'),color:TH.ink3,font:{size:12,family:'Archivo'}},grid:{color:TH.rule},ticks:{color:TH.ink3,font:{size:11},stepSize:10,callback:v=>v+'%'}}},
       plugins:{legend:{display:false},tooltip:{...ttO(),callbacks:{title:i=>{const w=Math.round(i[0].parsed.x);return w===0?t('la'):t('lw')+' '+(w>0?'+':'')+w},label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
-    plugins:[{id:'a',beforeDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(0);x.save();x.fillStyle='transparent';x.fillRect(s.left,y.top,p-s.left,y.bottom-y.top);x.fillStyle='transparent';x.fillRect(p,y.top,s.right-p,y.bottom-y.top);x.beginPath();x.setLineDash([4,3]);x.strokeStyle=cv('--ink3');x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle=cv('--ink');x.font='500 12px Archivo,sans-serif';x.textAlign='center';x.fillText(t('la'),p,y.top-8);x.fillStyle=cv('--ink3');x.font='11px Archivo,sans-serif';x.fillText(t('ll'),s.left+(p-s.left)/2,y.bottom-8);x.fillText(t('lr'),(p+s.right)/2,y.bottom-8);x.restore()}},{id:'b',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle=cv('--btc');x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle=cv('--paper');x.fill();x.fillStyle=cv('--paper');x.font='500 11px Archivo,sans-serif';x.textAlign='left';x.fillText(t('ln'),p.x+12,p.y+4);x.restore()}}]});
+    plugins:[{id:'a',beforeDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(0);x.save();x.fillStyle='transparent';x.fillRect(s.left,y.top,p-s.left,y.bottom-y.top);x.fillStyle='transparent';x.fillRect(p,y.top,s.right-p,y.bottom-y.top);x.beginPath();x.setLineDash([4,3]);x.strokeStyle=TH.ink3;x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle=TH.ink;x.font='500 12px Archivo,sans-serif';x.textAlign='center';x.fillText(t('la'),p,y.top-8);x.fillStyle=TH.ink3;x.font='11px Archivo,sans-serif';x.fillText(t('ll'),s.left+(p-s.left)/2,y.bottom-8);x.fillText(t('lr'),(p+s.right)/2,y.bottom-8);x.restore()}},{id:'b',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle=TH.btc;x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle=TH.paper;x.fill();x.fillStyle=TH.paper;x.font='500 11px Archivo,sans-serif';x.textAlign='left';x.fillText(t('ln'),p.x+12,p.y+4);x.restore()}}]});
   bl('lg1',ch1);
   const c4ch2=c4PostD.length>2?c4PostD:c4PostW;
   ch2=new Chart(document.getElementById('ch2'),{type:'line',data:{datasets:[ds(D1.filter(p=>p.x>=0),0),ds(D2.filter(p=>p.x>=0),1),ds(D3.filter(p=>p.x>=0),2),ds(c4ch2,3)]},
     options:{layout:{padding:{top:20}},responsive:true,maintainAspectRatio:false,interaction:{mode:'nearest',intersect:false,axis:'x'},
-      scales:{x:{type:'linear',min:0,max:140,title:{display:true,text:t('ax2'),color:cv('--ink3'),font:{size:12,family:'Archivo'}},grid:{color:cv('--rule')},ticks:{color:cv('--ink3'),font:{size:11},stepSize:10}},y:{min:-92,max:5,title:{display:true,text:t('ay2'),color:cv('--ink3'),font:{size:12,family:'Archivo'}},grid:{color:cv('--rule')},ticks:{color:cv('--ink3'),font:{size:11},stepSize:10,callback:v=>v+'%'}}},
+      scales:{x:{type:'linear',min:0,max:140,title:{display:true,text:t('ax2'),color:TH.ink3,font:{size:12,family:'Archivo'}},grid:{color:TH.rule},ticks:{color:TH.ink3,font:{size:11},stepSize:10}},y:{min:-92,max:5,title:{display:true,text:t('ay2'),color:TH.ink3,font:{size:12,family:'Archivo'}},grid:{color:TH.rule},ticks:{color:TH.ink3,font:{size:11},stepSize:10,callback:v=>v+'%'}}},
       plugins:{legend:{display:false},tooltip:{...ttO(),callbacks:{title:i=>t('lw')+' '+Math.round(i[0].parsed.x*10)/10,label:c=>' '+c.dataset.label+': '+Math.round(c.parsed.y*10)/10+'%'}}}},
     plugins:[{id:'bz',beforeDatasetsDraw(c){const x=c.ctx,s=c.scales.x,y=c.scales.y;
       const yd=v=>y.getPixelForValue((v/ATH-1)*100);
       const x0=s.getPixelForValue(50),x1=s.getPixelForValue(60),y0=yd(57000),y1=yd(38000);
       x.save();
-      x.fillStyle=cv('--sea1');x.fillRect(x0,y0,x1-x0,y1-y0);
-      x.strokeStyle=cv('--sea3');x.setLineDash([5,4]);x.lineWidth=1;x.strokeRect(x0,y0,x1-x0,y1-y0);
-      x.strokeStyle=cv('--rule');x.setLineDash([3,4]);
-      [57000,50000,44000,38000].forEach(p=>{const yy=yd(p);x.beginPath();x.moveTo(s.left,yy);x.lineTo(s.right,yy);x.stroke();x.fillStyle=cv('--ink3');x.font='10px Archivo,sans-serif';x.textAlign='right';x.fillText('$'+(p/1000)+'K',s.right-4,yy-3)});
-      x.setLineDash([]);x.fillStyle=cv('--ink2');x.font='500 10px Archivo,sans-serif';x.textAlign='center';x.fillText(t('win_box'),(x0+x1)/2,y0-6);
+      x.fillStyle=TH.sea1;x.fillRect(x0,y0,x1-x0,y1-y0);
+      x.strokeStyle=TH.sea3;x.setLineDash([5,4]);x.lineWidth=1;x.strokeRect(x0,y0,x1-x0,y1-y0);
+      x.strokeStyle=TH.rule;x.setLineDash([3,4]);
+      [57000,50000,44000,38000].forEach(p=>{const yy=yd(p);x.beginPath();x.moveTo(s.left,yy);x.lineTo(s.right,yy);x.stroke();x.fillStyle=TH.ink3;x.font='10px Archivo,sans-serif';x.textAlign='right';x.fillText('$'+(p/1000)+'K',s.right-4,yy-3)});
+      x.setLineDash([]);x.fillStyle=TH.ink2;x.font='500 10px Archivo,sans-serif';x.textAlign='center';x.fillText(t('win_box'),(x0+x1)/2,y0-6);
       // Where each prior cycle actually bottomed, in weeks after its own ATH. The
       // shaded window is drawn from these three observations and nothing else, so
       // showing them makes the derivation visible instead of asserted.
@@ -1312,9 +1315,14 @@ function rebuild(){
         x.font='10px Archivo,sans-serif';x.textAlign='center';
         x.fillText('C'+(p.c+1)+' w'+p.w,px2,ty)});
       x.restore()}},
-    {id:'c',afterDraw(c){const w=wk(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle=cv('--ink3');x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle=cv('--ink2');x.font='11px Archivo,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},{id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle=cv('--btc');x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle=cv('--paper');x.fill();x.restore()}}]});
+    {id:'c',afterDraw(c){const w=wk(new Date()),x=c.ctx,s=c.scales.x,y=c.scales.y,p=s.getPixelForValue(w);x.save();x.beginPath();x.setLineDash([5,4]);x.strokeStyle=TH.ink3;x.lineWidth=1;x.moveTo(p,y.top);x.lineTo(p,y.bottom);x.stroke();x.setLineDash([]);x.fillStyle=TH.ink2;x.font='11px Archivo,sans-serif';x.textAlign='center';x.fillText(t('lw')+' '+w+' ('+t('ln')+')',p,y.top-6);x.restore()}},{id:'d',afterDatasetsDraw(c){const m=c.getDatasetMeta(3);if(m.hidden)return;const p=m.data[m.data.length-1];if(!p)return;const x=c.ctx;x.save();x.beginPath();x.arc(p.x,p.y,7,0,Math.PI*2);x.fillStyle=TH.btc;x.fill();x.beginPath();x.arc(p.x,p.y,3,0,Math.PI*2);x.fillStyle=TH.paper;x.fill();x.restore()}}]});
   bl('lg2',ch2);
 }
+// Price ticks only move cycle 4's last points: update the data in place instead of rebuilding both charts.
+function updateCharts(){if(!ch1||!ch2)return rebuild();
+  ch1.data.datasets[3].data=[...c4Pre,...c4PostW];ch2.data.datasets[3].data=c4PostD.length>2?c4PostD:c4PostW;
+  ch1.update('none');ch2.update('none')}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{rebuild();if(lastC)renderPriceMap(lastC)});
 
 // ============ REFRESH & INIT ============
 async function refresh(){
@@ -1323,7 +1331,7 @@ async function refresh(){
   const eiW=c4PostW.findIndex(p=>p.x===w);if(eiW>=0)c4PostW[eiW].y=dd;else{c4PostW.push({x:w,y:dd});c4PostW.sort((a,b)=>a.x-b.x)}
   c4PostD.push({x:Math.round(fw*100)/100,y:dd});
   localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:pr,lastUpdate:Date.now()}));
-  ss('ok',tf('so',$(pr),Math.round(dd)));updateUI();rebuild();
+  ss('ok',tf('so',$(pr),Math.round(dd)));updateUI();updateCharts();
 }
 let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=ctr%2===0?'0.7':'0.3';if(ctr<=0){ctr=60;refresh()}},1000);
 
@@ -1331,8 +1339,8 @@ let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=
   lang=detectLang();applyI18n();
   ss('ld',t('sf'));
 
-  // Fetch 1000 daily candles from Binance (no key needed)
-  const klines=await fetchBinanceKlines(1000);
+  // klines, data.json and funding are independent: fetch them together (each catches its own failure)
+  const [klines]=await Promise.all([fetchBinanceKlines(1000),fetchOnChainData(),fetchFunding()]);
 
   if(klines.length>0){
     const d=processKlines(klines);
@@ -1341,16 +1349,11 @@ let ctr=60;setInterval(()=>{ctr--;document.getElementById('rDot').style.opacity=
     const dd=Math.round(((lastPr/ATH)-1)*100);
 
     dailyK=klines;
-    // parallel, failure-tolerant: FNG, on-chain data.json, Binance Futures funding
-    await Promise.all([fetchOnChainData(),fetchFunding()]);
 
     localStorage.setItem(SK,JSON.stringify({pre:c4Pre,postW:c4PostW,postD:c4PostD,lastPrice:lastPr,lastUpdate:Date.now()}));
     ss('ok',tf('so',$(lastPr),dd));
-    // Fetch full history (Aug 2017 to now) in background for click-to-compare
-    // Pi Cycle needs the full daily history (350D MA + the cycle-4 peak), so the
-    // scorecard is re-rendered once it lands — otherwise that card never appears.
-    // The retro-calibration needs the same full history (200-week MA back to 2022),
-    // so it can only draw once this resolves — hence the re-render here too.
+    // Full daily history (Aug 2017 to now) loads in the background: the chart click panel and the
+    // 200-week MA need it, so the page re-renders once it lands.
     fetchAllHistory().then(()=>{if(allDailyCloses.length>0){document.getElementById('ch1').style.cursor='crosshair';updateUI()}});
   } else {
     // Offline: try stored data

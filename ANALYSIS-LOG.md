@@ -23,6 +23,162 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-10 — Research pass + the Nov 9 adjudication: 1 of 3 on the published arbiter; the Binance restart test closes without a failure; price under the STH cost basis; the un-adopted Oct 30 marker would have fired; 70% held a seventh time
+
+Owner asked to update the data, search for new information, update the calendar, name the next price-moving events
+and analyse the recommendation. **A research pass** (`an_asof`, `ev_asof`, `mac_h` → Nov 10) **plus the twelfth
+adjudication. No threshold, weight, band, window, falsifier, trigger or `st` changed.** Reads Nov 10, 11:30–12:00 UTC.
+`data.json` = the Nov 10 06:09 build: on-chain through Nov 3 (`sth_realized_price` Nov 9), macro through Nov 6,
+`etf.d` Nov 9, `stale: ["onchain"]`. Web research through three sonnet subagents (crypto-native; macro; calendar/IPO);
+everything marked press came that way. Disclosure, as on Oct 29: the assistant is built by Anthropic; the IPO rows rest
+on the SEC filing and cited press.
+
+**Rendered before the edits (en):** Too early · 0 of 4 families · **0 of 15 active · 5 partial · expert 16% / equal
+17%** (Nov 4 late: 3 partial, 7% / 10%). The two new PARTIALs are price-driven, not a pass decision: `sthmvrv` (spot
+74,253 / STH basis 75,786 = **0.98**, under 1 → PARTIAL by `RULE`; the series value is 1.0255 on Nov 3) and `ma200w`
+(74,253 / 67,771 = +9.6%, under the +10% PARTIAL edge at **≈ $74,548** — marginal, price trades through it intraday).
+SOPR 1.0041 (Nov 3) stays PARTIAL. Every on-chain series is dated Nov 3, before the drop.
+
+**Twelfth adjudication, Nov 9 window: not fired — 1 of 3 on the published arbiter.**
+- Leg 1: Binance 1w Nov 2–8 closed **$74,851.44** — fired (bar ~$70K). Lowest weekly close since Aug 10–16 ($62,900);
+  fifth lower weekly close in a row (86,530 → 83,773 → 82,116 → 80,154 → 78,354 → 74,851).
+- Leg 2: Nov 8 daily close Coinbase 74,754.08 / Binance 74,851.44 = **−0.1301% raw**; USDT-USD 0.99880 → **−0.0101%
+  adjusted**. Weekly mean raw (Nov 2–8) −0.145%; positive raw closes 0 of 7. **Every form misses**, the sixth such
+  window. Tally raw-Sunday 0/12, weekly-mean 0/12, any-positive-raw 2/12, adjusted-Sunday 5/12. No owner decision: the
+  pinned raw form stood.
+- Leg 3: `etf.d20` **−1.41** as carried at the window (Nov 8 19:05 build, `etf.d` Nov 6; sessions Oct 12–Nov 6) — not
+  fired. Hand check from Farside rows: −1,411.3. The first window in which the arbiter as published reads one leg.
+- **Nov 16 window** (sessions Oct 19–Nov 13): −1,383.9 through Nov 9 → needs **≈ +$2.88B over Nov 10–13**.
+
+**Premium closes (raw / adjusted):** Nov 4 −0.0940 / +0.0070, Nov 5 −0.1563 / −0.0033, Nov 6 −0.1489 / −0.0110, Nov 7
+−0.1498 / −0.0048, Nov 8 −0.1301 / −0.0101, Nov 9 −0.1448 / −0.0178. **66 negative raw closes Sep 5–Nov 9** (Nov 10 in
+progress, not counted). Adjusted near zero since the restart; raw not narrowing. `cbp` NOT YET.
+
+**Binance failure-path test (written Oct 30): closed without a failure — check 3 not triggered on the evidence found,
+not measured.** No source gives a 7-day net figure for Nov 1 06:00 → Nov 8 06:00 UTC. Largest sourced net figures:
+$5.28B over the first 46h (CEO via CoinDesk, Nov 3), $3.64B in the first 9.5h (The Block), ~$4.72B "after reopening"
+(Reuters via a substack, Nov 9, window unstated). CryptoQuant reserves through Nov 8 (BTC ~730K → 673.7K, ETH
+3.48M → 3.08M, ERC-20 stablecoins ~$41B → $32B, Bitcoin.com) are **gross and include the theft** — not comparable with
+the bar. The subagent's own "≈ $5–6B at most" is inference and is not used. Checks 1–2 passed Nov 1–2 (Nov 4 entry).
+Binance said Nov 6 that its latest zk proof was ready (TokenPost); the 44-token per-asset ratios and auditor were not
+found. Elliptic (Nov 9 13:15 UTC update, P): $2.85B frozen/seized, ~$3.0B still in theft-linked addresses, 18,270 BTC
+unmoved, ~3,000 BTC converted from other assets in new addresses, ~130 BTC coinjoined, ~7,000 ETH into Tornado Cash
+from Nov 8. No other halt, depeg, >$500M exploit or >5,000 BTC government/Mt. Gox move found (one pass; an aggregator's
+"Drift $295.7M exploit" is the Apr 1 event, stale).
+
+**Read on-chain (mempool.space, Nov 10 ~11:40 UTC).** Walked every spend from root `bc1q0mtc…2mnm`: 30 addresses,
+**19 leaves, 18,270.20 BTC, none spent, nothing in the mempool** — unchanged since Oct 30 (the leaves' tx counts of 9–17
+are inbound dust).
+
+**Tape (Binance).** Daily closes Nov 4–9: 80,504.01 / 76,088.01 / 75,844.00 / 75,867.59 / 74,851.44 / 75,368.41. Nov 8
+low **73,510.00** — the lowest since Aug 21 (73,027.02); under the Sep 15 low (74,968) and the STH basis. 46.9% of the
+57,800 → 87,396 rally retraced; −15.9% from the Sep 21 peak; +27.2% over the cycle low; −41.2% from the ATH, week 57.1.
+SMA 20/50/100/200: 78,712 / 81,705 / 77,472 / 73,209; 200W MA 67,760 (weekly closes). Press: Nov 5 −5% with the
+Nasdaq/chip rout (CoinGlass 24h $1.05B liquidated, $930M longs); Nov 8–9 Nvidia board probe headline + Rubio "talks
+stalled" (24h $1.15B, $1.04B longs, The Block); Nov 10 24h liquidations $184M (CoinDesk). Options: 1-week 25-delta skew
+~+10% to puts, most-traded the 74,000 put for Nov 13 (CoinDesk). CME leveraged funds net short (Nov 3 COT, press).
+F&G (alternative.me, direct): Nov 4 34, Nov 5 50, Nov 6 28, Nov 7 25, Nov 8 28, Nov 9 29, Nov 10 32.
+
+**Funding (last / 7d, %/8h):** Binance USDT +0.0100 / +0.0077 (0 of 21 negative), COIN-M +0.0100 / +0.0093; Bybit linear
++0.0032 / +0.0072 (1 of 21 negative, min −0.0004), inverse +0.0078 / +0.0064 (1, −0.0046); OKX USDT +0.0100 / +0.0064
+(1, −0.0004), USD +0.0100 / +0.0100. **No capitulation in funding; three single negative prints, none sustained.**
+Binance OI 94.2–99.0K BTC Nov 1–10, no flush. Context only (§5).
+
+**`hash`:** 30d/60d 1,028.7 / 996.3 EH/s = **+3.25%** (Nov 10; +4.97% Nov 4). Retarget est. **−6.83%** at 77.7%, ~20:06
+UTC Nov 13 (was −3.12% at 40.8%); average block ~10.7 min. A falling hashrate brings the 30d-under-60d cross the classic
+buy cross has to follow; that cross would be a reading, not a firing. MARA "sold 13,597 BTC in six weeks" is a headline,
+not opened. Stays PARTIAL (Oct 6 call).
+
+**`lth` — no new low since Nov 3** (BGeometrics `long-term-hodler-supply-btc`, read 12:36 UTC after the hourly limit
+reset — the morning's endpoint probes had spent it): Nov 4–9 16,284,094 / 16,267,429 / 16,282,261 / 16,272,636 /
+16,312,418 / **16,276,546**; low still 16,254,879 (Nov 3); 7d −27,642, **30d −188,663** (−296,031 on Nov 3); −3.46% from
+the Jul 24 record. Distribution slowing, still negative: NOT YET under the Sep 27 rule (PARTIAL only on a positive 30-day
+change). The Nov 2–3 coin-age hypothesis stays untested. A small item for the ledger's "for" side, logged here only.
+
+**Strategy (EDGAR 8-K Nov 9, read by the subagent):** 1,036 BTC for $81.9M at $79,012 (Nov 2–8); 850,364 BTC, average
+**$75,456 — spot under it since Nov 8**; MSTR ATM $283.8M net; STRC bought back $188.3M; USD Reserve $4.77B. No sales.
+mNAV not in the filing. Buying: the gate's Strategy mechanism stays de-armed. **MSCI (P, Nov 4 pre-announcement):** review
+list posted shortly after 23:00 CET Nov 11 (22:00 UTC), changes at the Nov 30 close; that the non-operating exclusions are
+in it is press. Analyst reads split (Strategy trips ~3 of 5 flags per one analyst; others say all five; Strategy disputes
+two); JPMorgan ~$2.8B outflow if excluded, possibly an estimate of the earlier proposal.
+
+**Macro (P where marked).** Payrolls Oct (bls.gov, P): **+165K** (consensus ~60–70K, press), unemployment 4.1%, Aug+Sep
+revised +84K, AHE +0.4% / 3.1% y/y. December hike: CME "better than 80%" (CNBC, Nov 10); "above 80%, from 60%" after
+payrolls (Nov 6 wrap); a 96.3% snippet unverified, not used. Waller Nov 10 (London, press): leaning to a December hike
+even on a softer CPI; 50bp "should be considered" if inflation higher. Goolsbee, Barkin (Nov 9), Hammack (Nov 6) hawkish
+(press). Treasury par curves (P), 10y / real 10y / 2y: Nov 4 4.90 / 2.64 / 4.58, Nov 5 4.84 / 2.60 / 4.46, Nov 6 4.86 /
+2.63 / 4.51, Nov 9 4.88 / 2.66 / 4.56. Brent (press): Nov 4 ~94.6, Nov 5 98.29, Nov 6 98.32 (−16% on the week), Nov 9
+**92.57**; Oct 30 ~116.7–117.6 derived (replaces the Nov 4 entry's ≈113.43). Iran: no deal, "strikes highly unlikely
+while talks continue" (Trump, Nov 8), talks stalled (Rubio), tanker hits Nov 6 and Nov 8 (UKMTO). Broad dollar (FRED, P)
+121.40 / 121.51 / 121.88 (Nov 4–6) vs 200d 119.57; DXY ~101.7–102.0 Nov 9 (press). HY OAS (FRED, P) 3.32 / 3.48 / 3.42
+(Nov 4–6). Equities: S&P 7,688.62 / 7,353.73 / ~7,377 / ~7,550 (Nov 4, 5 FRED; Nov 6, 9 press); Nasdaq Composite
+25,736.51 / 24,315.00 / 24,579.42 / 25,253.14 (FRED via subagent); Nasdaq-100 28,437.17 / 26,629.81 / 26,989.99 /
+27,907.63 (Yahoo, read directly — FRED timed out from this machine). Recession: Kalshi 2026 ~2.5% (press), WSJ survey
+24% / 12 months (second-hand). Trade: USTR extended the Section 301 port-fee suspension Nov 10 → Jan 9, 2027 (press,
+Federal Register not read); China mirrored to Jan 10. CLARITY failed cloture 49–50 and lapses Jan 3, 2027 (press) —
+not a checklist input. CR through Dec 11 (P.L. 119-103). BoJ Dec 17–18 hike to 1.50% priced ~76–85% (press).
+
+**October CPI (Nov 10, 13:30 UTC; bls.gov read by a fetch subagent, P).** Headline **+0.4% m/m SA** (Sep +0.6%), core
+**+0.3%** (as in Aug and Sep), energy +0.7% (Sep +5.2%), shelter +0.3% (over 30% of the increase). **12-month rates not
+published** for indexes missing Oct 2025 data (2025 appropriations lapse). Consensus ~+0.24% for both (press, snippet-
+level; not on the BLS page) — **hot on both**. BTC (Binance 5m): 13:30 candle O 74,410.78 H **74,770.01** L **73,524.73**
+C 73,991.60, 1,187 BTC (≈25× the prior candles), the low $14.73 above the Nov 8 low; ~74,060 at 13:40. The Oct 15
+event-study caution applies (scheduled releases time volatility, not direction). Fed odds and yields after the print
+were not read. Added to the ledger's "against" side; it moves no score, trigger or probability.
+
+**Anthropic (SEC EDGAR, P).** S-1/A No. 2 filed Nov 10 (0001628280-26-072484): range **$70.00–78.00**, 825,000,000
+Class A shares (801.4M primary), 123.75M option, Nasdaq "ANT"; concurrent **$26.0B** Class N private placement at the IPO
+price (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC Partners), not under underwriter lock-up; lock-ups up to
+180 / 365 days. **Retail brokers are named in both amendments** (grepped directly: Schwab, Fidelity, Robinhood,
+Trade-PMR, SoFi, E*TRADE as selling-group members; No. 2 adds "certain broker-dealers, including") — the subagent's
+"not in the filing" was a string search broken by a page break; the page's existing claim stands. No pricing or first-
+trade date in the filing; press: pricing the week of Nov 16, debut before Thanksgiving. A circulated 867M × $70–80 term
+sheet was retracted as "inaccurate" (press). `EVENTS.anthropic` d → Nov 17 (span to Nov 25 kept); `ndx_ant` → Dec 9–17.
+
+**IPO-drain test (pre-registered Oct 29) — window opens; conventions and baselines pinned now, before any of the window's
+data exists.** Window Nov 10–25 (roadshow start → last reported listing day; it moves with the listing date per the
+Oct 29 text). Leg 1: Farside sessions Nov 10–25, sum ≤ −$1.0B. Leg 2: BTC = Binance BTCUSDT daily close (00:00 UTC
+convention), NDX = official close (Yahoo `^NDX`); baselines the **Nov 9 closes, BTC 75,368.41 and NDX 27,907.63**; end
+the closes of the last window day; underperformance = NDX % − BTC % ≥ 10 points. Leg 3: the Oct 29 list. Pinned at
+~12:00 UTC Nov 10, before the US open of the window's first session (BTC −1.5% on the in-progress UTC day at the time).
+
+**Polymarket — read directly** (Gamma API by `curl`; Python's resolver failed once, `curl` resolved natively), event
+`what-price-will-bitcoin-hit-before-2027`, open contracts, `outcomePrices` mid, 11:34 UTC Nov 10: ↓$70K **61.5** (31.5
+Nov 4), ↓$65K 32.5 (19.5), ↓$60K **19.5** (13.5), ↓$55K **9.5** (7.5), ↓$50K 5.4, ↓$45K 2.85, ↓$40K 2.35; ↑$90K **16.5**
+(42.5), ↑$95K 9.0, ↑$100K 6.5. No-new-low ≈ 100 − (9.5 + 0.56 × 10.0) ≈ **~84.9%** (89.1 Nov 4); gap ~15 points.
+
+**The 70%: held, a seventh time.** No adopted marker at stake. **The downside marker proposed Oct 30 (weekly close under
+~$75.9K) and not adopted would have fired at $74,851** — stated as a fact, applied as nothing: adopting it after the
+close that fires it is the retro-edit the conventions forbid. Ledger since Nov 4 — against: lowest print since Aug 21;
+weekly close under the STH basis and Strategy's average; five lower weekly closes; ETF −$0.97B in four sessions, d20
+−1.55; premium 66 negative closes; payrolls +165K and December >80% with Waller floating 50bp; HY 348bp on Nov 5; BTC
+missed the Nov 9 equity rebound; market no-new-low 89 → 85% and ↓$70K 61.5%. For: restart test closed without a
+failure; stolen BTC unspent; Strategy buying; funding positive on six venues, OI no flush; Brent ~$117 → $92.57; 10y
+4.95 → 4.88. **One-sided against, and the number does not move on a ledger alone** (rule of Oct 22 / Oct 29 / Oct 30 /
+Nov 4). Why this could be wrong — sharper than on Nov 4: seven holds while every flow and holder leg deteriorated; the
+one prospective marker on offer would have fired; and with no adopted downside marker the number can only fall on a
+lower low under $57,800 (−22% from here), so it is structurally unable to track the evidence on the way down. The report
+still sits ~15 points *under* the market's no-new-low read, so the rule is not producing an outlier against the market —
+the structural problem is the asymmetry, not the level. **Owner decision proposed, not taken:** a prospective downside
+marker for windows from Nov 16 on (example offered: a weekly close under $70K — which would also unfire leg 1 — cuts the
+probability to a stated number), to be adopted or declined before the Nov 16 window.
+
+**Recommendation.** Stage TOO EARLY; nothing deployed; bands unchanged ($52–57K probe 20%, $44–50K core 45%, $38–44K
+capitulation 35%, un-gated on the catalyst). Deploy trigger 1 of 3 at Nov 9; at Nov 16 the flow leg needs ≈ +$2.9B in four
+sessions and the premium a positive raw close from −0.13 to −0.15%. Probe band top is 23% under spot. The projected
+capitulation end (Nov 9–19) and the week-60 window end (Nov 30) are now inside the calendar's next three weeks.
+
+**Edited.** EN by script (43 exact-substring replacements, each asserted unique in the EN block) + `EVENTS` (`retarget5`
+tm, `msci_list` tm + `p`, `msci_eff` `p`, `fomc_min2` `p`, `nvda_q3` tm, `anthropic` d → Nov 17, `ndx_ant` Dec 9–17, new
+`retail_oct`); PT/ES mirrored by a sonnet agent against `check_mirror.js` (changed-leaf digit multiset + placeholders + `ev`
+key order): `an_asof`, `ev_asof`, `mac_h`, `th_p` (adjudication sentences, Nov 9 window, new Nov 10 paragraph, SOPR/200W
+marginal sentence, week 57, STH sentence), `trig_n`, `trig[0..3]`, `fal[5]`, `cvp[3]`, `bs` hash / lth / cbp, `mac` Fed /
+Rates / Dollar / Credit / ETF / Recession / Trade / Geopolitics / Catalyst / Strategy / Events / Equities, `ev` anthropic /
+anthropic_rs / ndx_ant / nvda_q3 / retarget5 / msci_list / fomc_min2 / retail_oct; CPI sentences written into all three
+after the release. **Verified:** mirror check 37 changed EN leaves, 0 problems; parity 187/187, events ids match, no
+`EVENTS` row without text; rendered en/pt/es with headless Chrome, 0 console lines ×3: Too early · 0 of 4 · 0 of 15 · 5
+partial · expert 16% / equal 17%. **Not re-read:** `resv` (Sep 26), Liquidity row, Polymarket recession odds.
+
 ## 2026-11-04 (late) — ETF feed restored from Farside: the page's only ACTIVE row was the frozen figure; readiness 12% → 7%; pending re-reads closed; 70% unchanged
 
 Owner asked to update and do what was pending for a more precise recommendation. **No threshold, weight, band,

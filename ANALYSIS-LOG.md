@@ -23,6 +23,24 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-10 (marker) — Downside marker adopted: a weekly close under $70K cuts the ~70% to ~50%, from the Nov 16 window
+
+Owner adopted a prospective downside marker after the Nov 10 pass put it to them. **Rule:** Binance `BTCUSDT` weekly
+close (Monday-open convention, completed week — leg 1's convention) below **$70,000** → the counter-scenario ("the low is
+already in at $57.8K") goes from ~70% to **~50%** at that window. First window it can fire: **Nov 16**. One-shot; later
+moves return to the ledger rule.
+
+**Written before any data that fires it.** Spot ~$74K at adoption; the Nov 2–8 week closed $74,851.44 and the Nov 9 week
+traded no lower than $73,524.73 (the CPI candle) — the line is 5.4% under spot. **Why $70K:** it is the deploy trigger's
+own leg-1 bar, so the marker fires exactly when the "low is in" confirmation path also loses its first leg; it sits
+under the Sep 15 ($74,968) and Nov 8 ($73,510) lows, so ordinary noise around the STH cost basis does not fire it.
+**Why 50%:** halfway back to the ~35% that stood before the Sep 21 upside marker — a close under $70K retraces ~59% of the
+$57.8K → $87.4K rally but is still 21% above the low that defines the scenario, so it is evidence against the path, not
+its refutation. **Not retroactive:** the Oct 30 proposal (weekly close under ~$75.9K) was never adopted; it would have
+fired at the Nov 9 window and stays unapplied. Market reference at adoption: Polymarket no-new-low ~84.9%, ↓$70K 61.5%.
+
+**Edited:** `MAINTENANCE.md` §2b (marker bullet; carry list), `index.html` `hv_prob_v` en/pt/es (one sentence).
+
 ## 2026-11-10 (redesign) — The page shows only the current reading; calibration, phase timeline, scorecard and historical tables removed
 
 Owner asked, before the push of the Nov 10 pass, to clean the site: less text, only what helps a reader anticipate the
@@ -46,10 +64,10 @@ historical-table fillers in `updateUI`, the exchange table builder; i18n keys 18
 `CBP_LAST` (leg 2 at the last adjudicated close), `TRIG_ST` (confirmation-card statuses). Leg 1 is now computed live
 (last completed Sunday close from the page's Binance klines) instead of typed.
 
-**Left in place, owner's decision pending:** `history.json` (90.6KB, accumulated daily by `build_data.py`'s
+**Left in place — kept by the owner's decision the same day:** `history.json` (90.6KB, accumulated daily by `build_data.py`'s
 `extend_series`) is no longer read by the page. Deleting it and its pipeline code loses the accumulated on-chain series
 beyond the provider's rolling 1,461-day window (the Nov 2022 bottom leaves that window on Nov 20, 2026), so it was not
-removed without asking. Also kept: the 33 past `EVENTS` rows and their `ev` text, per the standing rule that past rows
+removed without asking; the owner kept it ("the robot may read it for information it needs"). Also kept: the 33 past `EVENTS` rows and their `ev` text, per the standing rule that past rows
 are not deleted by hand (they no longer render).
 
 **Design:** depth-chart palette (paper `#F1F5F8` / ink `#10243A`, buy bands as three depths of sea blue, bitcoin orange

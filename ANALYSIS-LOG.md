@@ -23,6 +23,39 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-10 (redesign) — The page shows only the current reading; calibration, phase timeline, scorecard and historical tables removed
+
+Owner asked, before the push of the Nov 10 pass, to clean the site: less text, only what helps a reader anticipate the
+bottom, a cleaner look. Decisions taken by the owner (asked, answered): **cut the long text from the page** (the dated
+history of each reading already lives here); **remove** the historical tables (halving data, post-ATH bear markets,
+same-week drawdown), the retro-calibration chart and the cycle-phase timeline, and the price-indicator scorecard;
+**keep** the exchange comparison (its duplicate table was dropped, the cards stay); lead with a **price map**.
+**No threshold, weight, band, window, falsifier, trigger, `st` or probability changed** — same `RULE`, `BS_W`, `BS_FAM`,
+`LAD_BANDS`, `EVENTS`; the stage, readiness and legs render the same values as before the redesign.
+
+**What the page is now:** verdict (stage, action at today's price, buy-now trigger count, cycle clock, the ~70% next to
+the market's read, next four events) beside a log-scale price map (price, rally peak, STH cost basis, 200W MA, cycle
+low, Realized Price against the three bands); the buy-now trigger with its three legs; the buy plan; the checklist
+(families, 15 rows, four confirmation signals); events (next 45 days, "show all" button); the two cycle charts; macro
+(one line per factor); timing and price estimates; falsifiers; exchanges. EN text of the rendered keys ~20,900 → ~2,300 words (past event rows excluded); page 591KB → 170KB.
+
+**Code removed (dead with their sections):** `PHASES`/`PH_*`, `renderPhases`, `renderCalib`, `CORE`, `coreAt`,
+`calibTrace`, `coreOnDate`, `calibNums`, `preSums`, `fetchHistory`, `renderScorecard`, `calcIndicators`,
+`calcPiCycle`, `fetchFNG` (Fear & Greed was shown only by the scorecard), `BS_SPEED` and its latency tags, the
+historical-table fillers in `updateUI`, the exchange table builder; i18n keys 187 → 132 per language. **New manual consts:**
+`CBP_LAST` (leg 2 at the last adjudicated close), `TRIG_ST` (confirmation-card statuses). Leg 1 is now computed live
+(last completed Sunday close from the page's Binance klines) instead of typed.
+
+**Left in place, owner's decision pending:** `history.json` (90.6KB, accumulated daily by `build_data.py`'s
+`extend_series`) is no longer read by the page. Deleting it and its pipeline code loses the accumulated on-chain series
+beyond the provider's rolling 1,461-day window (the Nov 2022 bottom leaves that window on Nov 20, 2026), so it was not
+removed without asking. Also kept: the 33 past `EVENTS` rows and their `ev` text, per the standing rule that past rows
+are not deleted by hand (they no longer render).
+
+**Design:** depth-chart palette (paper `#F1F5F8` / ink `#10243A`, buy bands as three depths of sea blue, bitcoin orange
+used only for "now"), dark mode by `prefers-color-scheme`, one family (Archivo, width axis: expanded for the stage and
+figures). Checked by headless Chrome screenshots at 1280px and 390px, light and dark, en/pt/es, 0 console lines.
+
 ## 2026-11-10 — Research pass + the Nov 9 adjudication: 1 of 3 on the published arbiter; the Binance restart test closes without a failure; price under the STH cost basis; the un-adopted Oct 30 marker would have fired; 70% held a seventh time
 
 Owner asked to update the data, search for new information, update the calendar, name the next price-moving events

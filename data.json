@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T06:09:21Z",
+  "updated": "2026-11-11T19:06:52Z",
   "onchain": {
     "realized_price": {
       "d": "2026-11-04",
@@ -90,12 +90,12 @@
     "dxy_src": "FRED DTWEXBGS (broad trade-weighted USD) \u2014 the ICE DXY is licensed"
   },
   "etf": {
-    "d": "2026-11-09",
-    "d5": -1.08,
-    "d20": -1.55,
-    "d60": 3.71,
-    "ytd": -1.03,
-    "cum": 55.6
+    "d": "2026-11-10",
+    "d5": -1.06,
+    "d20": -1.82,
+    "d60": 3.32,
+    "ytd": -1.12,
+    "cum": 55.5
   },
   "stale": [
     "onchain"

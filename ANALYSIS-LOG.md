@@ -23,6 +23,108 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-12 — Research pass: Strategy out of MSCI USA, hike priced ~100%, Nvidia CEO report; the SpaceX analog's first leg did not repeat; IPO-drain test running; 70% held an eighth time; leg-2 streak off by one fixed
+
+Owner asked to review everything, search news, update the calendar, give the recommendation and say whether the
+Anthropic IPO is following SpaceX's pattern. **A research pass** (`an_asof`, `mac_h` → Nov 12; `ev_asof` left at Nov 10).
+**No threshold, weight, band, window, falsifier, trigger, `st`, `TRIG_ST` or probability changed.** Reads Nov 12,
+02:20–03:30 UTC (Nov 11 evening in Brazil); the Nov 12 candle is in progress and not used. Three sonnet subagents
+(Anthropic IPO; crypto-native; macro); press items are marked. Disclosure, as on Oct 29: the assistant is built by
+Anthropic; the IPO rows rest on EDGAR and cited press.
+
+**Rendered (en, headless, after the edits):** Too early · 0 of 4 families · 0 of 15 active · 5 partial · 16% / 17% ·
+legs 1 of 3 (last weekly close 74,851.44; −0.130% Nov 8; d20 −1.82) · `stale: onchain` (series through Nov 4).
+pt/es rendered with the same values; no console lines captured in any of the three (capture checked with a forced console.log probe).
+
+**Tape (Binance closes).** Nov 10 73,796.06 (low **72,727.27**, under the Aug 21 low 73,027; "lowest since Aug 20" is press, FXStreet), Nov 11
+74,015.19. Spot ~73.9K: under the STH basis (75,703, Nov 10) and Strategy's average (75,456). F&G 28–32. Funding Binance
++0.0035 last / +0.0072 7d, 0 of 21 negative; OI 96–99.5K BTC, no flush. Press: CoinGlass 24h ~$710M liquidated after CPI.
+
+**Premium (raw / adjusted):** Nov 10 −0.1331 / −0.0111, Nov 11 −0.1183 / −0.0003. **68 negative raw closes Sep 5–Nov 11.**
+**Defect found and fixed:** `CBP_LAST.streak` read 66 for the Nov 8 close; the run Sep 5–Nov 8 is 65 (66 is through Nov 9 —
+the Nov 10 pass typed the through-Nov-9 count next to the Nov 8 value). Now `CBP_LAST.from` ('2026-09-05') and
+`cbpStreak()` derive it; `scripts/test_page.js` asserts 65 / 68 / the shipped value (fails on the old page: no
+`cbpStreak`). Leg 2 is otherwise unchanged (still the Nov 8 adjudicated close).
+
+**`hash`** 30d/60d 1,026.6 / 995.5 = **+3.12%** (Nov 12). Retarget est. **−6.93%** at 88.3%, ~20:30 UTC Nov 13. Stays PARTIAL.
+**`lth`** (BGeometrics, one request): **new low 16,249,779 on Nov 10**, 16,250,282 Nov 11; 7d −33,812, **30d −211,276**;
+−3.61% from the Jul 24 record. NOT YET (rule: PARTIAL only on a positive 30-day change).
+
+**MSCI (P: the Nov 11 MSCI Global Standard Indexes public list, read directly):** "STRATEGY A" is in the MSCI USA Index
+deletions, effective at the Nov 30 close. Exclusion from all GIMI and Metaplanet's deletion (Japan small cap) are press
+(Bitcoin Magazine, The Block). MSTR after hours −0.8 to −1.5% (press). The ~$2.8B estimate is JPMorgan's for the earlier
+proposal; no new figure. **Not a §3 "Strategy escalates" trigger:** the list there is sales, mNAV under 1, dividend cut,
+forced deleveraging; an index deletion forces selling of MSTR shares, not BTC. It may raise Strategy's cost of equity,
+which is the route to that list — watch the Nov 16 8-K for equity raised with no BTC bought. No new 8-K since Nov 9.
+
+**ETF (Farside, read with `build_data.py`'s parser):** Nov 9 −201.0, Nov 10 −95.0; Nov 11 not posted at the read. d5 −1.06,
+d20 −1.82 (data.json). **Nov 16 window** (sessions Oct 19–Nov 13): −1,478.9 over 17 sessions → needs **≈ +$2.98B** over
+Nov 11–13. Leg 3 will not fire on any plausible flow.
+
+**Macro.** Treasury par/real curves (P), Nov 10: 10y **4.98**, 2y **4.73**, real 10y **2.78** (kept out of the `rates` row's prose: it is a `k:` row) (Nov 9: 4.88 / 4.56 / 2.66); Nov 11
+no print (Veterans Day, bond market closed). Fed (press): December any-hike ~100% (84% the day before), 50bp ~15%
+(from ~1%); Waller floats 50bp, Logan favors two more hikes. Equities (press; NDX from Yahoo directly): Nov 10 S&P
+7,520.93, NDX 27,740.79; Nov 11 S&P ~7,619, NDX **28,374.25** (+2.3%). **Nvidia −7 to −9% after hours Nov 11** on a WSJ
+report that the board is preparing to oust the CEO (NQ futures −0.8%) — postdates the Nov 11 NDX close. DXY yearly high
+~102.9 Nov 11 (press). Brent settle $91.49 Nov 10, ~$93–94 intraday Nov 11 (press); Iran denies talks, Hormuz traffic
+near zero (single-source trackers). BoJ Dec hike ~70–84% (press). Calendar (agent, BLS/BEA pages fetched): PPI Nov 13,
+PCE Nov 25, payrolls Dec 4, CPI Dec 10 confirmed; retail sales Nov 17 from a search summary; FOMC minutes Nov 18 inferred
+from the 3-week rule. Recession odds: nothing Nov-dated found (stale).
+
+**Anthropic (P: EDGAR submissions for CIK 0002130357, read Nov 12 ~03:00 UTC):** latest filing is still S-1/A No. 2 (Nov 10,
+range $70–78); no amendment since. Press: book "covered on an allocable basis" (CNBC, Nov 10), "several times
+oversubscribed", bankers preparing to price above the range, $1.4–1.5T (Bloomberg/FT via Syz, Nov 11); pricing Nov 18 and
+first trade Nov 19 unchanged (CNBC sources). Schwab minimum cut to $50K (single report). No measured retail selling of
+crypto to fund allocations; commentary attributing BTC weakness to the IPO (van de Poppe, Cowen) is opinion. No other
+>$5B IPO found in Nov 10–Dec 15.
+
+**SpaceX analog — measured (Binance closes; NDX Yahoo; Farside).** The calendars line up almost exactly: S-1 → roadshow
+start 14 days (SpaceX May 20 → Jun 3; roadshow dates single-source, Wikipedia) vs 15 (Oct 26 → Nov 10); S-1 → debut 23 vs 24.
+
+| From the S-1 close | SpaceX (S-1 $77,552) | Anthropic (S-1 $80,151) |
+|---|---|---|
+| day 7 | −4.0% | −4.2% |
+| day 12 | −7.9% | −5.3% |
+| roadshow day 1 close | −17.3% (Jun 3) | −7.9% (Nov 10) |
+| day 16 (Jun 5 / Nov 11) | −21.3% | −7.7% |
+| worst close so far | −21.5% (day 17) | −7.9% (day 15) |
+| BTC minus NDX, S-1 → day 16 | ≈ −20 pts (NDX −1.2% to Jun 5) | ≈ −4.6 pts (NDX −3.1% to Nov 11) |
+| ETF net, same 11 sessions | −$3.34B | −$1.89B |
+
+**Reading:** the first two weeks matched (−4 to −5%); the analog's first leg — the Jun 1–6 collapse into the roadshow — has
+not repeated through the Nov 11 close. Its low close (Jun 6, day 17) maps onto Nov 12–13 and it held near −20% until
+pricing, so the window is still open; matching its depth would need ~$63K within days. The June leg carried
+confounds this window lacks (Mt. Gox 10,422 BTC Jun 3, ~$1.86B liquidated in 72h); this window has its own (Binance theft,
+Nov 5 AI rout, hot CPI, MSCI). N = 1 both ways: the second leg (~Dec 7, after debut, before the Nasdaq-100 buy) stays a
+scenario. `ev.anthropic_rs` and `ev.ant_leg2` now carry the comparison.
+
+**IPO-drain test (pre-registered Oct 29) — running, not scored.** Through Nov 11: leg 1 −$95M (one session) vs ≤ −$1.0B;
+leg 2 BTC −1.80% (75,368.41 → 74,015.19), NDX +1.67% (27,907.63 → 28,374.25) = **3.5 points** vs ≥ 10. **Leg-3 candidate
+logged now, before the outcome:** the Nov 10 CPI and its repricing (Dec any-hike 84 → ~100%, 50bp ~1 → ~15%) may count as
+"a hike surprise at a scheduled release" under the Oct 29 wording; decide at scoring on that wording, not on BTC's path.
+
+**Polymarket (Gamma API, plain curl, 02:22 UTC Nov 12):** ↓$70K **65.0**, ↓$65K 34.5, ↓$60K 18.5, ↓$55K 9.5, ↓$50K 5.35,
+↓$45K 3.55, ↓$40K 2.65; ↑$90K 15.5, ↑$95K 6.5, ↑$100K 4.5. No-new-low ≈ 100 − (9.5 + 0.56 × 9.0) ≈ **85.5%**.
+
+**Stolen BTC:** Elliptic (Nov 10 11:00 UTC update, via agent): 18,270 BTC in 19 addresses, unmoved; $2.85B frozen/seized.
+Not re-walked on-chain this pass. No halt, depeg, >$500M exploit or >5,000 BTC government/Mt. Gox move found (one pass).
+
+**The 70%: held, an eighth time.** No adopted marker at stake (the downside marker's first window is Nov 16). Ledger since
+Nov 10 — against: lower low $72,727; LTH new low; premium 68; ETF outflows 5 of 6 sessions; hike ~100% with 50bp in play;
+10y 4.98 / real 2.78; DXY yearly high; BTC missed the Nov 11 equity rebound; MSCI deletion. For: the SpaceX-style first
+leg did not come; funding positive and OI without a flush; stolen BTC unmoved; Strategy still buying (no new 8-K);
+market no-new-low ~85.5% (~85% Nov 10), ↓$70K 61.5 → 65. Ledger rule: no move. **Why this could be wrong:** price is 5.6%
+above the line that fires the marker, with Nvidia's CEO news hitting futures after the close — the Nov 16 window
+(Nov 9–15 week) may fire it on Monday.
+
+**Edited:** `index.html` en/pt/es — `an_asof`, `mac_h`, `hv_prob_v`, `cvp[3].d`, `mac` rows Fed/rates/dollar/ETF/
+geopolitics/crypto-shock/Strategy/events/stocks, `trig[0–3].d`, `bs` `hash`/`lth`/`cbp`, `ev` `retarget5` (+ `EVENTS.tm` → ~20:30 UTC), Recession row dated Nov 10 (not re-read),
+`anthropic_rs`, `ant_leg2`, `msci_eff` (title + text), `nvda_q3`; `CBP_LAST`/`cbpStreak`; `scripts/test_page.js`.
+**Checked:** `node scripts/test_page.js` 19 passed (fails on the old page); parity 133/133, `EVENTS` all with text;
+digit tokens EN = PT = ES on the edited keys; staleness sweep for the Nov 10 lead figures (92.57, −0.97B, 77.7%,
+−6.83, +3.25%, 16,276,546, 66 in a row, above 80%) — none left as current readings. **Not done:** `ev_asof` (see above),
+`resv`, Recession, Trade re-reads, the 19 wallets on-chain, Binance proof ratios.
+
 ## 2026-11-10 (IPO calendar) — Anthropic IPO phases and the SpaceX analog put on the calendar for tracking
 
 Owner asked to register the dates. **No reading, threshold, band, trigger or probability changed.** `EVENTS`:

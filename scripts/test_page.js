@@ -23,7 +23,7 @@ for (; ; k++) { if (js[k] === '{') d++; else if (js[k] === '}' && --d === 0) bre
 const ctx = { console };
 vm.createContext(ctx);
 vm.runInContext('var ' + js.slice(li + 6, k + 1) + ';var lang="en";var dailyK=[];var etfData=null;', ctx);
-const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose'];
+const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose', 'CBP_LAST', 'cbpStreak'];
 let missing = [];
 for (const n of need) { try { vm.runInContext(grab(n).replace(/^(const|let) /, 'var '), ctx) } catch (e) { missing.push(n) } }
 
@@ -61,6 +61,12 @@ run('dailyK=' + JSON.stringify([{ ts: sun - 7 * day, close: 78354 }, { ts: sun -
 run('Date.now=()=>' + (sun + 12 * 3600e3));            // Sunday noon UTC
 const w2 = run('lastWeeklyClose()');
 ok(w2 && w2.d === '2026-11-01' && w2.c === 78354, 'in-progress Sunday is skipped: ' + JSON.stringify(w2));
+
+// Leg 2's "negative N closes in a row" is derived from the run's first close, not typed: the Nov 10, 2026 pass
+// typed 66 for the Nov 8 close, whose run (Sep 5–Nov 8, measured from Coinbase/Binance daily closes) is 65.
+ok(run('cbpStreak({d:"2026-11-08",from:"2026-09-05"})') === 65, 'premium run Sep 5–Nov 8 is 65 closes');
+ok(run('cbpStreak({d:"2026-11-11",from:"2026-09-05"})') === 68, 'premium run Sep 5–Nov 11 is 68 closes');
+ok(run('cbpStreak(CBP_LAST)') === 65, 'the shipped CBP_LAST (Nov 8) renders a run of 65');
 
 console.log(fail ? fail + ' failed, ' + pass + ' passed' : 'OK ' + pass + ' passed');
 process.exit(fail ? 1 : 0);

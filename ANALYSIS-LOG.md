@@ -23,6 +23,45 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-12 (forecast) — Registered for later scoring: if the trend holds, a local low ~$65–68K between Nov 27 and Dec 10; the cycle low stays $57.8K
+
+Owner asked when the bottom comes and how deep, "if it keeps going like this", taking the Anthropic IPO into account,
+and asked to register the answer to be scored later. **Written Nov 12 ~03:10 UTC, spot 73,848 (Binance). No reading,
+band, trigger or probability changed.** Disclosure: the assistant is built by Anthropic; the IPO part rests on measured
+paths, not judgment about the company.
+
+**Answer given (two scenarios, the report's split):**
+1. **Low already in (~70% report / ~85.5% Polymarket).** What comes is the local low of the current correction, not a
+   cycle low. Two mechanical methods agree:
+   - **Trend:** five lower weekly closes, 86,530 → 74,851.44 = **−2.86%/week**; extrapolated weekly closes Nov 15
+     **72,712**, Nov 22 **70,634**, Nov 29 **68,615**, Dec 6 **66,654**.
+   - **SpaceX second leg (N = 1):** debut close → lowest close −7.8% (63,580 → 58,625), −11.6% from the post-debut high
+     (66,329), 18 days after debut. Mapped onto a Nov 19 debut at ~$74K: ~Dec 7, ~$65–68K.
+   - **Stated:** local low **~$65–68K, Nov 27–Dec 10** (cluster: SpaceX lock-up Dec 8, FOMC Dec 9, CPI Dec 10, Nasdaq-100
+     buy of ANT ~Dec 10). SpaceX's low came just before its index buy, then BTC rallied. Above the probe band: the plan
+     does not buy on this path; only the buy-now trigger can deploy.
+2. **New cycle low under $57,800 (~30%).** Would land in the probe band $52–57K; outside the week 50–60 window if after
+   Nov 30. Needs a shock beyond the IPO (Strategy selling, stolen BTC sold, a 50bp hike). Polymarket ↓$55K 9.5%.
+- **Marker:** on the trend path the downside marker (weekly close < $70K → ~50%) fires at the **Nov 23 or Nov 30** window
+  (Nov 22 / Nov 29 closes).
+- **IPO caveats stated:** the first leg did not repeat through the Nov 11 close (−8% vs −21% at the same calendar
+  point); the Oct 29 seven-IPO study found no consistent BTC effect; a late first leg (SpaceX's low maps onto Nov 12–13)
+  would need ~$63K now. Full-analog depth for reference only: −24.4% from the S-1 → ~$60.6K.
+
+**Market reference at writing (Polymarket, 02:22 UTC Nov 12, by year-end):** ↓$70K 65.0, ↓$65K 34.5, ↓$60K 18.5,
+↓$55K 9.5; ↑$90K 15.5.
+
+**Scoring (on Dec 16, after the Dec 15 close; Binance BTCUSDT daily closes, 00:00 UTC convention):**
+- **L** = lowest daily close Nov 12–Dec 15, **D** = its date.
+- **Hit:** 65,000 ≤ L ≤ 68,000 and Nov 27 ≤ D ≤ Dec 10.
+- **Level only:** L in band, D outside. **Timing only:** D in window, L outside the band.
+- **Miss, shallower:** L > 68,000 (the correction stalls; say whether L came before Nov 27).
+- **Miss, deeper:** L < 65,000; **scenario 2 fired** if any daily *low* < 57,800.19 by Dec 31 (score that leg on Jan 1, 2027).
+- **Trend method alone:** compare each actual weekly close with 72,712 / 70,634 / 68,615 / 66,654.
+- **Marker call:** hit if the first weekly close under $70,000 is the Nov 22 or Nov 29 close; record the actual week
+  (or "none through Dec 13").
+- Record the result here as a new entry; do not edit this one.
+
 ## 2026-11-12 — Research pass: Strategy out of MSCI USA, hike priced ~100%, Nvidia CEO report; the SpaceX analog's first leg did not repeat; IPO-drain test running; 70% held an eighth time; leg-2 streak off by one fixed
 
 Owner asked to review everything, search news, update the calendar, give the recommendation and say whether the

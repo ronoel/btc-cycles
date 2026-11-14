@@ -23,6 +23,78 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-14 (interim check) — The SpaceX analog's first leg arrived late: BTC −14.8% from the S-1 at the Nov 13 close (SpaceX −18.3% at the same day); market no-new-low ~56%; 70% not re-scored
+
+Owner asked to update the data, read the news and say whether BTC's fall is following the SpaceX IPO pattern with the
+Anthropic IPO. **Interim check, not a pass:** `an_asof` stays Nov 12, `ev_asof` Nov 10. **No threshold, band, trigger,
+marker, falsifier or probability changed; the 70% is not re-scored** (that belongs to the Nov 16 adjudication). Reads
+Nov 14 18:40–18:50 UTC; the Nov 14 candle is in progress and quoted as provisional. Two sonnet subagents (Anthropic IPO;
+crypto + macro); press items marked. Disclosure, as before: the assistant is built by Anthropic; the IPO rows rest on
+EDGAR and measured paths.
+
+**Tape (Binance closes):** Nov 12 71,460.00, Nov 13 **68,314.00** (low 67,568), Nov 14 ~65.7K in progress (low 65,000.00).
+F&G 20 on Nov 13 (press, lowest since Jul 8). Funding Binance last +0.0039, 7d +0.0066, 0 of 21 negative; OI 97,956 BTC —
+still no flush. Liquidations: $730M/24h on Nov 12 (CoinGlass via press); Nov 13 not found. Coinbase/Binance close
+spread Nov 12 −0.125%, Nov 13 −0.113% (close-to-close, not the leg-2 measure). BTC touched the 200-week SMA ~$68K (press).
+
+**SpaceX analog, measured (day 0 = S-1 close; SpaceX May 20 $77,552.23, Anthropic Oct 26 $80,150.56):**
+
+| day | SpaceX | Anthropic |
+|---|---|---|
+| 12 | −7.9% | −5.3% |
+| 15 (roadshow day 1 for Anthropic) | −17.6% | −7.9% |
+| 16 | −21.3% | −7.7% |
+| 17 | **−21.5%** (low close) | −10.8% |
+| 18 | −18.3% (bounce) | **−14.8%** |
+| 19 | −18.7% | ~−18% intraday / −18.9% at the low (provisional) |
+
+**Reading:** the Nov 12 entry's "first leg did not repeat" is overtaken. Depth converged in three sessions; the shape is
+late — SpaceX fell on days 12–17 and was bouncing by day 18; this leg began on day 17 and has printed no low yet. Measured
+from pricing the two are about a day apart (SpaceX's low close 5 days before pricing; Nov 14 is 4 days before Nov 18).
+**Analog-consistent closes through Nov 18: ~$62.9K–65.5K** (−21.5% to −18.3% from the S-1); materially lower = deeper
+than the analog. SpaceX's full path (lowest close −24.4%, intraday −25.5%) maps to **~$60.6K close / ~$59.7K intraday
+around Dec 7** — scenario, N = 1, above the $57,800.19 cycle low and the $52–57K probe band.
+
+**Path similarity is not causation.** Against an IPO cause: Nvidia's CEO resigned (8-K, Nov 12; CFO Kress interim; NVDA
+−7 to −13% intraday, press); hot CPI and Dec hike ~85–90% (FedWatch via press, Nov 13); PPI Oct +0.3% m/m vs +0.4%
+(BLS via summarizer); stablecoin supply −$14.2B in 30 days (Glassnode via press); no source reports crypto sold to fund
+ANT allocations (none found). For: BTC fell while equities did not (below). Mechanism differs from June: no Mt. Gox move,
+no funding flip, OI flat — this is spot/ETF selling, not a liquidation cascade.
+
+**IPO-drain test (pre-registered Oct 29) — running, not scored (closes Nov 25).** Leg 1, ETF Nov 10–13 (Farside via
+`build_data.parse_farside`): −95.0 −299.8 −284.1 −185.4 = **−$864.3M** vs ≤ −$1.0B. Leg 2, from the Nov 9 baselines to the
+Nov 13 close: BTC −9.36% (75,368.41 → 68,314.00), NDX +0.13% (27,907.63 → 27,943.74, Yahoo) = **9.5 points** vs ≥ 10 (~12.8
+on the provisional Nov 14 price). Leg 3: the Nov 10 CPI candidate logged Nov 12 stands; Nvidia's CEO resignation is a
+large named shock but not in the Oct 29 list — decide at scoring on the wording, not on BTC's path. Liquidations > $1.5B
+in 72h not established.
+
+**Anthropic (P: EDGAR submissions, CIK 0002130357, via subagent):** no S-1/A No. 3, no 424B since Nov 10; five FWPs Nov
+11–12 (0001628280-26-072949/-072952/-072953/-073040/-073045; not opened). Press: ~6× oversubscribed (Bloomberg via
+investinglive, Nov 13); above-range talk FT-attributed, unconfirmed; pricing Nov 18 / first trade Nov 19 unchanged.
+
+**Other:** ETF d5 −1.07, d20 −2.25 (data.json, Nov 13 session); seven straight outflow sessions (press). Retarget **−9.13%**
+at block 975,744, Nov 14 05:02 UTC (mempool.space, read directly) — largest drop since the 0.899 retarget in June; next
+est. −6.78% at 4% of the epoch. Strategy: no 8-K after Nov 9 found; MSCI deletion effective Nov 30. Stolen 18,270 BTC: no
+Nov 12–14 report found — not re-walked, "unmoved" unverified. On-chain feed still `stale` (series through Nov 4).
+
+**Polymarket (Gamma API, ~18:45 UTC Nov 14, by year-end):** ↓$65K 99.95 (touched), ↓$60K **55.5**, ↓$55K 28.5, ↓$50K 15.4,
+↓$45K 8.95, ↓$40K 5.05; ↑$90K 7.5. No-new-low ≈ 100 − (28.5 + 0.56 × 27.0) ≈ **56%** (85.5% Nov 12) — now below the report's
+70% (earlier readings not re-checked for a precedent).
+
+**Dated consequences (not acted on here):**
+- **Downside marker:** fires at the Nov 16 window unless the Nov 15 close is ≥ $70,000 (+6.6% from ~65.7K).
+- **Nov 12 forecast:** its level band ($65–68K) was reached ~2 weeks early (Nov 14 intraday). Not scored or edited; scoring
+  stays Dec 16 on its own rules (the lowest close through Dec 15 decides).
+- **Buy-now trigger:** leg 1 fails at any close under $70K; nothing deploys. Spot ~65.7K is 12.0% above $57,800 and 13.2%
+  above the probe band top ($57K).
+
+**Edited (en/pt/es):** `ev` `anthropic_rs`, `ant_leg2`, `nvda_q3`; `hv_prob_v`; `cvp[3]` v + d; `mac` Stocks and Events
+rows; `bs` `hash` r tail; `trig` `hash` d. **Checked:** `node scripts/test_page.js` 19 passed; parity 133/133, `EVENTS`
+all with text; digit tokens EN = PT = ES on the edited `ev` keys and `hv_prob_v`; headless Chrome render en/pt/es
+(`--accept-lang`), 0 console lines, edited sentences present, headline Too early · 0 of 4 · 1 of 15 · 5 partial; staleness
+sweep for 73,848 / 74,015 / ~85% / −6.9 / "oust" — only dated hits left. **Not done:** FWPs not opened; Nov 13
+liquidations; 10y/2y/DXY after Nov 10; Strategy mNAV; the 19 wallets; hash ribbon 30d/60d re-measure.
+
 ## 2026-11-12 (forecast) — Registered for later scoring: if the trend holds, a local low ~$65–68K between Nov 27 and Dec 10; the cycle low stays $57.8K
 
 Owner asked when the bottom comes and how deep, "if it keeps going like this", taking the Anthropic IPO into account,

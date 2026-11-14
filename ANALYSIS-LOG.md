@@ -75,7 +75,9 @@ investinglive, Nov 13); above-range talk FT-attributed, unconfirmed; pricing Nov
 **Other:** ETF d5 −1.07, d20 −2.25 (data.json, Nov 13 session); seven straight outflow sessions (press). Retarget **−9.13%**
 at block 975,744, Nov 14 05:02 UTC (mempool.space, read directly) — largest drop since the 0.899 retarget in June; next
 est. −6.78% at 4% of the epoch. Strategy: no 8-K after Nov 9 found; MSCI deletion effective Nov 30. Stolen 18,270 BTC: no
-Nov 12–14 report found — not re-walked, "unmoved" unverified. On-chain feed still `stale` (series through Nov 4).
+Nov 12–14 report found — not re-walked, "unmoved" unverified. On-chain feed still `stale`: series through Nov 7 (`sth_realized_price` through Nov 13, 75,041.76), read from data.json
+(06:08 UTC build). **The one active row is the 200-week MA** (price ≤ $67,914, spot ~4% under it) — price-driven and
+marginal: a ~4% bounce turns it off; quote the family count (0 of 4), not the row count.
 
 **Polymarket (Gamma API, ~18:45 UTC Nov 14, by year-end):** ↓$65K 99.95 (touched), ↓$60K **55.5**, ↓$55K 28.5, ↓$50K 15.4,
 ↓$45K 8.95, ↓$40K 5.05; ↑$90K 7.5. No-new-low ≈ 100 − (28.5 + 0.56 × 27.0) ≈ **56%** (85.5% Nov 12) — now below the report's

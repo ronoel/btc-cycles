@@ -66,7 +66,8 @@ ok(w2 && w2.d === '2026-11-01' && w2.c === 78354, 'in-progress Sunday is skipped
 // typed 66 for the Nov 8 close, whose run (Sep 5–Nov 8, measured from Coinbase/Binance daily closes) is 65.
 ok(run('cbpStreak({d:"2026-11-08",from:"2026-09-05"})') === 65, 'premium run Sep 5–Nov 8 is 65 closes');
 ok(run('cbpStreak({d:"2026-11-11",from:"2026-09-05"})') === 68, 'premium run Sep 5–Nov 11 is 68 closes');
-ok(run('cbpStreak(CBP_LAST)') === 65, 'the shipped CBP_LAST (Nov 8) renders a run of 65');
+ok(run('cbpStreak({d:"2026-11-15",from:"2026-09-05"})') === 72, 'premium run Sep 5–Nov 15 is 72 closes');
+ok(run('cbpStreak(CBP_LAST)') === 72, 'the shipped CBP_LAST (Nov 15) renders a run of 72');
 
 console.log(fail ? fail + ' failed, ' + pass + ' passed' : 'OK ' + pass + ' passed');
 process.exit(fail ? 1 : 0);

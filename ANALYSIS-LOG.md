@@ -23,6 +23,136 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-18 — Research pass + the Nov 16 adjudication (run ~2 days late): 0 of 3, the first leg-1 miss; the downside marker fired, 70% → 50%; the SpaceX analog's first leg matched in depth
+
+Owner asked to update, give the new recommendation and say whether the Anthropic IPO is relating to SpaceX's.
+**A research pass** (`an_asof`, `mac_h` → Nov 18; `ev_asof` left at Nov 10) **and the thirteenth adjudication.** **No threshold, weight, band,
+window, falsifier, trigger or `st` changed; the probability moved by the pre-registered marker only.** Reads Nov 18,
+03:05–04:30 UTC (Nov 17 evening in Brazil); the Nov 18 daily candle and the Nov 16–22 weekly candle are in progress and not
+used. Three sonnet subagents (Anthropic IPO; crypto-native; macro); press items are marked. Disclosure, as before: the
+assistant is built by Anthropic; the IPO rows rest on EDGAR and measured paths.
+
+**Thirteenth adjudication, Nov 16 window: 0 of 3 — not fired, nothing deployed.**
+- Leg 1: Binance weekly close Nov 9–15 **$65,351.05** (low 62,006.00) — under ~$70K, **the first leg-1 miss in thirteen windows**.
+- Leg 2: Nov 15 close **−0.0546% raw / −0.0016% adjusted** (Coinbase 65,315.35, Binance 65,351.05, USDT 0.99947). Forms:
+  raw-Sunday miss, weekly-mean raw −0.106% miss, any-positive-raw 0 of 7 miss, adjusted-Sunday miss — the seventh window in
+  which every form misses; tally raw-Sunday 0/13, weekly-mean 0/13, any-positive-raw 2/13, adjusted-Sunday 5/13. The raw gap
+  narrowed to −0.049 / −0.055% on Nov 14–15 as USDT-USD rose to 0.9994, and was back at −0.102 / −0.114% on Nov 16–17.
+  Run: 72 negative raw closes Sep 5–Nov 15 (74 through Nov 17).
+- Leg 3: `etf.d20` **−$2.25B** as carried by the Nov 15 19:05 build (`etf.d` Nov 13; commit 56b4b59). Now −2.77 (`etf.d` Nov 16).
+
+**Downside marker (adopted Nov 10): fired.** Weekly close $65,351.05 < $70,000 at its first window → `LOW_IN_PCT` **70 → 50**,
+as written. One-shot, now spent. **Ledger since Nov 12, kept separate and not applied on top** (the same price fall is what
+fired the marker) — against: low $62,006; LTH new low; ETF −$1.9B in seven sessions; 10y 5.15 / real 2.91–2.92; equities
+joined the fall Nov 16–17; treasury companies selling (press); attack-linked wallets moving. For: Strategy bought, sold none;
+ETF streak ended; 50bp priced ~15 → ~4%; Nvidia beat; OI −9% and ~$1.3B of longs liquidated Nov 13–14 (K33 via press) — the
+first deleveraging of the move; hash ribbons still Up; closes held the analog band. Market no-new-low ~54%: report and
+market now agree to within 4 points (the report was 14 above it on Nov 14).
+
+**Tape (Binance closes):** Nov 12 71,460.00 · Nov 13 68,314.00 · Nov 14 **64,150.00** (low 63,320) · Nov 15 65,351.05 (low
+**62,006.00**) · Nov 16 64,882.87 · Nov 17 64,947.35; ~64.5K at the read. −49% from the ATH; 11.5% above $57,800.19; the probe
+band top ($57K) is 12% below. The 200-week average is $68,039 (page); the week closed under it.
+
+**SpaceX analog — extended (day 0 = S-1 close; SpaceX May 20 $77,552.23, Anthropic Oct 26 $80,150.56; Binance closes):**
+
+| day | SpaceX | Anthropic |
+|---|---|---|
+| 17 | −21.5% (Jun 6, low close of the leg) | −10.8% (Nov 12) |
+| 18 | −18.3% | −14.8% |
+| 19 | −18.7% | **−20.0%** (Nov 14, low close so far) |
+| 20 | −20.4% | −18.5% |
+| 21 | −20.7% | −19.0% |
+| 22 | −18.0% (Jun 11, pricing eve) | −19.0% (Nov 17) |
+| 23 | −18.0% (Jun 12, debut) | Nov 18, pricing (in progress) |
+| intraday low of the leg | −23.8% (Jun 5, 59,130.91) | −22.6% (Nov 15, 62,006.00) |
+
+**Reading:** the first leg now matches in depth and in the flat hold into pricing: days 19–22 are −18.0 to −20.7% (SpaceX)
+and −18.5 to −20.0% (Anthropic). **The band the Nov 14 entry wrote in advance for closes through Nov 18 ($62.9K–65.5K) held
+on all four closes since** (64,150 / 65,351 / 64,883 / 64,947). It came two days late (low close day 19 vs 17). After its
+debut SpaceX rose 4.3% in three sessions (66,328.74, Jun 15), then fell to its lowest close 18 days after the debut
+(58,624.71, Jun 30, −24.4% from the S-1) and the next day printed **$57,800.19 — the cycle low itself** (−25.5%). Mapped
+onto a Nov 19 debut: ~Dec 7, **~$60.6K close / ~$59.7K intraday**, i.e. 3% above the cycle low. Scenario, N = 1.
+
+**Path similarity is still not causation.** For an IPO link: two mega-IPOs, two −18 to −21% holds into pricing at the same
+calendar point; BTC 10.6 points behind the Nasdaq-100 since Nov 9; named commentators attribute it (Xapo's CEO, RBC's
+Krayko, Cowen — opinion). Against: no flow data found showing crypto sold to fund allocations (none in brokerage,
+money-market or stablecoin figures; one search pass); Wintermute and K33 attribute the fall to rate repricing, ETF
+outflows and the lost 200-week average (press); the Oct 29 seven-IPO study found no consistent BTC effect; each window has
+its own confounds (June: Mt. Gox, liquidations; now: hot CPI, Nvidia's CEO, MSCI, Binance).
+
+**IPO-drain test (pre-registered Oct 29) — running, not scored (closes Nov 25).** Leg 1, ETF Nov 10–16: −95.0 −299.8 −284.1
+−185.4 +7.9 = **−$856.4M** vs ≤ −$1.0B (Nov 17 row posted without IBIT: −30.4 partial, not counted). Leg 2, Nov 9 → Nov 17
+closes: BTC −13.83% (75,368.41 → 64,947.35), NDX −3.25% (27,907.63 → 27,001.79, Yahoo) = **10.6 points** vs ≥ 10 — met as of
+Nov 17. Leg 3 candidates unchanged (CPI repricing; Nvidia's CEO) — decide at scoring on the Oct 29 wording.
+
+**Anthropic (P: EDGAR submissions JSON, CIK 0002130357, read directly Nov 18 03:15 UTC):** S-1/A No. 3 (0001628280-26-074338)
+and 8-A12B (0001628280-26-074342) filed Nov 17; **no 424B4, no EFFECT** — not priced at the read. From the S-1/A text (read
+by the subagent; sec.gov refused the direct document request): range **$70–78 unchanged**, 825,000,000 shares (801.4M
+company, 23.6M holders) + 123.75M option, listing approved on Nasdaq Global Select as **ANT**, concurrent $26.0B Class N
+private placement. Press: Bloomberg headline Nov 17, "guide IPO price to top of range or above" (body not read); ~6×
+covered (Bloomberg via Reuters, Nov 12), "10–20×" unverified; retail ~20% (press), request window closes Nov 18 (Motley
+Fool); pricing Nov 18 / first trade Nov 19 unchanged, no delay reported. Nasdaq-100 fast entry ~Dec 10 (derived).
+SpaceX (press, aggregators): $139.11 on Nov 13 vs a $135 IPO price; Dec 8 lock-up, share counts disagree (328M–798M);
+prospectus still not read.
+
+**ETF (Farside via `parse_farside`):** Nov 11 −299.8, Nov 12 −284.1, Nov 13 −185.4, **Nov 16 +7.9** — seven outflow sessions
+(Nov 5–13, −$1,907.4M) ended. d5 −0.86, d20 −2.77, d60 +0.93. Nov 23 window (Oct 26–Nov 20): −2,541.5 over 16 sessions →
+needs ≈ +$4.04B over Nov 17–20.
+
+**`lth`** (one request): **new low 16,188,580 on Nov 16**, 16,219,137 Nov 17; 7d −30,642, 30d −217,277; −3.80% from the Jul 24
+record. NOT YET. **`hash`** (BGeometrics): 30d/60d 1,023.87 / 1,006.34 EH/s = **+1.74%** (Nov 17; +4.24% Nov 1), state Up since
+Sep 1; this endpoint reads +3.15% for Nov 11 where the Nov 12 entry logged +3.12% from other figures. Next retarget est.
++11.4% at 31% of the epoch (~Nov 26, mempool.space) — blocks are fast after the −9.13% cut. Stays PARTIAL.
+
+**Funding (last / 7d avg, %/8h; negative prints of 21):** Binance USDT-M +0.0060 / +0.0040 (4); COIN-M −0.0007 / +0.0028 (6);
+Bybit linear +0.0046 / +0.0040 (3), inverse +0.0007 / +0.0029 (5); OKX USDT −0.0011 / +0.0027 (8), USD +0.0038 / +0.0049 (5).
+Negative prints appeared on every venue (lowest −0.0101, COIN-M) but all six 7-day averages are positive: "funding turned
+negative" headlines are prints, not averages. Binance OI 101,152 BTC (Nov 13) → 92,007 (Nov 18), −9%.
+
+**Deposit address / large wallets (mempool.space):** `3GPnJf…` 204 txs, 11,566.66 BTC received, last inbound Oct 7 —
+unchanged; `bc1qazcm…` 94,643.49 and `bc1qa5wk…` 69,370.18 — unchanged.
+
+**Polymarket (Gamma, ~03:15 UTC Nov 18, by year-end):** ↓$60K **59.5**, ↓$55K 29.5, ↓$50K 19.65, ↓$45K 7.7, ↓$40K 6.45; ↑$90K
+5.5. No-new-low ≈ 100 − (29.5 + 0.56 × 30.0) ≈ **54%** (56% Nov 14).
+
+**Macro.** Treasury (P, via subagent) 10y / 2y / real: Nov 12 5.10 / 4.86 / 2.86; Nov 13 **5.15** / 4.88 / 2.91; Nov 16 5.12 /
+4.83 / 2.92; Nov 17 5.10 / 4.80 / 2.89. Fed (press): CME Nov 17 +25bp 95.7%, +50bp 4.3%; Hammack "smaller increments"
+(Nov 16), Williams no dramatic action (Nov 17). Data: PPI Oct +0.3% m/m, +6.5% y/y (BLS); retail sales +0.2%, control
++0.6%; industrial production −0.4%; Empire 7.8; NAHB 25 (press). Equities (Yahoo, direct): S&P 7,561.67 → 7,416.59 →
+7,340.53 (Nov 13/16/17); NDX 27,943.74 → 27,197.15 → 27,001.79. Nvidia Q3 (8-K, Nov 17, via subagent): revenue $115.8B,
+Q4 guide $130.0B; +1 to +5% after hours (press, disagree). DXY ~103.4 at Nov 13, strongest since ~Apr 2025 (press). Brent
+$95.84 Nov 13 settle, ~$93 Nov 17; Iran attacked a US base in Bahrain Nov 16, floated a plan to reopen Hormuz (press).
+H.4.1 Nov 12: assets $6,758.9B, TGA $914.4B. BoJ Dec 18 hike ~85% (press). Calendar at the publisher (via subagent): BEA
+Nov 25 / Dec 23; BLS Dec 4, Dec 10, Dec 15; ECB Dec 17; FOMC Dec 8–9. **Not at the publisher:** the FOMC-minutes date (the
+Fed page lists none; the `fomc_min2` row says otherwise and expires today), BoJ, the Dec 11 funding lapse, Deribit —
+and none opened in the main session, so `ev_asof` stays Nov 10.
+
+**Crypto-native.** Strategy 8-K Nov 16 (SEC document read by the subagent): **+485 BTC at $68,887**, 850,849 BTC at $75,452,
+no sale; $244.7M common ATM, $206.3M of it to STRC repurchases; USD reserve $4.75B. Not a §3 escalation. Binance theft
+(press): Elliptic Nov 16 — ~$2.85B frozen, ~$267M converted into BTC, ~$2.55B in attack-linked addresses; Nov 17 ~74,880 ETH
+moved, some swapped to BTC (Arkham via Decrypt); DOJ seized/restrained > $1.2B (CNBC, Nov 13). The page's "stolen BTC has
+not moved" was dropped rather than restated: the 19 wallets were not re-walked. Treasury sellers (press, unverified):
+MARA 13,597 BTC after Q3, Bitdeer, Ionic. No exchange halt, depeg, > $500M exploit or > 5,000 BTC government/Mt. Gox move
+found (Lighter: $10.4M, withdrawals paused Nov 16). F&G 12–13 (Nov 16–17, press). Liquidations: ~$1.3B BTC longs Nov 13–14
+(K33); Nov 14–15 figures disagree ($1.0–1.96B total).
+
+**Nov 12 forecast — not scored (Dec 16).** Stated for the record only: the lowest close so far is 64,150.00 on Nov 14, under
+the $65,000 band floor and before the Nov 27 window; the first weekly close under $70K was Nov 15, not Nov 22/29.
+
+**Rendered (headless Chrome, en/pt/es, after the edits, 0 console lines):** Too early · 0 of 4 families · 1 of 15 active
+(200-week average, price-driven) · 5 partial · legs 0 of 3 · ~50% · "Not buying yet. The next buy zone starts at $57,000,
+12% below today." On-chain feed `stale` (series through Nov 10).
+
+**Edited:** `index.html` en/pt/es — `an_asof`, `mac_h`, `hv_prob_v`, `tg_last`, `trig[0–3].d`, `cvp[3]`, `fal[5]`,
+`bs` `hash`/`lth`/`cbp`, `mac` Fed/rates/dollar/credit/ETF/geopolitics/crypto-shock/Strategy/events/stocks, `ev`
+`anthropic_px`/`anthropic`/`ant_leg2`/`anthropic_rs`; `CBP_LAST` (−0.0546, Nov 15), `LOW_IN_PCT` 50;
+`scripts/test_page.js` (run of 72). **Checked:** `node scripts/test_page.js` 20 passed; parity 133/133, `EVENTS` all with
+text; digit tokens EN = PT = ES on every edited key; staleness sweep for the Nov 12/14 lead figures (~56%, ~85%, 55.5,
+−14.8, 68 in a row, −0.118, +3.12%, near 100%, 850,364, 75,456, 91.49, twelve, 9.4%, 348bp) — none left.
+**Not done / not re-read:** Liquidity row (buybacks), Recession (nothing Nov-dated found), Trade (Jan 9 vs Jan 10 in
+press), `resv`; the 19 wallets; Binance proof ratios; Strategy mNAV; SpaceX prospectus; `og-card.html` still prints the
+removed `CORE` stat ("95% at 2022 low · 0% now").
+
 ## 2026-11-14 (interim check) — The SpaceX analog's first leg arrived late: BTC −14.8% from the S-1 at the Nov 13 close (SpaceX −18.3% at the same day); market no-new-low ~56%; 70% not re-scored
 
 Owner asked to update the data, read the news and say whether BTC's fall is following the SpaceX IPO pattern with the

@@ -23,6 +23,128 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-19 (interim check) — Anthropic priced above its range (press; no final prospectus yet); BTC's Nov 18 close is the low close of the analog's first leg; market no-new-low ~54 → ~43%; 50% not re-scored
+
+Owner asked to pull and update, ~22 hours after the Nov 18 pass. **Interim check, not a pass:** `an_asof` stays Nov 18,
+`ev_asof` Nov 10. **No threshold, band, weight, trigger, falsifier or `st` changed; `CBP_LAST`, `tg_last`, `fal[5]`,
+`LOW_IN_PCT` untouched** (no adjudication is due before Nov 23; the marker is spent, so a lower close does not re-fire
+it). Reads Nov 19, ~01:05–01:10 UTC (Nov 18 evening in Brazil): the Nov 19 daily candle and the Nov 16–22 weekly candle
+are in progress and not used. One sonnet subagent (press); the assistant is built by Anthropic — the IPO rows rest on
+EDGAR and measured paths. The pull brought two data builds only (`etf.d` Nov 17, on-chain Nov 11).
+
+**Tape (Binance):** Nov 18 close **63,068.22** (low 62,062.97, above the Nov 15 low of 62,006.00) — the lowest daily close
+since Aug 16 (62,900.00). −50.1% from the ATH; 9.1% above $57,800.19; the probe top ($57K) is 9.6% below the close.
+
+**Anthropic (P: EDGAR submissions JSON, read directly 01:10 UTC Nov 19):** S-1MEF 0001628280-26-074904 accepted Nov 18
+23:42:01 UTC; CERT (exchange) Nov 18 14:12 UTC; **no 424B4, no EFFECT.** The S-1MEF text was read by the subagent's fetch
+tool only (not confirmed against the raw document; sec.gov refuses this session's direct requests, not worked around):
+178,250,000 additional Class A shares including 23,250,000 under the underwriters' option, Rule 462(b), parent
+registration declared effective Nov 18. **Press (CNBC, Nov 18): priced at $83, above the $70–78 range, ~980M shares,
+$81.3B, first trade Nov 19 on Nasdaq as ANT.** The two agree arithmetically (825M + 155M = 980M; × $83 = $81.3B). **Timestamp gap:** the CNBC piece is stamped 10:15 AM EST and CoinDesk's entries run to 3:22 PM EST, all before the S-1MEF (6:42 PM EST), and CNBC's valuation sentence is conditional — so the page says "reported priced", not "priced", until a 424B4 is read. Other
+press: ~$1.5T valuation, book ~7× (Reuters via snippets); CoinDesk's "nearly $100 billion" disagrees with $81.3B and
+may include the $26B placement (unverified). No company pricing release found. Nothing about the debut is written — the
+US session had not opened at the read.
+
+**SpaceX analog — day 23 added (same convention as the Nov 18 table):** Anthropic Nov 18 **−21.3%** (63,068.22), the low
+close of the leg so far (Nov 14 was −20.0%); SpaceX day 23 (Jun 12, debut) −18.0%, its leg low close −21.5% (day 17).
+Intraday low of the leg unchanged at −22.6% (Nov 15). Anthropic's debut is day 24; SpaceX's was day 23. **The band
+written Nov 14 for closes through Nov 18 ($62.9K–65.5K) held on all five closes** (64,150 / 65,351 / 64,883 / 64,947 /
+63,068); its window is over and it is not extended. Second-leg scenario unchanged (~Dec 7, ~$60.6K close / ~$59.7K
+intraday; N = 1) — it is anchored on the S-1 close, not on spot. Nov 12 forecast: not scored, not edited (Dec 16).
+
+**Attribution of the Nov 18 fall (press, not picked):** CoinDesk headline "Bitcoin falls below $63,000 as Anthropic prices
+IPO at $83" beside a sidebar "Blaming Anthropic's IPO for bitcoin's slide is 'easy to believe,' but flawed, analysts say"
+(body not read); Motley Fool and CoinReporter name the Fed (Waller repeated a 50bp call, press), ETF outflows,
+leverage unwind, weak AI stocks and stablecoin redemptions (Grayscale). Liquidations ~$377M, longs ~$269M (CryptoTimes
+headline; CoinGlass via CoinReporter ~$150M BTC futures). Still no flow data tying crypto selling to IPO allocations.
+
+**ETF (Farside, read with the Action's UA):** Nov 17 **−239.9** (IBIT −209.5); Nov 18 row posted without IBIT (−86.7
+partial, not counted). `d20` −3,030.1 = Oct 21–Nov 17 by hand, equal to `etf.d20` −3.03. Nov 5–17: eight outflow
+sessions in nine, −$2,139.4M net. **Nov 23 window:** Oct 26–Nov 17 = −2,781.4 over 17 sessions → leg 3 needs ≈
+**+$4.28B over Nov 18–20**. **IPO-drain test (running, not scored; closes Nov 25):** leg 1 Nov 10–17 = **−$1,096.3M**,
+past the ≤ −$1.0B bar with six sessions left; leg 2 BTC −16.32% from the Nov 9 close, **NDX Nov 18 close not obtained**
+(Yahoo 429, FRED empty; the one press table found was unreliable) — not re-measured, last reading 10.6 points (Nov 17).
+
+**Premium (Coinbase vs Binance daily closes, Coinbase USDT-USD):** Nov 16 −0.102 / Nov 17 −0.114 / Nov 18 **−0.137% raw**
+(−0.003 / −0.006 / −0.001% adjusted; USDT 0.99864 on Nov 18). Run: **75** negative raw closes, Sep 5–Nov 18.
+
+**Polymarket (Gamma, 01:05 UTC Nov 19, by year-end):** ↓$60K **71.5** (59.5 on Nov 18), ↓$55K 38.5 (29.5), ↓$50K 22.1
+(19.65), ↓$45K 10.05 (7.7), ↓$40K 6.85 (6.45); ↑$90K 5.5. No-new-low ≈ 100 − (38.5 + 0.56 × 33.0) ≈ **~43%** (~54%).
+The report's 50% is now 7 points above the market; **not re-scored** — an interim check does not move it, and the same
+price fall that fired the marker is what the market is pricing.
+
+**Fed (P: federalreserve.gov, minutes of Oct 27–28, page dated Nov 18, read directly):** "Some participants favored an
+increase of 25 basis points in the target range at this meeting"; "A couple of participants noted that an increase of
+more than 25 basis points could warrant consideration at the next meeting if incoming inflation data were unfavorable";
+"Many participants viewed the AI buildout as a material source of inflation risk"; voting against: Cook and Hammack,
+for a 25bp hike. December 25bp ~96% (CME via CoinDesk, Nov 18 morning) — unchanged. Release time not on the page.
+
+**Unchanged at the provider (one request each):** hash ribbons 30d/60d +1.74% (Nov 17, Up since Sep 1); LTH 16,219,137
+(Nov 17). mempool.space: next retarget ~Nov 26 23:13 UTC, est. **+9.9%** (was +11.4%). Funding, Binance USDT-M only:
+last +0.0094 / 7d +0.0040 %/8h. Government-attributed addresses (mempool.space): 204 tx / 11,566.66 BTC received /
+balance 0; 94,643.49; 69,370.18 — all unchanged from the Oct 8 baseline.
+
+**Rendered (headless Chrome, en/pt/es, 0 console lines):** Too early · 0 of 4 families · 1 of 15 active · 5 partial; "Not
+buying yet. The next buy zone starts at $57,000, 10% below today"; trigger 0 of 3; $63,106, −50% from the peak, week 58;
+~50% / market ~43%; ETF −$3.03B.
+
+**Edited (en/pt/es, 36 replacements + 9 after review — "reported priced", the EDGAR clause dated, the minutes' condition restored):** `hv_prob_v`; `cvp[3]` v + d; `trig` prem / etf / fed `d`; `bs` `cbp` `r`; `mac`
+Fed, ETF and Events `r`; `ev` `anthropic`, `ant_leg2`. `MAINTENANCE.md`: changelog row, footer, carry paragraph.
+**Checked:** `node scripts/test_page.js` 20 passed; parity 133/133, `EVENTS` all with text; digit tokens EN = PT = ES on
+the edited keys; edited sentences present in all three renders; staleness sweep for 64,150 / "low close so far" / 74 in a
+row / −2.77 / +4.04 / 54% / 59.5 / +1.74% — only dated hits left (hash rows dated Nov 17, the provider's latest).
+**Not done / not re-read:** the 424B4 (absent); the debut (not open); NDX, S&P, 10y, DXY, Brent closes for Nov 18 (`mac`
+Rates, Dollar, Geopolitics and Stocks rows stay dated Nov 17); the 19 wallets; Strategy; Liquidity, Recession, Trade,
+`resv`; the other five funding venues; October housing starts.
+
+## 2026-11-18 (plan review; logged Nov 19) — The ladder and the trigger measured against three cycles: coherent for one outcome only; five specification gaps; nothing changed, owner decisions open
+
+Owner asked whether the buy plan is really ideal. **Review only: no band, weight, trigger or text changed.**
+
+**Design date.** `LAD_BANDS` was adopted in commit `4613f0a` on **Jul 12, 2026**, after the Jul 1 low ($57,800.19): the
+probe top ($57K) sits under the known low by design — the plan was built for "a new low is coming" and its allocation
+was kept by rule when the counter-scenario went to 70% (Sep 21; Sep 23 entry) and to 50% (Nov 16).
+
+**What the plan pays per outcome (from `LAD_BANDS`, 20 / 45 / 35 / 0):** low already in at $57.8K (report 50%) — the
+ladder buys nothing; only the trigger can deploy 65%, at ≥ $70K, and the 35% capitulation tranche never deploys. New low
+$52–57K — 20% at ~$54.5K, 80% idle. Low in $44–50K — 65% at ~$49.1K. Low in $38–44K — 100% at ~$45.9K. Under $35K —
+nothing left (reserved 0%).
+
+**Price-only backtest (Binance BTCUSDT daily; fill at the band midpoint on first touch; the bands restated as drawdown
+from the ATH: −55/−59, −60/−65, −65/−70). N = 2 closed cycles + the open one.**
+
+| Rule | C2 (low −84.1%, wk 51) | C3 (low −77.6%, wk 53) | C4 so far (low −54.2%, wk 38) |
+|---|---|---|---|
+| S0 current ladder | 100% by 2018-02-06, avg 7,220; then −56.3% | 100% by 2022-06-13, avg 25,164; then −38.5% | 0% deployed |
+| S1 + tranche at −50/−55 (20/20/40/20) | max pain −59.1% | −42.4% | 20% at $59,991 |
+| S2 weekly DCA, weeks 45–65 | avg 4,033 (+27.8% over the low), pain −21.7% | avg 18,637 (+20.4%), −17.0% | 66.7% at avg $77,740 |
+| S3 half ladder / half DCA | +64.0% over the low, −39.0% | +38.4%, −27.7% | 33.3% at $77,740 |
+| S4 ladder to week 52, then DCA to 65 | as S0 | as S0 | 50% at avg $77,557 |
+
+No rule wins all three. The ladder is early by 5–10 months in a deep cycle and empty in a shallow one; it is right only
+for a bottom at −60…−70%, which has not happened (−84, −78, −54 so far). §5 already records that the ladder is priced
+entirely for damping being right. **A gated version (the table's confirmations) is untestable on 2022:** `history.json`
+starts 2022-08-19, after the June 2022 fills.
+
+**This cycle:** since the ATH, 280 daily closes above $70K, 129 in $57–70K, 0 under $57K; since Jul 12, 44 closes in the
+gap (mean $64,480), lowest low $61,825 (Jul 13).
+
+**Trigger.** Legs 1 and 3 both fired from Aug 24 ($77,734). On a USDT-adjusted leg 2 the trigger would have deployed 65%
+there — −16.4% at the review (Nov 17 close, $64,947) and −18.9% at the Nov 18 close, +12.4% at the peak: unresolved, not a false positive, while the report gives 50% to the low
+being in. The raw leg tracks the USDT discount (raw −0.05 to −0.15% while adjusted ≈ 0; 0 of 13 windows), so the trigger
+may be unable to fire in a real recovery. Bear rallies of +45.7% (2018) and +43.1% (2022) exceeded the +21% that $70K is
+over the low. A weekly-mean adjusted form was not measured on past windows.
+
+**Specification gaps (independent of price):** (1) leg 2 raw measures the USDT discount; (2) the `lad` "Confirmation"
+column vs a price-only `verdictAction`; (3) no rule after week 60 (Nov 30) short of the week-70 falsifier; (4) the
+capitulation 35% is idle on every path above $44K, including a fired trigger; (5) the trigger deploys 65% at once.
+
+**Recommendation given, not adopted:** do not move bands now (two days after the marker fired, price inside the gap —
+the most reactive moment); fix leg 2 prospectively and pair it with staged deployment; write the confirmation and
+post-week-60 rules before Nov 30. **Allocation is a regret preference and the owner's:** a small retest tranche
+(15–20 points from capitulation, ~$58–62K) buys in the "low is in" half at the cost of being ~35% early if the low is
+$44K. Polymarket rungs are touch-by-Dec-31 odds, not fill probabilities for a plan that runs to week 70.
+
 ## 2026-11-18 — Research pass + the Nov 16 adjudication (run ~2 days late): 0 of 3, the first leg-1 miss; the downside marker fired, 70% → 50%; the SpaceX analog's first leg matched in depth
 
 Owner asked to update, give the new recommendation and say whether the Anthropic IPO is relating to SpaceX's.

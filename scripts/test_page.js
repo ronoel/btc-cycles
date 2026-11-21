@@ -23,7 +23,7 @@ for (; ; k++) { if (js[k] === '{') d++; else if (js[k] === '}' && --d === 0) bre
 const ctx = { console };
 vm.createContext(ctx);
 vm.runInContext('var ' + js.slice(li + 6, k + 1) + ';var lang="en";var dailyK=[];var etfData=null;', ctx);
-const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose', 'CBP_LAST', 'cbpStreak', 'ATH', 'CYCLE_LOW', 'cycleLow', 'isWeeklyClose', 'bandFired', 'LAD_ALLOC', 'trigPct'];
+const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose', 'CBP_LAST', 'cbpStreak', 'ATH', 'CYCLE_LOW', 'cycleLow', 'isWeeklyClose', 'fD', 'locOf', 'LOC', 'BAND_FIRED', 'bandFired', 'LAD_ALLOC', 'trigPct'];
 let missing = [];
 for (const n of need) { try { vm.runInContext(grab(n).replace(/^(const|let) /, 'var '), ctx) } catch (e) { missing.push(n) } }
 
@@ -51,7 +51,7 @@ ok(run('verdictAction(54000)') === run('tf("hv_band_wait",t("lad")[0].t,$(57000)
   run('Date.now=()=>' + (sun + D + 3600e3));         // Monday 01:00 UTC: closed at 56,500
   ok(run('verdictAction(54000)') === run('tf("hv_in",t("lad")[0].t)'), 'a completed weekly close under $57K fires the probe');
   run('dailyK=' + JSON.stringify([{ ts: sun, close: 57000.5, low: 55500 }]));
-  ok(run('bandFired(0)') === false, 'a weekly close at/above $57K does not fire the probe');
+  ok(run('bandFired(0)') === null, 'a weekly close at/above $57K does not fire the probe');
   // Core and capitulation use the same gate (Nov 21 numbers review): no "buys now" in $44-50K without a weekly
   // close under $50K — the old core column needed Puell < 0.5, which today means ~$38K.
   run('dailyK=' + JSON.stringify([{ ts: sun, close: 56500, low: 55500 }]));
@@ -62,6 +62,16 @@ ok(run('verdictAction(54000)') === run('tf("hv_band_wait",t("lad")[0].t,$(57000)
   ok(run('trigPct()') === 0, 'nothing left for the trigger once probe and core fired');
   run('dailyK=[]');
   ok(run('trigPct()') === 65, 'trigger deploys 65% when nothing has fired');
+  // Offline (code review, Nov 21): with no candles a band the Monday check recorded as fired must not read
+  // "waits", and the trigger must not count it again.
+  run('dailyK=[];BAND_FIRED=["2026-11-22",null,null]');
+  ok(run('verdictAction(54000)') !== run('tf("hv_band_wait",t("lad")[0].t,$(57000))'), 'offline, a typed fired band does not wait');
+  ok(run('trigPct()') === 45, 'offline, the trigger skips the typed fired probe: ' + run('trigPct()'));
+  run('BAND_FIRED=[null,null,null]');
+  // "buys now" only in the week after the firing close; a later re-entry says it was already bought (code review).
+  run('dailyK=' + JSON.stringify([{ ts: sun, close: 56500, low: 55500 }, { ts: sun + 7 * D, close: 62000, low: 60000 }]));
+  run('Date.now=()=>' + (sun + 8 * D + 3600e3));     // Monday after the second Sunday
+  ok(run('verdictAction(55000)') === run('tf("hv_bought",t("lad")[0].t,fD("2026-11-22"))'), 'a band fired at an earlier close reads as bought');
   run('Date.now=realNow'); }
 ok(run('verdictAction(30000)') === run('t("hv_none")'), 'verdict under every band says only the reserve is left');
 
@@ -94,10 +104,11 @@ ok(run('cbpStreak(CBP_LAST)') === 72, 'the shipped CBP_LAST (Nov 15) renders a r
 // The price map's cycle low is the lowest daily LOW since the ATH, live from dailyK, not a typed constant: the
 // constant read "Cycle low, Jul 1" at $57,800 after Binance printed $57,778 on Nov 20, 2026 (interim check, Nov 21).
 // A lower low from before the ATH must not count.
+const seedLow = run('CYCLE_LOW.p'), newLow = seedLow - 1000;   // independent of the typed seed
 run('dailyK=' + JSON.stringify([{ ts: Date.UTC(2024, 1, 1), close: 43000, low: 42000 },
-  { ts: Date.UTC(2026, 10, 21), close: 56986, low: 56584.07 }, { ts: Date.UTC(2026, 10, 22), close: 57500, low: 57100 }]));
+  { ts: Date.UTC(2026, 10, 21), close: seedLow, low: newLow }, { ts: Date.UTC(2026, 10, 22), close: seedLow + 500, low: seedLow + 100 }]));
 let cl = run('cycleLow()');
-ok(cl.p === 56584.07 && cl.ts === Date.UTC(2026, 10, 21), 'cycle low tracks a new post-ATH daily low: ' + JSON.stringify(cl));
+ok(cl.p === newLow && cl.ts === Date.UTC(2026, 10, 21), 'cycle low tracks a new post-ATH daily low: ' + JSON.stringify(cl));
 run('dailyK=[]');
 cl = run('cycleLow()');
 ok(cl.p === run('CYCLE_LOW.p') && cl.ts === Date.parse(run('CYCLE_LOW.d')), 'cycle low falls back to the seed without candles');

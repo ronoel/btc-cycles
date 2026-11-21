@@ -68,7 +68,10 @@ def fetch(D):
     def farside():
         import build_data as b
         p = b.get(b.FARSIDE); p = p.decode() if isinstance(p, bytes) else p
-        return [list(x) for x in b.parse_farside(p)]
+        rows = [list(x) for x in b.parse_farside(p)] if p else []
+        if not rows:
+            raise SystemExit('Farside returned no rows: refusing to cache an empty ETF series')
+        return rows
     etf = once('etf.json', farside)
     return cm, bn, cb, cbu, cmu, etf
 
@@ -120,7 +123,7 @@ def report_core(m):
             print(f'   {lab:22s} ' + (f'{d} {m[d]["px"]:>9,.0f} {(m[d]["px"] / lowp - 1) * 100:+6.1f}% vs low, '
                                       f'{days_between(d, lowd):4d}d before, dd {(m[d]["px"] / athp - 1) * 100:.0f}%'
                                       if d else 'never'))
-    mm = mean365(m, ds); last = ds[-1]; mp = mm[last]
+    mm = mean365(m, ds); last = max(d for d in ds if m[d]['puell'] is not None); mp = mm[last]
     r = [m[d]['puell'] / (m[d]['px'] / mm[d]) for d in ds if d >= '2025-05-01' and m[d]['puell']]
     r.sort(); q = lambda f: r[int(f * (len(r) - 1))]
     print(f'Puell / (price/365d mean) since 2025-05 (block-count noise): p5 {q(.05):.2f} p50 {q(.5):.2f} p95 {q(.95):.2f}'
@@ -129,10 +132,10 @@ def report_core(m):
         px = [m[x]['px'] for x in ds[-365:]]; out = []
         for w in range(27):
             if w: px = px[7:] + [P] * 7
-            if w in (0, 4, 8, 13, 26): out.append(f'+{w}w ${0.5 * sum(px) / 365:,.0f}')
+            if w in (0, 4, 8, 13, 26): out.append(f'+{w}w ${0.5 / q(.5) * sum(px) / 365:,.0f}')
         print(f'   Puell-0.5 price (median ratio) if price holds at ${P:,}: ' + ' '.join(out))
     print(f'Today ({last}): Puell {m[last]["puell"]:.3f} ~ price/365d mean {m[last]["px"] / mp:.3f}; '
-          f'Puell 0.5 at ~${0.5 * mp:,.0f} (0.47-0.53: ${0.47 * mp:,.0f}-{0.53 * mp:,.0f}); '
+          f'Puell 0.5 at ~${0.5 / q(.5) * mp:,.0f} (median ratio; p5-p95 ratio ${0.5 / q(.95) * mp:,.0f}-{0.5 / q(.05) * mp:,.0f}); '
           f'Realized Price ${m[last]["rp"]:,.0f}')
 
 
@@ -219,19 +222,18 @@ def report_extras(m, bn, prem, cbu, cmu):
             d1 = next(d for d in dsm if d >= ath and m[d]['px'] <= athp * lv)
             w1 = next(d for d in dsm if d >= ath and dt.date.fromisoformat(d).weekday() == 6 and m[d]['px'] <= athp * lv)
             print(f'   {c} -{int((1 - lv) * 100)}%: daily {d1} | weekly {w1} {(m[w1]["px"] / (athp * lv) - 1) * 100:+.1f}% vs level')
-    print('== Interim lows that later broke: weeks each running low stood (daily lows, Binance; CoinMetrics before 2017)')
+    print('== Interim lows that later broke: weeks from the day each running low was set to the first trade under it'
+          ' (daily lows, Binance; CoinMetrics closes before 2017)')
     for c in ('C1', 'C2', 'C3', 'C4'):
         ath, low = CYC[c]; end = low or max(bn)
         src = {d: v[0] for d, v in bn.items()} if ath >= '2017-08-17' else {d: m[d]['px'] for d in m}
-        seq = sorted(d for d in src if ath <= d <= end); recs, lo = [], 1e18
-        for d in seq:
-            if src[d] < lo * 0.97 or not recs:      # a new low at least 3% under the standing one
+        recs = []                                   # [date set, level, date undercut]
+        for d in sorted(x for x in src if ath <= x <= end):
+            if not recs or src[d] < recs[-1][1]:
                 if recs: recs[-1].append(d)
-                recs.append([d, src[d]]); lo = src[d]
-            elif src[d] < lo: lo = src[d]; recs[-1][1] = lo
-        stood = [(r[0], round(r[1]), days_between(r[0], r[2]) / 7) for r in recs if len(r) == 3]
-        top = sorted(stood, key=lambda x: -x[2])[:3]
-        print(f'   {c}: longest-standing lows that broke: ' + '; '.join(f'{d} ${p:,} stood {w:.0f}w' for d, p, w in top))
+                recs.append([d, src[d]])
+        stood = sorted(((r[0], round(r[1]), days_between(r[0], r[2]) / 7) for r in recs if len(r) == 3), key=lambda x: -x[2])
+        print(f'   {c}: longest-standing lows that broke: ' + '; '.join(f'{d} ${p:,} stood {w:.0f}w' for d, p, w in stood[:3]))
 
 
 def report_cap(m):

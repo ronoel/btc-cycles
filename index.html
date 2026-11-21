@@ -350,6 +350,7 @@ hv_above:"Not buying yet. The next buy zone starts at {0}, {1}% below today.",
 hv_none:"Below the plan’s last band: only the reserved tranche remains, for a forced corporate-treasury sale.",
 hv_in:"Price is inside the {0} zone: this tranche buys now.",
 hv_band_wait:"Price is inside the {0} zone, but it buys only after a weekly close below {1} (Sunday’s close, checked Monday).",
+hv_bought:"Price is inside the {0} zone; this tranche was already bought at the {1} weekly close.",
 hv_trig:"Buy-now trigger",
 hv_trig_v:"{0} of 3 conditions met",
 hv_week:"Cycle clock",
@@ -490,6 +491,7 @@ hv_above:"Ainda sem comprar. A pr\u00f3xima zona de compra come\u00e7a em {0}, {
 hv_none:"Abaixo da \u00faltima faixa do plano: resta s\u00f3 a parcela reservada, para uma venda for\u00e7ada de tesouraria corporativa.",
 hv_in:"O pre\u00e7o est\u00e1 dentro da zona {0}: esta parcela compra agora.",
 hv_band_wait:"O pre\u00e7o est\u00e1 dentro da zona {0}, mas ela s\u00f3 compra ap\u00f3s um fechamento semanal abaixo de {1} (fechamento de domingo, conferido na segunda).",
+hv_bought:"O pre\u00e7o est\u00e1 dentro da zona {0}; esta parcela j\u00e1 foi comprada no fechamento semanal de {1}.",
 hv_trig:"Gatilho de compra imediata",
 hv_trig_v:"{0} de 3 condi\u00e7\u00f5es atendidas",
 hv_week:"Rel\u00f3gio do ciclo",
@@ -630,6 +632,7 @@ hv_above:"A\u00fan sin comprar. La pr\u00f3xima zona de compra empieza en {0}, {
 hv_none:"Por debajo de la \u00faltima banda del plan: solo queda el tramo reservado, para una venta forzada de tesorer\u00eda corporativa.",
 hv_in:"El precio est\u00e1 dentro de la zona {0}: este tramo compra ahora.",
 hv_band_wait:"El precio est\u00e1 dentro de la zona {0}, pero solo compra tras un cierre semanal por debajo de {1} (cierre del domingo, revisado el lunes).",
+hv_bought:"El precio est\u00e1 dentro de la zona {0}; este tramo ya se compr\u00f3 en el cierre semanal del {1}.",
 hv_trig:"Disparador de compra inmediata",
 hv_trig_v:"{0} de 3 condiciones cumplidas",
 hv_week:"Reloj del ciclo",
@@ -1077,7 +1080,8 @@ const EVENTS=[
 // Fixed reference levels of cycle 4 (Binance daily extremes).
 // CYCLE_LOW seeds cycleLow() (the lowest daily low since the ATH, live from dailyK); it is only the fallback when
 // Binance is unreachable. Typed constants chasing a moving low go stale (the Jul 1 low read on after Nov 20, 2026).
-const CYCLE_LOW={p:57778.35,d:'2026-11-20'},RALLY_PEAK=87395.67;
+// Re-seed CYCLE_LOW on every pass (MAINTENANCE §2); Nov 21 is the in-progress candle's low at 04:43 UTC.
+const CYCLE_LOW={p:55555.55,d:'2026-11-21'},RALLY_PEAK=87395.67;
 function cycleLow(){let b={p:CYCLE_LOW.p,ts:Date.parse(CYCLE_LOW.d)};
   for(const k of dailyK)if(k.ts>=ATHD.getTime()&&k.low<b.p)b={p:k.low,ts:k.ts};return b}
 // Leg 2 of the buy-now trigger at the last adjudicated Sunday close. Manual, raw convention
@@ -1195,11 +1199,17 @@ function renderPriceMap(c){
 // a tranche buys at the first completed Binance weekly close (Sunday daily candle, Monday-open convention, as leg 1)
 // below its band top; latched once it prints. Puell < 0.5 and "premium turning up" were dropped from the core gate
 // (ANALYSIS-LOG.md, Nov 21 "plan rules by the numbers").
-function bandFired(i){return dailyK.some(k=>k.ts>=ATHD.getTime()&&isWeeklyClose(k)&&k.close<LAD_BANDS[i][1])}
+// BAND_FIRED: ISO date of the weekly close that fired each band, typed at the Monday check — the offline fallback,
+// since dailyK is empty when Binance is unreachable. bandFired(i) returns that date (live or typed) or null.
+const BAND_FIRED=[null,null,null];
+function bandFired(i){const k=dailyK.find(k=>k.ts>=ATHD.getTime()&&isWeeklyClose(k)&&k.close<LAD_BANDS[i][1]);
+  return k?isoD(k.ts):BAND_FIRED[i]}
 // Share of the plan the buy-now trigger deploys: the probe and core tranches not yet bought (§3).
 function trigPct(){return[0,1].reduce((s,i)=>s+(bandFired(i)?0:LAD_ALLOC[i]),0)}
 function verdictAction(p){const B3=LAD_BANDS.slice(0,3),lad=t('lad'),band=B3.findIndex(([lo,hi])=>p>=lo&&p<hi),below=B3.findIndex(([,hi])=>hi<=p);
-  return band>=0?(bandFired(band)?tf('hv_in',lad[band].t):tf('hv_band_wait',lad[band].t,$(LAD_BANDS[band][1])))
+  // "buys now" only in the week after the close that fired the band; afterwards the tranche is already bought.
+  const f=band>=0&&bandFired(band),now=f&&f===lastWeeklyClose()?.d;
+  return band>=0?(!f?tf('hv_band_wait',lad[band].t,$(LAD_BANDS[band][1])):now?tf('hv_in',lad[band].t):tf('hv_bought',lad[band].t,fD(f)))
     :below>=0?tf('hv_above',$(B3[below][1]),Math.round((1-B3[below][1]/p)*100)):t('hv_none')}
 // Price-map y of the now marker, clamped to the drawn scale
 function pmClampY(y){return Math.min(PM.bot,Math.max(PM.top,y))}

@@ -55,7 +55,7 @@ entry, same commit day, carried a 28-calendar-day ETF window and an untested 8-w
 
 **1. Core gate.** NUPL < 0 and MVRV-Z < 0 are one condition (price < Realized Price, $53,262 Nov 20) and hold
 automatically inside $44–50K. Within an epoch Puell ≈ price / 365-day mean price (0.794 vs 0.779 on Nov 20), so
-**Puell < 0.5 ≈ price < $37,758** today at the median ratio, drifting to ~$34–35K over 8–13 weeks at flat price. But the
+**Puell < 0.5 ≈ price < $37,994** today at the median ratio (0.99; $37,758 at ratio 1, as first printed), drifting to ~$34–35K over 8–13 weeks at flat price. But the
 daily print moves with block count: Puell / (price/365d mean) since May 2025 has p5 0.83, p50 0.99, p95 1.14 (min 0.67,
 max 1.36), so a **single-day Puell < 0.5 can print anywhere from ~$33K to ~$45K** (p95–p5), and higher on an extreme day.
 It would open inside the core band only on slow-block noise — block timing, not valuation. History agrees: NUPL<0 & Puell<0.5 first held at drawdowns of
@@ -90,8 +90,10 @@ deployment.**
 touch-by-Dec-31 buckets: R0 status quo EV ×1.27 (cash in the 79% of weight above $45K); R1 merged into core ×1.60; **R2
 cap band, else release at week 70: ×1.64–1.95** (week-70 price taken as +13w multiple, low ~week 58). **The table
 prices idle cash, not safety:** each scenario low is treated as final, so any purchase beats cash. The missing case —
-release, then a lower low — is not rare: running lows that later broke had stood **25w (C1, Apr 2014), 40w (C2, Feb
-2018), 21w (C3, Jun 2022), ~20w (C4, Jul 1 → Nov 20, 2026)**. An 8-week "low is old enough" guard would have failed
+release, then a lower low — is not rare: running lows that later broke had stood **25w (C1, Apr 2014), 20w (C2, Jun
+2018), 20w (C3, Jun 2022), 20w (C4, Jul 1 → Nov 20, 2026)** — from the day each low was set to the first trade under
+it (corrected after code review the same day: the first count kept a record's first-touch date across small undercuts
+and printed 40w for C2). An 8-week "low is old enough" guard would have failed
 in every cycle, so it is dropped; no age guard is grounded. What history does say: the final low came before week 70 in
 4 of 4 (weeks 23, 58, 52, 54) — R2 is a bet on the cycle clock, and it is a calendar buy (the Nov 21 post-week-60 rule
 excludes calendar buys only *through* week 70). **No release rule is recommended on the numbers:** R2 (release at

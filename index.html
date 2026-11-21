@@ -302,7 +302,7 @@ bs_off:"Not yet",
 bs:[{"k":"rp","n":"Price below the average cost of all coins","th":"Spot < Realized Price","r":"—","tip":"Realized Price: the average on-chain cost of every coin. Every past bottom traded below it."},{"k":"nupl","n":"NUPL below zero","th":"NUPL < 0","r":"—","tip":"Unrealized profit of all holders. Below zero the average holder is at a loss — where the 2015, 2018 and 2022 bottoms formed."},{"k":"mvrv","n":"MVRV Z-score below zero","th":"Z &lt; 0 (partial &lt; 0.5)","r":"—","tip":"Market value against realized value, in standard deviations. Past bottoms printed below zero."},{"k":"sopr","n":"SOPR below 1 for weeks","th":"< 1 for weeks","r":"—","tip":"Above 1, coins move at a profit. Weeks below 1 mean holders are selling at a loss."},{"k":"fund","n":"Funding deeply negative","th":"7d avg < −0.005%/8h","st":"off","r":"Fallback, Oct 11: +0.001%/8h 7-day average.","tip":"What futures longs pay shorts. Deeply negative for a week means the crowd is short — a washed-out market."},{"k":"ma200w","n":"Price at or below the 200-week average","th":"≤ 200W MA","r":"—","tip":"Past bottoms formed at or below it. This cycle already closed one week below it (Jun 22–28, 2026, at $59,577)."},{"k":"dd55","n":"Fall deeper than −55%","th":"≤ −55% from ATH","r":"—","tip":"Distance from the $126,296 peak."},{"k":"puell","n":"Puell Multiple in the bottom zone","th":"< 0.5","st":"off","r":"Fallback, Sep 20: 1.08.","tip":"Miner revenue against its yearly average. Below 0.5 means deep miner stress."},{"k":"hash","n":"Hash Ribbons buy cross","th":"30d hashrate MA &gt; 60d after capitulation","st":"part","r":"<b>Up since Sep 1, narrowing:</b> the 30-day average is +1.74% over the 60-day (Nov 17), down from +4.2% on Nov 1. Difficulty fell 9.13% at the Nov 14 retarget (mempool.space).","tip":"Miner stress. The buy signal is the 30-day average crossing back above the 60-day after a capitulation; a long up-run says nothing by itself."},{"k":"lth","n":"Long-term holders accumulating","th":"LTH supply rising","st":"off","r":"16,219,137 BTC on Nov 17, a day after a new low (16,188,580); −217,277 over 30 days. Turns partial when the 30-day change is positive.","tip":"Coins held for more than 155 days. Rising supply means coins are moving to holders who rarely sell into weakness."},{"k":"resv","n":"Exchange reserves falling, stablecoin ratio low","th":"Multi-month reserve decline","st":"part","r":"Reserves unmeasured (paid data). Stablecoin supply ratio 6.60 on Sep 26, near the 6.80 of the 2022 bottom.","tip":"Coins leaving exchanges cut the supply ready to sell; a low ratio means stablecoin buying power is large against BTC."},{"k":"sthmvrv","n":"Recent buyers deep underwater","th":"≤ 0.80 (below 1.00 = at a loss)","st":"off","r":"Fallback, Nov 3: 1.03.","tip":"Price against the cost of coins bought in the last 155 days — the group that capitulates. Under 1 they are at a loss; past bottoms went under 0.80 (0.84 in Nov 2022)."},{"k":"cbp","n":"Coinbase premium positive","th":"Sustained &gt; 0","st":"off","r":"Negative on every close since Sep 4: 75 in a row through Nov 18; −0.137% on Nov 18.","tip":"Coinbase price minus Binance price. Positive and sustained means US buyers are leading."},{"k":"fed","n":"Macro liquidity turning","th":"3 of 3 (partial: 2 of 3)","r":"—","tip":"One row for the macro backdrop: money supply accelerating, the dollar below its 200-day, the real 10-year below its 200-day. Past bottoms formed with at least two turning."},{"k":"etf","n":"ETF flows turning after outflows","th":"4-week net &gt; +$1.5B","r":"—","tip":"US spot ETF net flows over 20 sessions (Farside). Active above +$1.5B, partial when positive."}],
 lad_t:"Buy plan",
 lad_h:["Tranche","Price band","Drawdown","Allocation","Confirmation"],
-lad:[{"t":"Probe","b":"$52K–57K","dd":"−55…−59%","a":"20%","c":"A weekly close below $57K (Sunday’s close, read Monday)"},{"t":"Core","b":"$44K–50K","dd":"−60…−65%","a":"45%","c":"A weekly close below $50K (price then under the Realized Price: NUPL and MVRV-Z below zero)"},{"t":"Capitulation","b":"$38K–44K","dd":"−65…−70%","a":"35%","c":"A weekly close below $44K; gate open since the Oct 29 Binance theft"},{"t":"Reserved","b":"&lt; $35K","dd":"&lt; −72%","a":"0%","c":"Only for a forced sale by a leveraged corporate treasury"}],
+lad:[{"t":"Probe","b":"$52K–57K","dd":"−55…−59%","c":"A weekly close below $57K (Sunday’s close, read Monday)"},{"t":"Core","b":"$44K–50K","dd":"−60…−65%","c":"A weekly close below $50K (price then under the Realized Price: NUPL and MVRV-Z below zero)"},{"t":"Capitulation","b":"$38K–44K","dd":"−65…−70%","c":"A weekly close below $44K; gate open since the Oct 29 Binance theft"},{"t":"Reserved","b":"&lt; $35K","dd":"&lt; −72%","c":"Only for a forced sale by a leveraged corporate treasury"}],
 lad_now:"◀ current price",
 trig_t:"Confirmation signals",
 trig_n:"When all four fired together, past bottoms were already in. Now: none fired, one partial.",
@@ -358,7 +358,7 @@ hv_week_v:"after the peak; past bottoms came in weeks 52–59",
 hv_price:"Price",
 hv_prob:"Is the low already in at $57.8K?",
 hv_prob_v:"Resolved Nov 20: Binance traded at $57,778, under the Jul 1 low of $57,800. No new estimate while the low is still moving; the prediction market prices $55K at 76.5% and $50K at 49% by year-end (Nov 21).",
-hv_prob_no:"No",
+hv_prob_n:"No",
 hv_next:"Coming up",
 win_box:"Bottom window",
 hv_dd:"{0}% from the peak",
@@ -442,7 +442,7 @@ bs_off:"Ainda n\u00e3o",
 bs:[{"k":"rp","n":"Pre\u00e7o abaixo do custo m\u00e9dio de todas as moedas","th":"Spot < Pre\u00e7o Realizado","r":"\u2014","tip":"Realized Price: o custo m\u00e9dio on-chain de cada moeda. Todos os fundos passados negociaram abaixo dele."},{"k":"nupl","n":"NUPL abaixo de zero","th":"NUPL < 0","r":"\u2014","tip":"Lucro n\u00e3o realizado de todos os detentores. Abaixo de zero, o detentor m\u00e9dio est\u00e1 no preju\u00edzo \u2014 onde se formaram os fundos de 2015, 2018 e 2022."},{"k":"mvrv","n":"MVRV Z-score abaixo de zero","th":"Z &lt; 0 (parcial &lt; 0.5)","r":"\u2014","tip":"Valor de mercado contra valor realizado, em desvios-padr\u00e3o. Os fundos passados marcaram abaixo de zero."},{"k":"sopr","n":"SOPR abaixo de 1 por semanas","th":"< 1 por semanas","r":"\u2014","tip":"Acima de 1, as moedas se movem com lucro. Semanas abaixo de 1 significam detentores vendendo no preju\u00edzo."},{"k":"fund","n":"Funding muito negativo","th":"m\u00e9dia 7d < \u22120,005%/8h","st":"off","r":"Dado de reserva, 11 out: m\u00e9dia de 7 dias de +0,001%/8h.","tip":"O que as posi\u00e7\u00f5es compradas em futuros pagam \u00e0s vendidas. Muito negativo por uma semana significa que a multid\u00e3o est\u00e1 vendida \u2014 um mercado limpo."},{"k":"ma200w","n":"Pre\u00e7o na m\u00e9dia de 200 semanas ou abaixo dela","th":"\u2264 200W MA","r":"\u2014","tip":"Os fundos passados se formaram nela ou abaixo. Este ciclo j\u00e1 fechou uma semana abaixo (22\u201328 jun, 2026, a $59,577)."},{"k":"dd55","n":"Queda maior que \u221255%","th":"\u2264 \u221255% da ATH","r":"\u2014","tip":"Dist\u00e2ncia do topo de $126,296."},{"k":"puell","n":"Puell Multiple na zona de fundo","th":"< 0,5","st":"off","r":"Dado de reserva, 20 set: 1,08.","tip":"Receita dos mineradores contra a m\u00e9dia do ano. Abaixo de 0,5 significa forte estresse dos mineradores."},{"k":"hash","n":"Cruzamento de compra do Hash Ribbons","th":"MA 30d do hashrate &gt; 60d ap\u00f3s capitula\u00e7\u00e3o","st":"part","r":"<b>Para cima desde 1 set, estreitando:</b> a m\u00e9dia de 30 dias est\u00e1 +1,74% acima da de 60 dias (17 nov), contra +4,2% em 1 nov. A dificuldade caiu 9,13% no ajuste de 14 nov (mempool.space).","tip":"Estresse dos mineradores. O sinal de compra \u00e9 a m\u00e9dia de 30 dias voltando a cruzar acima da de 60 dias depois de uma capitula\u00e7\u00e3o; uma longa sequ\u00eancia de alta n\u00e3o diz nada por si s\u00f3."},{"k":"lth","n":"Detentores de longo prazo acumulando","th":"Supply LTH subindo","st":"off","r":"16.219.137 BTC em 17 nov, um dia ap\u00f3s nova m\u00ednima (16.188.580); \u2212217.277 em 30 dias. Vira parcial quando a varia\u00e7\u00e3o de 30 dias \u00e9 positiva.","tip":"Moedas paradas h\u00e1 mais de 155 dias. Oferta crescente significa moedas indo para detentores que raramente vendem na fraqueza."},{"k":"resv","n":"Reservas nas corretoras caindo, raz\u00e3o de stablecoins baixa","th":"Queda de reservas por v\u00e1rios meses","st":"part","r":"Reservas n\u00e3o medidas (dado pago). Raz\u00e3o de oferta de stablecoins 6,60 em 26 set, perto do 6,80 do fundo de 2022.","tip":"Moedas saindo das corretoras reduzem a oferta pronta para venda; uma raz\u00e3o baixa significa grande poder de compra em stablecoins frente ao BTC."},{"k":"sthmvrv","n":"Compradores recentes muito no preju\u00edzo","th":"\u2264 0.80 (abaixo de 1.00 = no preju\u00edzo)","st":"off","r":"Dado de reserva, 3 nov: 1,03.","tip":"Pre\u00e7o contra o custo das moedas compradas nos \u00faltimos 155 dias \u2014 o grupo que capitula. Abaixo de 1 est\u00e3o no preju\u00edzo; os fundos passados foram abaixo de 0,80 (0,84 em nov de 2022)."},{"k":"cbp","n":"Pr\u00eamio da Coinbase positivo","th":"Sustentado &gt; 0","st":"off","r":"Negativo em todos os fechamentos desde 4 set: 75 seguidos at\u00e9 18 nov; \u22120,137% em 18 nov.","tip":"Pre\u00e7o na Coinbase menos pre\u00e7o na Binance. Positivo e sustentado significa compradores dos EUA na lideran\u00e7a."},{"k":"fed","n":"Liquidez macro virando","th":"3 de 3 (parcial: 2 de 3)","r":"\u2014","tip":"Uma linha para o cen\u00e1rio macro: oferta de moeda acelerando, d\u00f3lar abaixo da m\u00e9dia de 200 dias, juro real de 10 anos abaixo da m\u00e9dia de 200 dias. Os fundos passados se formaram com pelo menos duas virando."},{"k":"etf","n":"Fluxo dos ETFs virando ap\u00f3s sa\u00eddas","th":"L\u00edquido de 4 semanas &gt; +$1.5B","r":"\u2014","tip":"Fluxo l\u00edquido dos ETFs spot dos EUA em 20 sess\u00f5es (Farside). Ativo acima de +$1,5B, parcial quando positivo."}],
 lad_t:"Plano de compra",
 lad_h:["Tranche","Faixa de pre\u00e7o","Drawdown","Aloca\u00e7\u00e3o","Confirma\u00e7\u00e3o"],
-lad:[{"t":"Sondagem","b":"$52K\u201357K","dd":"\u221255\u2026\u221259%","a":"20%","c":"Um fechamento semanal abaixo de $57K (fechamento de domingo, lido na segunda)"},{"t":"N\u00facleo","b":"$44K\u201350K","dd":"\u221260\u2026\u221265%","a":"45%","c":"Um fechamento semanal abaixo de $50K (pre\u00e7o ent\u00e3o abaixo do Realized Price: NUPL e MVRV-Z abaixo de zero)"},{"t":"Capitula\u00e7\u00e3o","b":"$38K\u201344K","dd":"\u221265\u2026\u221270%","a":"35%","c":"Um fechamento semanal abaixo de $44K; porta aberta desde o roubo da Binance em 29 out"},{"t":"Reservado","b":"&lt; $35K","dd":"&lt; \u221272%","a":"0%","c":"S\u00f3 para uma venda for\u00e7ada por uma tesouraria corporativa alavancada"}],
+lad:[{"t":"Sondagem","b":"$52K\u201357K","dd":"\u221255\u2026\u221259%","c":"Um fechamento semanal abaixo de $57K (fechamento de domingo, lido na segunda)"},{"t":"N\u00facleo","b":"$44K\u201350K","dd":"\u221260\u2026\u221265%","c":"Um fechamento semanal abaixo de $50K (pre\u00e7o ent\u00e3o abaixo do Realized Price: NUPL e MVRV-Z abaixo de zero)"},{"t":"Capitula\u00e7\u00e3o","b":"$38K\u201344K","dd":"\u221265\u2026\u221270%","c":"Um fechamento semanal abaixo de $44K; porta aberta desde o roubo da Binance em 29 out"},{"t":"Reservado","b":"&lt; $35K","dd":"&lt; \u221272%","c":"S\u00f3 para uma venda for\u00e7ada por uma tesouraria corporativa alavancada"}],
 lad_now:"\u25c0 pre\u00e7o atual",
 trig_t:"Sinais de confirma\u00e7\u00e3o",
 trig_n:"Quando os quatro dispararam juntos, os fundos passados j\u00e1 tinham passado. Agora: nenhum disparou, um parcial.",
@@ -498,7 +498,7 @@ hv_week_v:"ap\u00f3s o topo; os fundos passados vieram nas semanas 52\u201359",
 hv_price:"Pre\u00e7o",
 hv_prob:"A m\u00ednima j\u00e1 passou, em $57.8K?",
 hv_prob_v:"Resolvido em 20 nov: a Binance negociou a $57,778, abaixo da m\u00ednima de 1 jul, $57,800. Nenhuma nova estimativa enquanto a m\u00ednima ainda se move; o mercado de previs\u00f5es d\u00e1 76,5% para $55K e 49% para $50K at\u00e9 o fim do ano (21 nov).",
-hv_prob_no:"N\u00e3o",
+hv_prob_n:"N\u00e3o",
 hv_next:"Em breve",
 win_box:"Janela do fundo",
 hv_dd:"{0}% em rela\u00e7\u00e3o ao topo",
@@ -582,7 +582,7 @@ bs_off:"A\u00fan no",
 bs:[{"k":"rp","n":"Precio por debajo del costo promedio de todas las monedas","th":"Spot < Precio Realizado","r":"\u2014","tip":"Realized Price: el costo promedio on-chain de cada moneda. Todos los pisos pasados cotizaron por debajo."},{"k":"nupl","n":"NUPL por debajo de cero","th":"NUPL < 0","r":"\u2014","tip":"Ganancia no realizada de todos los tenedores. Por debajo de cero, el tenedor promedio est\u00e1 en p\u00e9rdida \u2014 donde se formaron los pisos de 2015, 2018 y 2022."},{"k":"mvrv","n":"MVRV Z-score por debajo de cero","th":"Z &lt; 0 (parcial &lt; 0.5)","r":"\u2014","tip":"Valor de mercado frente a valor realizado, en desviaciones est\u00e1ndar. Los pisos pasados marcaron por debajo de cero."},{"k":"sopr","n":"SOPR por debajo de 1 durante semanas","th":"< 1 por semanas","r":"\u2014","tip":"Por encima de 1, las monedas se mueven con ganancia. Semanas por debajo de 1 significan tenedores vendiendo con p\u00e9rdida."},{"k":"fund","n":"Funding muy negativo","th":"prom. 7d < \u22120.005%/8h","st":"off","r":"Dato de respaldo, 11 oct: promedio de 7 d\u00edas de +0,001%/8h.","tip":"Lo que los largos de futuros pagan a los cortos. Muy negativo durante una semana significa que la multitud est\u00e1 corta \u2014 un mercado limpio."},{"k":"ma200w","n":"Precio en el promedio de 200 semanas o por debajo","th":"\u2264 200W MA","r":"\u2014","tip":"Los pisos pasados se formaron en \u00e9l o por debajo. Este ciclo ya cerr\u00f3 una semana por debajo (22\u201328 jun, 2026, a $59,577)."},{"k":"dd55","n":"Ca\u00edda mayor a \u221255%","th":"\u2264 \u221255% del ATH","r":"\u2014","tip":"Distancia desde el m\u00e1ximo de $126,296."},{"k":"puell","n":"Puell Multiple en la zona de piso","th":"< 0.5","st":"off","r":"Dato de respaldo, 20 sep: 1,08.","tip":"Ingresos de los mineros frente a su promedio anual. Por debajo de 0,5 significa fuerte estr\u00e9s minero."},{"k":"hash","n":"Cruce de compra de Hash Ribbons","th":"MA 30d del hashrate &gt; 60d tras capitulaci\u00f3n","st":"part","r":"<b>Al alza desde el 1 sep, estrech\u00e1ndose:</b> el promedio de 30 d\u00edas est\u00e1 +1,74% sobre el de 60 d\u00edas (17 nov), frente a +4,2% el 1 nov. La dificultad cay\u00f3 9,13% en el ajuste del 14 nov (mempool.space).","tip":"Estr\u00e9s de los mineros. La se\u00f1al de compra es el promedio de 30 d\u00edas volviendo a cruzar por encima del de 60 d\u00edas tras una capitulaci\u00f3n; una racha larga al alza no dice nada por s\u00ed sola."},{"k":"lth","n":"Tenedores de largo plazo acumulando","th":"Supply LTH subiendo","st":"off","r":"16.219.137 BTC el 17 nov, un d\u00eda despu\u00e9s de un nuevo m\u00ednimo (16.188.580); \u2212217.277 en 30 d\u00edas. Pasa a parcial cuando el cambio de 30 d\u00edas es positivo.","tip":"Monedas quietas por m\u00e1s de 155 d\u00edas. Una oferta creciente significa monedas yendo a tenedores que rara vez venden en la debilidad."},{"k":"resv","n":"Reservas en exchanges bajando, ratio de stablecoins bajo","th":"Ca\u00edda de reservas por varios meses","st":"part","r":"Reservas sin medir (dato de pago). Ratio de oferta de stablecoins 6,60 el 26 sep, cerca del 6,80 del piso de 2022.","tip":"Las monedas que salen de los exchanges reducen la oferta lista para vender; un ratio bajo significa que el poder de compra en stablecoins es grande frente al BTC."},{"k":"sthmvrv","n":"Compradores recientes muy en p\u00e9rdida","th":"\u2264 0.80 (por debajo de 1.00 = en p\u00e9rdida)","st":"off","r":"Dato de respaldo, 3 nov: 1,03.","tip":"Precio frente al costo de las monedas compradas en los \u00faltimos 155 d\u00edas \u2014 el grupo que capitula. Por debajo de 1 est\u00e1n en p\u00e9rdida; los pisos pasados bajaron de 0,80 (0,84 en nov de 2022)."},{"k":"cbp","n":"Prima de Coinbase positiva","th":"Sostenido &gt; 0","st":"off","r":"Negativa en todos los cierres desde el 4 sep: 75 seguidos hasta el 18 nov; \u22120,137% el 18 nov.","tip":"Precio en Coinbase menos precio en Binance. Positiva y sostenida significa que los compradores de EE. UU. lideran."},{"k":"fed","n":"Liquidez macro girando","th":"3 de 3 (parcial: 2 de 3)","r":"\u2014","tip":"Una fila para el contexto macro: oferta monetaria acelerando, d\u00f3lar por debajo de su media de 200 d\u00edas, tasa real a 10 a\u00f1os por debajo de su media de 200 d\u00edas. Los pisos pasados se formaron con al menos dos girando."},{"k":"etf","n":"Flujos de ETF girando tras salidas","th":"Neto de 4 semanas &gt; +$1.5B","r":"\u2014","tip":"Flujos netos de los ETF spot de EE. UU. en 20 sesiones (Farside). Activo por encima de +$1,5B, parcial cuando es positivo."}],
 lad_t:"Plan de compra",
 lad_h:["Tramo","Banda de precio","Drawdown","Asignaci\u00f3n","Confirmaci\u00f3n"],
-lad:[{"t":"Sondeo","b":"$52K\u201357K","dd":"\u221255\u2026\u221259%","a":"20%","c":"Un cierre semanal por debajo de $57K (cierre del domingo, le\u00eddo el lunes)"},{"t":"N\u00facleo","b":"$44K\u201350K","dd":"\u221260\u2026\u221265%","a":"45%","c":"Un cierre semanal por debajo de $50K (precio entonces bajo el Realized Price: NUPL y MVRV-Z por debajo de cero)"},{"t":"Capitulaci\u00f3n","b":"$38K\u201344K","dd":"\u221265\u2026\u221270%","a":"35%","c":"Un cierre semanal por debajo de $44K; compuerta abierta desde el robo a Binance del 29 oct"},{"t":"Reservado","b":"&lt; $35K","dd":"&lt; \u221272%","a":"0%","c":"Solo para una venta forzada de una tesorer\u00eda corporativa apalancada"}],
+lad:[{"t":"Sondeo","b":"$52K\u201357K","dd":"\u221255\u2026\u221259%","c":"Un cierre semanal por debajo de $57K (cierre del domingo, le\u00eddo el lunes)"},{"t":"N\u00facleo","b":"$44K\u201350K","dd":"\u221260\u2026\u221265%","c":"Un cierre semanal por debajo de $50K (precio entonces bajo el Realized Price: NUPL y MVRV-Z por debajo de cero)"},{"t":"Capitulaci\u00f3n","b":"$38K\u201344K","dd":"\u221265\u2026\u221270%","c":"Un cierre semanal por debajo de $44K; compuerta abierta desde el robo a Binance del 29 oct"},{"t":"Reservado","b":"&lt; $35K","dd":"&lt; \u221272%","c":"Solo para una venta forzada de una tesorer\u00eda corporativa apalancada"}],
 lad_now:"\u25c0 precio actual",
 trig_t:"Se\u00f1ales de confirmaci\u00f3n",
 trig_n:"Cuando las cuatro se dispararon juntas, los pisos pasados ya hab\u00edan ocurrido. Ahora: ninguna disparada, una parcial.",
@@ -638,7 +638,7 @@ hv_week_v:"tras el m\u00e1ximo; los pisos pasados llegaron en las semanas 52\u20
 hv_price:"Precio",
 hv_prob:"\u00bfEl m\u00ednimo ya pas\u00f3, en $57.8K?",
 hv_prob_v:"Resuelto el 20 nov: Binance cotiz\u00f3 a $57,778, por debajo del m\u00ednimo del 1 jul, $57,800. Ninguna nueva estimaci\u00f3n mientras el m\u00ednimo siga movi\u00e9ndose; el mercado de predicciones da 76,5% a $55K y 49% a $50K antes de fin de a\u00f1o (21 nov).",
-hv_prob_no:"No",
+hv_prob_n:"No",
 hv_next:"Pr\u00f3ximamente",
 win_box:"Ventana del piso",
 hv_dd:"{0}% respecto al m\u00e1ximo",
@@ -943,6 +943,8 @@ async function fetchOnChainData(){
 function tip(s){return s?'<span class="tip" tabindex="0">?<span class="tt">'+s+'</span></span>':''}
 function ma200w(){if(!allDailyCloses||allDailyCloses.length<1400)return null;const p=allDailyCloses.slice(-1400);return p.reduce((a,b)=>a+b[1],0)/1400}
 const LAD_BANDS=[[52000,57000],[44000,50000],[38000,44000],[0,35000]];
+// Share of the plan per tranche (probe, core, capitulation, reserved); the ladder table, price map and trigPct() read it.
+const LAD_ALLOC=[20,45,35,0];
 // Weeks after ATH at which each completed bear market bottomed (Jan 2015, Dec 2018,
 // Nov 2022). `c` indexes CYCLE_ATHS/COL. The projected window (weeks 50–60) is an
 // envelope around these three and has no other source.
@@ -1084,10 +1086,6 @@ function cycleLow(){let b={p:CYCLE_LOW.p,ts:Date.parse(CYCLE_LOW.d)};
 const CBP_LAST={pct:-0.0546,d:'2026-11-15',from:'2026-09-05'};
 function cbpStreak(c){return Math.round((Date.parse(c.d)-Date.parse(c.from))/864e5)+1}
 const TRIG_BAR={wk:70000,etf:1.5};
-// Counter-scenario probability ("the low is already in at $57.8K"), set in each research pass. Downside marker
-// (MAINTENANCE.md §2b): a weekly close under TRIG_BAR.wk cut it to ~50% at the Nov 16, 2026 window. Resolved NO on
-// Nov 20, 2026 (daily low $57,778.35 < $57,800.19): null renders t('hv_prob_no') until the owner sets a new question.
-const LOW_IN_PCT=null;
 // Status of the four confirmation cards, by the `k` of each `trig` entry; set in each research pass.
 const TRIG_ST={prem:'off',hash:'part',fed:'off'}; // etf is live: etfSt(etf.d20)
 let dailyK=[];
@@ -1095,9 +1093,10 @@ function cv(n){return getComputedStyle(document.documentElement).getPropertyValu
 // UTC day label; `x` is an ISO day or epoch ms, `o` the toLocaleDateString fields (default: short month + day)
 function fD(x,o){return new Date(typeof x==='number'?x:x+'T00:00:00Z').toLocaleDateString(locOf(),Object.assign({timeZone:'UTC'},o||{month:'short',day:'numeric'}))}
 // Last completed weekly close: the Sunday daily close equals the Binance 1w close (Monday-open convention).
+// A completed weekly close: the Sunday daily candle whose UTC day has ended (Monday-open convention, §2b).
+function isWeeklyClose(k){return new Date(k.ts).getUTCDay()===0&&k.ts+864e5<=Date.now()}
 function lastWeeklyClose(){
-  for(let i=dailyK.length-1;i>=0;i--){const k=dailyK[i],d=new Date(k.ts);
-    if(d.getUTCDay()===0&&k.ts+864e5<=Date.now())return {d:isoD(k.ts),c:k.close}}
+  for(let i=dailyK.length-1;i>=0;i--){const k=dailyK[i];if(isWeeklyClose(k))return {d:isoD(k.ts),c:k.close}}
   return null}
 function upcomingEvents(now=new Date()){
   const day=864e5,t0=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate());
@@ -1169,7 +1168,7 @@ function renderPriceMap(c){
   // depth bands = the buy plan's three tranches
   LAD_BANDS.slice(0,3).forEach(([lo,hi],i)=>{const y0=y(hi),y1=y(lo),ym=f((y0+y1)/2+5),hit=lastPr>=lo&&lastPr<hi;
     g+='<rect class="pm-b'+i+'" x="'+xs+'" y="'+f(y0)+'" width="'+(W-xs)+'" height="'+f(y1-y0)+'"/>'
-      +'<text class="pm-bt" x="'+(xs+12)+'" y="'+ym+'">'+esc(lad[i].t)+' '+lad[i].a+'</text>'
+      +'<text class="pm-bt" x="'+(xs+12)+'" y="'+ym+'">'+esc(lad[i].t)+' '+LAD_ALLOC[i]+'%</text>'
       +'<text class="pm-br" x="'+(W-8)+'" y="'+ym+'" text-anchor="end">'+esc(lad[i].b)+(hit?' ◀':'')+'</text>'});
   // reference levels, labels pushed down so they never overlap
   const lv=[{p:RALLY_PEAK,n:t('pm_peak')},{p:c.srp,n:t('pm_sth')},{p:c.m2,n:t('pm_200w')},
@@ -1196,14 +1195,12 @@ function renderPriceMap(c){
 // a tranche buys at the first completed Binance weekly close (Sunday daily candle, Monday-open convention, as leg 1)
 // below its band top; latched once it prints. Puell < 0.5 and "premium turning up" were dropped from the core gate
 // (ANALYSIS-LOG.md, Nov 21 "plan rules by the numbers").
-function bandFired(i){for(const k of dailyK){if(k.ts<ATHD.getTime())continue;
-    if(new Date(k.ts).getUTCDay()===0&&k.ts+864e5<=Date.now()&&k.close<LAD_BANDS[i][1])return {d:isoD(k.ts),c:k.close}}
-  return null}
+function bandFired(i){return dailyK.some(k=>k.ts>=ATHD.getTime()&&isWeeklyClose(k)&&k.close<LAD_BANDS[i][1])}
 // Share of the plan the buy-now trigger deploys: the probe and core tranches not yet bought (§3).
-function trigPct(){return(bandFired(0)?0:20)+(bandFired(1)?0:45)}
+function trigPct(){return[0,1].reduce((s,i)=>s+(bandFired(i)?0:LAD_ALLOC[i]),0)}
 function verdictAction(p){const B3=LAD_BANDS.slice(0,3),lad=t('lad'),band=B3.findIndex(([lo,hi])=>p>=lo&&p<hi),below=B3.findIndex(([,hi])=>hi<=p);
-  if(band>=0&&!bandFired(band))return tf('hv_band_wait',lad[band].t,$(LAD_BANDS[band][1]));
-  return band>=0?tf('hv_in',lad[band].t):below>=0?tf('hv_above',$(B3[below][1]),Math.round((1-B3[below][1]/p)*100)):t('hv_none')}
+  return band>=0?(bandFired(band)?tf('hv_in',lad[band].t):tf('hv_band_wait',lad[band].t,$(LAD_BANDS[band][1])))
+    :below>=0?tf('hv_above',$(B3[below][1]),Math.round((1-B3[below][1]/p)*100)):t('hv_none')}
 // Price-map y of the now marker, clamped to the drawn scale
 function pmClampY(y){return Math.min(PM.bot,Math.max(PM.top,y))}
 let lastC=null;
@@ -1231,7 +1228,7 @@ function renderAnalysis(){
     +'<div class="v-f"><div class="k">'+t('hv_trig')+'</div><div class="n">'+tf('hv_trig_v',met)+'</div></div>'
     +'<div class="v-f"><div class="k">'+t('hv_price')+'</div><div class="n">'+$(lastPr)+'</div><div class="s">'+tf('hv_dd',c.dd)+'</div></div>'
     +'<div class="v-f"><div class="k">'+t('hv_week')+'</div><div class="n">'+tf('hv_week_n',w)+'</div><div class="s">'+t('hv_week_v')+'</div></div>'
-    +'<div class="v-f"><div class="k">'+t('hv_prob')+'</div><div class="n">'+(LOW_IN_PCT==null?t('hv_prob_no'):'~'+LOW_IN_PCT+'%')+'</div><div class="s">'+t('hv_prob_v')+'</div></div>'
+    +'<div class="v-f"><div class="k">'+t('hv_prob')+'</div><div class="n">'+t('hv_prob_n')+'</div><div class="s">'+t('hv_prob_v')+'</div></div>'
     +'</div><div class="v-next"><div class="v-l">'+t('hv_next')+'</div><ul>'+next+'</ul></div>';
   renderPriceMap(c);
   document.getElementById('tgT').innerHTML=t('tg_t');
@@ -1243,7 +1240,7 @@ function renderAnalysis(){
   document.getElementById('ladT').innerHTML=t('lad_t')+asof;
   document.getElementById('ladTH').innerHTML=thr(t('lad_h'));
   document.getElementById('ladTB').innerHTML=lad.map((r,i)=>{const hit=lastPr>=LAD_BANDS[i][0]&&lastPr<LAD_BANDS[i][1];
-    return '<tr'+(hit?' class="hit"':'')+'><td><b>'+r.t+'</b>'+(hit?' '+t('lad_now'):'')+'</td><td class="num">'+r.b+'</td><td class="num rd">'+r.dd+'</td><td class="num">'+r.a+'</td><td>'+r.c+'</td></tr>'}).join('');
+    return '<tr'+(hit?' class="hit"':'')+'><td><b>'+r.t+'</b>'+(hit?' '+t('lad_now'):'')+'</td><td class="num">'+r.b+'</td><td class="num rd">'+r.dd+'</td><td class="num">'+LAD_ALLOC[i]+'%</td><td>'+r.c+'</td></tr>'}).join('');
   // checklist
   document.getElementById('bsT').innerHTML=t('bs_t')+asof+'<span class="asof">'+S.expert+'% '+tf('bs_ready',S.equal)+'</span>'+stale('onchain');
   document.getElementById('bsN').innerHTML=t('bs_n');

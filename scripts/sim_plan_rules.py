@@ -15,20 +15,13 @@ published ones, the leg-1 analog is the $70K / $57.8K ratio the trigger was set 
 running low is at least 50% under the ATH, and every premium form is reported. N is 2-4 cycles: read ranges and
 failure modes, not optima. Bitfinex USDT is not used (it carries its own premium: +0.06% mean, 0.61% max vs Coinbase).
 """
-import argparse, datetime as dt, json, math, os, sys, time, urllib.request
+import argparse, bisect, datetime as dt, json, math, os, sys, time
 
-UA = {'User-Agent': 'btc-cycles/1.0 (+https://github.com/ronoel/btc-cycles)'}
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from build_cycles import get, utcday  # noqa: E402 - shared HTTP retry policy and UTC day convention
+
 CYC = {'C0': ('2011-06-08', '2011-11-18'), 'C1': ('2013-12-04', '2015-01-14'),
        'C2': ('2017-12-17', '2018-12-15'), 'C3': ('2021-11-08', '2022-11-21'), 'C4': ('2025-10-06', None)}
-
-
-def get(url):
-    for i in range(3):
-        try:
-            return json.load(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60))
-        except Exception as e:  # noqa: BLE001 - retry any transport error
-            err = e; time.sleep(2)
-    raise err
 
 
 def cm_series(asset, metrics, start):
@@ -45,7 +38,7 @@ def cb_candles(prod, start):
         t2 = min(t + dt.timedelta(days=299), end)
         for c in get(f'https://api.exchange.coinbase.com/products/{prod}/candles?granularity=86400'
                      f'&start={t.isoformat()}&end={t2.isoformat()}'):
-            out[dt.datetime.fromtimestamp(c[0], dt.UTC).date().isoformat()] = c[4]
+            out[utcday(c[0]).isoformat()] = c[4]
         t = t2 + dt.timedelta(days=1); time.sleep(0.25)
     return out
 
@@ -65,7 +58,7 @@ def fetch(D):
             k += r
             if len(r) < 1000: break
             st = r[-1][0] + 86400000
-        return {dt.datetime.fromtimestamp(x[0] / 1000, dt.UTC).date().isoformat(): [float(x[3]), float(x[4])]
+        return {utcday(x[0] // 1000).isoformat(): [float(x[3]), float(x[4])]
                 for x in k if x[6] < time.time() * 1000}          # completed candles only
     bn = once('bn.json', binance)
     cb = once('cb.json', lambda: cb_candles('BTC-USD', '2017-08-17'))
@@ -73,7 +66,7 @@ def fetch(D):
     cmu = once('cmusdt.json', lambda: {x['time'][:10]: float(x['PriceUSD'])
                                        for x in cm_series('usdt', 'PriceUSD', '2017-06-01')})
     def farside():
-        sys.path.insert(0, os.path.dirname(__file__)); import build_data as b
+        import build_data as b
         p = b.get(b.FARSIDE); p = p.decode() if isinstance(p, bytes) else p
         return [list(x) for x in b.parse_farside(p)]
     etf = once('etf.json', farside)
@@ -92,11 +85,19 @@ def onchain(cm):
         sd = math.sqrt(max(s2 / n - (s / n) ** 2, 1e-9))
         iss = float(r.get('IssTotUSD') or 'nan')
         m[r['time'][:10]] = {'px': px, 'nupl': 1 - 1 / mv, 'mvrvz': (mc - mc / mv) / sd, 'rp': px / mv, 'iss': iss}
-    ds = sorted(m)
+    ds, tot, cnt = sorted(m), 0.0, 0          # rolling 365-day sum / count of non-NaN issuance
     for i, d in enumerate(ds):
-        w = [m[x]['iss'] for x in ds[max(0, i - 364):i + 1] if not math.isnan(m[x]['iss'])]
-        m[d]['puell'] = m[d]['iss'] / (sum(w) / len(w)) if len(w) >= 300 and not math.isnan(m[d]['iss']) else None
+        if not math.isnan(m[d]['iss']): tot += m[d]['iss']; cnt += 1
+        if i >= 365 and not math.isnan(m[ds[i - 365]]['iss']): tot -= m[ds[i - 365]]['iss']; cnt -= 1
+        m[d]['puell'] = m[d]['iss'] / (tot / cnt) if cnt >= 300 and not math.isnan(m[d]['iss']) else None
     return m
+
+
+def mean365(m, ds):
+    """{day: mean price of the 365 days ending that day}, from a prefix sum."""
+    pre = [0.0]
+    for d in ds: pre.append(pre[-1] + m[d]['px'])
+    return {d: (pre[i + 1] - pre[max(0, i - 364)]) / min(365, i + 1) for i, d in enumerate(ds)}
 
 
 def days_between(a, b):
@@ -119,9 +120,8 @@ def report_core(m):
             print(f'   {lab:22s} ' + (f'{d} {m[d]["px"]:>9,.0f} {(m[d]["px"] / lowp - 1) * 100:+6.1f}% vs low, '
                                       f'{days_between(d, lowd):4d}d before, dd {(m[d]["px"] / athp - 1) * 100:.0f}%'
                                       if d else 'never'))
-    last = ds[-1]; mp = sum(m[x]['px'] for x in ds[-365:]) / 365
-    r = [m[d]['puell'] / (m[d]['px'] / (sum(m[x]['px'] for x in ds[i - 364:i + 1]) / 365))
-         for i, d in enumerate(ds) if d >= '2025-05-01' and m[d]['puell']]
+    mm = mean365(m, ds); last = ds[-1]; mp = mm[last]
+    r = [m[d]['puell'] / (m[d]['px'] / mm[d]) for d in ds if d >= '2025-05-01' and m[d]['puell']]
     r.sort(); q = lambda f: r[int(f * (len(r) - 1))]
     print(f'Puell / (price/365d mean) since 2025-05 (block-count noise): p5 {q(.05):.2f} p50 {q(.5):.2f} p95 {q(.95):.2f}'
           f' min {r[0]:.2f} max {r[-1]:.2f} -> a single daily Puell < 0.5 needs price < 0.5/ratio x mean')
@@ -142,8 +142,10 @@ def premium(bn, cb, cbu, cmu):
     return ds, {d: (cb[d] / bn[d][1] - 1) * 100 for d in ds}, {d: (cb[d] / (bn[d][1] * u(d)) - 1) * 100 for d in ds}
 
 
-def report_leg2(bn, cb, cbu, cmu, etf):
-    ds, raw, adj = premium(bn, cb, cbu, cmu)
+def report_leg2(bn, prem, etf):
+    ds, raw, adj = prem
+    bnd = sorted(bn); etf = sorted(etf); etd = [d for d, v in etf]; etp = [0.0]
+    for d, v in etf: etp.append(etp[-1] + v)
     forms = {'F0 no leg 2': lambda s, r, a: True, 'F1 raw Sunday': lambda s, r, a: raw[s] > 0,
              'F2 adj Sunday': lambda s, r, a: adj[s] > 0, 'F3 raw week mean': lambda s, r, a: sum(r) / len(r) > 0,
              'F4 adj week mean': lambda s, r, a: sum(a) / len(a) > 0, 'F5 any raw +': lambda s, r, a: max(r) > 0,
@@ -153,17 +155,20 @@ def report_leg2(bn, cb, cbu, cmu, etf):
           '\n   FALSE = a lower low printed later in the cycle.')
     fires = {}
     for c, ath, end in [('C2', '2017-12-17', '2019-12-15'), ('C3', '2021-11-08', '2023-11-21'), ('C4', '2025-10-06', ds[-1])]:
-        lo = athp = 0; lo = 1e18
-        for s in [d for d in suns if ath <= d <= end]:
-            lo = min(lo, min(v[0] for d, v in bn.items() if ath <= d <= s)); athp = max(bn[d][1] for d in bn if ath <= d <= s)
-            if lo > 0.5 * athp or bn[s][1] < 1.21 * lo: continue
+        days = [d for d in bnd if ath <= d <= end]
+        later = {}; mn = math.inf                     # min daily low strictly after each day, to the cycle end
+        for d in reversed(days): later[d] = mn; mn = min(mn, bn[d][0])
+        lo, athp, sunset = math.inf, 0.0, set(suns)
+        for s in days:
+            lo = min(lo, bn[s][0]); athp = max(athp, bn[s][1])
+            if s not in sunset or lo > 0.5 * athp or bn[s][1] < 1.21 * lo: continue
             wk = [x for x in ((dt.date.fromisoformat(s) - dt.timedelta(days=i)).isoformat() for i in range(6, -1, -1)) if x in raw]
             r, a = [raw[x] for x in wk], [adj[x] for x in wk]
             ok = {k: f(s, r, a) for k, f in forms.items()}
             if c == 'C4':
-                e = sum(v for d, v in [x for x in etf if x[0] <= s][-20:])      # the arbiter: 20 sessions
+                j = bisect.bisect_right(etd, s); e = etp[j] - etp[max(0, j - 20)]   # the arbiter: 20 sessions
                 ok = {k: v and e >= 1500 for k, v in ok.items()}
-            false = min(v[0] for d, v in bn.items() if s < d <= end) < lo if any(s < d <= end for d in bn) else False
+            false = later[s] < lo
             fires.setdefault(c, []).append((s, bn[s][1], false, ok))
         for k in forms:
             f_ = [(s, round(p)) for s, p, fa, ok in fires.get(c, []) if ok[k] and fa]
@@ -183,8 +188,8 @@ def report_leg2(bn, cb, cbu, cmu, etf):
             print(f'   {c} {e[0][0]} {"FALSE" if e[0][2] else "true "} lump {e[0][1]:>9,.0f}  staged {stg:>9,.0f} ({(stg / e[0][1] - 1) * 100:+.1f}%)')
 
 
-def report_extras(m, bn, cb, cbu, cmu):
-    ds, raw, adj = premium(bn, cb, cbu, cmu)
+def report_extras(m, bn, prem, cbu, cmu):
+    ds, raw, adj = prem
     k = [d for d in cbu if d in cmu]; dd = sorted((cmu[d] - cbu[d]) * 100 for d in k)
     print(f'\n== USDT source check: CoinMetrics - Coinbase USDT-USD, n {len(k)}, mean {sum(dd) / len(dd):+.3f}% '
           f'max|d| {max(map(abs, dd)):.3f}%')
@@ -207,8 +212,9 @@ def report_extras(m, bn, cb, cbu, cmu):
                   f'({(bn[first][1] / bn[low][0] - 1) * 100 if first else 0:+.0f}% vs low) | on {len(on) / max(1, len(idx)):.0%} of NUPL<0 days')
     print('   C4 last 30 days on: ' + ' '.join(f'{kk[:2]} {sum(f(i) for i in range(len(ds) - 30, len(ds))) / 30:.0%}' for kk, f in fam.items()))
     print('== Weekly close vs first daily close under each band top (closes, not intraday touches; all deep cycles):')
+    dsm = sorted(m)
     for c in ('C1', 'C2', 'C3'):
-        ath, low = CYC[c]; athp = m[ath]['px']; dsm = sorted(m)
+        ath, low = CYC[c]; athp = m[ath]['px']
         for lv in (0.45, 0.40, 0.35):
             d1 = next(d for d in dsm if d >= ath and m[d]['px'] <= athp * lv)
             w1 = next(d for d in dsm if d >= ath and dt.date.fromisoformat(d).weekday() == 6 and m[d]['px'] <= athp * lv)
@@ -229,7 +235,6 @@ def report_extras(m, bn, cb, cbu, cmu):
 
 
 def report_cap(m):
-    ds = sorted(m)
     add = lambda d, n: (dt.date.fromisoformat(d) + dt.timedelta(days=n)).isoformat()
     print('\n== CAPITULATION RELEASE: price / cycle low after the low (cost of waiting)')
     mult = {}
@@ -256,4 +261,5 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('--cache', required=True); a = ap.parse_args()
     cm, bn, cb, cbu, cmu, etf = fetch(a.cache)
     m = onchain(cm)
-    report_core(m); report_leg2(bn, cb, cbu, cmu, etf); report_extras(m, bn, cb, cbu, cmu); report_cap(m)
+    prem = premium(bn, cb, cbu, cmu)
+    report_core(m); report_leg2(bn, prem, etf); report_extras(m, bn, prem, cbu, cmu); report_cap(m)

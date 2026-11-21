@@ -23,6 +23,61 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-21 (plan rules by the numbers) — Core gate cannot open inside its band (Puell 0.5 ≈ $37.8K); no leg-2 form separates bear rallies from recoveries; time-staging does not change cost; capitulation release at week 70 — recommendations, nothing changed
+
+Owner asked to decide the open items on numbers and to say what can be simulated and on which data. **Analysis only:
+no rule, band, allocation or text changed** — the decisions below are recommendations pending the owner's OK.
+Reproduce: `python3 scripts/sim_plan_rules.py --cache DIR` (fetches into DIR, not the repo). Definitions fixed before
+outcomes; published thresholds only; N = 2–4 cycles.
+
+**Data and what is testable.**
+
+| Question | Data | N | Testable? |
+|---|---|---|---|
+| Core gate | CoinMetrics community (MVRV, market cap, issuance, price; 2010–), cross-checked vs the page's provider: NUPL, MVRV-Z, Realized Price identical to 3 decimals on six dates 2022–26; Puell within 0.03 | C0–C3 (4 bottoms) | yes, except "premium turning up" (2 bottoms) |
+| Leg-2 form | Coinbase BTC-USD vs Binance BTCUSDT daily closes (2017–); USDT-USD Coinbase (2021–) / CoinMetrics (2017–; vs Coinbase sd 0.014%) — Bitfinex rejected (+0.06% mean, 0.61% max own premium) | C2, C3, C4 | leg 2 yes; the whole trigger only in C4 (ETF leg from 2024) |
+| Staging | same | 11 fire episodes | yes |
+| Capitulation release | measured post-low recoveries C1–C3; Polymarket rungs as scenario weights | 3 | regret table only — no shallow cycle exists to backtest |
+
+**1. Core gate.** NUPL < 0 and MVRV-Z < 0 are one condition (price < Realized Price, $53,262 Nov 20) and hold
+automatically inside $44–50K. Within an epoch Puell ≈ price / 365-day mean price (0.794 vs 0.779 on Nov 20), so
+**Puell < 0.5 ≈ price < $37,758** today (0.47–0.53: $35.5–40.0K), drifting to ~$34–35K over 8–13 weeks at flat price —
+**below the capitulation band, let alone the core band.** History agrees: NUPL<0 & Puell<0.5 first held at drawdowns of
+−86% (C0), −71% (C1), −75% (C2), −67% (C3), never inside −60…−65%; it opened 26–149 days before the low at +42…+90%
+over it, while price-only entry at −60% came 107–313 days before at +70…+341%. "Premium turning up" (P1 7d-mean
+adjusted > 0; P2 7d mean above its 28d mean and rising; P3 7d-mean raw > 0) held on 39–81% of the below-RP days before
+the C2/C3 lows — no timing content (C3: opened the day NUPL went negative; C2: P1 a week later, +22% vs +51% over the
+low); P2 is on 50% of the last 30 days now. **Recommendation:** core confirmation = a weekly close below $50K (same
+convention as the probe), with price then under the Realized Price by construction; drop Puell < 0.5 and "premium
+turning up" from the gate. As written, the 45% would buy only under ~$38K. Weekly-close vs daily-touch slippage at the
+−55/−60/−65% levels in C1–C3: the weekly close came 0.2–13.3% *below* the level, never above, and no level was touched
+without a later weekly close under it (9 of 9).
+
+**2. Leg 2.** Leg-1 analog: weekly close ≥ 1.21 × running low once the low is ≥ 50% under the ATH (C4 also with ETF
+d20 ≥ +1.5B). False = a lower low printed later. Every form fires falsely in every cycle: C2 false/true F0 21/43, F1
+raw Sunday 11/28, F2 adjusted Sunday 13/24, F4 adjusted weekly mean 12/30; C3 12/45, 12/36, 9/29, 9/43; C4 (true 0
+so far) F1 3 (Mar 15 – Apr 26, 2026, from $72.8K, before the trigger existed), F2 3 (from **Aug 23, $77,734 — now a
+realized false positive**), F4 5. All forms catch the true recoveries within a week (2018-12-23 $3,930; 2023-01-15
+$20,872). Per cycle: ~2 false episodes before the true one. **Recommendation: keep raw Sunday (no change)** — no form
+discriminates, and switching to adjusted would have deployed at $77.7K.
+
+**3. Staging.** First fire of each F1 episode, lump vs four weekly quarters: −5.3…+22.6% (false), −3.3…+8.1%
+(true); no systematic sign. The false-fire damage (to the final low: −61% C2 Feb 2018, −63% C3 Feb 2022, −23% C4
+Mar 2026 so far) comes from the fire itself, which time-staging does not avoid. **Recommendation: keep single
+deployment.**
+
+**4. Capitulation release.** Post-low multiples: +4w ×1.04–1.25, +8w ×1.14–1.69, +13w ×1.25–1.57, +26w ×1.63–2.78,
++52w ×2.22–2.46. Value of the 35% tranche 52w after the low (×2.38 median; cash ×1.04), weights from Polymarket
+touch-by-Dec-31 buckets: R0 status quo EV ×1.27 (cash in the 79% of weight above $45K); R1 merged into core ×1.60; **R2
+cap band, else release at week 70: ×1.64–1.95** (week-70 price taken as +13w multiple, low ~week 58). **Recommendation
+R2:** if unfilled at the week-70 Monday check (**Feb 8, 2027**) and no new cycle low in the prior 8 weeks, deploy at
+market; if lows are still printing, falsifier #3 governs instead. Caveats: three recoveries; weights are short-horizon
+touch odds, not fill odds; a later low shortens the wait and helps R2.
+
+**Surfaced, not decided:** leg 1's $70K was 1.21 × the old low ($67.5K at today's $55,801) — re-anchoring at each new
+low moves the goalposts and the test above shows no level that separates rallies; keep $70K. `tg_lead` and §3 say
+"65%": if the probe fills Monday, the trigger deploys the core only (45%).
+
 ## 2026-11-21 (owner decisions) — Probe gate pinned to a weekly close under $57K before any such close; post-week-60 rule; no replacement probability
 
 Owner: "vamos seguir com as recomendações" — accepting the Nov 21 interim check's recommendation. **Recorded ~04:10 UTC

@@ -120,6 +120,17 @@ def report_core(m):
                                       f'{days_between(d, lowd):4d}d before, dd {(m[d]["px"] / athp - 1) * 100:.0f}%'
                                       if d else 'never'))
     last = ds[-1]; mp = sum(m[x]['px'] for x in ds[-365:]) / 365
+    r = [m[d]['puell'] / (m[d]['px'] / (sum(m[x]['px'] for x in ds[i - 364:i + 1]) / 365))
+         for i, d in enumerate(ds) if d >= '2025-05-01' and m[d]['puell']]
+    r.sort(); q = lambda f: r[int(f * (len(r) - 1))]
+    print(f'Puell / (price/365d mean) since 2025-05 (block-count noise): p5 {q(.05):.2f} p50 {q(.5):.2f} p95 {q(.95):.2f}'
+          f' min {r[0]:.2f} max {r[-1]:.2f} -> a single daily Puell < 0.5 needs price < 0.5/ratio x mean')
+    for P in (56000, 48000):
+        px = [m[x]['px'] for x in ds[-365:]]; out = []
+        for w in range(27):
+            if w: px = px[7:] + [P] * 7
+            if w in (0, 4, 8, 13, 26): out.append(f'+{w}w ${0.5 * sum(px) / 365:,.0f}')
+        print(f'   Puell-0.5 price (median ratio) if price holds at ${P:,}: ' + ' '.join(out))
     print(f'Today ({last}): Puell {m[last]["puell"]:.3f} ~ price/365d mean {m[last]["px"] / mp:.3f}; '
           f'Puell 0.5 at ~${0.5 * mp:,.0f} (0.47-0.53: ${0.47 * mp:,.0f}-{0.53 * mp:,.0f}); '
           f'Realized Price ${m[last]["rp"]:,.0f}')
@@ -150,7 +161,7 @@ def report_leg2(bn, cb, cbu, cmu, etf):
             r, a = [raw[x] for x in wk], [adj[x] for x in wk]
             ok = {k: f(s, r, a) for k, f in forms.items()}
             if c == 'C4':
-                e = sum(v for d, v in etf if d <= s and d >= (dt.date.fromisoformat(s) - dt.timedelta(days=28)).isoformat())
+                e = sum(v for d, v in [x for x in etf if x[0] <= s][-20:])      # the arbiter: 20 sessions
                 ok = {k: v and e >= 1500 for k, v in ok.items()}
             false = min(v[0] for d, v in bn.items() if s < d <= end) < lo if any(s < d <= end for d in bn) else False
             fires.setdefault(c, []).append((s, bn[s][1], false, ok))
@@ -170,6 +181,51 @@ def report_leg2(bn, cb, cbu, cmu, etf):
             i = suns.index(e[0][0]); nxt = [suns[i + k] for k in range(4) if i + k < len(suns)]
             stg = sum(bn[d][1] for d in nxt) / len(nxt)
             print(f'   {c} {e[0][0]} {"FALSE" if e[0][2] else "true "} lump {e[0][1]:>9,.0f}  staged {stg:>9,.0f} ({(stg / e[0][1] - 1) * 100:+.1f}%)')
+
+
+def report_extras(m, bn, cb, cbu, cmu):
+    ds, raw, adj = premium(bn, cb, cbu, cmu)
+    k = [d for d in cbu if d in cmu]; dd = sorted((cmu[d] - cbu[d]) * 100 for d in k)
+    print(f'\n== USDT source check: CoinMetrics - Coinbase USDT-USD, n {len(k)}, mean {sum(dd) / len(dd):+.3f}% '
+          f'max|d| {max(map(abs, dd)):.3f}%')
+    sun = [d for d in ds if dt.date.fromisoformat(d).weekday() == 6 and d in cbu]
+    for lab, f in [('USDT < 0.999', lambda d: cbu[d] < 0.999), ('USDT >= 0.999', lambda d: cbu[d] >= 0.999)]:
+        x = [d for d in sun if f(d)]
+        print(f'   Sundays {lab}: n {len(x)}, raw > 0 {sum(raw[d] > 0 for d in x) / max(1, len(x)):.0%}, '
+              f'adjusted > 0 {sum(adj[d] > 0 for d in x) / max(1, len(x)):.0%}')
+    ma = lambda sr, i, n: sum(sr[x] for x in ds[max(0, i - n + 1):i + 1]) / min(n, i + 1)
+    fam = {'P1 7d adj > 0': lambda i: ma(adj, i, 7) > 0,
+           'P2 7d adj > 28d & rising': lambda i: ma(adj, i, 7) > ma(adj, i, 28) and ma(adj, i, 7) > ma(adj, i - 7, 7),
+           'P3 7d raw > 0': lambda i: ma(raw, i, 7) > 0}
+    print('== "Premium turning up" family (fixed before looking), with NUPL < 0:')
+    for c in ('C2', 'C3'):
+        ath, low = CYC[c]; idx = [i for i, d in enumerate(ds) if ath <= d <= low and i > 35 and m[d]['nupl'] < 0]
+        for kk, f in fam.items():
+            on = [i for i in idx if f(i)]
+            first = ds[on[0]] if on else None
+            print(f'   {c} {kk:26s} first {first} {bn[first][1] if first else 0:>9,.0f} '
+                  f'({(bn[first][1] / bn[low][0] - 1) * 100 if first else 0:+.0f}% vs low) | on {len(on) / max(1, len(idx)):.0%} of NUPL<0 days')
+    print('   C4 last 30 days on: ' + ' '.join(f'{kk[:2]} {sum(f(i) for i in range(len(ds) - 30, len(ds))) / 30:.0%}' for kk, f in fam.items()))
+    print('== Weekly close vs first daily close under each band top (closes, not intraday touches; all deep cycles):')
+    for c in ('C1', 'C2', 'C3'):
+        ath, low = CYC[c]; athp = m[ath]['px']; dsm = sorted(m)
+        for lv in (0.45, 0.40, 0.35):
+            d1 = next(d for d in dsm if d >= ath and m[d]['px'] <= athp * lv)
+            w1 = next(d for d in dsm if d >= ath and dt.date.fromisoformat(d).weekday() == 6 and m[d]['px'] <= athp * lv)
+            print(f'   {c} -{int((1 - lv) * 100)}%: daily {d1} | weekly {w1} {(m[w1]["px"] / (athp * lv) - 1) * 100:+.1f}% vs level')
+    print('== Interim lows that later broke: weeks each running low stood (daily lows, Binance; CoinMetrics before 2017)')
+    for c in ('C1', 'C2', 'C3', 'C4'):
+        ath, low = CYC[c]; end = low or max(bn)
+        src = {d: v[0] for d, v in bn.items()} if ath >= '2017-08-17' else {d: m[d]['px'] for d in m}
+        seq = sorted(d for d in src if ath <= d <= end); recs, lo = [], 1e18
+        for d in seq:
+            if src[d] < lo * 0.97 or not recs:      # a new low at least 3% under the standing one
+                if recs: recs[-1].append(d)
+                recs.append([d, src[d]]); lo = src[d]
+            elif src[d] < lo: lo = src[d]; recs[-1][1] = lo
+        stood = [(r[0], round(r[1]), days_between(r[0], r[2]) / 7) for r in recs if len(r) == 3]
+        top = sorted(stood, key=lambda x: -x[2])[:3]
+        print(f'   {c}: longest-standing lows that broke: ' + '; '.join(f'{d} ${p:,} stood {w:.0f}w' for d, p, w in top))
 
 
 def report_cap(m):
@@ -200,4 +256,4 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('--cache', required=True); a = ap.parse_args()
     cm, bn, cb, cbu, cmu, etf = fetch(a.cache)
     m = onchain(cm)
-    report_core(m); report_leg2(bn, cb, cbu, cmu, etf); report_cap(m)
+    report_core(m); report_leg2(bn, cb, cbu, cmu, etf); report_extras(m, bn, cb, cbu, cmu); report_cap(m)

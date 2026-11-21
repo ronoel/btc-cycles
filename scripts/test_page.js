@@ -23,7 +23,7 @@ for (; ; k++) { if (js[k] === '{') d++; else if (js[k] === '}' && --d === 0) bre
 const ctx = { console };
 vm.createContext(ctx);
 vm.runInContext('var ' + js.slice(li + 6, k + 1) + ';var lang="en";var dailyK=[];var etfData=null;', ctx);
-const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose', 'CBP_LAST', 'cbpStreak'];
+const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose', 'CBP_LAST', 'cbpStreak', 'ATH', 'CYCLE_LOW', 'cycleLow'];
 let missing = [];
 for (const n of need) { try { vm.runInContext(grab(n).replace(/^(const|let) /, 'var '), ctx) } catch (e) { missing.push(n) } }
 
@@ -68,6 +68,17 @@ ok(run('cbpStreak({d:"2026-11-08",from:"2026-09-05"})') === 65, 'premium run Sep
 ok(run('cbpStreak({d:"2026-11-11",from:"2026-09-05"})') === 68, 'premium run Sep 5–Nov 11 is 68 closes');
 ok(run('cbpStreak({d:"2026-11-15",from:"2026-09-05"})') === 72, 'premium run Sep 5–Nov 15 is 72 closes');
 ok(run('cbpStreak(CBP_LAST)') === 72, 'the shipped CBP_LAST (Nov 15) renders a run of 72');
+
+// The price map's cycle low is the lowest daily LOW since the ATH, live from dailyK, not a typed constant: the
+// constant read "Cycle low, Jul 1" at $57,800 after Binance printed $57,778 on Nov 20, 2026 (interim check, Nov 21).
+// A lower low from before the ATH must not count.
+run('dailyK=' + JSON.stringify([{ ts: Date.UTC(2024, 1, 1), close: 43000, low: 42000 },
+  { ts: Date.UTC(2026, 10, 21), close: 56986, low: 56584.07 }, { ts: Date.UTC(2026, 10, 22), close: 57500, low: 57100 }]));
+let cl = run('cycleLow()');
+ok(cl.p === 56584.07 && cl.ts === Date.UTC(2026, 10, 21), 'cycle low tracks a new post-ATH daily low: ' + JSON.stringify(cl));
+run('dailyK=[]');
+cl = run('cycleLow()');
+ok(cl.p === run('CYCLE_LOW.p') && cl.ts === Date.parse(run('CYCLE_LOW.d')), 'cycle low falls back to the seed without candles');
 
 console.log(fail ? fail + ' failed, ' + pass + ' passed' : 'OK ' + pass + ' passed');
 process.exit(fail ? 1 : 0);

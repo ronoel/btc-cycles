@@ -23,6 +23,100 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-21 (interim check) — The Jul 1 low broke: daily low $57,778.35 on Nov 20, $56,584 on Nov 21 (in progress); "low already in" resolved NO and voided, no replacement number; probe band entered intraday, no completed close under $57K; price map's cycle low made live
+
+Owner asked to update, review the analysis and give the recommendation. **Interim check, not a pass:** `an_asof` stays
+Nov 18, `ev_asof` Nov 10; `CBP_LAST`, `tg_last`, `fal[5]` untouched (Nov 23 adjudication). **No band, allocation,
+weight, threshold, trigger or `st` changed.** Reads Nov 21, ~03:45–04:10 UTC (Nov 21 00:45–01:10 in Brazil). The Nov 21
+daily and the Nov 16–22 weekly candles are in progress; figures from them are marked. One sonnet subagent (press).
+Disclosure as before: the assistant is built by Anthropic; the IPO rows rest on EDGAR and measured paths.
+
+**Tape (Binance BTCUSDT daily):** Nov 19 close 61,986.73 (low 61,428.26); **Nov 20 close 58,951.51, low 57,778.35** —
+$21.84 under the Jul 1 low of 57,800.19, on one completed candle. **The cycle's lowest close is unbroken:** Jun 30
+58,624.71 (Binance, re-read from the ATH) is below Nov 20's 58,951.51 — the break so far is intraday.
+Nov 21 in progress: low **56,584.07**, ~56.6–57.0K at the read (−55% from the ATH). Week 58.6 after the ATH (past bottoms:
+weeks 52–59; window ends Nov 30). Press (CoinGlass via Coin Edition): $1.90B crypto liquidations in 24h, longs $1.73B,
+BTC $735.8M; another outlet ~$1.49B. Binance OI 95,615 BTC (92,007 Nov 18).
+
+**Resolution of the counter-scenario.** "Is the low already in at $57.8K?" resolved **NO** on Nov 20 — the same
+criterion the Nov 12 forecast pre-registered for its scenario 2 (any daily low < 57,800.19). Voided as a fact
+correction, not a re-score: `LOW_IN_PCT` → `null`, the verdict renders "No" (`hv_prob_no`, new key, en/pt/es) and
+`hv_prob_v` states the resolution and the market rungs. **No replacement probability published:** a number for "is the
+new low in" at a low still moving has no rule; that is the owner's call. **Nov 12 forecast:** scenario-2 condition met,
+recorded only — not scored, not edited (Dec 16 / Jan 1).
+
+**Probe band (`lad[0]`, $52–57K, 20%):** spot under $57,000 intraday on Nov 21; **zero completed daily closes under
+$57K** (Nov 20 closed 58,951.51). `lad[0].c` gates the tranche on "a sustained close below $57K"; `verdictAction` is
+price-only and now renders "Price is inside the Probe zone: this tranche buys now" whenever spot < $57,000 — gap (2) of
+the Nov 18 plan review, now live. Not resolved here: "sustained" is not defined in a pass with price on the line. Next
+discriminating prints: the Nov 21 daily close and the Nov 22 weekly close.
+
+**Leg 2 inputs (Coinbase BTC-USD vs Binance BTCUSDT daily closes; USDT-USD close):** Nov 19 −0.1186% raw / −0.0026%
+adjusted (USDT 0.99884); **Nov 20 −0.2316% raw / +0.0044% adjusted, USDT 0.99764** — the widest USDT discount in this
+log's reads; the raw gap is the USDT discount again. Run: 77 negative raw closes, Sep 5–Nov 20. A first read of the
+Nov 21 in-progress candle (−0.48% raw) mixed fetch times and is **discarded**; a simultaneous tick at 03:53 UTC read
+−0.175% raw / −0.003% adjusted (tick, not a close).
+
+**ETF (Farside via `parse_farside`):** Nov 18 **−306.5**, Nov 19 **−582.3** (IBIT −148.7 / −541.1, TFTC) — the largest
+outflow since Oct 30 (−643.2). Nov 5–19: ten outflow sessions in eleven, −$3,028.2M. `etf.d20` −3.81 (`etf.d` Nov 19).
+**Nov 23 window:** Oct 26–Nov 19 = −3,670.2 over 19 sessions → leg 3 needs ≈ **+$5.17B on Nov 20 alone** — a miss.
+**IPO-drain test (running; scores Nov 25):** leg 1 Nov 10–19 = **−$1,985.1M** (bar ≤ −$1.0B); leg 2 Nov 9 → Nov 20
+closes BTC −21.78% (75,368.41 → 58,951.51), NDX −10.31% (27,907.63 → 25,028.98, Yahoo via subagent) = **11.5 points**
+(bar ≥ 10). Leg 3 on the Oct 29 wording at scoring. Confound now explicit: Nov 20 was a broad rout (below).
+
+**Anthropic (P: EDGAR submissions JSON, read directly 04:00 UTC):** **424B4 0001628280-26-074944 accepted Nov 19 11:05:50
+UTC**; FWP (pricing) 02:33, EFFECT 05:15. Text read by the subagent only: 980,000,000 shares (956,351,354 company,
+23,648,646 holders), **$83.00**, Nasdaq "ANT". The page now says "priced". Trading (Yahoo via subagent): Nov 19 open
+111.50, close **97.17** (+17.1%); Nov 20 close **88.91** (+7.1% vs $83). **SpaceX analog (day 0 = S-1 close 80,150.56):**
+day 24 (Nov 19) −22.7%, **day 25 (Nov 20) −26.4%** — past SpaceX's full depth (lowest close −24.4% on day +18 after its
+debut; intraday −25.5%), ~17 days earlier than the mapped ~Dec 7 (~$60.6K). Scenario overshot early; outcome written in
+the `mac` events landed tail, `EVENTS` text not used for outcomes. Attribution still disputed in press (Strive's CEO:
+investors sell BTC to fund IPOs; others: deleveraging, rates, tech) — no flow data found.
+
+**Macro / equities (subagent; Yahoo chart API unless noted):** Nov 20 NDX 25,028.98 (−5.6%), S&P 6,910.39 (−3.7%),
+Nasdaq-100 in a bear market intraday (CNBC); Nvidia 125.53 (−14.0%) after a Reuters report of an SEC look at its
+accounting (press). 10y 5.066 / 5.052 / **4.912** (Nov 18/19/20); DXY ~103.9 flat. Fed: Waller (Nov 18, via Yahoo/CNBC)
+"you have to go 50 in December" absent a clear January signal; Cook (Nov 20) policy "isn't restrictive enough"; Dec 25bp
+89.6% (Coin Edition) vs "nearly 95%" (summary) — sources disagree. UMich final Nov 51.5; 1y expectations 3.7%. Flash
+PMIs Nov 23.
+
+**Strategy:** no 8-K since Nov 16 (EDGAR via subagent); MSTR 96.50 → 77.80 (Nov 17 → 20). Spot ~25% under its $75,452
+average. No sale or dividend change found; **mNAV not measured** (last snapshot 1.08–1.09 on Nov 10 at MSTR $121.07 — a
+§3 criterion is mNAV holding below 1, so re-read it Monday).
+
+**Polymarket (Gamma, direct, ~03:50 UTC Nov 21, open contracts only, by year-end):** ↓$55K **76.5**, ↓$50K **49.4**, ↓$45K
+21.0, ↓$40K 12.05, ↓$35K 7.85; ↑$90K 3.3. ↓$60K is no longer open, so the "no-new-low" formula has no inputs and is
+**retired**, not recomputed; `cvp[3]` now leads with the $50K rung.
+
+**Valuation rows (LIVE, not edited):** on-chain series still end Nov 13 (spot then ~$68K), except the STH cost basis
+(Nov 19, 73,615): the page computes STH-MVRV as spot over it, ≈ **0.77** at ~$57K, and renders the row ACTIVE. Price
+vs Realized Price (53,750, Nov 13): ~6% above; NUPL/MVRV-Z < 0 need roughly a move under ~$53.7K — co-located with the
+core band's gate.
+
+**Standing reads:** LTH **16,136,832 (Nov 20)**, new low, −82K since Nov 16 (BGeometrics, one request). Funding Binance
+USDT-M last −0.0061 / 7d +0.0027 %/8h (5 negative of 21); other venues not read. Retarget ~Nov 27 00:40 UTC est. **+9.3%**
+(mempool.space) — hashrate still rising, no miner capitulation. `3GPnJf…` 204 tx / 11,566.66 / balance 0 — unchanged;
+`bc1qazcm…`, `bc1qa5wk…`, hash 30d/60d and the 19 wallets not read.
+
+**Code (bug fix + regression test):** the price map drew `CYCLE_LOW` (typed 57,800.19, "Cycle low, Jul 1") after the low
+broke. Now `cycleLow()` = lowest daily *low* since the ATH from `dailyK` (klines now carry `low`), seeded by
+`CYCLE_LOW={p:57778.35,d:'2026-11-20'}` as the offline fallback; `pm_low` takes the date (`{0}`, `fD`). Test in
+`scripts/test_page.js` (post-ATH low tracked, pre-ATH low ignored, fallback) — fails on the old page ("missing
+functions: cycleLow"). Also removed the typed "deepest point so far is −54% (Jul 1)" from the drawdown tooltip (en/pt/es):
+the row computes it live.
+
+**Edited (en/pt/es):** `hv_prob_v`, `hv_prob_no` (new), `pm_low`, `cvp[3]` v + d, `ev` `anthropic` (title and text) /
+`ant_leg2` ("Jul 1 low"), `mac` Fed / Rates / ETF / Events / Stocks `r`, `bs` `dd` tip. `MAINTENANCE.md`: §2 Verdict-lines row and §2b
+marker note (`LOW_IN_PCT` may be `null`; `cycleLow()`), changelog row, footer, carry line. **Checked:** `node
+scripts/test_page.js` 22 passed (and fails on the old page); parity 134/134, `EVENTS` all with text; digit tokens EN = PT =
+ES on edited keys (hv_prob_v same digits, word order); render (headless Chrome, en/pt-BR/es; console counted on en only: 0 lines): Too early
+· 1 of 4 families lit · 4 of 15 active (STH-MVRV, SOPR, 200-week, drawdown −55.1%) · 5 partial — spot-driven at
+$56,729: the drawdown row flips at $56,833 (−55%) and the verdict line at $57,000; "Price is inside the
+Probe zone: this tranche buys now"; trigger 0 of 3; $56,729; "Is the low already in at $57.8K? No"; price map "Cycle low,
+Nov 21". **Not checked:** the verdict with spot just over $57,000 rendered (covered by `test_page.js` at 60,000 only).
+**Not done:** `trig`/`bs cbp` premium text (Nov 18 figures, dated), Geopolitics, Liquidity, Recession, Trade, `resv`,
+Strategy row, `og-card.html`.
+
 ## 2026-11-19 (interim check) — Anthropic priced above its range (press; no final prospectus yet); BTC's Nov 18 close is the low close of the analog's first leg; market no-new-low ~54 → ~43%; 50% not re-scored
 
 Owner asked to pull and update, ~22 hours after the Nov 18 pass. **Interim check, not a pass:** `an_asof` stays Nov 18,

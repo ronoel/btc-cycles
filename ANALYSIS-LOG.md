@@ -23,6 +23,19 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-21 (owner decisions, 2) — Numbers review adopted: core and capitulation gated on a weekly close; trigger unchanged; no capitulation release
+
+Owner: "sim para tudo que mediu, pode seguir com suas recomendações". Recorded ~04:35 UTC Nov 21 (spot ~$55.7K; no
+weekly close under $57K yet). **Adopted:** core buys at the first completed weekly close < $50K and capitulation < $44K
+(latched; the probe's convention, applied to the two lower bands on the same weekly-vs-daily measurement); the core's
+Puell < 0.5 and "premium turning up" dropped. Leg 2 raw Sunday, single deployment, leg 1 $70K: unchanged. **Capitulation
+release: none** — no rule was recommended (the week-70 option was left to preference), so the status quo holds.
+`tg_lead` now renders the unfilled probe + core share (`trigPct()`), so the "65%" goes to 45% by itself if the probe
+fills. **Code:** `probeFired()` → `bandFired(i)`, `hv_probe_wait` → `hv_band_wait`, `trigPct()`; `lad[1].c`, `lad[2].c`,
+`tg_lead` (en/pt/es). **Checked:** `node scripts/test_page.js` 30 passed (the new tests fail on the previous page:
+"missing functions: bandFired, trigPct"); parity 135/135; render en/pt-BR/es, 0 console lines each — verdict "inside the
+Probe zone, but it buys only after a weekly close below $57,000", trigger "(65% of the plan)", ladder rows reworded.
+
 ## 2026-11-21 (plan rules by the numbers) — Core gate opens on block timing, not valuation (Puell 0.5 ≈ $38K typical); no leg-2 form separates bear rallies from recoveries and raw is off under a USDT discount; time-staging does not change cost; no grounded capitulation release rule — recommendations, nothing changed
 
 Owner asked to decide the open items on numbers and to say what can be simulated and on which data. **Analysis only:

@@ -23,7 +23,7 @@ for (; ; k++) { if (js[k] === '{') d++; else if (js[k] === '}' && --d === 0) bre
 const ctx = { console };
 vm.createContext(ctx);
 vm.runInContext('var ' + js.slice(li + 6, k + 1) + ';var lang="en";var dailyK=[];var etfData=null;', ctx);
-const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose', 'CBP_LAST', 'cbpStreak', 'ATH', 'CYCLE_LOW', 'cycleLow'];
+const need = ['t', 'tf', '$', 'isoD', 'LAD_BANDS', 'TRIG_BAR', 'PM', 'etfSt', 'verdictAction', 'pmClampY', 'lastWeeklyClose', 'CBP_LAST', 'cbpStreak', 'ATH', 'CYCLE_LOW', 'cycleLow', 'probeFired'];
 let missing = [];
 for (const n of need) { try { vm.runInContext(grab(n).replace(/^(const|let) /, 'var '), ctx) } catch (e) { missing.push(n) } }
 
@@ -40,7 +40,18 @@ for (const p of [74000, 60000, 51000, 47000, 43000, 36000, 30000]) {
 }
 ok(/\$57,000, 23% below/.test(run('verdictAction(74000)')), 'verdict at 74000 names the $57K band');
 ok(/\$50,000/.test(run('verdictAction(51000)')), 'verdict at 51000 names the next band down ($50K)');
-ok(run('verdictAction(54000)') === run('tf("hv_in",t("lad")[0].t)'), 'verdict inside the probe band says it is buying');
+// Probe gate (owner, Nov 21, 2026): inside the probe band the page must not say "buys now" until a completed weekly
+// (Sunday) close under $57K has printed — the old price-only verdict said it on an intraday dip with zero such closes.
+ok(run('verdictAction(54000)') === run('tf("hv_probe_wait",t("lad")[0].t,$(57000))'), 'probe band without a weekly close under $57K waits');
+{ const D = 864e5, sun = Date.UTC(2026, 10, 22);    // Sun Nov 22, 2026
+  run('dailyK=' + JSON.stringify([{ ts: sun - D, close: 55000, low: 54000 }, { ts: sun, close: 56500, low: 55500 }]));
+  run('Date.now=()=>' + (sun + 12 * 3600e3));        // Sunday noon: the weekly candle is still open
+  ok(run('verdictAction(54000)') === run('tf("hv_probe_wait",t("lad")[0].t,$(57000))'), 'an open Sunday candle does not fire the probe');
+  run('Date.now=()=>' + (sun + D + 3600e3));         // Monday 01:00 UTC: closed at 56,500
+  ok(run('verdictAction(54000)') === run('tf("hv_in",t("lad")[0].t)'), 'a completed weekly close under $57K fires the probe');
+  run('dailyK=' + JSON.stringify([{ ts: sun, close: 57000.5, low: 55500 }]));
+  ok(run('probeFired()') === null, 'a weekly close at/above $57K does not fire the probe');
+  run('dailyK=[]'); run('Date.now=()=>' + Date.now()); }
 ok(run('verdictAction(30000)') === run('t("hv_none")'), 'verdict under every band says only the reserve is left');
 
 // The now marker must stay on the drawn scale (code review: $100K drew over the ATH caption).

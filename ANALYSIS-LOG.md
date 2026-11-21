@@ -23,6 +23,31 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-21 (owner decisions) — Probe gate pinned to a weekly close under $57K before any such close; post-week-60 rule; no replacement probability
+
+Owner: "vamos seguir com as recomendações" — accepting the Nov 21 interim check's recommendation. **Recorded ~04:10 UTC
+Nov 21:** no daily close under $57,000 yet (Nov 20 58,951.51; Nov 21 in progress, ~$55,957, low 55,801) and no weekly
+close (the Nov 16–22 week closes Nov 22 24:00 UTC). So the gate is fixed before the print that tests it, as the Nov 10
+marker was.
+
+**Adopted:** (1) **probe** = first completed Binance weekly close < $57,000 (Sunday daily candle, Monday-open
+convention), read Monday, 20% at market, latched; (2) **after week 60**: price-only to week 70 (Feb 8, 2027); (3)
+**core/capitulation** untouched; (4) **no new counter-scenario number**.
+
+**Why weekly (the recommendation's reasoning):** same convention as leg 1 and the downside marker; a daily close or an
+intraday dip is one print in the noisiest part of a liquidation cascade (Nov 20–21: $1.5–1.9B liquidated, press); the
+probe is the smallest tranche, so the cost of waiting up to a week is bounded. **Alternatives not taken:** (a) one daily
+close < $57K — would likely have fired at tonight's close; (c) two consecutive daily closes — earliest Nov 22.
+**Edge, stated not decided away:** a weekly close under $52K also fires the probe ("below $57K"); the core and
+capitulation verdict lines remain price-only.
+
+**Code:** `probeFired()` (first completed Sunday close since the ATH under `LAD_BANDS[0][1]`), `verdictAction` returns
+`hv_probe_wait` inside the probe band until it fires; `lad[0].c` reworded (en/pt/es). **Tests** (`scripts/test_page.js`,
+25 passed): band without a weekly close waits; an open Sunday candle does not fire; a completed weekly close at 56,500
+fires; 57,000.5 does not — fails on the previous page ("missing functions: probeFired"). **Render** (headless Chrome,
+en/pt-BR/es, 0 console lines each): "Price is inside the Probe zone, but it buys only after a weekly close below $57,000
+(Sunday's close, checked Monday)." Parity 135/135.
+
 ## 2026-11-21 (interim check) — The Jul 1 low broke: daily low $57,778.35 on Nov 20, $56,584 on Nov 21 (in progress); "low already in" resolved NO and voided, no replacement number; probe band entered intraday, no completed close under $57K; price map's cycle low made live
 
 Owner asked to update, review the analysis and give the recommendation. **Interim check, not a pass:** `an_asof` stays

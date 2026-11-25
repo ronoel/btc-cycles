@@ -23,6 +23,97 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-25 (Nov 23 adjudication, run late + interim check) — 0 of 3, fourteenth miss; probe not fired (Nov 22 weekly close $61,271); hash ribbons crossed down; IPO-drain legs 1–2 met on either window, leg 3 and the window left to the owner
+
+Owner asked to update, search the news, review the analysis and give the recommendation. **Adjudication of the Nov 23
+window (run ~2.8 days late) + interim check, not a research pass:** `an_asof` stays Nov 18 — Liquidity, Recession,
+Trade, `resv`/SSR, Crypto shock, the 19 wallets and the `EVENTS` dates were not re-read. **No band, allocation, weight,
+threshold, trigger leg or `st` changed.** Reads Nov 25, ~19:25–19:45 UTC; the Nov 25 daily candle and the US session
+were in progress. One sonnet subagent (press). Disclosure as before: the assistant is built by Anthropic; the IPO rows
+rest on EDGAR, Yahoo and measured paths.
+
+**Tape (Binance BTCUSDT daily closes):** Nov 21 60,215.77 (**low 55,130.00 at 06:00 UTC**, 1h candle — the cycle low;
+the `CYCLE_LOW` seed had been typed 55,555.55 while the day was in progress, re-seeded), Nov 22 **61,271.08**, Nov 23
+61,270.93, Nov 24 59,832.00; Nov 25 in progress, low 57,300.38, ~60.2K at the read. **Lowest close of the cycle still
+Jun 30, 58,624.71** (Nov 20's 58,951.51 is above it). Week 59 after the ATH.
+
+**Adjudication, Nov 23 (falsifier #6 / buy-now trigger): 0 of 3, not fired, nothing deployed.** Leg 1: Nov 16–22 weekly
+close **$61,271.08** vs $70K — miss. Leg 2 (raw Sunday close, Coinbase BTC-USD vs Binance BTCUSDT): Nov 22 **−0.1764%**
+raw / −0.0054% adjusted (USDT-USD 0.99829) — miss. Leg 3: Farside Oct 26–Nov 20, 20 sessions = **−$4,339.4M** vs
++$1.5B — miss. `CBP_LAST` → {−0.1764, Nov 22}; `cbpStreak` renders 79 (test updated: it pinned the shipped Nov 15 value).
+Fourteenth Monday miss (Aug 24–Nov 23).
+
+**Probe gate:** the Nov 16–22 weekly close ($61,271.08) is above $57,000 — **not fired**. Next gate print: the Nov 23–29
+weekly close (Sunday Nov 29 24:00 UTC), read Monday Nov 30, with the Nov 30 adjudication.
+
+**Premium run (raw closes):** Nov 21 −0.2155, Nov 22 −0.1764, Nov 23 −0.1321, Nov 24 −0.1523% (adjusted −0.0095 /
+−0.0054 / −0.0111 / −0.0123; USDT 0.9979–0.9988). **81 negative raw closes, Sep 5–Nov 24.** Adjusted negative on all four.
+
+**ETF (Farside via `parse_farside`, Action UA):** Nov 20 **−669.2** (largest since Jun 25, −691.7), Nov 23 −569.7, Nov 24
+−231.4. Nov 5–24: 13 outflow sessions of 14, −$4,498.5M. `etf.d20` −5.43 (Oct 28–Nov 24, by hand −5,426.8). Press:
+November ≈ −$4.9B, a record month (CoinDesk).
+
+**Hash Ribbons (BGeometrics `hashribbons`, one request):** **Down on Nov 24** — sma30 1,015.37 vs sma60 1,020.82 (×10⁶),
+−0.53%; Up Sep 1–Nov 23 (Nov 23 +0.17%). The state field is memoryless (Aug 31 one-day whipsaw), so one print is not a
+cross that stands. **Row stays PARTIAL** (as after the Aug 31 whipsaw; §2b: no naive sma30/sma60 scoring); `TRIG_ST`, `trig_n` unchanged.
+mempool.space: next retarget ~Nov 27 02:30 UTC est. **+8.6%** (previous −9.13%) — blocks are fast; no miner capitulation
+in the difficulty data.
+
+**LTH (BGeometrics `long-term-hodler-supply-btc`):** **16,069,543 (Nov 24)**, new low; 30d −284,710. Off.
+
+**Funding (Binance USDT-M only):** last +0.0061 / 7d +0.0030 %/8h, 3 negative of 21. Other venues not read.
+
+**On-chain:** provider series end Nov 18 except STH cost basis (Nov 24, 72,380.48). `stale:["onchain"]` is the build's
+3-day tolerance, not a pipeline fault (Action log 45681765666, "complete but stale"). Valuation rows are Nov 18 readings.
+
+**Polymarket (Gamma, direct, ~19:30 UTC Nov 25, open contracts, by year-end):** ↓$55K **52.5** (76.5 Nov 21), ↓$50K
+**32.15** (49.4), ↓$45K 12.4 (21.0), ↓$40K 9.3, ↓$35K 5.65; ↑$90K 3.55, ↑$95K 1.95. The market moved down as price bounced
+from $55.1K; no report number to compare (none published since Nov 21).
+
+**Fed / macro:** BEA (read by the subagent, bea.gov, Nov 25): October PCE +0.3% m/m, **3.8% y/y**; core +0.3% m/m,
+**3.3% y/y** (3.1% Sep); consensus headline 3.8%, core 3.2% (press). Dec 9: 25bp ~95–96%, rest 50bp (CME via a newsletter,
+Nov 24; Polymarket/Kalshi 94%); post-PCE split not found. NDX (Yahoo, direct): Nov 19 26,517.05, Nov 20 25,028.98,
+Nov 23 26,746.10, Nov 24 26,214.17, Nov 25 26,037.77 (intraday). 10y 4.90 / DXY 103.83 (Nov 24, press). Brent ~$91.40
+Nov 24 (press; a vessel-attacks-near-Hormuz cause is single-newsletter and was not written to the page; nor was
+Nvidia's CEO "reinstated", no source URL). Tariff proposal on 14 partners (crypto.news,
+single source, not corroborated at USTR) — not written to the page.
+
+**Strategy (8-K Nov 23, read by the subagent from EDGAR):** Nov 16–22 bought **457 BTC / $29.6M at $64,898**, holdings
+**851,305** at $75,446 average, **no BTC sales**; sold 1,925,676 MSTR for $176.7M, of which $147.0M bought back STRC.
+USD Reserve $3.73B. mNAV not measured. MSCI USA exit at the Nov 30 close unchanged.
+
+**Anthropic (ANT, press):** Nov 23 close 87.64, **Nov 24 81.91**, first close under the $83 offer (intraday 75.61).
+
+**IPO-drain test (pre-registered Oct 29) — legs computed, verdict left to the owner.** The Oct 29 text says the window
+runs roadshow start → listing day and moves with the listing date; the listing was Nov 19, but every entry since Nov 10
+wrote "closes Nov 25". Both readings:
+
+| Window | Leg 1 ETF (≤ −$1.0B) | Leg 2 NDX % − BTC % (≥ 10) | Leg 3 (no comparable shock) |
+|---|---|---|---|
+| Nov 10–19 | −$1,985.1M ✓ | −4.98 − (−17.76) = **12.8** ✓ | turns on whether the Nov 10 CPI repricing (Dec any-hike 84 → ~100%, 50bp ~1 → ~15%) is "a hike surprise at a scheduled release" — logged as a candidate Nov 12. Liquidations Nov 13–14 ~$1.3B (< $1.5B) |
+| Nov 10–25 | −$3,455.4M through Nov 24 ✓ | through Nov 24: −6.07 − (−20.61) = **14.5** ✓ (Nov 25 closes pending) | **fails**: Nov 21 liquidations $2.5–2.7B in 24h (CoinGlass via press) > $1.5B / 72h |
+
+So: on Nov 10–25 → **not evidenced** (leg 3). On Nov 10–19 → evidenced unless the CPI counts. The result feeds nothing
+(it only decides whether IPO dates are risk rows or context). Not decided here: window and CPI reading are the owner's,
+the more so given the disclosure above.
+
+**Press attribution, Nov 20–25 (not picked):** equity sell-off (NDX worst week since Mar 2020), stop cascades
+(FxPro), ETF outflows, hot core PCE, MSCI/MSTR month-end selling (Wincent); 24/7 Wall St: "No single outside trigger has
+been confirmed." Glassnode: 11.6M BTC underwater, supply in profit 8.5M (below the 8.6M at the Nov 2022 low). F&G 8–13.
+Crypto shocks: Chainflip 122.86 BTC exploit (small); no depeg, no exploit > $100M found.
+
+**Edited (en/pt/es):** `tg_last`, `fal[5]`, `hv_prob_v`, `cvp[3]` v + d, `trig[0..3].d`, `bs` `hash`/`lth`/`cbp` `r`,
+`bs` `ma200w` tip (it said the cycle had closed "one week" below the 200W MA; on a weekly-close SMA the Aug 10–16 week
+(62,900 vs 63,999) and the Nov 9–15 / Nov 16–22 weeks (vs 67,983 / 68,176) closed below it too — the tip no longer
+enumerates: first Jun 22–28, below again since Nov 9–15), `mac` Fed / ETF / Geopolitics / Strategy / Events / Stocks `r`;
+`CYCLE_LOW` 55,130.00, `CBP_LAST`. **Checked:** `node scripts/test_page.js` 33 passed; parity 136/136, `EVENTS` all with
+text; digit tokens EN = PT = ES on edited keys (`hv_prob_v` same digits, word order); render (headless Chrome, en / pt-BR
+/ es, 0 console lines each): **Too early · 1 of 4 families · 2 of 15 active (SOPR, 200-week) · 5 partial** at ~$60.15K;
+"Not buying yet. The next buy zone starts at $57,000, 5% below today"; trigger 0 of 3; cycle low $55,130 Nov 21;
+staleness sweep (76.5, 49.4, −0.137, 75 in a row, +1.74%, thirteen, 582, 239.9, 16,219,137, 850,849, ~96%) — no
+current-reading hits left. **Not done:** research-pass rows above, mNAV, other funding venues, `og-card.html` (no stale
+figure in it).
+
 ## 2026-11-21 (owner decisions, 2) — Numbers review adopted: core and capitulation gated on a weekly close; trigger unchanged; no capitulation release
 
 Owner: "sim para tudo que mediu, pode seguir com suas recomendações". Recorded ~04:35 UTC Nov 21 (spot ~$55.7K; no

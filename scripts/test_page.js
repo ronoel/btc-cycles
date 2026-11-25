@@ -99,7 +99,7 @@ ok(w2 && w2.d === '2026-11-01' && w2.c === 78354, 'in-progress Sunday is skipped
 ok(run('cbpStreak({d:"2026-11-08",from:"2026-09-05"})') === 65, 'premium run Sep 5–Nov 8 is 65 closes');
 ok(run('cbpStreak({d:"2026-11-11",from:"2026-09-05"})') === 68, 'premium run Sep 5–Nov 11 is 68 closes');
 ok(run('cbpStreak({d:"2026-11-15",from:"2026-09-05"})') === 72, 'premium run Sep 5–Nov 15 is 72 closes');
-ok(run('cbpStreak(CBP_LAST)') === 72, 'the shipped CBP_LAST (Nov 15) renders a run of 72');
+ok(run('cbpStreak(CBP_LAST)') === 79, 'the shipped CBP_LAST (Nov 22) renders a run of 79');
 
 // The price map's cycle low is the lowest daily LOW since the ATH, live from dailyK, not a typed constant: the
 // constant read "Cycle low, Jul 1" at $57,800 after Binance printed $57,778 on Nov 20, 2026 (interim check, Nov 21).

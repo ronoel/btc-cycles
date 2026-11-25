@@ -59,7 +59,9 @@ cross that stands. **Row stays PARTIAL** (as after the Aug 31 whipsaw; §2b: no 
 mempool.space: next retarget ~Nov 27 02:30 UTC est. **+8.6%** (previous −9.13%) — blocks are fast; no miner capitulation
 in the difficulty data.
 
-**LTH (BGeometrics `long-term-hodler-supply-btc`):** **16,069,543 (Nov 24)**, new low; 30d −284,710. Off.
+**LTH (BGeometrics `long-term-hodler-supply-btc`):** **16,069,543 (Nov 24)**, lowest since May 6 (peak 16,859,102 Jul 24, −789,559); 30d −284,710. Off. (First
+written "new low" in the pushed commit and on the page; corrected the same day — the series was lower through May 6.)
+Hash ribbons re-checked on review: the only Down prints since Aug 25 are Aug 25, Aug 31 and Nov 24.
 
 **Funding (Binance USDT-M only):** last +0.0061 / 7d +0.0030 %/8h, 3 negative of 21. Other venues not read.
 

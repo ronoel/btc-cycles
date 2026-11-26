@@ -23,6 +23,87 @@ thing you decided *not* to change** goes here.
 
 ---
 
+## 2026-11-26 (interim check) — Nothing fired; ETF outflows seven sessions in a row (−$5.0B Nov 5–25); hash ribbons Down a second day; USTR proposed Section 301 tariffs on 14 economies; ANT Nasdaq-100 entry reported for Dec 21, not Dec 10; IPO-drain leg 2 on Nov 10–25 = 13.1
+
+Owner asked to search news and the calendar, update data, review the analysis and give the recommendation and agenda.
+**Interim check, not a research pass:** `an_asof` stays Nov 18 and `ev_asof` stays Nov 10 — Recession, Liquidity,
+`resv`/SSR, Crypto-shock wallets, Strategy mNAV and the 2027 `EVENTS` rows were not re-read. **No band, allocation,
+weight, threshold, trigger leg, `st`, `TRIG_ST` or `CBP_LAST` changed.** Reads Nov 26, ~12:50–13:30 UTC (US
+Thanksgiving; the Nov 26 candle in progress). One sonnet subagent (press + calendar; BLS, BEA, Fed, ECB, USTR pages read
+at the publisher). `data.json` not rebuilt: the 06:10 UTC Action already carries the Nov 25 ETF session. Disclosure as
+before: the assistant is built by Anthropic; the ANT rows rest on Yahoo and press.
+
+**Tape (Binance BTCUSDT):** Nov 25 close **60,458.01** (low 57,300.38); Nov 26 ~60.9K at the read (low 60,377.37). Cycle
+low $55,130.00 (Nov 21) and lowest close 58,624.71 (Jun 30) unchanged. Week 59. Render: **Too early · 1 of 4 families ·
+2 of 15 active · 6 partial** (5 partial on Nov 25: the flip is **Puell** 0.8906 on the Nov 19 build, under its 0.9 bar —
+the §5 noise row, not information). On-chain series end Nov 19 (STH cost basis Nov 25, 72,125.11) — valuation rows are
+Nov 19 readings.
+
+**Premium (raw close, Coinbase BTC-USD vs Binance BTCUSDT):** Nov 25 **−0.1232%** (adjusted +0.0098%, USDT 0.99867).
+**82 negative raw closes, Sep 5–Nov 25.** Not an adjudicated Sunday: `CBP_LAST` stays Nov 22.
+
+**ETF (Farside via `parse_farside`):** Nov 25 **−453.0**. Seven outflow sessions Nov 17–25 = −3,052.0; Nov 5–25: 14
+outflows of 15, **−4,951.5**; November through Nov 25 −5,391.1 (18 sessions). `etf.d20` **−6.02** (Oct 29–Nov 25).
+US markets shut Nov 26, half-day Nov 27.
+
+**Hash Ribbons (BGeometrics):** Down **Nov 24 and Nov 25** — Nov 25 sma30 1,012.92 vs sma60 1,021.60 (×10⁶), −0.85%.
+Two prints; the Aug 31 whipsaw lasted one. Row stays PARTIAL (§2b: the buy signal is the cross back up after
+capitulation, and the Down run is its precondition, not the signal). mempool.space: retarget est. **+8.89%**, 95.8%
+through, ~Nov 27 01:45 UTC — blocks fast, no miner capitulation in difficulty. LTH: no print after Nov 24 (16,069,543).
+
+**Funding (%/8h, last / 7-day):** Binance USDT-M +0.0085 / +0.0030 (3 negative of 21); COIN-M +0.0100 / +0.0030; Bybit
+linear +0.0099 / +0.0016, inverse +0.0100 / +0.0038; OKX USDT +0.0067 / +0.0017, USD +0.0100 / +0.0051. Neutral; context
+only (§5).
+
+**Polymarket (Gamma, direct, ~13:00 UTC Nov 26, open contracts, by year-end):** ↓$55K **48.5** (52.5 Nov 25), ↓$50K
+**26.05** (32.15), ↓$45K 13.75 (12.4), ↓$40K 8.8, ↓$35K 5.35; ↑$90K 3.15, ↑$95K 1.55.
+
+**Macro (press unless noted):** Nov 25 — Q3 GDP second estimate 4.3% (prior 3.4%; consensus unclear between outlets),
+initial claims 189K vs 200K, durable goods +0.2% vs +0.6%; 10y 4.868%. Dec 9 FOMC: +25bp 93–98% across CME/Kalshi
+press quotes, none with a URL'd split — **`mac` Fed row left on the Nov 24 sentence.** Waller (Nov 18) argued for 50bp
+absent a January signal. NDX (Yahoo) Nov 25 26,046.90; Nasdaq Composite −4.6% intraday, −0.62% close. Brent: Yahoo
+`BZ=F` 94.61 (Nov 25) vs Investing.com 90.91 settle — unreconciled, no Nov 25 figure written; $91.26 at the Nov 26 read.
+Hormuz: three vessels struck Nov 23 (UKMTO via CNBC/Investing.com). **USTR (ustr.gov, Nov 25):** Section 301
+determinations + *proposed* tariffs on 14 economies (EU/Japan/Korea/Switzerland/Taiwan ≤15%, China ≤20%, India ≤25%,
+Vietnam ≤35%, five ASEAN ≤18%, Singapore ≤20%); comments Jan 5, hearing Jan 25, no effective date. This settles the
+Nov 25 entry's uncorroborated "tariff proposal on 14 partners". Shutdown: CR lapses Dec 11 23:59 ET; Kalshi 34.4% (about
+a week old). BoJ Dec 18: OIS ~70–80% for a hike (press).
+
+**Strategy:** no 8-K after Nov 23; mNAV not found. MSCI USA exit at the Nov 30 close (press); JPMorgan's $2.8B passive
+estimate was computed on an earlier proposal; Strategy puts MSCI-linked holdings at ~13M shares, < one day's volume.
+
+**Anthropic (Yahoo, ANT):** closes Nov 19 97.17, Nov 20 88.91, Nov 23 87.64, Nov 24 81.91, **Nov 25 82.79** (second
+close under the $83 offer). **Nasdaq-100 entry:** Bloomberg (Nov 16, via stockanalysis.com) reports the **Dec 21 open**;
+the report's derived row said the Dec 10 close (15 sessions). The 15-session count is right; the gap is presumably the
+rule's interaction with the annual reconstitution (methodology not read). Row moved to Dec 21, `s:'s'`, text says Nasdaq
+has not announced it.
+
+**IPO-drain test, leg 2 on the Nov 10–25 window (closes now in):** NDX −6.67%, BTC −19.78% (same bases as the Nov 25
+entry) → **13.1 ≥ 10 ✓**. Leg 3 on that window still fails on the Nov 21 liquidations ($2.5–2.7B > $1.5B). Verdict and
+window still the owner's.
+
+**Nov 12 forecast (scored Dec 16; not scored here):** its level leg is already outside the band — the lowest close since
+Nov 12 is 58,951.51 (Nov 20) < 65,000, and L can only fall further → "miss, deeper" is already settled; scenario 2
+fired (daily low 57,778.35 < 57,800.19 on Nov 20). Marker call: the first weekly close under $70K was **Nov 15**, not
+Nov 22/29 → miss. Recorded here as a pointer; the Dec 16 entry scores it formally.
+
+**Crypto shocks:** none found Nov 24–26 (no failure, depeg, exploit > $100M). Mt. Gox deadline moved to Oct 31, 2027
+(press; `mtgox` row already 2027-10-31).
+
+**Calendar re-checked at the publisher (subagent):** JOLTS Dec 1, payrolls Dec 4, CPI Dec 10, PPI Dec 15 (BLS
+12_sched); trade balance Dec 8, PCE + GDP Dec 23 (BEA); FOMC Dec 8–9 (Fed); ECB Dec 17 (ECB; time kept 13:15 UTC — the
+13:45 CET was a third-party calendar); S&P DJI quarterly rebalance effective Dec 21 (spglobal notice). Press only: BoE
+Dec 17, BoJ Dec 18, Deribit Nov 27 / Dec 25, SpaceX unlock Dec 8, MSCI Nov 30.
+
+**Edited (en/pt/es):** `mac` ETF / Trade / Geopolitics / Events / Stocks `r`; `bs` `hash`/`cbp` `r`; `trig[0..2].d`;
+`cvp[3]` v + d; `hv_prob_v`; `ev.ndx_ant`; `EVENTS` `ndx_ant` → Dec 21 `s:'s'`, **+6 rows** (`retarget6`, `jolts_oct`,
+`boe_dec`, `sp_reb`, `fomc_min3` (derived), `ustr301`). **Checked:** `node scripts/test_page.js` 33 passed; parity
+136/136, `EVENTS` all with text, `ev` ids equal across languages; digit tokens EN = PT = ES on every edited key; render
+(headless Chrome, en / pt-BR / es, 0 console lines each): **Too early · 1 of 4 · 2 of 15 active · 6 partial**, "Not
+buying yet. The next buy zone starts at $57,000, 6% below today", trigger 0 of 3; staleness sweep (52.5, 32.2, 13 of
+the 14, 4.5B, 81 in a row, 8.6%, first Down print, 81.91, Dec 10 close) — no current-reading hits left. **Not done:**
+the research-pass rows listed above, `og-card.html`.
+
 ## 2026-11-25 (Nov 23 adjudication, run late + interim check) — 0 of 3, fourteenth miss; probe not fired (Nov 22 weekly close $61,271); hash ribbons crossed down; IPO-drain legs 1–2 met on either window, leg 3 and the window left to the owner
 
 Owner asked to update, search the news, review the analysis and give the recommendation. **Adjudication of the Nov 23
